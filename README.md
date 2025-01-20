@@ -13,12 +13,12 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 Add a group photo here!
 
-- Group member 1, name, email, role
-- Group member 2, name, email, role
-- Group member 3, name, email, role
-- Group member 4, name, email, role
-- Group member 5, name, email, role
-- Group member 5, name, email, role
+- Group member 1, Jingwei Lin, qw24858@bristol.ac.uk, ZhiyiJaved
+- Group member 2, Xiao Wu, ev24875@bristol.ac.uk, Alfie-wuxiao
+- Group member 3, Shaojie Yang, av24455@bristol.ac.uk, YYYYWhy
+- Group member 4, Yaoyao Shen, bz24315@bristol.ac.uk, YasmineShen
+- Group member 5, Xinyi Zhou, qp24615@bristol.ac.uk, Neltharion-Z
+- Group member 6, Yaxin Chen, mq24914@bristol.ac.uk, chyx-17
 
 ## Project Report
 
