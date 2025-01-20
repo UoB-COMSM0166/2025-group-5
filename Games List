@@ -69,3 +69,44 @@ Game Links: https://squiggythings.itch.io/mini-tanks
 
 7. Core Gameplay:  
    - Use quick reflexes and strategic planning to navigate the snake around the screen, avoiding collisions while aiming to achieve the longest possible snake!
+
+================================= Divider =================================
+
+Carrot Fantasy 
+1. Objective
+-Protect the carrot from monster attacks while eliminating all the monsters.
+
+2. Gameplay
+-Players must build and upgrade various defense towers along the fixed paths taken by the monsters to prevent them from reaching the carrot.
+
+3. Controls
+-Players can tap the screen to place defense towers. They can also choose to upgrade or remove the towers.
+
+4. Rules and Limitations
+-Players start with limited resources and need to manage gold wisely.
+-Monsters move along fixed paths, and players can only place defense towers near these paths. Each tower has unique attack range, damage type, and attack speed.
+-Killing monsters rewards gold, which can be used to purchase and upgrade towers.
+-If monsters reach the carrot, the carrot's health will decrease. The game ends in failure if the carrot’s health reaches 0.
+
+5. Rewards and Feedback
+-Defeating monsters grants gold rewards.
+-Completing hidden tasks (such as destroying certain objects) in special levels provides additional rewards.
+-Clearing a level unlocks new maps and towers.
+
+6. Difficulty and Advanced Mechanisms
+The difficulty increases progressively through the levels:
+-Monsters’ health and numbers grow.
+-Path layouts become more complex.
+-New types of monsters are introduced, such as fast-moving monsters or those immune to specific tower attacks.
+
+7. Features
+Easy to Learn:
+-The rules are simple: place defense towers and stop the monsters from reaching the carrot.
+Diverse Designs:
+-Defense Towers: Each tower has unique functions (e.g., area damage, single-target attacks, slowing effects).
+-Levels: The game offers various themed maps (e.g., forest, desert, ocean), each with unique backgrounds and monster designs.
+-Monsters: Includes normal monsters, fast-moving monsters, and high-health monsters. Some monsters have special abilities, such as resistance to certain tower effects.
+Fun Hidden Mechanics:
+-Maps feature destructible objects (e.g., treasure chests, grass, ice blocks) that may drop gold or hidden items when destroyed.
+
+================================= Divider =================================
