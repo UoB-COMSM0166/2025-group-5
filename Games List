@@ -1,0 +1,37 @@
+Game Mechanics Overview
+
+*Tanks（Mini Tanks）
+1. Basic Controls:
+Tank Movement:
+Press W to move forward.
+Press S to move backward.
+Press A to turn left.
+Press D to turn right.
+
+Cannon Control:
+Move the mouse to adjust the cannon’s direction.
+Press the left mouse button to fire a shell.
+
+2. Gameplay Objectives:
+Control your tank to navigate the battlefield and defeat all enemy tanks to progress through each level.
+Survive the encounter by strategically dodging enemy fire and effectively using your own.
+
+3. Projectile Behavior:
+Shells will bounce once off walls.
+If a shell hits another wall after bouncing, it will disappear.
+
+4. Boss Mechanics:
+Boss tanks appear in specific levels and are more challenging than standard enemy tanks.
+Bosses have faster-moving projectiles, requiring quick reflexes to evade.
+
+5. Lives and Progression:
+Each game session starts with three lives.
+Losing all three lives results in failure, and all level progress resets to the beginning.
+There is no level progression inheritance; you must restart from Level 1 upon failure.
+
+6. No Rankings or Records:
+The game does not include a leaderboard or any ranking system.
+There is no record of completed levels or player performance.
+
+Game Links: https://squiggythings.itch.io/mini-tanks
+================================= Divider =================================
