@@ -35,3 +35,37 @@ There is no record of completed levels or player performance.
 
 Game Links: https://squiggythings.itch.io/mini-tanks
 ================================= Divider =================================
+
+
+2.Snake
+1. Basic Controls:  
+   - Snake Movement:  
+     Press `↑` to move up.  
+     Press `↓` to move down.  
+     Press `←` to move left.  
+     Press `→` to move right.  
+
+2. Game Objective:
+   - Control the snake to eat the randomly appearing food blocks on the screen.  
+   - Each piece of food consumed increases the length of the snake.  
+   - Try to grow the snake as long as possible without colliding with obstacles.  
+
+3. Collision Mechanism: 
+   - If the snake's head collides with the screen boundaries, the game will reset, and the snake will return to its initial length.  
+   - If the snake's head collides with its own body, the game will also reset.  
+
+4. Scoring System:
+   - Each food block eaten increases the player's score.  
+   - The score increments by 1 for each successful food collection.  
+   - No leaderboard or score-saving feature is included.  
+
+5. Game Progression:
+   - The game starts at a slow pace, but as the snake grows longer, the game becomes increasingly challenging.  
+   - There are no predefined levels or checkpoints. Players continue indefinitely until they collide or stop playing.  
+
+6. Game Features:  
+   - Simple and minimalistic design for easy accessibility.  
+   - Randomly generated food positions ensure varied gameplay.  
+
+7. Core Gameplay:  
+   - Use quick reflexes and strategic planning to navigate the snake around the screen, avoiding collisions while aiming to achieve the longest possible snake!
