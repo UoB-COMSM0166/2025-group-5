@@ -141,3 +141,23 @@ In each run, players will encounter different room layouts and enemies, and will
 This ensures that each playthrough is unique. Sometimes, players may be quickly defeated by small enemies, while other times they can easily one-shot the boss.
 
 ================================= Divider =================================
+
+# Gomoku
+## Rules of the game
+1. Players play against the computer on a 15x15 board.
+2. Black moves first and takes turns.
+3. Each side can only place one piece at a time at the intersection.
+4. For winning, both Sides needs to form five pieces of the same color in a line (horizontal, vertical, or diagonal).
+## Global control buttons
+Start: Start a game.
+Admit defeat: Throw in the towel from the computer
+Repentance: Withdraw the most recent piece of the two sides.
+## Game difficulty Setting
+AI of this game uses an algorithm of **Minimax**. The difficulty of the game depends on the depth of searching.
+## Improvement Items
+1. Play online with another player.
+2. Appearance and music personalization.
+3. Scores and leaderboards.
+
+## Reference
+[reference github link](https://github.com/lihongxun945/gobang)
