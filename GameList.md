@@ -5,6 +5,7 @@
 - [Carrot Fantasy](#carrot-fantasy)
 - [The Binding of Isaac: Rebirth (rogue-like)](#the-binding-of-isaac-rebirth-rogue-like)
 - [Gomoku](#gomoku)
+- [Battle of Balls](#battle-of-balls)
 ---
 
 # Tanks(Mini-Tanks)
@@ -168,3 +169,30 @@ AI of this game uses an algorithm of **Minimax**. The difficulty of the game dep
 3. Scores and leaderboards.
 ## Reference
 [reference github link](https://github.com/lihongxun945/gobang)
+
+---
+
+# Battle of Balls
+## Basic Controls:
+Ball Movement:
+- Tap or click to move the ball.
+- Drag to aim and release to shoot.
+## Game Objective:
+- Control the ball to hit the opponent's ball.
+- Each hit increases the player's score.
+Try to score as high as possible without missing shots.
+## Collision Mechanism:
+- If the ball hits the opponent's ball, the opponent loses a point.
+- If the ball hits the opponent's wall, the ball bounces back to the player.
+## Scoring System:
+- Each successful hit increases the player's score.
+- The score increments by 1 for each successful hit.
+- No leaderboard or score-saving feature is included.
+## Game Progression:
+- The game starts at a slow pace, but as the score increases, the game becomes increasingly challenging.
+- There are no predefined levels or checkpoints. Players continue indefinitely until they miss a shot or stop playing.
+## Game Features:
+- Simple and minimalistic design for easy accessibility.
+- Randomly generated opponent positions ensure varied gameplay.
+## Core Gameplay:
+- Use quick reflexes and strategic planning to navigate the ball around the screen, avoiding misses while aiming to achieve the highest possible score!
