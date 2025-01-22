@@ -32,3 +32,45 @@ function keyPressed() {
   }
 }
 ============================================= Xiao Wu with Yaoyao Shen =============================================
+
+// Initialize the brush color to black
+let brushColor = 'black';
+
+// Set up the canvas size and background color
+function setup() {
+  createCanvas(400, 400); 
+  background(255); // Set the background color to white
+}
+
+// Draw shapes based on mouse position and button pressed
+function draw() {
+  if (mouseIsPressed) {
+    let size = mouseButton === RIGHT ? 20 : 10; // Use a larger size for the right mouse button, smaller for the left
+    fill(brushColor); // Set the brush color
+    noStroke(); 
+    ellipse(mouseX, mouseY, size, size); // Draw an ellipse (circle) at the mouse position
+  }
+}
+
+// Listen for key presses to change the brush color
+function keyPressed() {
+  switch(key) {
+    case 'r':
+    case 'R':
+      brushColor = 'red'; // Switch to red
+      break;
+    case 'g':
+    case 'G':
+      brushColor = 'green'; // Switch to green
+      break;
+    case 'b':
+    case 'B':
+      brushColor = 'blue'; // Switch to blue
+      break;
+    case 'd':
+    case 'D':
+      brushColor = color(random(255), random(255), random(255)); // Random color
+      break;
+  }
+}
+============================================= Jingwei Lin with Yaxin Chen =============================================
