@@ -14,7 +14,7 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 
 ## Your Group
 
-![image](https://github.com/user-attachments/assets/32db240d-3e52-44db-9531-6450c397556c)
+![image](https://github.com/user-attachments/assets/61d8fa3f-cef3-44d9-bd0a-202d769f345d)
 
 
 - Group member 1, Jingwei Lin, qw24858@bristol.ac.uk, ZhiyiJaved
