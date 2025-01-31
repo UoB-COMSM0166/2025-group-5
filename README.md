@@ -9,6 +9,9 @@ Your game lives in the [/docs](/docs) folder, and is published using Github page
 
 Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
 
+## Kanban Link
+https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
+
 ## Your Group
 
 Add a group photo here!
