@@ -4,7 +4,7 @@
 ## Your Game
 
 Link to your game [PLAY HERE](https://peteinfo.github.io/COMSM0166-project-template/)
-The Canvas: http://127.0.0.1:3002/Drawing/index.html
+The Canvas: https://editor.p5js.org/chyx-17/full/gs4csAz5Y
 
 Your game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
 
