@@ -2,7 +2,7 @@
 // 预先导入图片
 function preload()
 {
-    playerTexture = loadImage('resources/images/characters_and_obstacles/example2.jpg');
+    playerTexture = loadImage('resources/images/characters_and_obstacles/dragon.gif');
     enemyTexture = loadImage('resources/images/characters_and_obstacles/example1.jpg');
     grassTexture = loadImage('resources/images/characters_and_obstacles/example3.jpg');
     obstacleTexture = loadImage('resources/images/characters_and_obstacles/example4.jpg');
@@ -108,3 +108,12 @@ function keyPressed()
         player.shoot();
     }
 }
+
+window.onload = function() {
+    gameMusic.playBackground(); // 启动背景音乐
+};
+
+document.addEventListener("click", () => {
+    gameMusic.playBackground();
+}, { once: true }); // 只执行一次
+

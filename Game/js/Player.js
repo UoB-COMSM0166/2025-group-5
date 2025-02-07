@@ -53,5 +53,7 @@ class Player extends Character
         const centerX = this.x + this.size/2 - 2.5;
         const centerY = this.y + this.size/2 - 2.5;
         this.projectiles.push(new Projectile(centerX, centerY, this.lastDirection));
+
+        gameMusic.playSFX("shoot");
     }
 }
