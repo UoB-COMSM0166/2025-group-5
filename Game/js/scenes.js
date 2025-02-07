@@ -135,6 +135,8 @@ function checkCollisions()
             {    
                 enemies.splice(i, 1);
                 player.projectiles.splice(j, 1);
+
+                gameMusic.playSFX("hit");
                 break;
             }
         }
