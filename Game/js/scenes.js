@@ -3,8 +3,9 @@ function createEnemies()
 {
     for (let i = 0; i < enemyCount; i++) 
     {
-        enemies.push(new Enemy(random(width - 50), random(height - 50)));
-        enemies[i].changeFormat(enemyTexture);
+        enemies.push(new Enemy(random(width - 50), random(height - 50), 
+            soldierSize, enemyTexture, soldierHealth, soldierHealth, soldierAttack,
+            charStatus.NORMAL, soldierSpeed));
     }
 }
 

@@ -2,21 +2,22 @@
 class Player extends Character 
 {
     constructor(x, y) 
-    {
-        super(x, y, 50, playerTexture);
-        this.speed = 5;
+    {// Use playerTexture as the initial player image.
+        super(x, y, playerSize, playerTexture, playerInitHealth, 
+            playerInitHealth, playerInitAttack, 
+            charStatus.NORMAL, playerInitSpeed);
         this.projectiles = [];
         this.prevX = x;
         this.prevY = y;
-        this.lastDirection = 'up'; // 记录最后方向为子弹方向
+        this.lastDirection = 'up'; // use the last direction to shoot.
     }
 
     update() 
-    {
+    { // to do: status changed by status here.
         this.prevX = this.x;
         this.prevY = this.y;
 
-        // 更新移动方向记录
+        // use D-pad to direct the movement.
         if (keyIsDown(UP_ARROW)) 
         {
             this.y -= this.speed;
@@ -52,8 +53,9 @@ class Player extends Character
     {
         const centerX = this.x + this.size/2 - 2.5;
         const centerY = this.y + this.size/2 - 2.5;
-        this.projectiles.push(new Projectile(centerX, centerY, this.lastDirection));
+        this.projectiles.push(new Projectile(centerX, centerY, 
+            this.lastDirection));
 
-        gameMusic.playSFX("shoot");
+        playerShootGunMusic();
     }
 }
