@@ -1,0 +1,35 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Attack.tsx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Attack.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        }
+    },
+    "frame.defaultDuration": 190,
+    "last.imagePath": "C:/Users/94940/Desktop/study/软件工程/Tiny RPG Character Asset Pack v1.03b -Free Soldier&Orc/characters/Monsters_Creatures_Fantasy/Flying eye",
+    "map.height": 50,
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 80,
+    "openFiles": [
+        "Attack.tsx"
+    ],
+    "project": "1.1.tiled-project",
+    "recentFiles": [
+        "Attack.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
