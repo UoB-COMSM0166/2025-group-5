@@ -134,7 +134,11 @@ function checkCollisions()
                 proj.y < enemy.y + enemy.size &&
                 proj.y + proj.size > enemy.y) 
             {    
-                enemies.splice(i, 1);
+                enemies[i].changeHealth(- player.getAttack());
+                if(enemies[i].getStatus() === charStatus.DEAD)
+                { // remove dead enemy.
+                    enemies.splice(i, 1);
+                }
                 player.projectiles.splice(j, 1);
 
                 gameMusic.playSFX("hit");

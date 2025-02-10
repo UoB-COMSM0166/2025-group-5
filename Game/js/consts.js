@@ -10,6 +10,9 @@ const obstacleCount = 5;
 let isGameOver = false;
 
 // # Game values
+// Character
+let HealthBarHeight = 5;
+
 // ## Player
 let playerInitHealth = 100;
 let maxAttack = 100; // max attack of all the units
