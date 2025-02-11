@@ -13,21 +13,32 @@ function setup() {
     createCanvas(1280, 800);
     player = new Player(width / 2, height / 2);
 
-    // 游戏标题和开始按钮
+    // 游戏标题
     gameTitle = createElement('h1', 'Snake Adventure');
-    startButton = createButton('Start Game');
     gameTitle.position(width / 2 - 100, height / 2 - 100);
     gameTitle.style('color', 'white');
     gameTitle.style('font-size', '48px');
     gameTitle.style('text-align', 'center');
 
-    startButton.position(width / 2 - 50, height / 2);
-    startButton.size(100, 40);
-    startButton.style('background', '#4CAF50');
-    startButton.style('color', 'white');
+    // 替换按钮为图片
+    startButton = createImg('resources/images/UI/example3.jpg', 'Start Game');
+    startButton.position(width / 2 - 75, height / 2);
+    startButton.size(150, 60); // 设置初始大小
+
+    // 鼠标悬停时放大
+    startButton.mouseOver(() => {
+        startButton.size(165, 65); // 变大
+    });
+
+    // 鼠标移开时恢复原始大小
+    startButton.mouseOut(() => {
+        startButton.size(150, 60);
+    });
+
+    // 点击后开始游戏
     startButton.mousePressed(() => {
-        gameState = 'levelSelect'; // 进入关卡选择状态
-        selectLevel(); // 初始化关卡选择界面
+        gameState = 'levelSelect';
+        selectLevel();
     });
 
     // 初始化关卡选择界面（但不显示）
@@ -37,13 +48,13 @@ function setup() {
     if (level2Button) level2Button.hide();
 }
 
-function selectLevel() {
-    // 如果标题和按钮已经创建，则直接返回
-    if (levelTitle) return;
 
-    // 清除开始菜单的 DOM 元素
+function selectLevel() {
+    if (levelTitle) return; // 如果已创建，不重复生成
+
+    // 隐藏开始菜单
     gameTitle.hide();
-    startButton.hide(); // 确保隐藏开始按钮
+    startButton.hide();
 
     // 创建关卡选择标题
     levelTitle = createElement('h1', 'Select Level');
@@ -52,21 +63,35 @@ function selectLevel() {
     levelTitle.style('font-size', '48px');
     levelTitle.style('text-align', 'center');
 
-    // 创建关卡按钮
-    level1Button = createButton('Level 1');
-    level1Button.position(width / 2 - 50, height / 2 - 50);
-    level1Button.size(100, 40);
-    level1Button.style('background', '#4CAF50');
-    level1Button.style('color', 'white');
-    level1Button.mousePressed(() => startGame(1)); // 进入关卡 1
+    // 替换按钮为图片
+    level1Button = createImg('resources/images/UI/example3.jpg', 'Level 1');
+    level1Button.position(width / 2 - 75, height / 2 - 50);
+    level1Button.size(150, 60); // 初始大小
 
-    level2Button = createButton('Level 2');
-    level2Button.position(width / 2 - 50, height / 2 + 50);
-    level2Button.size(100, 40);
-    level2Button.style('background', '#4CAF50');
-    level2Button.style('color', 'white');
-    level2Button.mousePressed(() => startGame(2)); // 进入关卡 2
+    level2Button = createImg('resources/images/UI/example3.jpg', 'Level 2');
+    level2Button.position(width / 2 - 75, height / 2 + 50);
+    level2Button.size(150, 60); // 初始大小
+
+    // 鼠标悬停时放大
+    level1Button.mouseOver(() => {
+        level1Button.size(165, 65);
+    });
+    level1Button.mouseOut(() => {
+        level1Button.size(150, 60);
+    });
+
+    level2Button.mouseOver(() => {
+        level2Button.size(165, 65);
+    });
+    level2Button.mouseOut(() => {
+        level2Button.size(150, 60);
+    });
+
+    // 关卡选择点击事件
+    level1Button.mousePressed(() => startGame(1));
+    level2Button.mousePressed(() => startGame(2));
 }
+
 
 function startGame(level) {
     gameState = 'playing'; // 进入游戏状态

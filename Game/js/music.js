@@ -6,7 +6,8 @@ class Music {
 
         this.sfx = {
             shoot: new Audio("resources/music/shoot.mp3"),
-            hit: new Audio("resources/music/hit.mp3")
+            hit: new Audio("resources/music/hit.mp3"),
+            click: new Audio("resources/music/click.mp3")
         };
     }
 
