@@ -11,7 +11,7 @@
 # Tanks(Mini-Tanks)
 ## Basic Controls:
 Tank Movement:
-Press W to move forward.
+Press W  to move forward.
 Press S to move backward.
 Press A to turn left.
 Press D to turn right.
