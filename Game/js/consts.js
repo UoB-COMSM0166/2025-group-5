@@ -1,6 +1,9 @@
-let gameState = 'start'; // 游戏状态 start/playing/over
+let gameState = 'start'; // 游戏状态 start/levelSelect/playing/over
 let startButton;
 let gameTitle;
+let levelTitle; // 关卡选择标题
+let level1Button; // 关卡1按钮
+let level2Button; // 关卡2按钮
 
 let player;
 let enemies = [];
@@ -47,6 +50,3 @@ const charStatus = Object.freeze
         INCOMPETENT: 'incompetent',
     }
 );
-
-
-
