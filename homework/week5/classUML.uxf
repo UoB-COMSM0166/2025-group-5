@@ -1,0 +1,85 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>610</y><w>210</w><h>240</h></coordinates><panel_attributes>&lt;&lt;Level&gt;&gt;
+--
+-player:Player
+-background:BackGround
+-backMusic:Music
+-enemyList:List&lt;Enemy&gt;
+-ObstacleList:List&lt;Obstacle&gt;
+--
++constructor(filename, playerStatus)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>310</y><w>260</w><h>390</h></coordinates><panel_attributes>&lt;&lt;Character&gt;&gt;
+--
+-x:Int
+-y:Int
+-size:Int
+-format
+    - color:String
+    - image:PImage
+-health:Int
+-max health:Int
+-attack:Int
+-status:String
+-speed:Float
+--
++constructor((x, y, size, format, 
+	health, maxHealth, attack, status, speed) )
++display()
++changeFormat(format)
++getHealth()
++getAttack()
++getStatus()
++getSpeed()
+-changeHealth(health)
+-changeAttack(attack)
+-changeStatus(status)
+-changeSpeed(speed)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>730</y><w>250</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Player&gt;&gt;
+--
+-projectiles:List&lt;Projectile&gt;
+-prevX:Int
+-prevY:Int
+-lastDirection:String
+--
++constructor(x, y, size, format, 
+	health, maxHealth, attack, status, speed) 
++update()
+-undoMove()
++shoot()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>510</y><w>250</w><h>180</h></coordinates><panel_attributes>&lt;&lt;Enemy&gt;&gt;
+--
+-projectiles:List&lt;Projectile&gt;
+-prevX:Int
+-prevY:Int
+--
++constructor(x, y, size, format, 
+	health, maxHealth, attack, status, speed) 
++update()
+-undoMove()
++shoot()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>340</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Obstacle&gt;&gt;
+--
++isPassable:Boolean
++isHarmful:Boolean
++Harm:Int
+--
+constructor(x, y, isPassable)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>380</y><w>120</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;90;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>490</y><w>120</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;110</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>540</y><w>120</w><h>300</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;280</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>490</y><w>160</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>133;10;10;140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1000</x><y>540</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Projectile&gt;&gt;
+--
+-x:Int
+-y:Int
+-size:Int
+-speed:Int
+-direction:Int
+--
++constructor(x, y, direction)
++update()
++display()
++isVisible()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>720</y><w>260</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Music&gt;&gt;
+--
+-bgMusic:Audio
+--
++constructor()
++playBackground()
++stopBackground()
+playSFX(name)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>640</y><w>160</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>133;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>620</y><w>110</w><h>220</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>83;10;10;200</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>590</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>83;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>870</y><w>260</w><h>100</h></coordinates><panel_attributes>&lt;&lt;BackGround&gt;&gt;
+--
+-format
+    -color:String
+    -image:PImage
+--
++changeBackground(format)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>670</y><w>160</w><h>280</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>133;260;10;10</additional_attributes></element></diagram>
