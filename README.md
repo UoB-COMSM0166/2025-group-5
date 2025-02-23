@@ -66,7 +66,11 @@ o	Additionally, we considered features like an infinite mode to enhance competit
 ### Design
 
 - 15% ~750 words 
-- System architecture. Class diagrams, behavioural diagrams. 
+- System architecture
+- Class diagram
+![](./homework/week5/classUML.png)
+
+- behavioural diagram
 
 ### Implementation
 
