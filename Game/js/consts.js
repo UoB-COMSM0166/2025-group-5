@@ -12,8 +12,8 @@ const enemyCount = 5;
 const obstacleCount = 5;
 let isGameOver = false;
 
-// # Game values
-// Character
+// Game values
+// # Character
 let HealthBarHeight = 5;
 
 // ## Player
@@ -23,6 +23,7 @@ let playerInitAttack = 5;
 let maxSpeed = 5; // max speed of all the units
 let playerInitSpeed = 2;
 let playerSize = 50;
+let playerFile = 'resources/images/characters_and_obstacles/dragon.gif';
 let playerTexture;
 
 // ## Enemy
@@ -31,12 +32,31 @@ let soldierHealth = 10;
 let soldierAttack = 5;
 let soldierSpeed = 1;
 let soldierSize = 40;
+let enemyFile = 'resources/images/characters_and_obstacles/example1.jpg';
 let enemyTexture;
 
 // ## obstacle
 let obstacleSize = 50;
+let grassFile = 'resources/images/characters_and_obstacles/example3.jpg';
 let grassTexture;
+let obstacleFile = 'resources/images/characters_and_obstacles/example4.jpg';
 let obstacleTexture;
+
+// # Paths
+let attributeFile = './config/attribute.json';
+let level1ConfFile = './config/level1.json';
+let level2ConfFile = './config/level2.json';
+let level3ConfFile = './config/level3.json';
+let level4ConfFile = './config/level4.json';
+
+let level1BGFile = './resources/images/game_background/level1.png'
+let level1BGTexture;
+
+// # Level
+let level1;
+let level2;
+let level3;
+let level4;
 
 const charStatus = Object.freeze
 ( // ## Use charStatus to identify the status of the unit

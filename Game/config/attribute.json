@@ -1,0 +1,48 @@
+{
+    "map":
+    {
+        "width": 1280,
+        "height": 800
+    },
+
+    "player":
+    {
+        "width": 32,
+        "height": 32
+    },
+
+    "soldier":
+    {
+        "width": 32,
+        "height": 32
+    },
+
+    "boss1":
+    {
+        "width": 16,
+        "height": 16
+    },
+
+    "boss2":
+    {
+        "width": 16,
+        "height": 16
+    },
+
+    "wall":
+    {
+        "width": 32,
+        "height": 32
+    },
+
+    "water":
+    {
+        "width": 16,
+        "height": 16
+    },
+    "magma":
+    {
+        "width": 16,
+        "height": 16
+    }
+}
