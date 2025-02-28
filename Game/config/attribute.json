@@ -1,0 +1,22 @@
+{
+    "map":
+    {
+        "width": 1280,
+        "height": 800
+    },
+
+    "player":
+    {
+        "size": 32
+    },
+
+    "soldier":
+    {
+        "size": 32
+    },
+
+    "wall":
+    {
+        "size": 32
+    }
+}

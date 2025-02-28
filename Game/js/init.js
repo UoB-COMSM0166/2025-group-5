@@ -2,16 +2,17 @@
 // 预先导入图片
 function preload()
 {
-    playerTexture = loadImage('resources/images/characters_and_obstacles/dragon.gif');
-    enemyTexture = loadImage('resources/images/characters_and_obstacles/example1.jpg');
-    grassTexture = loadImage('resources/images/characters_and_obstacles/example3.jpg');
-    obstacleTexture = loadImage('resources/images/characters_and_obstacles/example4.jpg');
+    playerTexture = loadImage(playerFile);
+    enemyTexture = loadImage(enemyFile);
+    grassTexture = loadImage(grassFile);
+    obstacleTexture = loadImage(obstacleFile);
+    level1BGTexture = loadImage(level1BGFile);
+    level1LightTexture = loadImage(level1LightFile);
 }
 
 // 起始函数
-function setup() {
-    createCanvas(1280, 800);
-    player = new Player(width / 2, height / 2);
+async function setup() {
+    createCanvas(canvasWidth, canvasHeight);
 
     // 游戏标题和开始按钮
     gameTitle = createElement('h1', 'Snake Adventure');
@@ -35,6 +36,19 @@ function setup() {
     if (levelTitle) levelTitle.hide();
     if (level1Button) level1Button.hide();
     if (level2Button) level2Button.hide();
+
+    // 创建各个关卡对象
+    level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture);
+    await level1.init();
+//     level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture);
+//     await level2.init();
+//     level3 = new Level(3, level3ConfFile, level3BGTexture, level3LightTexture);
+//     await level3.init();
+//     level4 = new Level(4, level4ConfFile, level4BGTexture, level4LightTexture);
+//     await level4.init();
+
+    // 读取配置文件
+    attributes = await loadJsonData(attributeFile);
 }
 
 function selectLevel() {
@@ -76,21 +90,23 @@ function startGame(level) {
     if (level === 1) {
         bulletSpeed = 3;
         spawnInterval = 30;
+        level1.start();
     } else if (level === 2) {
         bulletSpeed = 5;
         spawnInterval = 20;
     }
 
-    // 重置敌人和障碍
-    enemies = [];
-    obstacles = [];
-    createEnemies();
-    createObstacles();
+    // // 重置敌人和障碍
+    // enemies = [];
+    // obstacles = [];
+    // createEnemies();
+    // createObstacles();
 
-    // 重置玩家
-    player.x = width / 2;
-    player.y = height / 2;
-    player.projectiles = [];
+    // // 重置玩家
+    // player.x = width / 2;
+    // player.y = height / 2;
+    // player.projectiles = [];
+
 }
 
 // to be done: 在draw()完成场景转换逻辑：开始 - 选关 - 结束 - 存/读档
@@ -141,14 +157,15 @@ function draw() {
         if (level1Button) level1Button.hide(); // 隐藏关卡按钮
         if (level2Button) level2Button.hide();
 
-        player.update();
-        player.display();
+        level1.update();
+        // player.update();
+        // player.display();
 
-        drawEnemies();
-        drawObstacles();
-        drawProjectiles();
+        // drawEnemies();
+        // drawObstacles();
+        // drawProjectiles();
 
-        checkCollisions();
+        // checkCollisions();
     } else if (gameState === 'over') {
         textSize(32);
         fill('red');
@@ -166,7 +183,7 @@ function keyPressed()
 {
     if (key === ' ') 
     {
-        player.shoot();
+        level1.player.shoot();
     }
 }
 

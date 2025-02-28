@@ -8,12 +8,12 @@ class Enemy extends Character
         this.prevY = y;
     }
 
-    update() 
+    update(level) 
     {
         this.prevX = this.x;
         this.prevY = this.y;
 
-        if (isPlayerInGrass()) 
+        if (level.isPlayerInGrass()) 
         {
             // 随机移动
             this.x += random(-this.speed, this.speed);
@@ -22,8 +22,8 @@ class Enemy extends Character
         else 
         {
             // 追踪玩家
-            let dx = player.x - this.x;
-            let dy = player.y - this.y;
+            let dx = level.player.x - this.x;
+            let dy = level.player.y - this.y;
             let dist = sqrt(dx * dx + dy * dy);
             if (dist > 0) 
             {
