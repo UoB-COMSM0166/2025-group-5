@@ -1,6 +1,6 @@
 class Level
 {
-    constructor(id, jsonFile)
+    constructor(id, jsonFile, bGTexture, lightTexture)
     {
         this.id = id;
         this.jsonFile = jsonFile;
@@ -8,6 +8,8 @@ class Level
         this.player = null;
         this.enemies = [];
         this.obstacles = [];
+        this.bGTexture = bGTexture;
+        this.lightTexture = lightTexture;
     }
 
     async init()
@@ -24,7 +26,7 @@ class Level
 
         // 创建玩家对象
         this.player = new Player(this.jsonData.player.position.x, 
-            this.jsonData.player.position.y);
+            this.jsonData.player.position.y, attributes.player.size);
         // 创建敌人对象
         for (let i = 0; i < enemyCount; i++) 
         {
@@ -33,32 +35,37 @@ class Level
                 charStatus.NORMAL, soldierSpeed));
         }
         // 创建障碍物对象
-        for (let i = 0; i < obstacleCount; i++) 
-        {
-            let x = random(width - 50);
-            let y = random(height - 50);
-            let isPassable = random() < 0.5;
-            this.obstacles.push(new Obstacle(x, y, isPassable));
-            if(isPassable)
-            {
-                this.obstacles[i].changeFormat(grassTexture);
-            }
-            else
-            {
-                this.obstacles[i].changeFormat(obstacleTexture);
-            }
-        }
+        this.createObstacles();
+        // for (let i = 0; i < obstacleCount; i++) 
+        // {
+        //     let x = random(width - 50);
+        //     let y = random(height - 50);
+        //     let isPassable = random() < 0.5;
+        //     this.obstacles.push(new Obstacle(x, y, isPassable));
+        //     if(isPassable)
+        //     {
+        //         this.obstacles[i].changeFormat(grassTexture);
+        //     }
+        //     else
+        //     {
+        //         this.obstacles[i].changeFormat(obstacleTexture);
+        //     }
+        // }
     }
 
     update()
     {
+        this.drawBG(); // 绘制背景
+
         this.player.update();
         this.player.display();
 
         this.drawEnemies();
-        this.drawObstacles();
+        // this.drawObstacles();
         this.drawProjectiles();
         this.checkCollisions();
+
+        this.drawLight(); // 绘制前景
     }
 
     drawEnemies()
@@ -68,7 +75,7 @@ class Level
             enemy.update(this);
             enemy.display();
         }
-}
+    }
 
     drawObstacles()
     {
@@ -101,7 +108,8 @@ class Level
             }
         }
     
-        this.player.projectiles = this.player.projectiles.filter(proj => proj.isVisible());
+        this.player.projectiles = 
+            this.player.projectiles.filter(proj => proj.isVisible());
     }
 
     checkCollisions()
@@ -173,5 +181,27 @@ class Level
             }
         }
         return false;
+    }
+
+    drawBG()
+    {
+        background(172, 199, 101);
+        image(this.bGTexture, 0, 0, canvasWidth, canvasHeight);
+    }
+
+    drawLight()
+    {
+        image(this.lightTexture, 0, 0, canvasWidth, canvasHeight);
+    }
+
+    createObstacles()
+    {
+        for(let obstacle of this.jsonData.obstacles)
+        {
+            let obs = new Obstacle(obstacle.position.x, 
+                obstacle.position.y, attributes[obstacle.type].size , false);
+            obs.changeFormat(grassTexture);
+            this.obstacles.push(obs);
+        }
     }
 }

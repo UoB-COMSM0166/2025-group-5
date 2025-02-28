@@ -12,6 +12,14 @@ const enemyCount = 5;
 const obstacleCount = 5;
 let isGameOver = false;
 
+// configuration
+let attributeFile = './config/attribute.json';
+let attributes;
+
+// canvas
+canvasWidth = 1280;
+canvasHeight = 800;
+
 // Game values
 // # Character
 let HealthBarHeight = 5;
@@ -43,14 +51,16 @@ let obstacleFile = 'resources/images/characters_and_obstacles/example4.jpg';
 let obstacleTexture;
 
 // # Paths
-let attributeFile = './config/attribute.json';
+
 let level1ConfFile = './config/level1.json';
 let level2ConfFile = './config/level2.json';
 let level3ConfFile = './config/level3.json';
 let level4ConfFile = './config/level4.json';
 
-let level1BGFile = './resources/images/game_background/level1.png'
 let level1BGTexture;
+let level1LightTexture;
+let level1BGFile = './resources/images/web_background//Dragon_Adventure_01.png'
+let level1LightFile = './resources/images/web_background/Dragon_Adventure_01_Light.png';
 
 // # Level
 let level1;

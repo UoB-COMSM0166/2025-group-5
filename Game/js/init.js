@@ -7,12 +7,12 @@ function preload()
     grassTexture = loadImage(grassFile);
     obstacleTexture = loadImage(obstacleFile);
     level1BGTexture = loadImage(level1BGFile);
+    level1LightTexture = loadImage(level1LightFile);
 }
 
 // 起始函数
 async function setup() {
-    createCanvas(1280, 800);
-    player = new Player(width / 2, height / 2);
+    createCanvas(canvasWidth, canvasHeight);
 
     // 游戏标题和开始按钮
     gameTitle = createElement('h1', 'Snake Adventure');
@@ -38,14 +38,17 @@ async function setup() {
     if (level2Button) level2Button.hide();
 
     // 创建各个关卡对象
-    level1 = new Level(1, level1ConfFile);
+    level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture);
     await level1.init();
-//     level2 = new Level(2, level2ConfFile);
+//     level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture);
 //     await level2.init();
-//     level3 = new Level(3, level3ConfFile);
+//     level3 = new Level(3, level3ConfFile, level3BGTexture, level3LightTexture);
 //     await level3.init();
-//     level4 = new Level(4, level4ConfFile);
+//     level4 = new Level(4, level4ConfFile, level4BGTexture, level4LightTexture);
 //     await level4.init();
+
+    // 读取配置文件
+    attributes = await loadJsonData(attributeFile);
 }
 
 function selectLevel() {

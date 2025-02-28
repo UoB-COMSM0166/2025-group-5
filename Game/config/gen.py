@@ -29,7 +29,7 @@ def main(map_file, size_file):
     # 绘制玩家
     player_pos = map_data['player']['position']
     player_size = size_data['player']
-    player_patch = patches.Rectangle((player_pos['x'], player_pos['y']), player_size['width'], player_size['height'], color=colors['player'])
+    player_patch = patches.Rectangle((player_pos['x'], player_pos['y']), player_size['size'], player_size['size'], color=colors['player'])
     ax.add_patch(player_patch)
     legend_patches.append(patches.Patch(color=colors['player'], label='player'))
 
@@ -38,7 +38,7 @@ def main(map_file, size_file):
         enemy_pos = enemy['position']
         enemy_type = enemy['type']
         enemy_size = size_data[enemy_type]
-        enemy_patch = patches.Rectangle((enemy_pos['x'], enemy_pos['y']), enemy_size['width'], enemy_size['height'], color=colors[enemy_type])
+        enemy_patch = patches.Rectangle((enemy_pos['x'], enemy_pos['y']), enemy_size['size'], enemy_size['size'], color=colors[enemy_type])
         ax.add_patch(enemy_patch)
         if enemy_type not in [patch.get_label() for patch in legend_patches]:
             legend_patches.append(patches.Patch(color=colors[enemy_type], label=enemy_type))
@@ -48,7 +48,7 @@ def main(map_file, size_file):
         obstacle_pos = obstacle['position']
         obstacle_type = obstacle['type']
         obstacle_size = size_data[obstacle_type]
-        obstacle_patch = patches.Rectangle((obstacle_pos['x'], obstacle_pos['y']), obstacle_size['width'], obstacle_size['height'], color=colors[obstacle_type])
+        obstacle_patch = patches.Rectangle((obstacle_pos['x'], obstacle_pos['y']), obstacle_size['size'], obstacle_size['size'], color=colors[obstacle_type])
         ax.add_patch(obstacle_patch)
         if obstacle_type not in [patch.get_label() for patch in legend_patches]:
             legend_patches.append(patches.Patch(color=colors[obstacle_type], label=obstacle_type))

@@ -1,9 +1,9 @@
 // 玩家类
 class Player extends Character 
 {
-    constructor(x, y) 
+    constructor(x, y, size) 
     {// Use playerTexture as the initial player image.
-        super(x, y, playerSize, playerTexture, playerInitHealth, 
+        super(x, y, size, playerTexture, playerInitHealth, 
             playerInitHealth, playerInitAttack, 
             charStatus.NORMAL, playerInitSpeed);
         this.projectiles = [];
