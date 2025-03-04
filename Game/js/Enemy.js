@@ -1,29 +1,50 @@
-// 敌人类（新增障碍物碰撞检测）
+// 敌人类
 class Enemy extends Character 
 {
-    constructor(x, y, size, format, health, maxHealth, attack, status, speed) 
+    constructor(x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
+        attackRange, warningRange)
     {
         super(x, y, size, format, health, maxHealth, attack, status, speed);
         this.prevX = x;
         this.prevY = y;
+        this.patrolPath = patrolPath;
+        this.nextPatrolPoint = patrolPath[0];
+        this.nextPatroIndex = 0;
+        this.findPalyer = false;
+        this.attackRange = attackRange;
+        this.warningRange = warningRange;
     }
 
-    update() 
+    update(level) 
     {
         this.prevX = this.x;
         this.prevY = this.y;
 
-        if (isPlayerInGrass()) 
+        if(this.x === this.nextPatrolPoint.x && 
+            this.y === this.nextPatrolPoint.y
+        )
         {
-            // 随机移动
-            this.x += random(-this.speed, this.speed);
-            this.y += random(-this.speed, this.speed);
+            this.nextPatroIndex = (this.nextPatroIndex + 1) % this.patrolPath.length;
+            this.nextPatrolPoint = this.patrolPath[this.nextPatroIndex];
+        }
+
+        if (!this.findPalyer) 
+        {
+            // 按照巡逻路线移动
+            let dx = this.nextPatrolPoint.x - this.x;
+            let dy = this.nextPatrolPoint.y - this.y;
+            let dist = sqrt(dx * dx + dy * dy);
+            if (dist > 0) 
+            {
+                this.x += (dx / dist) * this.speed;
+                this.y += (dy / dist) * this.speed;
+            }
         } 
         else 
         {
             // 追踪玩家
-            let dx = player.x - this.x;
-            let dy = player.y - this.y;
+            let dx = level.player.x - this.x;
+            let dy = level.player.y - this.y;
             let dist = sqrt(dx * dx + dy * dy);
             if (dist > 0) 
             {

@@ -12,8 +12,16 @@ const enemyCount = 5;
 const obstacleCount = 5;
 let isGameOver = false;
 
-// # Game values
-// Character
+// configuration
+let attributeFile = './config/attribute.json';
+let attributes;
+
+// canvas
+canvasWidth = 1280;
+canvasHeight = 800;
+
+// Game values
+// # Character
 let HealthBarHeight = 5;
 
 // ## Player
@@ -23,6 +31,7 @@ let playerInitAttack = 5;
 let maxSpeed = 5; // max speed of all the units
 let playerInitSpeed = 2;
 let playerSize = 50;
+let playerFile = 'resources/images/characters_and_obstacles/dragon.gif';
 let playerTexture;
 
 // ## Enemy
@@ -31,11 +40,14 @@ let soldierHealth = 10;
 let soldierAttack = 5;
 let soldierSpeed = 1;
 let soldierSize = 40;
+let enemyFile = 'resources/images/characters_and_obstacles/example1.jpg';
 let enemyTexture;
 
 // ## obstacle
 let obstacleSize = 50;
+let grassFile = 'resources/images/characters_and_obstacles/example3.jpg';
 let grassTexture;
+let obstacleFile = 'resources/images/characters_and_obstacles/example4.jpg';
 let obstacleTexture;
 
 const charStatus = Object.freeze
@@ -50,3 +62,42 @@ const charStatus = Object.freeze
         INCOMPETENT: 'incompetent',
     }
 );
+
+const charMoving = Object.freeze
+( // ## Use charMoving to indentify the moving of the unit
+    {
+        UP_WALKING: 'up_w',
+        DOWN_WALKING: 'down_w',
+        LEFT_WALKING: 'left_w',
+        RIGHT_WALKING: 'right_w',
+        UP_ATTACK: 'up_a',
+        DOWN_ATTACK: 'down_a',
+        LEFT_ATTACK: 'left_a',
+        RIGHT_ATTACK: 'right_a',
+        IDLE: 'idle',
+    }
+);
+
+// # Paths
+
+let level1ConfFile = './config/level1.json';
+let level2ConfFile = './config/level2.json';
+let level3ConfFile = './config/level3.json';
+let level4ConfFile = './config/level4.json';
+
+let level1BGTexture;
+let level1LightTexture;
+let level1BGFile = './resources/images/web_background//Dragon_Adventure_01.png'
+let level1LightFile = './resources/images/web_background/Dragon_Adventure_01_Light.png';
+
+// # Level
+let level1;
+let level2;
+let level3;
+let level4;
+
+// #mapping
+let image_map = 
+{
+    "soldier_idle": enemyTexture
+};
