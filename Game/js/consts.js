@@ -90,7 +90,12 @@ let level1LightTexture;
 let level1BGFile = './resources/images/web_background//Dragon_Adventure_01.png'
 let level1LightFile = './resources/images/web_background/Dragon_Adventure_01_Light.png';
 
+let level2BGTexture;
+let level2LightTexture;
+let level2BGFile = './resources/images/web_background//Dragon_Adventure_01.png'
+let level2LightFile = './resources/images/web_background/Dragon_Adventure_01_Light.png';
 // # Level
+let present_level;
 let level1;
 let level2;
 let level3;
