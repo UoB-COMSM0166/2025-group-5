@@ -23,17 +23,17 @@ class Player extends Character
             this.y -= this.speed;
             this.lastDirection = 'up';
         }
-        if (keyIsDown(DOWN_ARROW)) 
+        else if (keyIsDown(DOWN_ARROW)) 
         {
             this.y += this.speed;
             this.lastDirection = 'down';
         }
-        if (keyIsDown(LEFT_ARROW)) 
+        else if (keyIsDown(LEFT_ARROW)) 
         {
             this.x -= this.speed;
             this.lastDirection = 'left';
         }
-        if (keyIsDown(RIGHT_ARROW)) 
+        else if (keyIsDown(RIGHT_ARROW)) 
         {
             this.x += this.speed;
             this.lastDirection = 'right';

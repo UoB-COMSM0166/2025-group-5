@@ -28,29 +28,9 @@ class Level
         this.player = new Player(this.jsonData.player.position.x, 
             this.jsonData.player.position.y, attributes.player.size);
         // 创建敌人对象
-        for (let i = 0; i < enemyCount; i++) 
-        {
-            this.enemies.push(new Enemy(random(width - 50), random(height - 50), 
-                soldierSize, enemyTexture, soldierHealth, soldierHealth, soldierAttack,
-                charStatus.NORMAL, soldierSpeed));
-        }
+        this.createEnemies();
         // 创建障碍物对象
         this.createObstacles();
-        // for (let i = 0; i < obstacleCount; i++) 
-        // {
-        //     let x = random(width - 50);
-        //     let y = random(height - 50);
-        //     let isPassable = random() < 0.5;
-        //     this.obstacles.push(new Obstacle(x, y, isPassable));
-        //     if(isPassable)
-        //     {
-        //         this.obstacles[i].changeFormat(grassTexture);
-        //     }
-        //     else
-        //     {
-        //         this.obstacles[i].changeFormat(obstacleTexture);
-        //     }
-        // }
     }
 
     update()
@@ -194,14 +174,30 @@ class Level
         image(this.lightTexture, 0, 0, canvasWidth, canvasHeight);
     }
 
-    createObstacles()
+    createEnemies()
     {
+        for(let enemy of this.jsonData.enemies)
+        {
+            let temp = new Enemy(enemy.position.x, 
+                enemy.position.y, attributes[enemy.type].size, 
+                image_map[enemy.type + '_idle'], attributes[enemy.type].health,
+                attributes[enemy.type].health, 
+                attributes[enemy.type].attack, 
+                charStatus.NORMAL, attributes[enemy.type].speed,
+                enemy.patrolPath, attributes[enemy.type].attackRange,
+                attributes[enemy.type].warningRange);
+            this.enemies.push(temp);
+        }
+    }
+
+    createObstacles()
+    { // 根据level.json中的内容创建隐形墙
         for(let obstacle of this.jsonData.obstacles)
         {
-            let obs = new Obstacle(obstacle.position.x, 
+            let temp = new Obstacle(obstacle.position.x, 
                 obstacle.position.y, attributes[obstacle.type].size , false);
-            obs.changeFormat(grassTexture);
-            this.obstacles.push(obs);
+            temp.changeFormat(grassTexture);
+            this.obstacles.push(temp);
         }
     }
 }
