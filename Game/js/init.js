@@ -8,6 +8,8 @@ function preload()
     obstacleTexture = loadImage(obstacleFile);
     level1BGTexture = loadImage(level1BGFile);
     level1LightTexture = loadImage(level1LightFile);
+    level2BGTexture = loadImage(level2BGFile);
+    level2LightTexture = loadImage(level2LightFile);
 }
 
 // 起始函数
@@ -51,8 +53,8 @@ async function setup() {
     // 创建各个关卡对象
     level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture);
     await level1.init();
-//     level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture);
-//     await level2.init();
+    level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture);
+    await level2.init();
 //     level3 = new Level(3, level3ConfFile, level3BGTexture, level3LightTexture);
 //     await level3.init();
 //     level4 = new Level(4, level4ConfFile, level4BGTexture, level4LightTexture);
@@ -116,9 +118,12 @@ function startGame(level) {
         bulletSpeed = 3;
         spawnInterval = 30;
         level1.start();
+        present_level = 1;
     } else if (level === 2) {
         bulletSpeed = 5;
         spawnInterval = 20;
+        level2.start();
+        present_level = 2;
     }
 
     // // 重置敌人和障碍
@@ -182,7 +187,8 @@ function draw() {
         if (level1Button) level1Button.hide(); // 隐藏关卡按钮
         if (level2Button) level2Button.hide();
 
-        level1.update();
+        if(present_level === 1)level1.update();
+        else if(present_level === 2)level2.update(); 
         // player.update();
         // player.display();
 
