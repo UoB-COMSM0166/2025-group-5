@@ -3,7 +3,7 @@
 function preload()
 {
     playerTexture = loadImage(playerFile);
-    enemyTexture = loadImage(enemyFile);
+    image_map["soldier_idle"] = loadImage(enemyFile);
     grassTexture = loadImage(grassFile);
     obstacleTexture = loadImage(obstacleFile);
     level1BGTexture = loadImage(level1BGFile);

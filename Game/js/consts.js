@@ -50,6 +50,34 @@ let grassTexture;
 let obstacleFile = 'resources/images/characters_and_obstacles/example4.jpg';
 let obstacleTexture;
 
+const charStatus = Object.freeze
+( // ## Use charStatus to identify the status of the unit
+    {
+        NORMAL: 'normal',
+        DYING: 'dying',
+        INVINCIBLE: 'invincible',
+        FREEZING: 'freezing',
+        BLAMING: 'blaming',
+        DEAD: 'dead',
+        INCOMPETENT: 'incompetent',
+    }
+);
+
+const charMoving = Object.freeze
+( // ## Use charMoving to indentify the moving of the unit
+    {
+        UP_WALKING: 'up_w',
+        DOWN_WALKING: 'down_w',
+        LEFT_WALKING: 'left_w',
+        RIGHT_WALKING: 'right_w',
+        UP_ATTACK: 'up_a',
+        DOWN_ATTACK: 'down_a',
+        LEFT_ATTACK: 'left_a',
+        RIGHT_ATTACK: 'right_a',
+        IDLE: 'idle',
+    }
+);
+
 // # Paths
 
 let level1ConfFile = './config/level1.json';
@@ -68,15 +96,8 @@ let level2;
 let level3;
 let level4;
 
-const charStatus = Object.freeze
-( // ## Use charStatus to identify the status of the unit
-    {
-        NORMAL: 'normal',
-        DYING: 'dying',
-        INVINCIBLE: 'invincible',
-        FREEZING: 'freezing',
-        BLAMING: 'blaming',
-        DEAD: 'dead',
-        INCOMPETENT: 'incompetent',
-    }
-);
+// #mapping
+let image_map = 
+{
+    "soldier_idle": enemyTexture
+};
