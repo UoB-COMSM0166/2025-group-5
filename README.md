@@ -1,9 +1,9 @@
 # 2025-group-5
 2025 COMSM0166 group 5
 
-## Your Game
+## Dragon Adventure
 
-Link to your game [PLAY HERE](https://peteinfo.github.io/COMSM0166-project-template/)
+Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-5/)
 The Canvas: https://editor.p5js.org/chyx-17/full/gs4csAz5Y
 change color：press 'R','G', 'B'.
 change shape: press '1','2','3'.
