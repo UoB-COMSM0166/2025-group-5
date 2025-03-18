@@ -3,7 +3,7 @@
 
 ## Dragon Adventure
 
-Link to your game [PLAY HERE](https://uob-comsm0166.github.io/Game/)
+Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-5/Game/)
 The Canvas: https://editor.p5js.org/chyx-17/full/gs4csAz5Y
 change color：press 'R','G', 'B'.
 change shape: press '1','2','3'.
