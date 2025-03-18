@@ -3,7 +3,7 @@
 
 ## Dragon Adventure
 
-Link to your game [PLAY HERE](https://peteinfo.github.io/COMSM0166-project-template/)
+Link to your game [PLAY HERE](https://peteinfo.github.io/Game/)
 The Canvas: https://editor.p5js.org/chyx-17/full/gs4csAz5Y
 change color：press 'R','G', 'B'.
 change shape: press '1','2','3'.
