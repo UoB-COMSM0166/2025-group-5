@@ -127,4 +127,19 @@ class Character {
     {
         return this.status;
     }
+
+    get_x_position()
+    {
+        return this.x;
+    }
+
+    get_y_position()
+    {
+        return this.y;
+    }
+
+    getSize()
+    {
+        return this.size;
+    }
 }
