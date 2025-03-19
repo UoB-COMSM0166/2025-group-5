@@ -10,6 +10,8 @@ class Level
         this.obstacles = [];
         this.bGTexture = bGTexture;
         this.lightTexture = lightTexture;
+        this.curtain = new Curtain(canvasWidth, canvasHeight, 
+            "black", 0, 0, transparentRadius);
     }
 
     async init()
@@ -46,6 +48,8 @@ class Level
         this.checkCollisions();
 
         this.drawLight(); // 绘制前景
+
+        this.drawCurtain();
     }
 
     drawEnemies()
@@ -199,5 +203,13 @@ class Level
             temp.changeFormat(grassTexture);
             this.obstacles.push(temp);
         }
+    }
+
+    drawCurtain()
+    {
+        this.curtain.update(
+            this.player.get_x_position() + this.player.getSize() / 2, 
+            this.player.get_y_position() + this.player.getSize() / 2);
+        this.curtain.display();
     }
 }

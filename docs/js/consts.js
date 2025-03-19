@@ -106,3 +106,6 @@ let image_map =
 {
     "soldier_idle": enemyTexture
 };
+
+// # Curtain
+let transparentRadius = 100;
