@@ -98,16 +98,23 @@ class Level
 
     checkCollisions()
     {
-        // 玩家与敌人碰撞检测
-        for (let enemy of this.enemies) 
+        // 玩家遭受伤害判定
+        if(this.player.getStatus() !== charStatus.INVINCIBLE)
         {
-            if (this.player.x < enemy.x + enemy.size &&
-                this.player.x + this.player.size > enemy.x &&
-                this.player.y < enemy.y + enemy.size &&
-                this.player.y + this.player.size > enemy.y) 
+            // 玩家与敌人碰撞检测
+            for (let enemy of this.enemies) 
             {
-                isGameOver = true;
-                gameState = 'over';
+                if(enemy.enemyType === "collision")
+                {
+                    if (this.player.x < enemy.x + enemy.size &&
+                        this.player.x + this.player.size > enemy.x &&
+                        this.player.y < enemy.y + enemy.size &&
+                        this.player.y + this.player.size > enemy.y) 
+                    {
+                        this.player.changeHealth(- enemy.getAttack());
+                        this.player.changeStatus(charStatus.INVINCIBLE);
+                    }
+                }
             }
         }
 
@@ -124,6 +131,22 @@ class Level
             }
         }
 
+        // 敌人与障碍物碰撞检测
+        for (let enemy of this.enemies)
+        {
+            for(let obstacle of this.obstacles)
+            {
+                if (!obstacle.isPassable &&
+                    enemy.x < obstacle.x + obstacle.size &&
+                    enemy.x + enemy.size > obstacle.x &&
+                    enemy.y < obstacle.y + obstacle.size &&
+                    enemy.y + enemy.size > obstacle.y) 
+                {
+                    enemy.undoMove();
+                }
+            }
+        }
+
         // 子弹与敌人碰撞检测
         for (let i = this.enemies.length - 1; i >= 0; i --)
         {
@@ -132,22 +155,33 @@ class Level
                 let enemy = this.enemies[i];
                 let proj = this.player.projectiles[j];
 
-                if (proj.x < enemy.x + enemy.size &&
-                    proj.x + proj.size > enemy.x &&
-                    proj.y < enemy.y + enemy.size &&
-                    proj.y + proj.size > enemy.y) 
-                {    
-                    this.enemies[i].changeHealth(- this.player.getAttack());
-                    if(this.enemies[i].getStatus() === charStatus.DEAD)
-                    { // remove dead enemy.
-                        this.enemies.splice(i, 1);
-                    }
-                    this.player.projectiles.splice(j, 1);
+                if(enemy.getStatus() !== charStatus.INVINCIBLE)
+                {
+                    if (proj.x < enemy.x + enemy.size &&
+                        proj.x + proj.size > enemy.x &&
+                        proj.y < enemy.y + enemy.size &&
+                        proj.y + proj.size > enemy.y) 
+                    {    
+                        this.enemies[i].changeHealth(- this.player.getAttack());
+                        enemy.changeStatus(charStatus.INVINCIBLE);
+                        if(this.enemies[i].getHealth() === 0)
+                        { // remove dead enemy.
+                            this.enemies.splice(i, 1);
+                        }
+                        this.player.projectiles.splice(j, 1);
 
-                    gameMusic.playSFX("hit");
-                    break;
+                        gameMusic.playSFX("hit");
+                        break;
+                    }
                 }
             }
+        }
+
+        // 游戏失败判定
+        if(this.player.getHealth() === 0)
+        {
+            isGameOver = true;
+            gameState = 'over';
         }
     }
 
@@ -189,7 +223,8 @@ class Level
                 attributes[enemy.type].attack, 
                 charStatus.NORMAL, attributes[enemy.type].speed,
                 enemy.patrolPath, attributes[enemy.type].attackRange,
-                attributes[enemy.type].warningRange);
+                attributes[enemy.type].warningRange, 
+                attributes[enemy.type].enemyType);
             this.enemies.push(temp);
         }
     }

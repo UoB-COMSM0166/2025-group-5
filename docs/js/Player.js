@@ -41,6 +41,23 @@ class Player extends Character
 
         this.x = constrain(this.x, 0, width - this.size);
         this.y = constrain(this.y, 0, height - this.size);
+
+        if(this.invincibleTimer !== 0)this.invincibleTimer --;
+        if(this.invincibleTimer === 0)
+        {
+            if(this.health <= 0)
+            {
+                this.status = charStatus.DEAD;
+            }
+            else if(this.health <= this.maxHealth / 10)
+            {
+                this.status = charStatus.DYING;
+            }
+            else 
+            {
+                this.status = charStatus.NORMAL;
+            }
+        }
     }
 
     undoMove() 

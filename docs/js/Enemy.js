@@ -2,7 +2,7 @@
 class Enemy extends Character 
 {
     constructor(x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
-        attackRange, warningRange)
+        attackRange, warningRange, enemyType)
     {
         super(x, y, size, format, health, maxHealth, attack, status, speed);
         this.prevX = x;
@@ -13,6 +13,7 @@ class Enemy extends Character
         this.findPalyer = false;
         this.attackRange = attackRange;
         this.warningRange = warningRange;
+        this.enemyType = enemyType;
     }
 
     update(level) 
@@ -68,6 +69,23 @@ class Enemy extends Character
             {
                 this.undoMove();
                 break;
+            }
+        }
+
+        if(this.invincibleTimer !== 0)this.invincibleTimer --;
+        if(this.invincibleTimer === 0)
+        {
+            if(this.health <= 0)
+            {
+                this.status = charStatus.DEAD;
+            }
+            else if(this.health <= this.maxHealth / 10)
+            {
+                this.status = charStatus.DYING;
+            }
+            else 
+            {
+                this.status = charStatus.NORMAL;
             }
         }
     }
