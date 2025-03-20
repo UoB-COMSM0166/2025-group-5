@@ -23,6 +23,8 @@ canvasHeight = 800;
 // Game values
 // # Character
 let HealthBarHeight = 5;
+let globalInvincibleTimer = 120;
+let globalInvincibleFlashingInterval = 10;
 
 // ## Player
 let playerInitHealth = 100;

@@ -13,21 +13,26 @@ class Character {
         this.health = health;
         this.maxHealth = maxHealth;
         this.attack = attack;
-        this.status = (typeof status === 'string' ? status : null);
+        this.status = status;
         this.speed = speed;
+        this.invincibleTimer = 0;
     }
 
     display() 
     {
         // fill the Character with pure color or image
-        if(this.format.image)
+        if(Math.floor(this.invincibleTimer / globalInvincibleFlashingInterval)
+             % 2 === 0)
         {
-            image(this.format.image, this.x, this.y, this.size, this.size);
-        }
-        else
-        {
-            fill(this.format.color);
-            rect(this.x, this.y, this.size, this.size);
+            if(this.format.image)
+            {
+                image(this.format.image, this.x, this.y, this.size, this.size);
+            }
+            else
+            {
+                fill(this.format.color);
+                rect(this.x, this.y, this.size, this.size);
+            }
         }
         // Display the health of Player and Enemy
         if(this instanceof Player || this instanceof Enemy)
@@ -86,6 +91,7 @@ class Character {
         }
         else if(this.health <= 0)
         {
+            this.health = 0;
             this.status = charStatus.DEAD;
         }
         else if(this.health <= this.maxHealth / 10)
@@ -110,7 +116,12 @@ class Character {
 
     changeStatus(status)
     {
-        this.status = (typeof status === 'string' ? status : null);
+        // console.log(typeof status); // for debug
+        this.status = status;
+        if(this.status === charStatus.INVINCIBLE)
+        {
+            this.invincibleTimer = globalInvincibleTimer;
+        }
     }
 
     getHealth()
