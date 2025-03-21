@@ -149,6 +149,16 @@ class Character {
         return this.y;
     }
 
+    set_x_position(x)
+    {
+        this.x = x;
+    }
+
+    set_y_position(y)
+    {
+        this.y = y;
+    }
+
     getSize()
     {
         return this.size;

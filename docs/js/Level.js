@@ -16,6 +16,8 @@ class Level
             questionMarkTexture, g_skillStatusList, g_skillNumList, 
             g_skillBarX, g_skillBarY, g_skillBarHeight, g_skillBarWidth,
             g_skillBarBlankWidth, g_textSize);
+        this.tempPlayer = null;
+        this.transformFlag = false;
     }
 
     async init()
@@ -32,7 +34,12 @@ class Level
 
         // 创建玩家对象
         this.player = new Player(this.jsonData.player.position.x, 
-            this.jsonData.player.position.y, attributes.player.size);
+            this.jsonData.player.position.y, attributes.player.size, 
+            playerTexture, attributes.player.health, attributes.player.health,
+            attributes.player.attack, charStatus.NORMAL, attributes.player.speed,
+            attributes.player.attackRange, attributes.player.warningRange,
+            attributes.player.playerType
+        );
         // 创建敌人对象
         this.createEnemies();
         // 创建障碍物对象
@@ -108,19 +115,31 @@ class Level
         if(this.player.getStatus() !== charStatus.INVINCIBLE)
         {
             // 玩家与敌人碰撞检测
-            for (let enemy of this.enemies) 
+            for (let i = this.enemies.length - 1; i >= 0; i --) 
             {
-                if(enemy.enemyType === "collision")
+                if(this.enemies[i].enemyType === "collision")
                 {
-                    if (this.player.x < enemy.x + enemy.size &&
-                        this.player.x + this.player.size > enemy.x &&
-                        this.player.y < enemy.y + enemy.size &&
-                        this.player.y + this.player.size > enemy.y) 
+                    if (this.player.x < this.enemies[i].x + this.enemies[i].size &&
+                        this.player.x + this.player.size > this.enemies[i].x &&
+                        this.player.y < this.enemies[i].y + this.enemies[i].size &&
+                        this.player.y + this.player.size > this.enemies[i].y) 
                     {
-                        this.player.changeHealth(- enemy.getAttack());
+                        this.player.changeHealth(- this.enemies[i].getAttack());
                         this.player.changeStatus(charStatus.INVINCIBLE);
+                        if(this.player.playerType === "collision")
+                        {
+                            this.enemies[i].changeHealth(- this.player.getAttack());
+                            this.enemies[i].changeStatus(charStatus.INVINCIBLE);
+                            if(this.enemies[i].getHealth() === 0)
+                            { // remove dead enemy.
+                                this.skillBar.addSkill(this.enemies[i].getEnemyId());
+                                this.enemies.splice(i, 1);
+                            }
+                        }
                     }
                 }
+                
+
             }
         }
 
@@ -184,11 +203,25 @@ class Level
             }
         }
 
-        // 游戏失败判定
+        // 游戏失败及变身结束判定
         if(this.player.getHealth() === 0)
         {
-            isGameOver = true;
-            gameState = 'over';
+            if(!this.transformFlag)
+            {
+                isGameOver = true;
+                gameState = 'over';
+            }
+            else 
+            {
+                let temp_x = this.player.get_x_position();
+                let temp_y = this.player.get_y_position();
+                this.player = this.tempPlayer;
+                this.player.set_x_position(temp_x);
+                this.player.set_y_position(temp_y);
+                this.player.changeStatus(charStatus.INVINCIBLE);
+                this.player.invincibleTimer = globalInvincibleTimer;
+                this.transformFlag = false;
+            }
         }
     }
 
@@ -258,7 +291,7 @@ class Level
 
     keyPressedInLevel()
     {
-        if(key === ' ')
+        if(key === ' ' && this.player.playerType === "shooting")
         {
             this.player.shoot();
         }
@@ -266,7 +299,47 @@ class Level
              || key === '5' || key === '6' || key === '7' || key === '8'
              || key === '9')
         {
-            this.skillBar.useSkill(key - '1');
+            if(this.skillBar.useSkill(key - '1'))
+            {
+                if(!this.transformFlag)
+                {
+                    this.tempPlayer = this.player;
+                    for(let name in attributes)
+                    {
+                        if("enemyId" in attributes[name])
+                        {
+                            this.transformFlag = true;
+                            if(attributes[name].enemyId == key - '1')
+                            {
+                                this.player = new Player(this.tempPlayer.get_x_position(),
+                                    this.tempPlayer.get_y_position(),
+                                    attributes[name].size,
+                                    g_skillTextureList[key - '1'],
+                                    attributes[name].health,
+                                    attributes[name].health,
+                                    attributes[name].attack,
+                                    charStatus.NORMAL,
+                                    attributes[name].speed,
+                                    attributes[name].attackRange,
+                                    attributes[name].warningRange,
+                                    attributes[name].enemyType
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if(key === 'q')
+        {
+            let temp_x = this.player.get_x_position();
+            let temp_y = this.player.get_y_position();
+            this.player = this.tempPlayer;
+            this.player.set_x_position(temp_x);
+            this.player.set_y_position(temp_y);
+            this.player.changeStatus(charStatus.INVINCIBLE);
+            this.player.invincibleTimer = globalInvincibleTimer;
+            this.transformFlag = false;
         }
     }
 }

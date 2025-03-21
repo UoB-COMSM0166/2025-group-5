@@ -1,15 +1,21 @@
 // 玩家类
 class Player extends Character 
 {
-    constructor(x, y, size) 
+    constructor(x, y, size,
+        format, health, maxHealth, attack, status, speed,
+        attackRange, warningRange, playerType
+    ) 
     {// Use playerTexture as the initial player image.
-        super(x, y, size, playerTexture, playerInitHealth, 
-            playerInitHealth, playerInitAttack, 
-            charStatus.NORMAL, playerInitSpeed);
+        super(x, y, size, format, health, 
+            maxHealth, attack, 
+            status, speed);
         this.projectiles = [];
         this.prevX = x;
         this.prevY = y;
         this.lastDirection = 'up'; // use the last direction to shoot.
+        this.attackRange = attackRange,
+        this.warningRange = warningRange,
+        this.playerType = playerType
     }
 
     update() 

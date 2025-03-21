@@ -54,7 +54,7 @@ async function setup() {
     attributes = await loadJsonData(attributeFile);
 
     // sillbar 全局变量配置
-    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(image_map["soldier_idle"]);
     g_skillTextureList.push(grassTexture);
     g_skillTextureList.push(grassTexture);
     g_skillTextureList.push(grassTexture);
