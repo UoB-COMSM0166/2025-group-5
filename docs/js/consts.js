@@ -111,3 +111,17 @@ let image_map =
 
 // # Curtain
 let transparentRadius = 100;
+
+// # SkillBar
+let questionMarkTexture;
+let questionMarkFile = "./resources/images/skillbar/questionMark.png";
+let g_skillNumber = 9;
+let g_skillTextureList = [];
+let g_skillStatusList = [];
+let g_skillNumList = [];
+let g_skillBarX = 0;
+let g_skillBarY = 0;
+let g_skillBarHeight = 50;
+let g_skillBarWidth = 50;
+let g_skillBarBlankWidth = 5;
+let g_textSize = 16;

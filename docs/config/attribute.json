@@ -12,6 +12,7 @@
 
     "soldier":
     {
+        "enemyId": 0,
         "size": 32,
         "attack": 40,
         "health": 10,
