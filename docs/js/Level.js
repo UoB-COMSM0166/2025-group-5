@@ -12,6 +12,10 @@ class Level
         this.lightTexture = lightTexture;
         this.curtain = new Curtain(canvasWidth, canvasHeight, 
             "black", 0, 0, transparentRadius);
+        this.skillBar = new SkillBar(g_skillNumber, g_skillTextureList, 
+            questionMarkTexture, g_skillStatusList, g_skillNumList, 
+            g_skillBarX, g_skillBarY, g_skillBarHeight, g_skillBarWidth,
+            g_skillBarBlankWidth, g_textSize);
     }
 
     async init()
@@ -50,6 +54,8 @@ class Level
         this.drawLight(); // 绘制前景
 
         this.drawCurtain();
+        
+        this.skillBar.display();
     }
 
     drawEnemies()
@@ -154,7 +160,6 @@ class Level
             {
                 let enemy = this.enemies[i];
                 let proj = this.player.projectiles[j];
-
                 if(enemy.getStatus() !== charStatus.INVINCIBLE)
                 {
                     if (proj.x < enemy.x + enemy.size &&
@@ -164,16 +169,18 @@ class Level
                     {    
                         this.enemies[i].changeHealth(- this.player.getAttack());
                         enemy.changeStatus(charStatus.INVINCIBLE);
-                        if(this.enemies[i].getHealth() === 0)
-                        { // remove dead enemy.
-                            this.enemies.splice(i, 1);
-                        }
+                        
                         this.player.projectiles.splice(j, 1);
 
                         gameMusic.playSFX("hit");
                         break;
                     }
                 }
+            }
+            if(this.enemies[i].getHealth() === 0)
+            { // remove dead enemy.
+                this.skillBar.addSkill(this.enemies[i].getEnemyId());
+                this.enemies.splice(i, 1);
             }
         }
 
@@ -216,7 +223,8 @@ class Level
     {
         for(let enemy of this.jsonData.enemies)
         {
-            let temp = new Enemy(enemy.position.x, 
+            let temp = new Enemy(attributes[enemy.type].enemyId,
+                enemy.position.x, 
                 enemy.position.y, attributes[enemy.type].size, 
                 image_map[enemy.type + '_idle'], attributes[enemy.type].health,
                 attributes[enemy.type].health, 
@@ -246,5 +254,19 @@ class Level
             this.player.get_x_position() + this.player.getSize() / 2, 
             this.player.get_y_position() + this.player.getSize() / 2);
         this.curtain.display();
+    }
+
+    keyPressedInLevel()
+    {
+        if(key === ' ')
+        {
+            this.player.shoot();
+        }
+        else if(key === '1' || key === '2' || key === '3' || key === '4'
+             || key === '5' || key === '6' || key === '7' || key === '8'
+             || key === '9')
+        {
+            this.skillBar.useSkill(key - '1');
+        }
     }
 }

@@ -10,6 +10,7 @@ function preload()
     level1LightTexture = loadImage(level1LightFile);
     level2BGTexture = loadImage(level2BGFile);
     level2LightTexture = loadImage(level2LightFile);
+    questionMarkTexture = loadImage(questionMarkFile);
 }
 
 // 起始函数
@@ -51,6 +52,24 @@ async function setup() {
 
     // 读取配置文件
     attributes = await loadJsonData(attributeFile);
+
+    // sillbar 全局变量配置
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(grassTexture);
+
+    for(let i = 0; i < g_skillNumber; i ++)
+    {
+        g_skillStatusList.push(false);
+        g_skillNumList.push(0);
+    }
+    
 }
 
 function selectLevel() {
@@ -164,14 +183,6 @@ function draw() {
 
         if(present_level === 1)level1.update();
         else if(present_level === 2)level2.update(); 
-        // player.update();
-        // player.display();
-
-        // drawEnemies();
-        // drawObstacles();
-        // drawProjectiles();
-
-        // checkCollisions();
     } else if (gameState === 'over') {
         textSize(32);
         fill('red');
@@ -187,10 +198,22 @@ function draw() {
 // 按键监听（新增方向射击支持）
 function keyPressed() 
 {
-    if (key === ' ') 
+    if (present_level === 1) 
     {
-        level1.player.shoot();
+        level1.keyPressedInLevel();
     }
+    else if(present_level === 2)
+    {
+        level2.keyPressedInLevel();
+    }
+    // else if(present_level === 3)
+    // {
+    //     level3.keyPressedInLevel();
+    // }
+    // else if(present_level === 4)
+    // {
+    //     level4.keyPressedInLevel();
+    // }
 }
 
 window.onload = function() {

@@ -1,10 +1,11 @@
 // 敌人类
 class Enemy extends Character 
 {
-    constructor(x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
+    constructor(enemyId, x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
         attackRange, warningRange, enemyType)
     {
         super(x, y, size, format, health, maxHealth, attack, status, speed);
+        this.enemyId = enemyId;
         this.prevX = x;
         this.prevY = y;
         this.patrolPath = patrolPath;
@@ -94,5 +95,10 @@ class Enemy extends Character
     {
         this.x = this.prevX;
         this.y = this.prevY;
+    }
+
+    getEnemyId()
+    {
+        return this.enemyId;
     }
 }
