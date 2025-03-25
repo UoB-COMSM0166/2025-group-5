@@ -332,14 +332,17 @@ class Level
         }
         else if(key === 'q')
         {
-            let temp_x = this.player.get_x_position();
-            let temp_y = this.player.get_y_position();
-            this.player = this.tempPlayer;
-            this.player.set_x_position(temp_x);
-            this.player.set_y_position(temp_y);
-            this.player.changeStatus(charStatus.INVINCIBLE);
-            this.player.invincibleTimer = globalInvincibleTimer;
-            this.transformFlag = false;
+            if(this.transformFlag === true)
+            {
+                let temp_x = this.player.get_x_position();
+                let temp_y = this.player.get_y_position();
+                this.player = this.tempPlayer;
+                this.player.set_x_position(temp_x);
+                this.player.set_y_position(temp_y);
+                this.player.changeStatus(charStatus.INVINCIBLE);
+                this.player.invincibleTimer = globalInvincibleTimer;
+                this.transformFlag = false;
+            }
         }
     }
 }

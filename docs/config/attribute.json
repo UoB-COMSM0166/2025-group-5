@@ -13,7 +13,8 @@
         "speed": 2,
         "attackRange": 100,
         "warningRange": 160,
-        "playerType": "shooting"
+        "playerType": "shooting",
+        "visionType": "sector"
     },
 
     "soldier":
@@ -26,6 +27,47 @@
         "attackRange": 0,
         "warningRange": 160,
         "enemyType": "collision"
+    },
+
+    "green_slime":
+    {
+        "enemyId": 0,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 0,
+        "warningRange": 160,
+        "enemyType": "collision",
+        "visionType": "round"
+    },
+
+
+    "purple_slime":
+    {
+        "enemyId": 0,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 0,
+        "warningRange": 160,
+        "enemyType": "collision",
+        "visionType": "round"
+    },
+
+    "faye":
+    {
+        "enemyId": 0,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 0,
+        "warningRange": 160,
+        "enemyType": "aoe",
+        "cd": 120,
+        "visionType": "round"
     },
 
     "wall":
