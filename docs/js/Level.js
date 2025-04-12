@@ -38,7 +38,10 @@ class Level
             playerTexture, attributes.player.health, attributes.player.health,
             attributes.player.attack, charStatus.NORMAL, attributes.player.speed,
             attributes.player.attackRange, attributes.player.warningRange,
-            attributes.player.playerType
+            attributes.player.playerType, attributes.player.cd,
+            attributes.player.visionType, attributes.player.shootSize,
+            attributes.player.shootSpeed, attributes.player.shootDis,
+            attributes.player.shootColor,
         );
         // 创建敌人对象
         this.createEnemies();
@@ -60,7 +63,7 @@ class Level
 
         this.drawLight(); // 绘制前景
 
-        this.drawCurtain();
+        // this.drawCurtain(); // 绘制幕布
         
         this.skillBar.display();
     }
@@ -156,21 +159,21 @@ class Level
             }
         }
 
-        // 敌人与障碍物碰撞检测
-        for (let enemy of this.enemies)
-        {
-            for(let obstacle of this.obstacles)
-            {
-                if (!obstacle.isPassable &&
-                    enemy.x < obstacle.x + obstacle.size &&
-                    enemy.x + enemy.size > obstacle.x &&
-                    enemy.y < obstacle.y + obstacle.size &&
-                    enemy.y + enemy.size > obstacle.y) 
-                {
-                    enemy.undoMove();
-                }
-            }
-        }
+        // // 敌人与障碍物碰撞检测
+        // for (let enemy of this.enemies)
+        // {
+        //     for(let obstacle of this.obstacles)
+        //     {
+        //         if (!obstacle.isPassable &&
+        //             enemy.x < obstacle.x + obstacle.size &&
+        //             enemy.x + enemy.size > obstacle.x &&
+        //             enemy.y < obstacle.y + obstacle.size &&
+        //             enemy.y + enemy.size > obstacle.y) 
+        //         {
+        //             enemy.undoMove();
+        //         }
+        //     }
+        // }
 
         // 子弹与敌人碰撞检测
         for (let i = this.enemies.length - 1; i >= 0; i --)
@@ -265,7 +268,14 @@ class Level
                 charStatus.NORMAL, attributes[enemy.type].speed,
                 enemy.patrolPath, attributes[enemy.type].attackRange,
                 attributes[enemy.type].warningRange, 
-                attributes[enemy.type].enemyType);
+                attributes[enemy.type].enemyType,
+                attributes[enemy.type].cd,
+                attributes[enemy.type].visionType,
+                attributes[enemy.type].shootSize,
+                attributes[enemy.type].shootSpeed,
+                attributes[enemy.type].shootDis,
+                attributes[enemy.type].shootColor
+            );
             this.enemies.push(temp);
         }
     }
@@ -322,7 +332,13 @@ class Level
                                     attributes[name].speed,
                                     attributes[name].attackRange,
                                     attributes[name].warningRange,
-                                    attributes[name].enemyType
+                                    attributes[name].enemyType,
+                                    attributes[name].cd,
+                                    attributes[name].visionType,
+                                    attributes[name].shootSize,
+                                    attributes[name].shootSpeed,
+                                    attributes[name].shootDis,
+                                    attributes[name].shootColor
                                 );
                             }
                         }

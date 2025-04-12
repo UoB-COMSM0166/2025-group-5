@@ -16,6 +16,7 @@ class Character {
         this.status = status;
         this.speed = speed;
         this.invincibleTimer = 0;
+        this.attackCdTimer = 0;
     }
 
     display() 
