@@ -63,7 +63,7 @@ class Level
 
         this.drawLight(); // 绘制前景
 
-        // this.drawCurtain(); // 绘制幕布
+        this.drawCurtain(); // 绘制幕布
         
         this.skillBar.display();
     }
