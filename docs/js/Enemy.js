@@ -2,7 +2,8 @@
 class Enemy extends Character 
 {
     constructor(enemyId, x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
-        attackRange, warningRange, enemyType)
+        attackRange, warningRange, enemyType, cd, visionType,
+        shootSize, shootSpeed, shootDis, shootColor)
     {
         super(x, y, size, format, health, maxHealth, attack, status, speed);
         this.enemyId = enemyId;
@@ -15,16 +16,47 @@ class Enemy extends Character
         this.attackRange = attackRange;
         this.warningRange = warningRange;
         this.enemyType = enemyType;
+        this.cd = cd;
+        this.visionType = visionType;
+
+        this.shootSize = shootSize;
+        this,shootSpeed = shootSpeed;
+        this.shootDis = shootDis;
+        this.shootColor = shootColor;
+
+        this.projectiles = [];
     }
 
     update(level) 
     {
+        this.isFindPlayer(level.player);
+
+        this.enemyMove(level);
+
+        this.invincibleTimerUpdate();
+
+        this.doAttack(level.player.x, level.player.y);
+        
+        this.attackCdUpdate();
+    }
+
+    undoMove() 
+    {
+        this.x = this.prevX;
+        this.y = this.prevY;
+    }
+
+    getEnemyId()
+    {
+        return this.enemyId;
+    }
+
+    enemyMove(level)
+    {
         this.prevX = this.x;
         this.prevY = this.y;
 
-        if(this.x === this.nextPatrolPoint.x && 
-            this.y === this.nextPatrolPoint.y
-        )
+        if(this.isGetPoint())
         {
             this.nextPatroIndex = (this.nextPatroIndex + 1) % this.patrolPath.length;
             this.nextPatrolPoint = this.patrolPath[this.nextPatroIndex];
@@ -60,7 +92,7 @@ class Enemy extends Character
         this.y = constrain(this.y, 0, height - this.size);
 
         // 障碍物碰撞检测
-        for (let obstacle of obstacles) 
+        for (let obstacle of level.obstacles) 
         {
             if (!obstacle.isPassable &&
                 this.x < obstacle.x + obstacle.size &&
@@ -68,11 +100,33 @@ class Enemy extends Character
                 this.y < obstacle.y + obstacle.size &&
                 this.y + this.size > obstacle.y) 
             {
-                this.undoMove();
-                break;
+                if(
+                    this.prevY >= obstacle.y + obstacle.size ||
+                    this.prevY + this.size <= obstacle.y)
+                {
+                    this.y = this.prevY;
+                    if(this.x > this.prevX) this.x = this.prevX + this.speed;
+                    else this.x = this.prevX - this.speed;
+                }
+                else if(this.prevX >= obstacle.x + obstacle.size ||
+                    this.prevX + this.size <= obstacle.x)
+                {
+                    this.x = this.prevX;
+                    if(this.y > this.prevY) this.y = this.prevY + this.speed;
+                    else this.y = this.prevY - this.speed;
+                }
+                else
+                {
+                    this.undoMove();
+                }
             }
+            
         }
+    }
 
+    invincibleTimerUpdate()
+    {
+        // 无敌状态倒计时
         if(this.invincibleTimer !== 0)this.invincibleTimer --;
         if(this.invincibleTimer === 0)
         {
@@ -91,14 +145,38 @@ class Enemy extends Character
         }
     }
 
-    undoMove() 
+    attackCdUpdate()
     {
-        this.x = this.prevX;
-        this.y = this.prevY;
+        if(this.attackCdTimer !== 0)this.attackCdTimer --;
     }
 
-    getEnemyId()
+    doAttack(playerX, playerY)
     {
-        return this.enemyId;
+        
+    }
+
+    isFindPlayer(player)
+    {
+        let dis = Math.sqrt((this.x - player.x) * (this.x - player.x) 
+                    + (this.y - player.y) * (this.y - player.y));
+        if(dis < this.warningRange)
+        {
+            this.findPalyer = true;
+        } 
+        else 
+        {
+            this.findPalyer = false;
+        }
+        return this.findPalyer;
+    }
+
+    isGetPoint()
+    {
+        if(Math.sqrt((this.x - this.nextPatrolPoint.x)
+                    * (this.x - this.nextPatrolPoint.x)
+                    + (this.y - this.nextPatrolPoint.y)
+                    * (this.y - this.nextPatrolPoint.y)) < this.speed)
+        return true;
+        else return false;
     }
 }

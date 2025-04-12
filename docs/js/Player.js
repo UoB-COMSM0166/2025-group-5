@@ -3,7 +3,8 @@ class Player extends Character
 {
     constructor(x, y, size,
         format, health, maxHealth, attack, status, speed,
-        attackRange, warningRange, playerType
+        attackRange, warningRange, playerType, cd, visionType,
+        shootSize, shootSpeed, shootDis, shootColor
     ) 
     {// Use playerTexture as the initial player image.
         super(x, y, size, format, health, 
@@ -13,9 +14,16 @@ class Player extends Character
         this.prevX = x;
         this.prevY = y;
         this.lastDirection = 'up'; // use the last direction to shoot.
-        this.attackRange = attackRange,
-        this.warningRange = warningRange,
-        this.playerType = playerType
+        this.attackRange = attackRange;
+        this.warningRange = warningRange;
+        this.playerType = playerType;
+        this.cd = cd;
+        this.visionType = visionType;
+
+        this.shootSize = shootSize;
+        this.shootSpeed = shootSpeed;
+        this.shootDis = shootDis;
+        this.shootColor = shootColor;
     }
 
     update() 
@@ -74,10 +82,30 @@ class Player extends Character
 
     shoot()
     {
+        let dx, dy;
+        switch(this.lastDirection){
+            case "up":
+                dx = 0;
+                dy = -1;
+                break;
+            case "down":
+                dx = 0;
+                dy = 1;
+                break;
+            case "left":
+                dx = -1;
+                dy = 0;
+                break;
+            case "right":
+                dx = 1;
+                dy = 0;
+                break;
+        }
         const centerX = this.x + this.size/2 - 2.5;
         const centerY = this.y + this.size/2 - 2.5;
         this.projectiles.push(new Projectile(centerX, centerY, 
-            this.lastDirection));
+            dx, dy, this.shootSize, this.shootSpeed, 
+            this.shootDis, this.shootColor));
 
         playerShootGunMusic();
     }
