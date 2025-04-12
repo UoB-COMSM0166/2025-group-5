@@ -36,6 +36,21 @@
                     "y": 192
                 }
             ]
+        },
+        {
+            "type": "tower",
+            "position": 
+            {
+                "x": 960,
+                "y": 400
+            },
+            "patrolPath":
+            [
+                {
+                    "x": 800,
+                    "y": 400
+                }
+            ]
         }
     ],
     "obstacles":

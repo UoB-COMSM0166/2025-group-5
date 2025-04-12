@@ -20,7 +20,7 @@ class Enemy extends Character
         this.visionType = visionType;
 
         this.shootSize = shootSize;
-        this,shootSpeed = shootSpeed;
+        this.shootSpeed = shootSpeed;
         this.shootDis = shootDis;
         this.shootColor = shootColor;
 
@@ -31,11 +31,14 @@ class Enemy extends Character
     {
         this.isFindPlayer(level.player);
 
-        this.enemyMove(level);
+        if(this.attackCdTimer === 0)
+        { // 仅当攻击cd置零时可以发动攻击
+            this.enemyMove(level);
+            this.doAttack(level.player.x + level.player.size / 2, 
+                        level.player.y + level.player.size / 2);
+        }
 
         this.invincibleTimerUpdate();
-
-        this.doAttack(level.player.x, level.player.y);
         
         this.attackCdUpdate();
     }
@@ -152,7 +155,24 @@ class Enemy extends Character
 
     doAttack(playerX, playerY)
     {
-        
+        let centerX = this.x + this.size / 2;
+        let centerY = this.y + this.size / 2;
+        if(Math.sqrt((centerX - playerX) * (centerX - playerX)
+                    + (centerY - playerY) * (centerY - playerY)) 
+                    < this.attackRange)
+        {
+            if(this.enemyType === "shooting")
+            {
+                this.projectiles.push(new Projectile(centerX, centerY, 
+                    playerX - centerX, playerY - centerY, this.shootSize, 
+                    this.shootSpeed, this.shootDis, this.shootColor));
+            }
+            else if(this.enemyType === "aoe")
+            {
+    
+            }
+            this.attackCdTimer = this.cd;
+        }
     }
 
     isFindPlayer(player)

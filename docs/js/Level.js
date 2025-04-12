@@ -87,29 +87,30 @@ class Level
 
     drawProjectiles()
     {
-        for (let i = this.player.projectiles.length - 1; i >= 0; i --) 
-        {
-            let proj = this.player.projectiles[i];
-            proj.update();
-            proj.display();
-    
-            // 只检测不可穿越障碍物
-            for (let obstacle of this.obstacles) 
-            {
-                if (!obstacle.isPassable &&
-                    proj.x < obstacle.x + obstacle.size &&
-                    proj.x + proj.size > obstacle.x &&
-                    proj.y < obstacle.y + obstacle.size &&
-                    proj.y + proj.size > obstacle.y) 
-                {
-                    this.player.projectiles.splice(i, 1);
-                    break;
-                }
+        // 玩家子弹
+        this.player.projectiles.forEach(
+            proj => {       
+                proj.update();       
+                proj.display();   
             }
-        }
+        );
     
         this.player.projectiles = 
-            this.player.projectiles.filter(proj => proj.isVisible());
+            this.player.projectiles.filter(proj => proj.isVisible(this.obstacles));
+
+        // 敌人子弹
+        for (let i = this.enemies.length - 1; i >= 0; i --) 
+        {
+        
+            this.enemies[i].projectiles.forEach(
+                proj => {
+                    proj.update();
+                    proj.display();
+                }
+            );
+            this.enemies[i].projectiles.filter(proj => proj.isVisible(this.obstacles));
+            
+        }
     }
 
     checkCollisions()
@@ -159,21 +160,7 @@ class Level
             }
         }
 
-        // // 敌人与障碍物碰撞检测
-        // for (let enemy of this.enemies)
-        // {
-        //     for(let obstacle of this.obstacles)
-        //     {
-        //         if (!obstacle.isPassable &&
-        //             enemy.x < obstacle.x + obstacle.size &&
-        //             enemy.x + enemy.size > obstacle.x &&
-        //             enemy.y < obstacle.y + obstacle.size &&
-        //             enemy.y + enemy.size > obstacle.y) 
-        //         {
-        //             enemy.undoMove();
-        //         }
-        //     }
-        // }
+        // // 敌人与障碍物碰撞检测,在enemy类中实现
 
         // 子弹与敌人碰撞检测
         for (let i = this.enemies.length - 1; i >= 0; i --)

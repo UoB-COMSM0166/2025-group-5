@@ -23,13 +23,26 @@ class Projectile {
 
     display() {
         fill(this.color);
-        rect(this.x, this.y, this.size, this.size);
+        ellipse(this.x, this.y, this.size, this.size);
     }
 
-    isVisible() {
+    isVisible(obstacles) {
+        for (let obstacle of obstacles) // 障碍物检测
+        {
+            if (!obstacle.isPassable &&
+                this.x < obstacle.x + obstacle.size &&
+                this.x + this.size > obstacle.x &&
+                this.y < obstacle.y + obstacle.size &&
+                this.y + this.size > obstacle.y) 
+            {
+                return false;
+            }
+        }
+
         const traveledDistance = Math.sqrt(            
             Math.pow(this.x - this.startX, 2) + Math.pow(this.y - this.startY, 2)        
         );
+        
         return traveledDistance < this.maxDistance &&
                this.x > -this.size && 
                this.x < canvasWidth &&
