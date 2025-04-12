@@ -47,6 +47,9 @@ let enemyTexture;
 // ### tower
 let towerFile = 'resources/images/characters_and_obstacles/tower_example.png';
 let towerTexture;
+// ### faye
+let fayeFile = 'resources/images/characters_and_obstacles/mage_example.png';
+let fayeTexture;
 
 // ## obstacle
 let obstacleSize = 50;

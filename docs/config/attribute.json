@@ -103,7 +103,7 @@
         "health": 10,
         "speed": 1,
         "attackRange": 100,
-        "warningRange": 160,
+        "warningRange": 150,
         "enemyType": "aoe",
         "cd": 120,
         "visionType": "round",

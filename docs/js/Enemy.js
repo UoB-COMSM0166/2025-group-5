@@ -169,7 +169,14 @@ class Enemy extends Character
             }
             else if(this.enemyType === "aoe")
             {
-    
+                let baseAngle = Math.floor(Math.random() * 31);
+                for(let i = 0; i < 12; i ++)
+                {
+                    let angle = (baseAngle + 30 * i) * (Math.PI / 180);
+                    this.projectiles.push(new Projectile(centerX, centerY, 
+                        Math.cos(angle), Math.sin(angle), this.shootSize, 
+                        this.shootSpeed, this.shootDis, this.shootColor));
+                }
             }
             this.attackCdTimer = this.cd;
         }
