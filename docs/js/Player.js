@@ -24,6 +24,8 @@ class Player extends Character
         this.shootSpeed = shootSpeed;
         this.shootDis = shootDis;
         this.shootColor = shootColor;
+
+        this.attackCdTimer = 0;
     }
 
     update() 
@@ -72,6 +74,8 @@ class Player extends Character
                 this.status = charStatus.NORMAL;
             }
         }
+
+        this.attackCdUpdate();
     }
 
     undoMove() 
@@ -103,10 +107,37 @@ class Player extends Character
         }
         const centerX = this.x + this.size/2 - 2.5;
         const centerY = this.y + this.size/2 - 2.5;
-        this.projectiles.push(new Projectile(centerX, centerY, 
-            dx, dy, this.shootSize, this.shootSpeed, 
-            this.shootDis, this.shootColor));
+        if(this.attackCdTimer === 0)
+        {
+            this.projectiles.push(new Projectile(centerX, centerY, 
+                dx, dy, this.shootSize, this.shootSpeed, 
+                this.shootDis, this.shootColor));
 
-        playerShootGunMusic();
+            playerShootGunMusic();
+            this.attackCdTimer = this.cd;
+        }
+    }
+
+    aoe()
+    {
+        const centerX = this.x + this.size/2 - 2.5;
+        const centerY = this.y + this.size/2 - 2.5;
+        if(this.attackCdTimer === 0)
+        {
+            let baseAngle = Math.floor(Math.random() * 31);
+            for(let i = 0; i < 12; i ++)
+            {
+                let angle = (baseAngle + 30 * i) * (Math.PI / 180);
+                this.projectiles.push(new Projectile(centerX, centerY, 
+                    Math.cos(angle), Math.sin(angle), this.shootSize, 
+                    this.shootSpeed, this.shootDis, this.shootColor));
+            }
+            this.attackCdTimer = this.cd;
+        }
+    }
+
+    attackCdUpdate()
+    {
+        if(this.attackCdTimer !== 0)this.attackCdTimer --;
     }
 }

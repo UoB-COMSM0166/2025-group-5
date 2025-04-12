@@ -63,7 +63,7 @@ class Level
 
         this.drawLight(); // 绘制前景
 
-        // this.drawCurtain(); // 绘制幕布
+        this.drawCurtain(); // 绘制幕布
         
         this.skillBar.display();
     }
@@ -311,6 +311,10 @@ class Level
         if(key === ' ' && this.player.playerType === "shooting")
         {
             this.player.shoot();
+        }
+        else if(key === ' ' && this.player.playerType === "aoe")
+        {
+            this.player.aoe();
         }
         else if(key === '1' || key === '2' || key === '3' || key === '4'
              || key === '5' || key === '6' || key === '7' || key === '8'
