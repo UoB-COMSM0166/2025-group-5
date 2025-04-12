@@ -44,6 +44,9 @@ let soldierSpeed = 1;
 let soldierSize = 40;
 let enemyFile = 'resources/images/characters_and_obstacles/example1.jpg';
 let enemyTexture;
+// ### tower
+let towerFile = 'resources/images/characters_and_obstacles/tower_example.png';
+let towerTexture;
 
 // ## obstacle
 let obstacleSize = 50;
@@ -106,7 +109,8 @@ let level4;
 // #mapping
 let image_map = 
 {
-    "soldier_idle": enemyTexture
+    "soldier_idle": enemyTexture,
+    "tower_idle": towerTexture
 };
 
 // # Curtain

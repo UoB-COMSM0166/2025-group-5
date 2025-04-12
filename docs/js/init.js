@@ -4,6 +4,7 @@ function preload()
 {
     playerTexture = loadImage(playerFile);
     image_map["soldier_idle"] = loadImage(enemyFile);
+    image_map["tower_idle"] = loadImage(towerFile);
     grassTexture = loadImage(grassFile);
     obstacleTexture = loadImage(obstacleFile);
     level1BGTexture = loadImage(level1BGFile);
@@ -57,7 +58,7 @@ async function setup() {
     g_skillTextureList.push(image_map["soldier_idle"]);
     g_skillTextureList.push(grassTexture);
     g_skillTextureList.push(grassTexture);
-    g_skillTextureList.push(grassTexture);
+    g_skillTextureList.push(image_map["tower_idle"]);
     g_skillTextureList.push(grassTexture);
     g_skillTextureList.push(grassTexture);
     g_skillTextureList.push(grassTexture);
