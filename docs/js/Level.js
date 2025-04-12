@@ -63,7 +63,7 @@ class Level
 
         this.drawLight(); // 绘制前景
 
-        this.drawCurtain(); // 绘制幕布
+        // this.drawCurtain(); // 绘制幕布
         
         this.skillBar.display();
     }
@@ -190,6 +190,26 @@ class Level
             { // remove dead enemy.
                 this.skillBar.addSkill(this.enemies[i].getEnemyId());
                 this.enemies.splice(i, 1);
+            }
+        }
+
+        // 敌人子弹与玩家碰撞检测
+        for (let i = this.enemies.length - 1; i >= 0; i --)
+        {
+            for (let j = this.enemies[i].projectiles.length - 1; j >= 0; j--) 
+            {
+                let proj = this.enemies[i].projectiles[j];
+                if(this.player.getStatus() !== charStatus.INVINCIBLE)
+                {
+                    if (proj.isHit(this.player)) 
+                    {
+                        this.player.changeHealth(- this.enemies[i].getAttack());
+                        this.player.changeStatus(charStatus.INVINCIBLE);
+
+                        this.enemies[i].projectiles.splice(j, 1);
+                        break;
+                    }
+                }
             }
         }
 

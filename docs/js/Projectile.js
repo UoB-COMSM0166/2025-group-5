@@ -51,7 +51,7 @@ class Projectile {
     }
 
     isHit(character){
-        dis = Math.sqrt((character.x + character.size / 2 - this.x) 
+        let dis = Math.sqrt((character.x + character.size / 2 - this.x) 
                         * (character.x + character.size / 2 - this.x)
                         + (character.y + character.size / 2 - this.y) 
                         * (character.y + character.size / 2 - this.y));
