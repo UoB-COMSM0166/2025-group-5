@@ -13,7 +13,7 @@
         "speed": 2,
         "attackRange": 100,
         "warningRange": 160,
-        "cd": 120,
+        "cd": 60,
         "playerType": "shooting",
         "visionType": "sector",
         "shootSize": 5,
