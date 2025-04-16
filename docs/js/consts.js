@@ -117,7 +117,8 @@ let image_map =
 };
 
 // # Curtain
-let transparentRadius = 100;
+let transparentRadius = 30;
+let transparentSectorRadius = 200;
 
 // # SkillBar
 let questionMarkTexture;

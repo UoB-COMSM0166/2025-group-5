@@ -11,7 +11,7 @@ class Level
         this.bGTexture = bGTexture;
         this.lightTexture = lightTexture;
         this.curtain = new Curtain(canvasWidth, canvasHeight, 
-            "black", 0, 0, transparentRadius);
+            "black", 0, 0, transparentRadius, "sector", transparentSectorRadius);
         this.skillBar = new SkillBar(g_skillNumber, g_skillTextureList, 
             questionMarkTexture, g_skillStatusList, g_skillNumList, 
             g_skillBarX, g_skillBarY, g_skillBarHeight, g_skillBarWidth,
@@ -121,27 +121,29 @@ class Level
             // 玩家与敌人碰撞检测
             for (let i = this.enemies.length - 1; i >= 0; i --) 
             {
-                if(this.enemies[i].enemyType === "collision")
+
+                if (this.player.x < this.enemies[i].x + this.enemies[i].size &&
+                    this.player.x + this.player.size > this.enemies[i].x &&
+                    this.player.y < this.enemies[i].y + this.enemies[i].size &&
+                    this.player.y + this.player.size > this.enemies[i].y) 
                 {
-                    if (this.player.x < this.enemies[i].x + this.enemies[i].size &&
-                        this.player.x + this.player.size > this.enemies[i].x &&
-                        this.player.y < this.enemies[i].y + this.enemies[i].size &&
-                        this.player.y + this.player.size > this.enemies[i].y) 
+                    if(this.enemies[i].enemyType === "collision")
                     {
                         this.player.changeHealth(- this.enemies[i].getAttack());
                         this.player.changeStatus(charStatus.INVINCIBLE);
-                        if(this.player.playerType === "collision")
-                        {
-                            this.enemies[i].changeHealth(- this.player.getAttack());
-                            this.enemies[i].changeStatus(charStatus.INVINCIBLE);
-                            if(this.enemies[i].getHealth() === 0)
-                            { // remove dead enemy.
-                                this.skillBar.addSkill(this.enemies[i].getEnemyId());
-                                this.enemies.splice(i, 1);
-                            }
+                    }
+                    if(this.player.playerType === "collision")
+                    {
+                        this.enemies[i].changeHealth(- this.player.getAttack());
+                        this.enemies[i].changeStatus(charStatus.INVINCIBLE);
+                        if(this.enemies[i].getHealth() === 0)
+                        { // remove dead enemy.
+                            this.skillBar.addSkill(this.enemies[i].getEnemyId());
+                            this.enemies.splice(i, 1);
                         }
                     }
                 }
+
                 
 
             }
@@ -300,9 +302,28 @@ class Level
 
     drawCurtain()
     {
-        this.curtain.update(
-            this.player.get_x_position() + this.player.getSize() / 2, 
-            this.player.get_y_position() + this.player.getSize() / 2);
+        if("round" === this.player.visionType)
+        {
+            this.curtain.update(
+                this.player.get_x_position() + this.player.getSize() / 2, 
+                this.player.get_y_position() + this.player.getSize() / 2,
+                this.player.warningRange,
+                this.player.visionType,
+                this.player.warningRange,
+                "up"
+            );
+        }
+        else 
+        {
+            this.curtain.update(
+                this.player.get_x_position() + this.player.getSize() / 2, 
+                this.player.get_y_position() + this.player.getSize() / 2,
+                transparentRadius,
+                this.player.visionType,
+                this.player.warningRange,
+                this.player.lastDirection
+            );
+        }
         this.curtain.display();
     }
 
