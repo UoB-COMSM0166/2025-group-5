@@ -1,19 +1,5 @@
 
-// 预先导入图片
-function preload()
-{
-    playerTexture = loadImage(playerFile);
-    image_map["soldier_idle"] = loadImage(enemyFile);
-    image_map["tower_idle"] = loadImage(towerFile);
-    image_map["faye_idle"] = loadImage(fayeFile);
-    grassTexture = loadImage(grassFile);
-    obstacleTexture = loadImage(obstacleFile);
-    level1BGTexture = loadImage(level1BGFile);
-    level1LightTexture = loadImage(level1LightFile);
-    level2BGTexture = loadImage(level2BGFile);
-    level2LightTexture = loadImage(level2LightFile);
-    questionMarkTexture = loadImage(questionMarkFile);
-}
+
 
 // 起始函数
 async function setup() {

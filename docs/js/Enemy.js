@@ -3,7 +3,7 @@ class Enemy extends Character
 {
     constructor(enemyId, x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
         attackRange, warningRange, enemyType, cd, visionType,
-        shootSize, shootSpeed, shootDis, shootColor)
+        shootSize, shootSpeed, shootDis, shootFormat)
     {
         super(x, y, size, format, health, maxHealth, attack, status, speed);
         this.enemyId = enemyId;
@@ -22,7 +22,7 @@ class Enemy extends Character
         this.shootSize = shootSize;
         this.shootSpeed = shootSpeed;
         this.shootDis = shootDis;
-        this.shootColor = shootColor;
+        this.shootFormat = shootFormat;
 
         this.projectiles = [];
     }
@@ -165,7 +165,7 @@ class Enemy extends Character
             {
                 this.projectiles.push(new Projectile(centerX, centerY, 
                     playerX - centerX, playerY - centerY, this.shootSize, 
-                    this.shootSpeed, this.shootDis, this.shootColor));
+                    this.shootSpeed, this.shootDis, this.shootFormat));
             }
             else if(this.enemyType === "aoe")
             {
@@ -175,7 +175,7 @@ class Enemy extends Character
                     let angle = (baseAngle + 30 * i) * (Math.PI / 180);
                     this.projectiles.push(new Projectile(centerX, centerY, 
                         Math.cos(angle), Math.sin(angle), this.shootSize, 
-                        this.shootSpeed, this.shootDis, this.shootColor));
+                        this.shootSpeed, this.shootDis, this.shootFormat));
                 }
             }
             this.attackCdTimer = this.cd;

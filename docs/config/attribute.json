@@ -19,7 +19,7 @@
         "shootSize": 5,
         "shootSpeed": 5,
         "shootDis": 100,
-        "shootColor": "blue"
+        "shootFormat": "blue"
     },
 
     "soldier":
@@ -37,7 +37,7 @@
         "shootSize": 5,
         "shootSpeed": 5,
         "shootDis": 100,
-        "shootColor": "blue"
+        "shootFormat": "blue"
     },
 
     "green_slime":
@@ -55,7 +55,7 @@
         "shootSize": 5,
         "shootSpeed": 5,
         "shootDis": 100,
-        "shootColor": "blue"
+        "shootFormat": "blue"
     },
 
 
@@ -74,31 +74,103 @@
         "shootSize": 5,
         "shootSpeed": 1,
         "shootDis": 100,
-        "shootColor": "blue"
+        "shootFormat": "blue"
     },
 
     "tower":
     {
         "enemyId": 3,
-        "size": 32,
+        "size": 128,
         "attack": 4,
-        "health": 10,
+        "health": 100000,
         "speed": 0,
-        "attackRange": 100,
-        "warningRange": 160,
+        "attackRange": 200,
+        "warningRange": 200,
         "enemyType": "shooting",
         "cd": 120,
         "visionType": "sector",
         "shootSize": 20,
         "shootSpeed": 2,
         "shootDis": 100,
-        "shootColor": "red"
+        "shootFormat": "red"
+    },
+
+    "skeletonTower":
+    {
+        "enemyId": 3,
+        "size": 128,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red"
+    },
+
+    "forestTower":
+    {
+        "enemyId": 3,
+        "size": 128,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red"
+    },
+
+    "magmaTower":
+    {
+        "enemyId": 3,
+        "size": 128,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red"
+    },
+
+    "waterTower":
+    {
+        "enemyId": 3,
+        "size": 128,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red"
     },
 
     "faye":
     {
         "enemyId": 4,
-        "size": 32,
+        "size": 64,
         "attack": 4,
         "health": 10,
         "speed": 1,
@@ -110,7 +182,7 @@
         "shootSize": 30,
         "shootSpeed": 2,
         "shootDis": 100,
-        "shootColor": "yellow"
+        "shootFormat": "yellow"
     },
 
     "wall":
