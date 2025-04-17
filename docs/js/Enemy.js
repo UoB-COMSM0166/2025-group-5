@@ -2,7 +2,8 @@
 class Enemy extends Character 
 {
     constructor(enemyId, x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
-        attackRange, warningRange, enemyType)
+        attackRange, warningRange, enemyType, cd, visionType,
+        shootSize, shootSpeed, shootDis, shootFormat)
     {
         super(x, y, size, format, health, maxHealth, attack, status, speed);
         this.enemyId = enemyId;
@@ -15,16 +16,50 @@ class Enemy extends Character
         this.attackRange = attackRange;
         this.warningRange = warningRange;
         this.enemyType = enemyType;
+        this.cd = cd;
+        this.visionType = visionType;
+
+        this.shootSize = shootSize;
+        this.shootSpeed = shootSpeed;
+        this.shootDis = shootDis;
+        this.shootFormat = shootFormat;
+
+        this.projectiles = [];
     }
 
     update(level) 
     {
+        this.isFindPlayer(level.player);
+
+        if(this.attackCdTimer === 0)
+        { // 仅当攻击cd置零时可以发动攻击
+            this.enemyMove(level);
+            this.doAttack(level.player.x + level.player.size / 2, 
+                        level.player.y + level.player.size / 2);
+        }
+
+        this.invincibleTimerUpdate();
+        
+        this.attackCdUpdate();
+    }
+
+    undoMove() 
+    {
+        this.x = this.prevX;
+        this.y = this.prevY;
+    }
+
+    getEnemyId()
+    {
+        return this.enemyId;
+    }
+
+    enemyMove(level)
+    {
         this.prevX = this.x;
         this.prevY = this.y;
 
-        if(this.x === this.nextPatrolPoint.x && 
-            this.y === this.nextPatrolPoint.y
-        )
+        if(this.isGetPoint())
         {
             this.nextPatroIndex = (this.nextPatroIndex + 1) % this.patrolPath.length;
             this.nextPatrolPoint = this.patrolPath[this.nextPatroIndex];
@@ -60,7 +95,7 @@ class Enemy extends Character
         this.y = constrain(this.y, 0, height - this.size);
 
         // 障碍物碰撞检测
-        for (let obstacle of obstacles) 
+        for (let obstacle of level.obstacles) 
         {
             if (!obstacle.isPassable &&
                 this.x < obstacle.x + obstacle.size &&
@@ -68,11 +103,33 @@ class Enemy extends Character
                 this.y < obstacle.y + obstacle.size &&
                 this.y + this.size > obstacle.y) 
             {
-                this.undoMove();
-                break;
+                if(
+                    this.prevY >= obstacle.y + obstacle.size ||
+                    this.prevY + this.size <= obstacle.y)
+                {
+                    this.y = this.prevY;
+                    if(this.x > this.prevX) this.x = this.prevX + this.speed;
+                    else this.x = this.prevX - this.speed;
+                }
+                else if(this.prevX >= obstacle.x + obstacle.size ||
+                    this.prevX + this.size <= obstacle.x)
+                {
+                    this.x = this.prevX;
+                    if(this.y > this.prevY) this.y = this.prevY + this.speed;
+                    else this.y = this.prevY - this.speed;
+                }
+                else
+                {
+                    this.undoMove();
+                }
             }
+            
         }
+    }
 
+    invincibleTimerUpdate()
+    {
+        // 无敌状态倒计时
         if(this.invincibleTimer !== 0)this.invincibleTimer --;
         if(this.invincibleTimer === 0)
         {
@@ -91,14 +148,62 @@ class Enemy extends Character
         }
     }
 
-    undoMove() 
+    attackCdUpdate()
     {
-        this.x = this.prevX;
-        this.y = this.prevY;
+        if(this.attackCdTimer !== 0)this.attackCdTimer --;
     }
 
-    getEnemyId()
+    doAttack(playerX, playerY)
     {
-        return this.enemyId;
+        let centerX = this.x + this.size / 2;
+        let centerY = this.y + this.size / 2;
+        if(Math.sqrt((centerX - playerX) * (centerX - playerX)
+                    + (centerY - playerY) * (centerY - playerY)) 
+                    < this.attackRange)
+        {
+            if(this.enemyType === "shooting")
+            {
+                this.projectiles.push(new Projectile(centerX, centerY, 
+                    playerX - centerX, playerY - centerY, this.shootSize, 
+                    this.shootSpeed, this.shootDis, this.shootFormat));
+            }
+            else if(this.enemyType === "aoe")
+            {
+                let baseAngle = Math.floor(Math.random() * 31);
+                for(let i = 0; i < 12; i ++)
+                {
+                    let angle = (baseAngle + 30 * i) * (Math.PI / 180);
+                    this.projectiles.push(new Projectile(centerX, centerY, 
+                        Math.cos(angle), Math.sin(angle), this.shootSize, 
+                        this.shootSpeed, this.shootDis, this.shootFormat));
+                }
+            }
+            this.attackCdTimer = this.cd;
+        }
+    }
+
+    isFindPlayer(player)
+    {
+        let dis = Math.sqrt((this.x - player.x) * (this.x - player.x) 
+                    + (this.y - player.y) * (this.y - player.y));
+        if(dis < this.warningRange)
+        {
+            this.findPalyer = true;
+        } 
+        else 
+        {
+            this.findPalyer = false;
+        }
+        return this.findPalyer;
+    }
+
+    isGetPoint()
+    {
+        if(Math.sqrt((this.x - this.nextPatrolPoint.x)
+                    * (this.x - this.nextPatrolPoint.x)
+                    + (this.y - this.nextPatrolPoint.y)
+                    * (this.y - this.nextPatrolPoint.y)) < this.speed)
+        return true;
+        else return false;
     }
 }

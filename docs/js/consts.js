@@ -44,6 +44,12 @@ let soldierSpeed = 1;
 let soldierSize = 40;
 let enemyFile = 'resources/images/characters_and_obstacles/example1.jpg';
 let enemyTexture;
+// ### tower
+let towerFile = 'resources/images/characters_and_obstacles/tower/skeletonTower.png';
+let towerTexture;
+// ### faye
+let fayeFile = 'resources/images/characters_and_obstacles/wizard/wizard-walk/Wizard-Walk_1.png';
+let fayeTexture;
 
 // ## obstacle
 let obstacleSize = 50;
@@ -103,14 +109,31 @@ let level2;
 let level3;
 let level4;
 
+// # bullet
+let skeletonTowerFile = "resources/images/characters_and_obstacles/tower/skeletonBullet.png";
+
 // #mapping
 let image_map = 
 {
-    "soldier_idle": enemyTexture
+    "soldier_idle": null,
+    "skeletonTower_idle": null,
+    "forestTower_idle": null,
+    "magmaTower_idle": null,
+    "waterTower_idle": null
+};
+
+let bullet_map = 
+{
+    "faye": null,
+    "skeletonTower": null,
+    "forestTower": null,
+    "magmaTower": null,
+    "waterTower": null,
 };
 
 // # Curtain
-let transparentRadius = 100;
+let transparentRadius = 30;
+let transparentSectorRadius = 200;
 
 // # SkillBar
 let questionMarkTexture;
@@ -125,3 +148,21 @@ let g_skillBarHeight = 50;
 let g_skillBarWidth = 50;
 let g_skillBarBlankWidth = 5;
 let g_textSize = 16;
+
+// 预先导入图片
+function preload()
+{
+    playerTexture = loadImage(playerFile);
+    image_map["soldier_idle"] = loadImage(enemyFile);
+    image_map["skeletonTower_idle"] = loadImage(towerFile);
+    image_map["faye_idle"] = loadImage(fayeFile);
+    bullet_map["skeletonTower"] = loadImage(skeletonTowerFile);
+    bullet_map["faye"] = loadImage(skeletonTowerFile);
+    grassTexture = loadImage(grassFile);
+    obstacleTexture = loadImage(obstacleFile);
+    level1BGTexture = loadImage(level1BGFile);
+    level1LightTexture = loadImage(level1LightFile);
+    level2BGTexture = loadImage(level2BGFile);
+    level2LightTexture = loadImage(level2LightFile);
+    questionMarkTexture = loadImage(questionMarkFile);
+}

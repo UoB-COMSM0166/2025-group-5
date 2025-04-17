@@ -11,7 +11,7 @@ class Level
         this.bGTexture = bGTexture;
         this.lightTexture = lightTexture;
         this.curtain = new Curtain(canvasWidth, canvasHeight, 
-            "black", 0, 0, transparentRadius);
+            "black", 0, 0, transparentRadius, "sector", transparentSectorRadius);
         this.skillBar = new SkillBar(g_skillNumber, g_skillTextureList, 
             questionMarkTexture, g_skillStatusList, g_skillNumList, 
             g_skillBarX, g_skillBarY, g_skillBarHeight, g_skillBarWidth,
@@ -38,7 +38,10 @@ class Level
             playerTexture, attributes.player.health, attributes.player.health,
             attributes.player.attack, charStatus.NORMAL, attributes.player.speed,
             attributes.player.attackRange, attributes.player.warningRange,
-            attributes.player.playerType
+            attributes.player.playerType, attributes.player.cd,
+            attributes.player.visionType, attributes.player.shootSize,
+            attributes.player.shootSpeed, attributes.player.shootDis,
+            attributes.player.shootFormat,
         );
         // 创建敌人对象
         this.createEnemies();
@@ -60,7 +63,7 @@ class Level
 
         this.drawLight(); // 绘制前景
 
-        this.drawCurtain();
+        // this.drawCurtain(); // 绘制幕布
         
         this.skillBar.display();
     }
@@ -84,29 +87,30 @@ class Level
 
     drawProjectiles()
     {
-        for (let i = this.player.projectiles.length - 1; i >= 0; i --) 
-        {
-            let proj = this.player.projectiles[i];
-            proj.update();
-            proj.display();
-    
-            // 只检测不可穿越障碍物
-            for (let obstacle of this.obstacles) 
-            {
-                if (!obstacle.isPassable &&
-                    proj.x < obstacle.x + obstacle.size &&
-                    proj.x + proj.size > obstacle.x &&
-                    proj.y < obstacle.y + obstacle.size &&
-                    proj.y + proj.size > obstacle.y) 
-                {
-                    this.player.projectiles.splice(i, 1);
-                    break;
-                }
+        // 玩家子弹
+        this.player.projectiles.forEach(
+            proj => {       
+                proj.update();       
+                proj.display();   
             }
-        }
+        );
     
         this.player.projectiles = 
-            this.player.projectiles.filter(proj => proj.isVisible());
+            this.player.projectiles.filter(proj => proj.isVisible(this.obstacles));
+
+        // 敌人子弹
+        for (let i = this.enemies.length - 1; i >= 0; i --) 
+        {
+        
+            this.enemies[i].projectiles.forEach(
+                proj => {
+                    proj.update();
+                    proj.display();
+                }
+            );
+            this.enemies[i].projectiles.filter(proj => proj.isVisible(this.obstacles));
+            
+        }
     }
 
     checkCollisions()
@@ -117,27 +121,29 @@ class Level
             // 玩家与敌人碰撞检测
             for (let i = this.enemies.length - 1; i >= 0; i --) 
             {
-                if(this.enemies[i].enemyType === "collision")
+
+                if (this.player.x < this.enemies[i].x + this.enemies[i].size &&
+                    this.player.x + this.player.size > this.enemies[i].x &&
+                    this.player.y < this.enemies[i].y + this.enemies[i].size &&
+                    this.player.y + this.player.size > this.enemies[i].y) 
                 {
-                    if (this.player.x < this.enemies[i].x + this.enemies[i].size &&
-                        this.player.x + this.player.size > this.enemies[i].x &&
-                        this.player.y < this.enemies[i].y + this.enemies[i].size &&
-                        this.player.y + this.player.size > this.enemies[i].y) 
+                    if(this.enemies[i].enemyType === "collision")
                     {
                         this.player.changeHealth(- this.enemies[i].getAttack());
                         this.player.changeStatus(charStatus.INVINCIBLE);
-                        if(this.player.playerType === "collision")
-                        {
-                            this.enemies[i].changeHealth(- this.player.getAttack());
-                            this.enemies[i].changeStatus(charStatus.INVINCIBLE);
-                            if(this.enemies[i].getHealth() === 0)
-                            { // remove dead enemy.
-                                this.skillBar.addSkill(this.enemies[i].getEnemyId());
-                                this.enemies.splice(i, 1);
-                            }
+                    }
+                    if(this.player.playerType === "collision")
+                    {
+                        this.enemies[i].changeHealth(- this.player.getAttack());
+                        this.enemies[i].changeStatus(charStatus.INVINCIBLE);
+                        if(this.enemies[i].getHealth() === 0)
+                        { // remove dead enemy.
+                            this.skillBar.addSkill(this.enemies[i].getEnemyId());
+                            this.enemies.splice(i, 1);
                         }
                     }
                 }
+
                 
 
             }
@@ -156,21 +162,7 @@ class Level
             }
         }
 
-        // 敌人与障碍物碰撞检测
-        for (let enemy of this.enemies)
-        {
-            for(let obstacle of this.obstacles)
-            {
-                if (!obstacle.isPassable &&
-                    enemy.x < obstacle.x + obstacle.size &&
-                    enemy.x + enemy.size > obstacle.x &&
-                    enemy.y < obstacle.y + obstacle.size &&
-                    enemy.y + enemy.size > obstacle.y) 
-                {
-                    enemy.undoMove();
-                }
-            }
-        }
+        // // 敌人与障碍物碰撞检测,在enemy类中实现
 
         // 子弹与敌人碰撞检测
         for (let i = this.enemies.length - 1; i >= 0; i --)
@@ -200,6 +192,26 @@ class Level
             { // remove dead enemy.
                 this.skillBar.addSkill(this.enemies[i].getEnemyId());
                 this.enemies.splice(i, 1);
+            }
+        }
+
+        // 敌人子弹与玩家碰撞检测
+        for (let i = this.enemies.length - 1; i >= 0; i --)
+        {
+            for (let j = this.enemies[i].projectiles.length - 1; j >= 0; j--) 
+            {
+                let proj = this.enemies[i].projectiles[j];
+                if(this.player.getStatus() !== charStatus.INVINCIBLE)
+                {
+                    if (proj.isHit(this.player)) 
+                    {
+                        this.player.changeHealth(- this.enemies[i].getAttack());
+                        this.player.changeStatus(charStatus.INVINCIBLE);
+
+                        this.enemies[i].projectiles.splice(j, 1);
+                        break;
+                    }
+                }
             }
         }
 
@@ -265,7 +277,14 @@ class Level
                 charStatus.NORMAL, attributes[enemy.type].speed,
                 enemy.patrolPath, attributes[enemy.type].attackRange,
                 attributes[enemy.type].warningRange, 
-                attributes[enemy.type].enemyType);
+                attributes[enemy.type].enemyType,
+                attributes[enemy.type].cd,
+                attributes[enemy.type].visionType,
+                attributes[enemy.type].shootSize,
+                attributes[enemy.type].shootSpeed,
+                attributes[enemy.type].shootDis,
+                bullet_map[enemy.type]
+            );
             this.enemies.push(temp);
         }
     }
@@ -283,9 +302,28 @@ class Level
 
     drawCurtain()
     {
-        this.curtain.update(
-            this.player.get_x_position() + this.player.getSize() / 2, 
-            this.player.get_y_position() + this.player.getSize() / 2);
+        if("round" === this.player.visionType)
+        {
+            this.curtain.update(
+                this.player.get_x_position() + this.player.getSize() / 2, 
+                this.player.get_y_position() + this.player.getSize() / 2,
+                this.player.warningRange,
+                this.player.visionType,
+                this.player.warningRange,
+                "up"
+            );
+        }
+        else 
+        {
+            this.curtain.update(
+                this.player.get_x_position() + this.player.getSize() / 2, 
+                this.player.get_y_position() + this.player.getSize() / 2,
+                transparentRadius,
+                this.player.visionType,
+                this.player.warningRange,
+                this.player.lastDirection
+            );
+        }
         this.curtain.display();
     }
 
@@ -294,6 +332,10 @@ class Level
         if(key === ' ' && this.player.playerType === "shooting")
         {
             this.player.shoot();
+        }
+        else if(key === ' ' && this.player.playerType === "aoe")
+        {
+            this.player.aoe();
         }
         else if(key === '1' || key === '2' || key === '3' || key === '4'
              || key === '5' || key === '6' || key === '7' || key === '8'
@@ -322,7 +364,13 @@ class Level
                                     attributes[name].speed,
                                     attributes[name].attackRange,
                                     attributes[name].warningRange,
-                                    attributes[name].enemyType
+                                    attributes[name].enemyType,
+                                    attributes[name].cd,
+                                    attributes[name].visionType,
+                                    attributes[name].shootSize,
+                                    attributes[name].shootSpeed,
+                                    attributes[name].shootDis,
+                                    bullet_map[name]
                                 );
                             }
                         }
@@ -332,14 +380,17 @@ class Level
         }
         else if(key === 'q')
         {
-            let temp_x = this.player.get_x_position();
-            let temp_y = this.player.get_y_position();
-            this.player = this.tempPlayer;
-            this.player.set_x_position(temp_x);
-            this.player.set_y_position(temp_y);
-            this.player.changeStatus(charStatus.INVINCIBLE);
-            this.player.invincibleTimer = globalInvincibleTimer;
-            this.transformFlag = false;
+            if(this.transformFlag === true)
+            {
+                let temp_x = this.player.get_x_position();
+                let temp_y = this.player.get_y_position();
+                this.player = this.tempPlayer;
+                this.player.set_x_position(temp_x);
+                this.player.set_y_position(temp_y);
+                this.player.changeStatus(charStatus.INVINCIBLE);
+                this.player.invincibleTimer = globalInvincibleTimer;
+                this.transformFlag = false;
+            }
         }
     }
 }

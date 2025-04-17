@@ -36,6 +36,40 @@
                     "y": 192
                 }
             ]
+        },
+        {
+            "type": "skeletonTower",
+            "position": 
+            {
+                "x": 960,
+                "y": 400
+            },
+            "patrolPath":
+            [
+                {
+                    "x": 800,
+                    "y": 400
+                }
+            ]
+        },
+        {
+            "type": "faye",
+            "position": 
+            {
+                "x": 1000,
+                "y": 640
+            },
+            "patrolPath":
+            [
+                {
+                    "x": 1000,
+                    "y": 640
+                },
+                {
+                    "x": 1160,
+                    "y": 500
+                }
+            ]
         }
     ],
     "obstacles":
@@ -1746,6 +1780,49 @@
             "position": {
                 "x": 1248,
                 "y": 768
+            }
+        }
+    ],
+    "entities":
+    [
+        {
+            "type": "chest1",
+            "position": {
+                "x": 1024,
+                "y": 128
+            },
+            "isPassable": false,
+            "triggerDis": 10,
+            "condition": {
+                "enemyCleared": true,
+                "inv": []
+            },
+            "unmatchedResult": {
+                "getInv": [],
+                "consumeInv": [],
+                "mapChange": null,
+                "prompt": "You need to kill all the enemies."
+            },
+            "matchedResult": {
+                "getInv": ["key1"],
+                "consumeInv": [],
+                "mapChange": null,
+                "prompt": "You have gotten the key to next level."
+            },
+            "expireAfterTriggered": true
+        },
+        {
+            "type": "door",
+            "position": {
+                "x": 0,
+                "y": 416
+            }
+        },
+        {
+            "type": "door",
+            "position": {
+                "x": 0,
+                "y": 448
             }
         }
     ]
