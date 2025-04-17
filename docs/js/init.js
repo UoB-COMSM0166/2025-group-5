@@ -4,8 +4,10 @@ function preload()
 {
     playerTexture = loadImage(playerFile);
     image_map["soldier_idle"] = loadImage(enemyFile);
-    image_map["tower_idle"] = loadImage(towerFile);
+    image_map["skeletonTower_idle"] = loadImage(towerFile);
     image_map["faye_idle"] = loadImage(fayeFile);
+    bullet_map["skeletonTower"] = loadImage(skeletonTowerFile);
+    bullet_map["faye"] = loadImage(skeletonTowerFile);
     grassTexture = loadImage(grassFile);
     obstacleTexture = loadImage(obstacleFile);
     level1BGTexture = loadImage(level1BGFile);

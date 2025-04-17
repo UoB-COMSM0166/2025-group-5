@@ -41,7 +41,7 @@ class Level
             attributes.player.playerType, attributes.player.cd,
             attributes.player.visionType, attributes.player.shootSize,
             attributes.player.shootSpeed, attributes.player.shootDis,
-            attributes.player.shootColor,
+            attributes.player.shootFormat,
         );
         // 创建敌人对象
         this.createEnemies();
@@ -63,7 +63,7 @@ class Level
 
         this.drawLight(); // 绘制前景
 
-        this.drawCurtain(); // 绘制幕布
+        // this.drawCurtain(); // 绘制幕布
         
         this.skillBar.display();
     }
@@ -283,7 +283,7 @@ class Level
                 attributes[enemy.type].shootSize,
                 attributes[enemy.type].shootSpeed,
                 attributes[enemy.type].shootDis,
-                attributes[enemy.type].shootColor
+                bullet_map[enemy.type]
             );
             this.enemies.push(temp);
         }
@@ -370,7 +370,7 @@ class Level
                                     attributes[name].shootSize,
                                     attributes[name].shootSpeed,
                                     attributes[name].shootDis,
-                                    attributes[name].shootColor
+                                    bullet_map[name]
                                 );
                             }
                         }

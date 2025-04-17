@@ -4,7 +4,7 @@ class Player extends Character
     constructor(x, y, size,
         format, health, maxHealth, attack, status, speed,
         attackRange, warningRange, playerType, cd, visionType,
-        shootSize, shootSpeed, shootDis, shootColor
+        shootSize, shootSpeed, shootDis, shootFormat
     ) 
     {// Use playerTexture as the initial player image.
         super(x, y, size, format, health, 
@@ -23,7 +23,7 @@ class Player extends Character
         this.shootSize = shootSize;
         this.shootSpeed = shootSpeed;
         this.shootDis = shootDis;
-        this.shootColor = shootColor;
+        this.shootFormat = shootFormat;
 
         this.attackCdTimer = 0;
     }
@@ -111,7 +111,7 @@ class Player extends Character
         {
             this.projectiles.push(new Projectile(centerX, centerY, 
                 dx, dy, this.shootSize, this.shootSpeed, 
-                this.shootDis, this.shootColor));
+                this.shootDis, this.shootFormat));
 
             playerShootGunMusic();
             this.attackCdTimer = this.cd;
@@ -130,7 +130,7 @@ class Player extends Character
                 let angle = (baseAngle + 30 * i) * (Math.PI / 180);
                 this.projectiles.push(new Projectile(centerX, centerY, 
                     Math.cos(angle), Math.sin(angle), this.shootSize, 
-                    this.shootSpeed, this.shootDis, this.shootColor));
+                    this.shootSpeed, this.shootDis, this.shootFormat));
             }
             this.attackCdTimer = this.cd;
         }
