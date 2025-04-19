@@ -23,7 +23,7 @@ class Entity extends Character {
         {
             image(this.format.image, this.x, this.y, this.size, this.size);
         }
-        else
+        else if(this.format.color)
         {
             fill(this.format.color);
             rect(this.x, this.y, this.size, this.size);
@@ -57,7 +57,10 @@ class Entity extends Character {
     {
         if(this.condition.enemyCleared)
         { // 如果条件要求当前位置敌人被清空，检查敌人数量
-            if(level.enemies.length != 0) return false;
+            for(let enemy of level.enemies)
+            {
+                if(enemy.maxHealth !== 100000) return false;
+            }
         }
 
         for(let thing of this.condition.inv)

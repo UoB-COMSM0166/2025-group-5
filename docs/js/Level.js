@@ -17,8 +17,20 @@ class Level
             questionMarkTexture, g_skillStatusList, g_skillNumList, 
             g_skillBarX, g_skillBarY, g_skillBarHeight, g_skillBarWidth,
             g_skillBarBlankWidth, g_textSize);
+        this.prompt = new Prompt(
+            0, canvasHeight / 3 * 2, canvasWidth, canvasHeight / 3, "",
+            textBoardTexture
+        );
         this.tempPlayer = null;
         this.transformFlag = false;
+        this.promptFlag = false;
+        this.endFlag = false;
+        this.endAnimation = false
+        this.endTimer = 0;
+        this.endMaxTimer = 90;
+        this.startAnimation = true;
+        this.startTimer = 0;
+        this.startMaxTimer = 90;
     }
 
     async init()
@@ -55,16 +67,61 @@ class Level
     update()
     {
         this.drawBG(); // 绘制背景
+        if(!this.promptFlag && !this.startAnimation)
+        {
+            this.player.update();
+            this.player.display();
 
-        this.player.update();
+            this.drawEnemies();
+            this.drawEntities();
+            // this.drawObstacles();
+            this.drawProjectiles();
+            this.checkCollisions();
+            this.drawLight(); // 绘制前景
+
+            // this.drawCurtain(); // 绘制幕布
+            
+            this.skillBar.display();
+        } 
+        else
+        {
+            this.drawWithoutUpdate();
+
+            
+            if(!this.endAnimation && !this.startAnimation)this.prompt.display();
+            else if(this.endAnimation)
+            {
+                fill(0, 0, 0, 255 * this.endTimer / this.endMaxTimer);
+                noStroke();
+                rect(0, 0, canvasWidth, canvasHeight);
+                this.endTimer ++;
+                if(this.endTimer === this.endMaxTimer) gameState = "levelSelect";
+            }
+            else 
+            {
+                fill(0, 0, 0, 255 - 255 * this.startTimer / this.startMaxTimer);
+                noStroke();
+                rect(0, 0, canvasWidth, canvasHeight);
+                this.startTimer ++;
+                if(this.startTimer === this.startMaxTimer)
+                {
+                    this.startAnimation = false;
+                }
+            }
+        }
+    }
+
+    drawWithoutUpdate()
+    {
         this.player.display();
-
-        this.drawEnemies();
-        this.drawEntities();
-        // this.drawObstacles();
-        this.drawProjectiles();
-        this.checkCollisions();
-
+        for (let enemy of this.enemies) 
+        {
+            enemy.display();
+        }
+        for (let entity of this.entities) 
+        {
+            entity.display();
+        }
         this.drawLight(); // 绘制前景
 
         // this.drawCurtain(); // 绘制幕布
@@ -362,68 +419,118 @@ class Level
 
     keyPressedInLevel()
     {
-        if(key === ' ' && this.player.playerType === "shooting")
+        if(!this.promptFlag && !this.startAnimation)
         {
-            this.player.shoot();
-        }
-        else if(key === ' ' && this.player.playerType === "aoe")
-        {
-            this.player.aoe();
-        }
-        else if(key === '1' || key === '2' || key === '3' || key === '4'
-             || key === '5' || key === '6' || key === '7' || key === '8'
-             || key === '9')
-        {
-            if(this.skillBar.useSkill(key - '1'))
+            if(key === ' ' && this.player.playerType === "shooting")
             {
-                if(!this.transformFlag)
+                this.player.shoot();
+            }
+            else if(key === ' ' && this.player.playerType === "aoe")
+            {
+                this.player.aoe();
+            }
+            else if(key === '1' || key === '2' || key === '3' || key === '4'
+                || key === '5' || key === '6' || key === '7' || key === '8'
+                || key === '9')
+            {
+                if(this.skillBar.useSkill(key - '1'))
                 {
-                    this.tempPlayer = this.player;
-                    for(let name in attributes)
+                    if(!this.transformFlag)
                     {
-                        if("enemyId" in attributes[name])
+                        this.tempPlayer = this.player;
+                        for(let name in attributes)
                         {
-                            this.transformFlag = true;
-                            if(attributes[name].enemyId == key - '1')
+                            if("enemyId" in attributes[name])
                             {
-                                this.player = new Player(this.tempPlayer.get_x_position(),
-                                    this.tempPlayer.get_y_position(),
-                                    attributes[name].size,
-                                    g_skillTextureList[key - '1'],
-                                    attributes[name].health,
-                                    attributes[name].health,
-                                    attributes[name].attack,
-                                    charStatus.NORMAL,
-                                    attributes[name].speed,
-                                    attributes[name].attackRange,
-                                    attributes[name].warningRange,
-                                    attributes[name].enemyType,
-                                    attributes[name].cd,
-                                    attributes[name].visionType,
-                                    attributes[name].shootSize,
-                                    attributes[name].shootSpeed,
-                                    attributes[name].shootDis,
-                                    bullet_map[name]
-                                );
+                                this.transformFlag = true;
+                                if(attributes[name].enemyId == key - '1')
+                                {
+                                    this.player = new Player(this.tempPlayer.get_x_position(),
+                                        this.tempPlayer.get_y_position(),
+                                        attributes[name].size,
+                                        g_skillTextureList[key - '1'],
+                                        attributes[name].health,
+                                        attributes[name].health,
+                                        attributes[name].attack,
+                                        charStatus.NORMAL,
+                                        attributes[name].speed,
+                                        attributes[name].attackRange,
+                                        attributes[name].warningRange,
+                                        attributes[name].enemyType,
+                                        attributes[name].cd,
+                                        attributes[name].visionType,
+                                        attributes[name].shootSize,
+                                        attributes[name].shootSpeed,
+                                        attributes[name].shootDis,
+                                        bullet_map[name]
+                                    );
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        else if(key === 'q')
-        {
-            if(this.transformFlag === true)
+            else if(key === 'q')
             {
-                let temp_x = this.player.get_x_position();
-                let temp_y = this.player.get_y_position();
-                this.player = this.tempPlayer;
-                this.player.set_x_position(temp_x);
-                this.player.set_y_position(temp_y);
-                this.player.changeStatus(charStatus.INVINCIBLE);
-                this.player.invincibleTimer = globalInvincibleTimer;
-                this.transformFlag = false;
+                if(this.transformFlag === true)
+                {
+                    let temp_x = this.player.get_x_position();
+                    let temp_y = this.player.get_y_position();
+                    this.player = this.tempPlayer;
+                    this.player.set_x_position(temp_x);
+                    this.player.set_y_position(temp_y);
+                    this.player.changeStatus(charStatus.INVINCIBLE);
+                    this.player.invincibleTimer = globalInvincibleTimer;
+                    this.transformFlag = false;
+                }
             }
+            else if(key === 'e')
+            { // 如果玩家按e，检测周围是否存在可触发的entity
+                for(let i = 0; i < this.entities.length; i ++)
+                {
+                    if(this.entities[i].triggerableFlag)
+                    {
+                        if(this.entities[i].isMatched(this))
+                        {
+                            for(let inv of this.entities[i].matchedResult.getInv)
+                            {
+                                this.player.inv.push(inv);
+                            }
+                            for(let inv of this.entities[i].matchedResult.consumeInv)
+                            {
+                                let index = this.player.inv.indexOf(inv);
+                                if(index !== -1 )
+                                {
+                                    this.player.inv.splice(index, 1);
+                                }
+                            }
+                            if(this.entities[i].matchedResult.mapChange)
+                            {
+                                this.endFlag = true;
+                            }
+                            this.prompt.updateText(this.entities[i].matchedResult.prompt);
+                            if(this.entities[i].expireAfterTriggered)
+                            {
+                                this.entities.splice(i, 1);
+                            }
+                        }
+                        else 
+                        {
+                            this.prompt.updateText(this.entities[i].unmatchedResult.prompt);
+                        }
+                        this.promptFlag = true;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(key === ' ' && !this.endFlag)
+        {
+            this.promptFlag = false;
+        }
+        else if(key === ' ')
+        {
+            this.endAnimation = true;
         }
     }
 }

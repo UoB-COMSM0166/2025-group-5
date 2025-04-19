@@ -115,6 +115,10 @@ let level4;
 // # bullet
 let skeletonTowerFile = "resources/images/characters_and_obstacles/tower/skeletonBullet.png";
 
+// # prompt
+let textBoardFile = "resources/images/text/Board.png";
+let textBoardTexture;
+
 // #mapping
 let image_map = 
 {
@@ -155,11 +159,13 @@ let g_textSize = 16;
 // 预先导入图片
 function preload()
 {
+    textBoardTexture = loadImage(textBoardFile);
     playerTexture = loadImage(playerFile);
     image_map["soldier_idle"] = loadImage(enemyFile);
     image_map["skeletonTower_idle"] = loadImage(towerFile);
     image_map["faye_idle"] = loadImage(fayeFile);
     image_map["chest1_idle"] = loadImage(chestFile);
+    image_map["door_idle"] = null;
     bullet_map["skeletonTower"] = loadImage(skeletonTowerFile);
     bullet_map["faye"] = loadImage(skeletonTowerFile);
     grassTexture = loadImage(grassFile);
