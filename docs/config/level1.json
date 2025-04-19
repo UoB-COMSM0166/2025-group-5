@@ -1791,8 +1791,7 @@
                 "x": 1024,
                 "y": 128
             },
-            "isPassable": false,
-            "triggerDis": 10,
+            "triggerDis": 50,
             "condition": {
                 "enemyCleared": true,
                 "inv": []
@@ -1810,20 +1809,6 @@
                 "prompt": "You have gotten the key to next level."
             },
             "expireAfterTriggered": true
-        },
-        {
-            "type": "door",
-            "position": {
-                "x": 0,
-                "y": 416
-            }
-        },
-        {
-            "type": "door",
-            "position": {
-                "x": 0,
-                "y": 448
-            }
         }
     ]
 }

@@ -26,6 +26,8 @@ class Player extends Character
         this.shootFormat = shootFormat;
 
         this.attackCdTimer = 0;
+
+        this.inv = [];
     }
 
     update() 

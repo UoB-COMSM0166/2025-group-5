@@ -86,6 +86,9 @@ const charMoving = Object.freeze
     }
 );
 
+// # entity
+let chestFile = './resources/images/entities/Treasure_Chest_Close.png';
+
 // # Paths
 
 let level1ConfFile = './config/level1.json';
@@ -156,6 +159,7 @@ function preload()
     image_map["soldier_idle"] = loadImage(enemyFile);
     image_map["skeletonTower_idle"] = loadImage(towerFile);
     image_map["faye_idle"] = loadImage(fayeFile);
+    image_map["chest1_idle"] = loadImage(chestFile);
     bullet_map["skeletonTower"] = loadImage(skeletonTowerFile);
     bullet_map["faye"] = loadImage(skeletonTowerFile);
     grassTexture = loadImage(grassFile);
