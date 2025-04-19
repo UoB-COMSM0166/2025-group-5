@@ -8,7 +8,7 @@
     "player":
     {
         "size": 32,
-        "attack": 5,
+        "attack": 100,
         "health": 20,
         "speed": 2,
         "attackRange": 100,
@@ -194,5 +194,11 @@
     {
         "size": 32,
         "isPassable": false
+    },
+
+    "door":
+    {
+        "size": 64,
+        "isPassable": true
     }
 }

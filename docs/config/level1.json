@@ -1799,16 +1799,41 @@
             "unmatchedResult": {
                 "getInv": [],
                 "consumeInv": [],
-                "mapChange": null,
+                "mapChange": false,
                 "prompt": "You need to kill all the enemies."
             },
             "matchedResult": {
                 "getInv": ["key1"],
                 "consumeInv": [],
-                "mapChange": null,
+                "mapChange": false,
                 "prompt": "You have gotten the key to next level."
             },
             "expireAfterTriggered": true
+        },
+        {
+            "type": "door",
+            "position": {
+                "x": 0,
+                "y": 416
+            },
+            "triggerDis": 50,
+            "condition": {
+                "enemyCleared": false,
+                "inv": ["key1"]
+            },
+            "unmatchedResult": {
+                "getInv": [],
+                "consumeInv": [],
+                "mapChange": false,
+                "prompt": "You need to get the key to next level."
+            },
+            "matchedResult": {
+                "getInv": ["key1"],
+                "consumeInv": [],
+                "mapChange": true,
+                "prompt": "You win."
+            },
+            "expireAfterTriggered": false
         }
     ]
 }
