@@ -31,7 +31,25 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 ### Introduction
 
 - 5% ~250 words 
-- Describe your game, what is based on, what makes it novel? 
+- Describe your game, what is based on, what makes it novel?
+
+Dragon Adventure
+Dragon Adventure is a story-rich 2D action-adventure game. Guided by an engaging narrative, players battle a variety of monsters to fulfill their story-driven objectives.
+
+🎮 Game Inspiration
+The game is inspired by Soul Knight, a pixel-style dungeon adventure shooter that combines roguelike elements with action shooting gameplay. However, Dragon Adventure sets itself apart by shifting the focus away from flashy combat and a wide variety of weapons. Unlike Soul Knight, which lacks a continuous storyline and emphasizes grinding for experience and resources to grow stronger, our game aims to offer a deeper, more immersive narrative experience.
+
+🧩 Our Design Philosophy
+We want players to be truly immersed in the story — not just see the game as a combat playground. To achieve this, we've made several key design choices:
+
+Monster Abilities & Progression
+While challenging players through cleverly designed maps and diverse monster types, we also allow players to absorb a portion of a monster’s abilities upon defeating them. This system lets players grow stronger as they progress, while also revealing the nature of the world they’re in. It encourages creative strategy and adaptive play based on acquired abilities.
+
+Fog-of-War Vision System
+A unique vision mechanic, tightly integrated with environmental design, creates a sense of mystery and exploration. The player navigates a world shrouded in fog, heightening their curiosity and pushing them to explore.
+
+Narrative-Driven Visual & Gameplay Design
+We carefully crafted both the script and visual elements to align with gameplay mechanics. This synergy enhances the sense of immersion and supports the storytelling at every step.
 
 ### Requirements 
 1. List of Stakeholders
