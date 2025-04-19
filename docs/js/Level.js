@@ -7,6 +7,7 @@ class Level
         this.jsonData = null;
         this.player = null;
         this.enemies = [];
+        this.entities = [];
         this.obstacles = [];
         this.bGTexture = bGTexture;
         this.lightTexture = lightTexture;
@@ -45,6 +46,8 @@ class Level
         );
         // 创建敌人对象
         this.createEnemies();
+        // 创建可交互对象
+        this.createEntities();
         // 创建障碍物对象
         this.createObstacles();
     }
@@ -57,6 +60,7 @@ class Level
         this.player.display();
 
         this.drawEnemies();
+        this.drawEntities();
         // this.drawObstacles();
         this.drawProjectiles();
         this.checkCollisions();
@@ -66,6 +70,15 @@ class Level
         // this.drawCurtain(); // 绘制幕布
         
         this.skillBar.display();
+    }
+
+    drawEntities()
+    {
+        for (let entity of this.entities) 
+        {
+            entity.update(this);
+            entity.display();
+        }
     }
 
     drawEnemies()
@@ -286,6 +299,26 @@ class Level
                 bullet_map[enemy.type]
             );
             this.enemies.push(temp);
+        }
+    }
+
+    createEntities()
+    {
+        for(let entity of this.jsonData.entities)
+        {
+            let temp = new Entity(entity.position.x,
+                entity.position.y,
+                attributes[entity.type].size,
+                attributes[entity.type].isPassable,
+                image_map[entity.type + '_idle'],
+                entity.type,
+                entity.triggerDis,
+                entity.condition,
+                entity.unmatchedResult,
+                entity.matchedResult,
+                entity.expireAfterTriggered
+            );
+            this.entities.push(temp);
         }
     }
 

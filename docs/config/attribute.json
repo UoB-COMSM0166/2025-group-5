@@ -188,5 +188,11 @@
     "wall":
     {
         "size": 24
+    },
+
+    "chest1":
+    {
+        "size": 32,
+        "isPassable": false
     }
 }
