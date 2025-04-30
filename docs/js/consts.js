@@ -49,7 +49,7 @@ let enemyTexture;
 let towerFile = 'resources/images/characters_and_obstacles/tower/skeletonTower.png';
 let towerTexture;
 // ### faye
-let fayeFile = 'resources/images/characters_and_obstacles/wizard/wizard-walk/Wizard-Walk_1.png';
+let fayeFile = 'resources/images/characters_and_obstacles/wizard/fire wizard/move/move_0.png';
 let fayeTexture;
 
 // ## obstacle
