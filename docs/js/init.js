@@ -1,214 +1,218 @@
+// init.js
 
+let canvasElem, canvasX, canvasY;
+let skipButton;
 
-
-// 起始函数
 async function setup() {
-    createCanvas(canvasWidth, canvasHeight);
+  // 创建并定位画布
+  canvasElem = createCanvas(canvasWidth, canvasHeight);
+  // 取到画布在页面中的像素坐标
+  canvasX = canvasElem.elt.offsetLeft;
+  canvasY = canvasElem.elt.offsetTop;
 
-    // 游戏标题和开始按钮
-    gameTitle = createElement('h1', 'Snake Adventure');
-    startButton = createButton('Start Game');
-    gameTitle.position(width / 2 - 100, height / 2 - 100);
-    gameTitle.style('color', 'white');
-    gameTitle.style('font-size', '48px');
-    gameTitle.style('text-align', 'center');
+  // 预生成“Restart”按钮（Game Over 时用）
+  startButton = createButton('Restart');
+  startButton.hide();
 
-    startButton.position(width / 2 - 50, height / 2);
-    startButton.size(100, 40);
-    startButton.style('background', '#4CAF50');
-    startButton.style('color', 'white');
-    startButton.mousePressed(() => {
-        gameState = 'levelSelect'; // 进入关卡选择状态
-        selectLevel(); // 初始化关卡选择界面
-    });
+  // 准备剧情视频
+  // 故事1
+  story1Video.size(canvasWidth, canvasHeight);
+  story1Video.position(canvasX, canvasY);
+  story1Video.attribute('playsinline', '');
+  story1Video.hide();
+  // 故事2
+  story2Video.size(canvasWidth, canvasHeight);
+  story2Video.position(canvasX, canvasY);
+  story2Video.attribute('playsinline', '');
+  story2Video.hide();
 
-    // 初始化关卡选择界面（但不显示）
-    selectLevel();
-    if (levelTitle) levelTitle.hide();
-    if (level1Button) level1Button.hide();
-    if (level2Button) level2Button.hide();
+  // 创建并初始化关卡（不生成任何 DOM）
+  level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture);
+  await level1.init();
+  level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture);
+  await level2.init();
 
-    // 创建各个关卡对象
-    level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture);
-    await level1.init();
-    level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture);
-    await level2.init();
-//     level3 = new Level(3, level3ConfFile, level3BGTexture, level3LightTexture);
-//     await level3.init();
-//     level4 = new Level(4, level4ConfFile, level4BGTexture, level4LightTexture);
-//     await level4.init();
+  // 加载属性配置
+  attributes = await loadJsonData(attributeFile);
 
-    // 读取配置文件
-    attributes = await loadJsonData(attributeFile);
-
-    // sillbar 全局变量配置
-    g_skillTextureList.push(image_map["soldier_idle"]);
-    g_skillTextureList.push(grassTexture);
-    g_skillTextureList.push(grassTexture);
-    g_skillTextureList.push(image_map["tower_idle"]);
-    g_skillTextureList.push(image_map["faye_idle"]);
-    g_skillTextureList.push(grassTexture);
-    g_skillTextureList.push(grassTexture);
-    g_skillTextureList.push(grassTexture);
-    g_skillTextureList.push(grassTexture);
-
-    for(let i = 0; i < g_skillNumber; i ++)
-    {
-        g_skillStatusList.push(false);
-        g_skillNumList.push(0);
-    }
-    
+  // 初始化技能栏资源列表
+  g_skillTextureList.push(image_map['soldier_idle']);
+  g_skillTextureList.push(grassTexture);
+  g_skillTextureList.push(grassTexture);
+  g_skillTextureList.push(image_map['tower_idle']);
+  g_skillTextureList.push(image_map['faye_idle']);
+  for (let i = 0; i < g_skillNumber; i++) {
+    g_skillStatusList.push(false);
+    g_skillNumList.push(0);
+  }
 }
 
+// 开始播放第一个剧情
+function startStory1() {
+  gameState = 'story1';
+  // 显示并播放视频1
+  story1Video.show();
+  story1Video.play();
+
+  // 创建 Skip 按钮：60×30，画布右上角，内边距10px
+  const btnW = 60, btnH = 30, margin = 10;
+  skipButton = createButton('Skip');
+  skipButton.size(btnW, btnH);
+  skipButton.position(
+    canvasX + canvasWidth - btnW - margin,
+    canvasY + margin
+  );
+  skipButton.mousePressed(enterLevelSelect);
+
+  // 第一个视频播完后进入第二个剧情
+  story1Video.onended(startStory2);
+}
+
+// 切换到循环播放的剧情2
+function startStory2() {
+  // 清理剧情1
+  if (skipButton) {
+    skipButton.remove();
+    skipButton = null;
+  }
+  story1Video.hide();
+  story1Video.stop();
+
+  // 播放剧情2（循环）
+  story2Video.show();
+  story2Video.loop();
+  gameState = 'story2';
+}
+
+// 进入关卡选择界面
+function enterLevelSelect() {
+  // 停止并隐藏所有视频
+  story1Video.hide();
+  story1Video.stop();
+  story2Video.hide();
+  story2Video.stop();
+
+  if (skipButton) {
+    skipButton.remove();
+    skipButton = null;
+  }
+
+  gameState = 'levelSelect';
+  selectLevel();
+}
+
+// 关卡选择：只生成两个按钮，不再有标题
 function selectLevel() {
-    // 如果标题和按钮已经创建，则直接返回
-    if (levelTitle) return;
+  // 如果已经生成过，就不重复生成
+  if (level1Button) return;
 
-    // 清除开始菜单的 DOM 元素
-    gameTitle.hide();
-    startButton.hide(); // 确保隐藏开始按钮
+  // 确保隐藏 Restart 按钮
+  startButton.hide();
 
-    // 创建关卡选择标题
-    levelTitle = createElement('h1', 'Select Level');
-    levelTitle.position(width / 2 - 100, height / 2 - 150);
-    levelTitle.style('color', 'white');
-    levelTitle.style('font-size', '48px');
-    levelTitle.style('text-align', 'center');
+  // 两个按钮水平居中，垂直稍微偏上/下
+  const btnW = 110, btnH = 40, gap = 20;
+  const x = canvasX + canvasWidth / 2 - btnW / 2;
+  const y1 = canvasY + canvasHeight / 2 - btnH / 2 - gap;
+  const y2 = y1 + btnH + gap;
 
-    // 创建关卡按钮
-    level1Button = createButton('Level 1');
-    level1Button.position(width / 2 - 50, height / 2 - 50);
-    level1Button.size(100, 40);
-    level1Button.style('background', '#4CAF50');
-    level1Button.style('color', 'white');
-    level1Button.mousePressed(() => startGame(1)); // 进入关卡 1
+  level1Button = createButton('Level 1');
+  level1Button.size(btnW, btnH);
+  level1Button.position(x, y1);
+  level1Button.mousePressed(() => startGame(1));
 
-    level2Button = createButton('Level 2');
-    level2Button.position(width / 2 - 50, height / 2 + 50);
-    level2Button.size(100, 40);
-    level2Button.style('background', '#4CAF50');
-    level2Button.style('color', 'white');
-    level2Button.mousePressed(() => startGame(2)); // 进入关卡 2
+  level2Button = createButton('Level 2');
+  level2Button.size(btnW, btnH);
+  level2Button.position(x, y2);
+  level2Button.mousePressed(() => startGame(2));
 }
 
+// 开始游戏并隐藏关卡按钮
 function startGame(level) {
-    gameState = 'playing'; // 进入游戏状态
-    isGameOver = false; // 重置游戏结束标志
+  gameState = 'playing';
+  isGameOver = false;
 
-    // 根据关卡设置游戏参数
-    if (level === 1) {
-        bulletSpeed = 3;
-        spawnInterval = 30;
-        level1.start();
-        present_level = 1;
-    } else if (level === 2) {
-        bulletSpeed = 5;
-        spawnInterval = 20;
-        level2.start();
-        present_level = 2;
-    }
+  if (level === 1) {
+    bulletSpeed = 3;
+    spawnInterval = 30;
+    level1.start();
+    present_level = 1;
+  } else {
+    bulletSpeed = 5;
+    spawnInterval = 20;
+    level2.start();
+    present_level = 2;
+  }
 
-    // // 重置敌人和障碍
-    // enemies = [];
-    // obstacles = [];
-    // createEnemies();
-    // createObstacles();
-
-    // // 重置玩家
-    // player.x = width / 2;
-    // player.y = height / 2;
-    // player.projectiles = [];
-
+  // 隐藏关卡按钮
+  level1Button.hide();
+  level2Button.hide();
 }
 
-// to be done: 在draw()完成场景转换逻辑：开始 - 选关 - 结束 - 存/读档
+// 重新回到开场
+function restartGame() {
+  gameState = 'start';
+  startButton.hide();
+}
+
+// 主循环：根据 gameState 切换场景
 function draw() {
-    // 绘制边界
-    stroke(0);
-    strokeWeight(5);
-    noFill();
-    rect(0, 0, width, height);
-    background(220);
+  // **始终先填黑，确保无透明区域**
+  background(0);
 
-    if (gameState === 'start') {
-        // 渐变背景
-        let c1 = color(30, 50, 80);
-        let c2 = color(80, 120, 200);
-        for (let y = 0; y < height; y++) {
-            let inter = map(y, 0, height, 0, 1);
-            let c = lerpColor(c1, c2, inter);
-            stroke(c);
-            line(0, y, width, y);
-        }
-        // 显示界面元素
-        gameTitle.show();
-        startButton.show().html('Start Game');
-    } else if (gameState === 'levelSelect') {
-        // 关卡选择界面
-        let c1 = color(80, 120, 200);
-        let c2 = color(30, 50, 80);
-        for (let y = 0; y < height; y++) {
-            let inter = map(y, 0, height, 0, 1);
-            let c = lerpColor(c1, c2, inter);
-            stroke(c);
-            line(0, y, width, y);
-        }
+  switch (gameState) {
+    case 'start':
+      image(startImg, 0, 0, width, height);
+      break;
 
-        // 隐藏开始按钮
-        gameTitle.hide();
-        startButton.hide();
+    case 'story1':
+    case 'story2':
+      // 视频 DOM 元素位于画布之上，会覆盖这块黑底
+      break;
 
-        // 显示关卡选择标题和按钮
-        if (levelTitle) levelTitle.show();
-        if (level1Button) level1Button.show();
-        if (level2Button) level2Button.show();
-    } else if (gameState === 'playing') {
-        gameTitle.hide();
-        startButton.hide();
-        if (levelTitle) levelTitle.hide(); // 隐藏关卡选择标题
-        if (level1Button) level1Button.hide(); // 隐藏关卡按钮
-        if (level2Button) level2Button.hide();
+    case 'levelSelect':
+      image(levelSelectImg, 0, 0, width, height);
+      break;
 
-        if(present_level === 1)level1.update();
-        else if(present_level === 2)level2.update(); 
-    } else if (gameState === 'over') {
-        textSize(32);
-        fill('red');
-        text('Game Over', width / 2 - 80, height / 2);
-        startButton.show();
-        startButton.position(width / 2 - 50, height / 2);
-        startButton.html('Restart');
-    }
+    case 'playing':
+      // 进入游戏主逻辑
+      if (present_level === 1) level1.update();
+      else if (present_level === 2) level2.update();
+      break;
+
+    case 'over':
+      fill('red');
+      textSize(32);
+      text('Game Over', width / 2 - 80, height / 2);
+      startButton.show();
+      startButton.position(
+        canvasX + canvasWidth / 2 - 55,
+        canvasY + canvasHeight / 2 + 40
+      );
+      startButton.mousePressed(restartGame);
+      break;
+  }
 }
 
-
-
-// 按键监听（新增方向射击支持）
-function keyPressed() 
-{
-    if (present_level === 1) 
-    {
-        level1.keyPressedInLevel();
-    }
-    else if(present_level === 2)
-    {
-        level2.keyPressedInLevel();
-    }
-    // else if(present_level === 3)
-    // {
-    //     level3.keyPressedInLevel();
-    // }
-    // else if(present_level === 4)
-    // {
-    //     level4.keyPressedInLevel();
-    // }
+// 键盘事件
+function keyPressed() {
+  if (gameState === 'start' && key === ' ') {
+    startStory1();
+    return;
+  }
+  if (gameState === 'story2' && key === ' ') {
+    enterLevelSelect();
+    return;
+  }
+  if (gameState === 'playing') {
+    if (present_level === 1) level1.keyPressedInLevel();
+    else if (present_level === 2) level2.keyPressedInLevel();
+  }
 }
 
-window.onload = function() {
-    gameMusic.playBackground(); // 启动背景音乐
-};
-
-document.addEventListener("click", () => {
-    gameMusic.playBackground();
-}, { once: true }); // 只执行一次
-
+// 页面首次交互后启动背景音乐
+window.onload = () => gameMusic.playBackground();
+document.addEventListener(
+  'click',
+  () => gameMusic.playBackground(),
+  { once: true }
+);

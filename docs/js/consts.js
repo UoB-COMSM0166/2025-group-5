@@ -1,3 +1,4 @@
+/* ----------  原有常量与逻辑，无改动 ---------- */
 let gameState = 'start'; // 游戏状态 start/levelSelect/playing/over
 let startButton;
 let gameTitle;
@@ -58,39 +59,32 @@ let grassTexture;
 let obstacleFile = 'resources/images/characters_and_obstacles/example4.jpg';
 let obstacleTexture;
 
-const charStatus = Object.freeze
-( // ## Use charStatus to identify the status of the unit
-    {
-        NORMAL: 'normal',
-        DYING: 'dying',
-        INVINCIBLE: 'invincible',
-        FREEZING: 'freezing',
-        BLAMING: 'blaming',
-        DEAD: 'dead',
-        INCOMPETENT: 'incompetent',
-    }
-);
+const charStatus = Object.freeze({
+  NORMAL: 'normal',
+  DYING: 'dying',
+  INVINCIBLE: 'invincible',
+  FREEZING: 'freezing',
+  BLAMING: 'blaming',
+  DEAD: 'dead',
+  INCOMPETENT: 'incompetent',
+});
 
-const charMoving = Object.freeze
-( // ## Use charMoving to indentify the moving of the unit
-    {
-        UP_WALKING: 'up_w',
-        DOWN_WALKING: 'down_w',
-        LEFT_WALKING: 'left_w',
-        RIGHT_WALKING: 'right_w',
-        UP_ATTACK: 'up_a',
-        DOWN_ATTACK: 'down_a',
-        LEFT_ATTACK: 'left_a',
-        RIGHT_ATTACK: 'right_a',
-        IDLE: 'idle',
-    }
-);
+const charMoving = Object.freeze({
+  UP_WALKING: 'up_w',
+  DOWN_WALKING: 'down_w',
+  LEFT_WALKING: 'left_w',
+  RIGHT_WALKING: 'right_w',
+  UP_ATTACK: 'up_a',
+  DOWN_ATTACK: 'down_a',
+  LEFT_ATTACK: 'left_a',
+  RIGHT_ATTACK: 'right_a',
+  IDLE: 'idle',
+});
 
 // # entity
 let chestFile = './resources/images/entities/Treasure_Chest_Close.png';
 
 // # Paths
-
 let level1ConfFile = './config/level1.json';
 let level2ConfFile = './config/level2.json';
 let level3ConfFile = './config/level3.json';
@@ -98,13 +92,14 @@ let level4ConfFile = './config/level4.json';
 
 let level1BGTexture;
 let level1LightTexture;
-let level1BGFile = './resources/images/web_background//Dragon_Adventure_01.png'
+let level1BGFile = './resources/images/web_background/Dragon_Adventure_01.png';
 let level1LightFile = './resources/images/web_background/Dragon_Adventure_01_Light.png';
 
 let level2BGTexture;
 let level2LightTexture;
-let level2BGFile = './resources/images/web_background//Dragon_Adventure_01.png'
+let level2BGFile = './resources/images/web_background/Dragon_Adventure_01.png';
 let level2LightFile = './resources/images/web_background/Dragon_Adventure_01_Light.png';
+
 // # Level
 let present_level;
 let level1;
@@ -113,29 +108,27 @@ let level3;
 let level4;
 
 // # bullet
-let skeletonTowerFile = "resources/images/characters_and_obstacles/tower/skeletonBullet.png";
+let skeletonTowerFile = 'resources/images/characters_and_obstacles/tower/skeletonBullet.png';
 
 // # prompt
 let textBoardFile = "resources/images/text/Board.png";
 let textBoardTexture;
 
 // #mapping
-let image_map = 
-{
-    "soldier_idle": null,
-    "skeletonTower_idle": null,
-    "forestTower_idle": null,
-    "magmaTower_idle": null,
-    "waterTower_idle": null
+let image_map = {
+  soldier_idle: null,
+  skeletonTower_idle: null,
+  forestTower_idle: null,
+  magmaTower_idle: null,
+  waterTower_idle: null,
 };
 
-let bullet_map = 
-{
-    "faye": null,
-    "skeletonTower": null,
-    "forestTower": null,
-    "magmaTower": null,
-    "waterTower": null,
+let bullet_map = {
+  faye: null,
+  skeletonTower: null,
+  forestTower: null,
+  magmaTower: null,
+  waterTower: null,
 };
 
 // # Curtain
@@ -144,7 +137,7 @@ let transparentSectorRadius = 200;
 
 // # SkillBar
 let questionMarkTexture;
-let questionMarkFile = "./resources/images/skillbar/questionMark.png";
+let questionMarkFile = './resources/images/skillbar/questionMark.png';
 let g_skillNumber = 9;
 let g_skillTextureList = [];
 let g_skillStatusList = [];
@@ -156,9 +149,24 @@ let g_skillBarWidth = 50;
 let g_skillBarBlankWidth = 5;
 let g_textSize = 16;
 
-// 预先导入图片
-function preload()
-{
+/* ----------  新增：开场 / 剧情 / 选关 资源 ---------- */
+// 开始界面图片
+let startImgFile = './resources/images/game_background/GameStart.jpg';
+let startImg;
+
+// 选关界面底图
+let levelSelectImgFile = './resources/images/game_background/LevelSelect.jpg';
+let levelSelectImg;
+
+// 剧情视频
+let story1VideoFile = './resources/videos/story1.mp4';   // 剧情介绍
+let story2VideoFile = './resources/videos/story2_loop.mp4'; // 循环等待
+let story1Video; // p5.MediaElement
+let story2Video;
+
+/* ----------  统一预加载 ---------- */
+function preload() {
+  /* 原有加载 */
     textBoardTexture = loadImage(textBoardFile);
     playerTexture = loadImage(playerFile);
     image_map["soldier_idle"] = loadImage(enemyFile);
@@ -175,4 +183,15 @@ function preload()
     level2BGTexture = loadImage(level2BGFile);
     level2LightTexture = loadImage(level2LightFile);
     questionMarkTexture = loadImage(questionMarkFile);
+
+  /* 新增加载 */
+  startImg = loadImage(startImgFile);
+  levelSelectImg = loadImage(levelSelectImgFile);
+
+  // p5 视频使用 createVideo，必须立即隐藏，防止自动播放
+  story1Video = createVideo([story1VideoFile]);
+  story1Video.hide();
+
+  story2Video = createVideo([story2VideoFile]);
+  story2Video.hide();
 }
