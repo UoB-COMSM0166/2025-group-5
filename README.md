@@ -275,6 +275,35 @@ After completing the top-down requirements breakdown and system design, our team
 - **R (Result)**  
   The system worked smoothly, providing a fluid display of character actions and state transitions. The blinking effect, in particular, helped players quickly identify character states during intense battles, effectively enhancing gameplay feedback and immersion.
 
+  ---
+
+ #### ✅ Environment-Driven Narrative Through Map & Illustration Design
+(Corresponding to top-level requirement: Immersion and Narrative Progression)
+
+- **S (Situation)**
+  To elevate the player's emotional engagement and sense of progression, we aimed to integrate story directly into the game’s map layout and background illustrations. Rather than relying solely on cutscenes or dialogue, we wanted the transitions between stages—Forest, Graveyard, Lake, Lava—to visually communicate the narrative stakes and tone shifts.
+
+- **T (Task)**
+  I was responsible for designing visual narrative components across four major environments. Each area needed to:
+
+  Reflect the current state of the story and player growth.
+
+  Contain clear visual identity and contrast with previous zones.
+
+  Seamlessly integrate with the comic-style illustration system used for story transitions (e.g., fog, curses, monster influence).
+
+- **A (Action)**
+  To begin, I structured each map zone with a distinctive color palette and theme (green for peace, gray for despair, blue for mystery, red for danger). I then worked with pixel illustration tools to create four-panel and six-panel narrative strips for transitions between major stages. For example:
+
+  After defeating the Forest stage, I designed a comic showing a fog descending upon the Graveyard, indicating the Demon Lord’s curse.
+
+  Between Graveyard and Lake, I illustrated Rong's progression and his emotional burden, visually showing the increasing weight of his mission.
+
+  To ensure cohesion, I aligned monster placement, background details (e.g., gravestones, volcanic cracks), and interactive objects (locked treasure chests, chains) with each stage’s emotional theme. I also introduced elements like chained gates or misted-over signposts to foreshadow future challenges.
+
+- **R (Result)**
+  This approach enabled us to tell an evolving story entirely through the world itself, reducing reliance on text while deepening immersion. Players could feel the tension rise as environments shifted from lively to haunted to volatile. The visual transitions also acted as narrative rewards, making progression more satisfying. Overall, it laid a strong foundation for extending visual storytelling in future content, including flashbacks, side stories, or alternate endings.
+
 
 
 ### Evaluation
