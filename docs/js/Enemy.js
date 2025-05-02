@@ -3,7 +3,7 @@ class Enemy extends Character
 {
     constructor(enemyId, x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
         attackRange, warningRange, enemyType, cd, visionType,
-        shootSize, shootSpeed, shootDis, shootFormat)
+        shootSize, shootSpeed, shootDis, shootFormat, skill)
     {
         super(x, y, size, format, health, maxHealth, attack, status, speed);
         this.enemyId = enemyId;
@@ -24,7 +24,12 @@ class Enemy extends Character
         this.shootDis = shootDis;
         this.shootFormat = shootFormat;
 
+        this.skill = skill;
+
         this.projectiles = [];
+
+        this.factSpeed = speed;
+        this.factCd = cd;
     }
 
     update(level) 
@@ -41,6 +46,10 @@ class Enemy extends Character
         this.invincibleTimerUpdate();
         
         this.attackCdUpdate();
+
+        this.abnormalTimerUpdate();
+
+        this.fireEffect();
     }
 
     undoMove() 
@@ -153,6 +162,17 @@ class Enemy extends Character
         if(this.attackCdTimer !== 0)this.attackCdTimer --;
     }
 
+    abnormalTimerUpdate()
+    {
+        if(this.abnormalTimer !== 0)this.abnormalTimer --;
+        else 
+        {
+            this.abnormalStatus = "none";
+            this.speed = this.factSpeed;
+            this.cd = this.factCd;
+        }
+    }
+
     doAttack(playerX, playerY)
     {
         let centerX = this.x + this.size / 2;
@@ -165,7 +185,7 @@ class Enemy extends Character
             {
                 this.projectiles.push(new Projectile(centerX, centerY, 
                     playerX - centerX, playerY - centerY, this.shootSize, 
-                    this.shootSpeed, this.shootDis, this.shootFormat));
+                    this.shootSpeed, this.shootDis, this.shootFormat, this.skill));
             }
             else if(this.enemyType === "aoe")
             {
@@ -175,7 +195,7 @@ class Enemy extends Character
                     let angle = (baseAngle + 30 * i) * (Math.PI / 180);
                     this.projectiles.push(new Projectile(centerX, centerY, 
                         Math.cos(angle), Math.sin(angle), this.shootSize, 
-                        this.shootSpeed, this.shootDis, this.shootFormat));
+                        this.shootSpeed, this.shootDis, this.shootFormat, this.skill));
                 }
             }
             this.attackCdTimer = this.cd;
@@ -205,5 +225,31 @@ class Enemy extends Character
                     * (this.y - this.nextPatrolPoint.y)) < this.speed)
         return true;
         else return false;
+    }
+
+    changeAbnormalStatus(status)
+    {
+        if(status === "fire")
+        {
+            this.abnormalStatus = "fire";
+            this.abnormalTimer = globalFireStatusTimer;
+            this.speed = this.factSpeed;
+            this.cd = this.factCd / globalFireSpeedFactor;
+        }
+        else if(status === "water")
+        {
+            this.abnormalStatus = "water";
+            this.abnormalTimer = globalWaterStatusTimer;
+            this.speed = this.factSpeed * globalWaterSpeedFactor;
+            this.cd = this.factCd / globalWaterSpeedFactor;
+        }
+    }
+
+    fireEffect()
+    {
+        if(this.abnormalStatus === "fire" && this.abnormalTimer % 60 == 0)
+        {
+            this.changeHealth(- globalFireHealthPerSec);
+        }
     }
 }

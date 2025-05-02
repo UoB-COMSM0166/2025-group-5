@@ -19,170 +19,8 @@
         "shootSize": 5,
         "shootSpeed": 5,
         "shootDis": 100,
-        "shootFormat": "blue"
-    },
-
-    "soldier":
-    {
-        "enemyId": 0,
-        "size": 32,
-        "attack": 4,
-        "health": 10,
-        "speed": 1,
-        "attackRange": 0,
-        "warningRange": 100,
-        "cd": 0,
-        "enemyType": "collision",
-        "visionType": "round",
-        "shootSize": 5,
-        "shootSpeed": 5,
-        "shootDis": 100,
-        "shootFormat": "blue"
-    },
-
-    "green_slime":
-    {
-        "enemyId": 1,
-        "size": 32,
-        "attack": 4,
-        "health": 10,
-        "speed": 1,
-        "attackRange": 0,
-        "warningRange": 160,
-        "enemyType": "collision",
-        "cd": 0,
-        "visionType": "round",
-        "shootSize": 5,
-        "shootSpeed": 5,
-        "shootDis": 100,
-        "shootFormat": "blue"
-    },
-
-
-    "purple_slime":
-    {
-        "enemyId": 2,
-        "size": 32,
-        "attack": 4,
-        "health": 10,
-        "speed": 0,
-        "attackRange": 0,
-        "warningRange": 200,
-        "enemyType": "collision",
-        "cd": 0,
-        "visionType": "round",
-        "shootSize": 5,
-        "shootSpeed": 1,
-        "shootDis": 100,
-        "shootFormat": "blue"
-    },
-
-    "tower":
-    {
-        "enemyId": 3,
-        "size": 128,
-        "attack": 4,
-        "health": 100000,
-        "speed": 0,
-        "attackRange": 200,
-        "warningRange": 200,
-        "enemyType": "shooting",
-        "cd": 120,
-        "visionType": "sector",
-        "shootSize": 20,
-        "shootSpeed": 2,
-        "shootDis": 100,
-        "shootFormat": "red"
-    },
-
-    "skeletonTower":
-    {
-        "enemyId": 3,
-        "size": 128,
-        "attack": 4,
-        "health": 100000,
-        "speed": 0,
-        "attackRange": 200,
-        "warningRange": 200,
-        "enemyType": "shooting",
-        "cd": 120,
-        "visionType": "sector",
-        "shootSize": 20,
-        "shootSpeed": 2,
-        "shootDis": 100,
-        "shootFormat": "red"
-    },
-
-    "forestTower":
-    {
-        "enemyId": 3,
-        "size": 128,
-        "attack": 4,
-        "health": 100000,
-        "speed": 0,
-        "attackRange": 200,
-        "warningRange": 200,
-        "enemyType": "shooting",
-        "cd": 120,
-        "visionType": "sector",
-        "shootSize": 20,
-        "shootSpeed": 2,
-        "shootDis": 100,
-        "shootFormat": "red"
-    },
-
-    "magmaTower":
-    {
-        "enemyId": 3,
-        "size": 128,
-        "attack": 4,
-        "health": 100000,
-        "speed": 0,
-        "attackRange": 200,
-        "warningRange": 200,
-        "enemyType": "shooting",
-        "cd": 120,
-        "visionType": "sector",
-        "shootSize": 20,
-        "shootSpeed": 2,
-        "shootDis": 100,
-        "shootFormat": "red"
-    },
-
-    "waterTower":
-    {
-        "enemyId": 3,
-        "size": 128,
-        "attack": 4,
-        "health": 100000,
-        "speed": 0,
-        "attackRange": 200,
-        "warningRange": 200,
-        "enemyType": "shooting",
-        "cd": 120,
-        "visionType": "sector",
-        "shootSize": 20,
-        "shootSpeed": 2,
-        "shootDis": 100,
-        "shootFormat": "red"
-    },
-
-    "faye":
-    {
-        "enemyId": 4,
-        "size": 64,
-        "attack": 4,
-        "health": 10,
-        "speed": 1,
-        "attackRange": 100,
-        "warningRange": 150,
-        "enemyType": "aoe",
-        "cd": 120,
-        "visionType": "round",
-        "shootSize": 30,
-        "shootSpeed": 2,
-        "shootDis": 100,
-        "shootFormat": "yellow"
+        "shootFormat": "blue",
+        "skill": "none"
     },
 
     "wall":
@@ -200,5 +38,235 @@
     {
         "size": 64,
         "isPassable": true
+    },
+
+    "grassSlime":
+    {
+        "enemyId": 0,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 0,
+        "warningRange": 100,
+        "cd": 0,
+        "enemyType": "collision",
+        "visionType": "round",
+        "shootSize": 5,
+        "shootSpeed": 5,
+        "shootDis": 100,
+        "shootFormat": "blue",
+        "skill": "none"
+    },
+
+    "ghostSlime":
+    {
+        "enemyId": 1,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 0,
+        "warningRange": 100,
+        "cd": 0,
+        "enemyType": "collision",
+        "visionType": "round",
+        "shootSize": 5,
+        "shootSpeed": 5,
+        "shootDis": 100,
+        "shootFormat": "blue",
+        "skill": "none"
+    },
+
+    "waterSlime":
+    {
+        "enemyId": 2,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 0,
+        "warningRange": 100,
+        "cd": 0,
+        "enemyType": "collision",
+        "visionType": "round",
+        "shootSize": 5,
+        "shootSpeed": 5,
+        "shootDis": 100,
+        "shootFormat": "blue",
+        "skill": "water"
+    },
+
+    "fireSlime":
+    {
+        "enemyId": 3,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 0,
+        "warningRange": 100,
+        "cd": 0,
+        "enemyType": "collision",
+        "visionType": "round",
+        "shootSize": 5,
+        "shootSpeed": 5,
+        "shootDis": 100,
+        "shootFormat": "blue",
+        "skill": "fire"
+    },
+
+    "forestTower":
+    {
+        "enemyId": 100,
+        "size": 64,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red",
+        "skill": "none"
+    },
+
+    "skeletonTower":
+    {
+        "enemyId": 101,
+        "size": 32,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red",
+        "skill": "none"
+    },
+
+    "waterTower":
+    {
+        "enemyId": 102,
+        "size": 32,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red",
+        "skill": "water"
+    },
+
+    "magmaTower":
+    {
+        "enemyId": 103,
+        "size": 32,
+        "attack": 4,
+        "health": 100000,
+        "speed": 0,
+        "attackRange": 200,
+        "warningRange": 200,
+        "enemyType": "shooting",
+        "cd": 120,
+        "visionType": "sector",
+        "shootSize": 20,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "red",
+        "skill": "fire"
+    },
+
+    "grassWizard":
+    {
+        "enemyId": 4,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 100,
+        "warningRange": 150,
+        "enemyType": "aoe",
+        "cd": 120,
+        "visionType": "round",
+        "shootSize": 30,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "yellow",
+        "skill": "none"
+    },
+
+    "ghostWizard":
+    {
+        "enemyId": 5,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 100,
+        "warningRange": 150,
+        "enemyType": "aoe",
+        "cd": 120,
+        "visionType": "round",
+        "shootSize": 30,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "yellow",
+        "skill": "none"
+    },
+
+    "waterWizard":
+    {
+        "enemyId": 6,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 100,
+        "warningRange": 150,
+        "enemyType": "aoe",
+        "cd": 120,
+        "visionType": "round",
+        "shootSize": 30,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "yellow",
+        "skill": "water"
+    },
+
+    "fireWizard":
+    {
+        "enemyId": 7,
+        "size": 32,
+        "attack": 4,
+        "health": 10,
+        "speed": 1,
+        "attackRange": 100,
+        "warningRange": 150,
+        "enemyType": "aoe",
+        "cd": 120,
+        "visionType": "round",
+        "shootSize": 30,
+        "shootSpeed": 2,
+        "shootDis": 100,
+        "shootFormat": "yellow",
+        "skill": "fire"
     }
+
+
 }

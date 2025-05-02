@@ -4,7 +4,7 @@ class Player extends Character
     constructor(x, y, size,
         format, health, maxHealth, attack, status, speed,
         attackRange, warningRange, playerType, cd, visionType,
-        shootSize, shootSpeed, shootDis, shootFormat
+        shootSize, shootSpeed, shootDis, shootFormat, skill
     ) 
     {// Use playerTexture as the initial player image.
         super(x, y, size, format, health, 
@@ -27,7 +27,12 @@ class Player extends Character
 
         this.attackCdTimer = 0;
 
+        this.skill = skill;
+
         this.inv = [];
+
+        this.factSpeed = speed;
+        this.factCd = cd;
     }
 
     update() 
@@ -78,6 +83,10 @@ class Player extends Character
         }
 
         this.attackCdUpdate();
+        
+        this.abnormalTimerUpdate();
+
+        this.fireEffect();
     }
 
     undoMove() 
@@ -113,7 +122,7 @@ class Player extends Character
         {
             this.projectiles.push(new Projectile(centerX, centerY, 
                 dx, dy, this.shootSize, this.shootSpeed, 
-                this.shootDis, this.shootFormat));
+                this.shootDis, this.shootFormat, this.skill));
 
             playerShootGunMusic();
             this.attackCdTimer = this.cd;
@@ -132,7 +141,7 @@ class Player extends Character
                 let angle = (baseAngle + 30 * i) * (Math.PI / 180);
                 this.projectiles.push(new Projectile(centerX, centerY, 
                     Math.cos(angle), Math.sin(angle), this.shootSize, 
-                    this.shootSpeed, this.shootDis, this.shootFormat));
+                    this.shootSpeed, this.shootDis, this.shootFormat, this.skill));
             }
             this.attackCdTimer = this.cd;
         }
@@ -141,5 +150,42 @@ class Player extends Character
     attackCdUpdate()
     {
         if(this.attackCdTimer !== 0)this.attackCdTimer --;
+    }
+
+    abnormalTimerUpdate()
+    {
+        if(this.abnormalTimer !== 0)this.abnormalTimer --;
+        else 
+        {
+            this.abnormalStatus = "none";
+            this.speed = this.factSpeed;
+            this.cd = this.factCd;
+        }
+    }
+
+    changeAbnormalStatus(status)
+    {
+        if(status === "fire")
+        {
+            this.abnormalStatus = "fire";
+            this.abnormalTimer = globalFireStatusTimer;
+            this.speed = this.factSpeed;
+            this.cd = this.factSpeed / globalFireSpeedFactor;
+        }
+        else if(status === "water")
+        {
+            this.abnormalStatus = "water";
+            this.abnormalTimer = globalWaterStatusTimer;
+            this.speed = this.factSpeed * globalWaterSpeedFactor;
+            this.cd = this.factCd / globalWaterSpeedFactor;
+        }
+    }
+
+    fireEffect()
+    {
+        if(this.abnormalStatus === "fire" && this.abnormalTimer % 60 == 0)
+        {
+            this.changeHealth(- globalFireHealthPerSec);
+        }
     }
 }
