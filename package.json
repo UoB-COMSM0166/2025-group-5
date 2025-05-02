@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "游戏测试套件",
   "scripts": {
-    "test": "mocha docs/js/tests/*.test.js"
+    "test": "jest"
   },
   "dependencies": {
     "chai": "^4.3.7",
     "jsdom": "^22.1.0",
-    "mocha": "^10.2.0",
     "sinon": "^15.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 } 
