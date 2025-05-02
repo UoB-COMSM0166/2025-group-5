@@ -195,15 +195,9 @@ let g_textSize = 16;
 
 /* ----------  新增：开场 / 剧情 / 选关 资源 ---------- */
 // 开始界面图片,
-let startImgFile = ['./resources/images/game_background/Start_Game_01.png',
-                    './resources/images/game_background/Start_Game_02.jpg',
-                    './resources/images/game_background/Start_Game_03.jpg',
-                    './resources/images/game_background/Start_Game_04.jpg',
-                    './resources/images/game_background/Start_Game_05.jpg',
-                    './resources/images/game_background/Start_Game_06.jpg',
-                  ];
+let startImgFile = './resources/images/game_background/GameStart.jpg';
 let startImg = [];
-let startAnimInterval = 100;
+// let startAnimInterval = 100;
 
 // 选关界面底图
 let levelSelectImgFile = './resources/images/game_background/LevelSelect.jpg';
