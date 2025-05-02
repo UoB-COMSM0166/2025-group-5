@@ -17,6 +17,8 @@ class Character {
         this.speed = speed;
         this.invincibleTimer = 0;
         this.attackCdTimer = 0;
+        this.abnormalStatus = "none";
+        this.abnormalTimer = 0;
     }
 
     display() 
@@ -32,6 +34,18 @@ class Character {
             else
             {
                 fill(this.format.color);
+                rect(this.x, this.y, this.size, this.size);
+            }
+            if(this.abnormalStatus === "water")
+            {
+                noStroke();
+                fill(0, 0, 255, 100);
+                rect(this.x, this.y, this.size, this.size);
+            }
+            else if(this.abnormalStatus === "fire")
+            {
+                noStroke();
+                fill(255, 0, 0, 100);
                 rect(this.x, this.y, this.size, this.size);
             }
         }

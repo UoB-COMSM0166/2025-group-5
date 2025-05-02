@@ -26,6 +26,11 @@ canvasHeight = 800;
 let HealthBarHeight = 5;
 let globalInvincibleTimer = 120;
 let globalInvincibleFlashingInterval = 10;
+let globalWaterStatusTimer = 300;
+let globalFireStatusTimer = 360;
+let globalWaterSpeedFactor = 0.5;
+let globalFireSpeedFactor = 0.5;
+let globalFireHealthPerSec = 1;
 
 // ## Player
 let playerInitHealth = 100;
@@ -39,10 +44,6 @@ let playerTexture;
 
 // ## Enemy
 // ### Soldier
-let soldierHealth = 10;
-let soldierAttack = 5;
-let soldierSpeed = 1;
-let soldierSize = 40;
 let enemyFile = 'resources/images/characters_and_obstacles/example1.jpg';
 let enemyTexture;
 // ### tower
@@ -58,6 +59,20 @@ let grassFile = 'resources/images/characters_and_obstacles/example3.jpg';
 let grassTexture;
 let obstacleFile = 'resources/images/characters_and_obstacles/example4.jpg';
 let obstacleTexture;
+
+// slime
+let grassSlimeFile = 'resources/images/characters_and_obstacles/Slime/grass_slime/grass_slime move/slime_move_0.png';
+let ghostSlimeFile = 'resources/images/characters_and_obstacles/Slime/ghost_slime/ghost_slime move/slime_move_0.png';
+let waterSlimeFile = 'resources/images/characters_and_obstacles/Slime/water_slime/water_slime move/slime_move_0.png';
+let fireSlimeFile = 'resources/images/characters_and_obstacles/Slime/fire_slime/fire_slime move/slime_move_0.png';
+let forestTowerFile = 'resources/images/characters_and_obstacles/tower/forestTower.png';
+let skeletonTowerFile = 'resources/images/characters_and_obstacles/tower/skeletonTower.png';
+let waterTowerFile = 'resources/images/characters_and_obstacles/tower/waterTower.png';
+let magmaTowerFile = 'resources/images/characters_and_obstacles/tower/magmaTower.png';
+let grassWizardFile = 'resources/images/characters_and_obstacles/round ghost/round ghost walk/sprite_0.png';
+let ghostWizardFile = 'resources/images/characters_and_obstacles/round ghost/round ghost walk/sprite_0.png';
+let waterWizardFile = 'resources/images/characters_and_obstacles/wizard/lake wizard/move/lake wizard _0.png';
+let fireWizardFile = 'resources/images/characters_and_obstacles/wizard/fire wizard/move/move_0.png';
 
 const charStatus = Object.freeze({
   NORMAL: 'normal',
@@ -97,8 +112,18 @@ let level1LightFile = './resources/images/web_background/Dragon_Adventure_01_Lig
 
 let level2BGTexture;
 let level2LightTexture;
-let level2BGFile = './resources/images/web_background/Dragon_Adventure_01.png';
-let level2LightFile = './resources/images/web_background/Dragon_Adventure_01_Light.png';
+let level2BGFile = './resources/images/web_background/Dragon_Adventure_02.png';
+let level2LightFile = './resources/images/web_background/nothing.png';
+
+let level3BGTexture;
+let level3LightTexture;
+let level3BGFile = './resources/images/web_background/Dragon_Adventaure_03.png';
+let level3LightFile = './resources/images/web_background/nothing.png';
+
+let level4BGTexture;
+let level4LightTexture;
+let level4BGFile = './resources/images/web_background/Dragon_Adventure_04_without chest.png';
+let level4LightFile = './resources/images/web_background/nothing.png';
 
 // # Level
 let present_level;
@@ -108,7 +133,14 @@ let level3;
 let level4;
 
 // # bullet
-let skeletonTowerFile = 'resources/images/characters_and_obstacles/tower/skeletonBullet.png';
+let forestTowerBulletFile = 'resources/images/characters_and_obstacles/tower/forestBullet.png';
+let skeletonTowerBulletFile = 'resources/images/characters_and_obstacles/tower/skeletonBullet.png';
+let waterTowerBulletFile = 'resources/images/characters_and_obstacles/tower/waterBullet.png';
+let magmaTowerBulletFile = 'resources/images/characters_and_obstacles/tower/magmaBullet.png';
+let grassWizardBulletFile = 'resources/images/characters_and_obstacles/round ghost/round ghost bullet/light_blue_bullet.png';
+let ghostWizardBulletFile = 'resources/images/characters_and_obstacles/round ghost/round ghost bullet/light_blue_bullet.png';
+let waterWizardBulletFile = 'resources/images/characters_and_obstacles/wizard/lake wizard/bullet/lake wizard bullet.png';
+let fireWizardBulletFile = 'resources/images/characters_and_obstacles/wizard/fire wizard/bullet/fire wizard bullet.png';
 
 // # prompt
 let textBoardFile = "resources/images/text/Board.png";
@@ -117,10 +149,18 @@ let textBoardTexture;
 // #mapping
 let image_map = {
   soldier_idle: null,
+  grassSlime_idle: null,
+  ghostSlime_idle: null,
+  waterSlime_idle: null,
+  fireSlime_idle: null,
   skeletonTower_idle: null,
   forestTower_idle: null,
   magmaTower_idle: null,
   waterTower_idle: null,
+  grassWizard_idle: null,
+  ghostWizard_idle: null,
+  waterWizard_idle: null,
+  fireWizard_idle: null,
 };
 
 let bullet_map = {
@@ -129,6 +169,10 @@ let bullet_map = {
   forestTower: null,
   magmaTower: null,
   waterTower: null,
+  grassWizard: null,
+  ghostWizard: null,
+  waterWizard: null,
+  fireWizard: null,
 };
 
 // # Curtain
@@ -174,8 +218,28 @@ function preload() {
     image_map["faye_idle"] = loadImage(fayeFile);
     image_map["chest1_idle"] = loadImage(chestFile);
     image_map["door_idle"] = null;
-    bullet_map["skeletonTower"] = loadImage(skeletonTowerFile);
-    bullet_map["faye"] = loadImage(skeletonTowerFile);
+    image_map["grassSlime_idle"] = loadImage(grassSlimeFile);
+    image_map["ghostSlime_idle"] = loadImage(ghostSlimeFile);
+    image_map["waterSlime_idle"] = loadImage(waterSlimeFile);
+    image_map["fireSlime_idle"] = loadImage(fireSlimeFile);
+    image_map["forestTower_idle"] = loadImage(forestTowerFile);
+    image_map["skeletonTower_idle"] = loadImage(skeletonTowerFile);
+    image_map["waterTower_idle"] = loadImage(waterTowerFile);
+    image_map["magmaTower_idle"] = loadImage(magmaTowerFile);
+    image_map["grassWizard_idle"] = loadImage(grassWizardFile);
+    image_map["ghostWizard_idle"] = loadImage(ghostWizardFile);
+    image_map["waterWizard_idle"] = loadImage(waterWizardFile);
+    image_map["fireWizard_idle"] = loadImage(fireWizardFile);
+    
+    bullet_map["skeletonTower"] = loadImage(skeletonTowerBulletFile);
+    bullet_map["forestTower"] = loadImage(forestTowerBulletFile);
+    bullet_map["magmaTower"] = loadImage(magmaTowerBulletFile);
+    bullet_map["waterTower"] = loadImage(waterTowerBulletFile);
+    bullet_map["grassWizard"] = loadImage(grassWizardBulletFile);
+    bullet_map["ghostWizard"] = loadImage(ghostWizardBulletFile);
+    bullet_map["waterWizard"] = loadImage(waterWizardBulletFile);
+    bullet_map["fireWizard"] = loadImage(fireWizardBulletFile);
+
     grassTexture = loadImage(grassFile);
     obstacleTexture = loadImage(obstacleFile);
     level1BGTexture = loadImage(level1BGFile);
@@ -183,6 +247,10 @@ function preload() {
     level2BGTexture = loadImage(level2BGFile);
     level2LightTexture = loadImage(level2LightFile);
     questionMarkTexture = loadImage(questionMarkFile);
+    level3BGTexture = loadImage(level3BGFile);
+    level3LightTexture = loadImage(level3LightFile);
+    level4BGTexture = loadImage(level4BGFile);
+    level4LightTexture = loadImage(level4LightFile);
 
   /* 新增加载 */
   startImg = loadImage(startImgFile);

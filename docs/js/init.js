@@ -26,20 +26,27 @@ async function setup() {
   story2Video.hide();
 
   // 创建并初始化关卡对象（不生成 DOM）
-  level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture);
+  level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture, false);
   await level1.init();
-  level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture);
+  level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture, true);
   await level2.init();
+  level3 = new Level(3, level3ConfFile, level3BGTexture, level3LightTexture, false);
+  await level3.init();
+  level4 = new Level(4, level4ConfFile, level4BGTexture, level4LightTexture, false);
+  await level4.init();
 
   // 加载属性配置
   attributes = await loadJsonData(attributeFile);
 
   // 初始化技能栏资源
-  g_skillTextureList.push(image_map['soldier_idle']);
-  g_skillTextureList.push(grassTexture);
-  g_skillTextureList.push(grassTexture);
-  g_skillTextureList.push(image_map['tower_idle']);
-  g_skillTextureList.push(image_map['faye_idle']);
+  g_skillTextureList.push(image_map['grassSlime_idle']);
+  g_skillTextureList.push(image_map['ghostSlime_idle']);
+  g_skillTextureList.push(image_map['waterSlime_idle']);
+  g_skillTextureList.push(image_map['fireSlime_idle']);
+  g_skillTextureList.push(image_map['grassWizard_idle']);
+  g_skillTextureList.push(image_map['ghostWizard_idle']);
+  g_skillTextureList.push(image_map['waterWizard_idle']);
+  g_skillTextureList.push(image_map['fireWizard_idle']);
   for (let i = 0; i < g_skillNumber; i++) {
     g_skillStatusList.push(false);
     g_skillNumList.push(0);
@@ -97,6 +104,8 @@ function selectLevel() {
     const x = canvasX + canvasWidth / 2 - btnW / 2;
     const y1 = canvasY + canvasHeight / 2 - btnH / 2 - gap;
     const y2 = y1 + btnH + gap;
+    const y3 = y2 + btnH + gap;
+    const y4 = y3 + btnH + gap;
 
     level1Button = createButton('Level 1')
       .size(btnW, btnH)
@@ -107,10 +116,22 @@ function selectLevel() {
       .size(btnW, btnH)
       .position(x, y2)
       .mousePressed(() => startGame(2));
+
+    level3Button = createButton('Level 3')
+      .size(btnW, btnH)
+      .position(x, y3)
+      .mousePressed(() => startGame(3));
+
+    level4Button = createButton('Level 4')
+      .size(btnW, btnH)
+      .position(x, y4)
+      .mousePressed(() => startGame(4));
   }
   // 保证显示
   level1Button.show();
   level2Button.show();
+  level3Button.show();
+  level4Button.show();
 }
 
 // 开始游戏并隐藏按钮
@@ -119,19 +140,23 @@ function startGame(level) {
   isGameOver = false;
 
   if (level === 1) {
-    bulletSpeed = 3;
-    spawnInterval = 30;
     level1.start();
     present_level = 1;
-  } else {
-    bulletSpeed = 5;
-    spawnInterval = 20;
+  } else if (level === 2){
     level2.start();
     present_level = 2;
+  } else if (level === 3){
+    level3.start();
+    present_level = 3;
+  } else if (level === 4){
+    level4.start();
+    present_level = 4;
   }
 
   level1Button.hide();
   level2Button.hide();
+  level3Button.hide();
+  level4Button.hide();
 }
 
 // Game Over 后回到选关
@@ -162,6 +187,8 @@ function draw() {
     case 'playing':
       if (present_level === 1) level1.update();
       else if (present_level === 2) level2.update();
+      else if (present_level === 3) level3.update();
+      else if (present_level === 4) level4.update();
       break;
 
     case 'over':
@@ -186,6 +213,8 @@ function keyPressed() {
   } else if (gameState === 'playing') {
     if (present_level === 1) level1.keyPressedInLevel();
     else if (present_level === 2) level2.keyPressedInLevel();
+    else if (present_level === 3) level3.keyPressedInLevel();
+    else if (present_level === 4) level4.keyPressedInLevel();
   }
 }
 
