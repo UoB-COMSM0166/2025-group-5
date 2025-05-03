@@ -170,7 +170,7 @@ class Player extends Character
             this.abnormalStatus = "fire";
             this.abnormalTimer = globalFireStatusTimer;
             this.speed = this.factSpeed;
-            this.cd = this.factSpeed / globalFireSpeedFactor;
+            this.cd = this.factCd / globalFireSpeedFactor;
         }
         else if(status === "water")
         {
