@@ -1,11 +1,12 @@
 // 子弹类（新增方向控制）
 class Projectile {
-    constructor(x, y, dx, dy, size, speed, maxDistance, format) {
+    constructor(x, y, dx, dy, size, speed, maxDistance, format, skill) {
         this.x = x;
         this.y = y;
         this.size = size;
         this.speed = speed;
         this.maxDistance = maxDistance;
+        this.skill = skill;
         const magnitude = Math.sqrt(dx * dx + dy * dy);
         this.dx = dx / magnitude;        
         this.dy = dy / magnitude;

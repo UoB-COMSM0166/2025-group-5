@@ -1,6 +1,6 @@
 class Level
 {
-    constructor(id, jsonFile, bGTexture, lightTexture)
+    constructor(id, jsonFile, bGTexture, lightTexture, curtainFlag)
     {
         this.id = id;
         this.jsonFile = jsonFile;
@@ -25,7 +25,8 @@ class Level
         this.transformFlag = false;
         this.promptFlag = false;
         this.endFlag = false;
-        this.endAnimation = false
+        this.endAnimation = false;
+        this.curtainFlag = curtainFlag;
         this.endTimer = 0;
         this.endMaxTimer = 90;
         this.startAnimation = true;
@@ -54,7 +55,7 @@ class Level
             attributes.player.playerType, attributes.player.cd,
             attributes.player.visionType, attributes.player.shootSize,
             attributes.player.shootSpeed, attributes.player.shootDis,
-            attributes.player.shootFormat,
+            attributes.player.shootFormat, attributes.player.skill
         );
         // 创建敌人对象
         this.createEnemies();
@@ -79,7 +80,10 @@ class Level
             this.checkCollisions();
             this.drawLight(); // 绘制前景
 
-            // this.drawCurtain(); // 绘制幕布
+            if(this.curtainFlag)
+            {
+                this.drawCurtain(); // 绘制幕布
+            }
             
             this.skillBar.display();
         } 
@@ -124,7 +128,10 @@ class Level
         }
         this.drawLight(); // 绘制前景
 
-        // this.drawCurtain(); // 绘制幕布
+        if(this.curtainFlag)
+        {
+            this.drawCurtain(); // 绘制幕布
+        }
         
         this.skillBar.display();
     }
@@ -201,6 +208,7 @@ class Level
                     {
                         this.player.changeHealth(- this.enemies[i].getAttack());
                         this.player.changeStatus(charStatus.INVINCIBLE);
+                        this.player.changeAbnormalStatus(this.enemies[i].skill);
                     }
                     if(this.player.playerType === "collision")
                     {
@@ -210,6 +218,7 @@ class Level
                         { // remove dead enemy.
                             this.skillBar.addSkill(this.enemies[i].getEnemyId());
                             this.enemies.splice(i, 1);
+                            this.enemies[i].changeAbnormalStatus(this.player.skill);
                         }
                     }
                 }
@@ -249,8 +258,8 @@ class Level
                         proj.y + proj.size > enemy.y) 
                     {    
                         this.enemies[i].changeHealth(- this.player.getAttack());
-                        enemy.changeStatus(charStatus.INVINCIBLE);
-                        
+                        this.enemies[i].changeStatus(charStatus.INVINCIBLE);
+                        this.enemies[i].changeAbnormalStatus(proj.skill);
                         this.player.projectiles.splice(j, 1);
 
                         gameMusic.playSFX("hit");
@@ -277,7 +286,7 @@ class Level
                     {
                         this.player.changeHealth(- this.enemies[i].getAttack());
                         this.player.changeStatus(charStatus.INVINCIBLE);
-
+                        this.player.changeAbnormalStatus(proj.skill);
                         this.enemies[i].projectiles.splice(j, 1);
                         break;
                     }
@@ -353,7 +362,8 @@ class Level
                 attributes[enemy.type].shootSize,
                 attributes[enemy.type].shootSpeed,
                 attributes[enemy.type].shootDis,
-                bullet_map[enemy.type]
+                bullet_map[enemy.type],
+                attributes[enemy.type].skill
             );
             this.enemies.push(temp);
         }
@@ -462,7 +472,8 @@ class Level
                                         attributes[name].shootSize,
                                         attributes[name].shootSpeed,
                                         attributes[name].shootDis,
-                                        bullet_map[name]
+                                        bullet_map[name],
+                                        attributes[name].skill
                                     );
                                 }
                             }
