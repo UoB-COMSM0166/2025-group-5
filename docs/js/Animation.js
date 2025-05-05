@@ -1,16 +1,13 @@
-// Animation.js
 class SpriteAnimator {
   /**
    * @param {Object} frameSets  
    *   键名为状态(state)：
-   *     'idle' | 'moveUp'|'moveDown'|'moveLeft'|'moveRight'
-
-
+   *     'idleUp' | 'idleDown' | 'idleLeft' | 'idleRight' | 'moveUp'|'moveDown'|'moveLeft'|'moveRight'
    *            |'attackUp'|'attackDown'|'attackLeft'|'attackRight'
-   *   值为 { frames: p5.Image[], interval: number(ms), loop: boolean }
+   *   值为 { frames: p5.Image[], period: number(ms), loop: boolean }
    * @param {string} initialState - 初始状态，默认为 'idle'
    */
-  constructor(frameSets, initialState = 'idle') {
+  constructor(frameSets, initialState = 'idleUp') {
     this.frameSets = frameSets;
     this.currentState = initialState;
     this.currentIndex = 0;
@@ -40,8 +37,11 @@ class SpriteAnimator {
     let cfg = this.frameSets[this.currentState];
     if (!cfg || this.finished) return;
 
+    // 计算每帧的显示时间（interval）
+    let interval = cfg.period / cfg.frames.length;
     let now = millis();
-    if (now - this.lastSwitch >= cfg.interval) {
+
+    if (now - this.lastSwitch >= interval) {
       this.lastSwitch = now;
       this.currentIndex++;
       if (this.currentIndex >= cfg.frames.length) {

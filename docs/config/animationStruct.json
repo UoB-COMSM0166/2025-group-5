@@ -1,0 +1,977 @@
+{
+    "player":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "grassSlime":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "ghostSlime":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "waterSlime":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "fireSlime":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "forestTower":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        }
+    },
+    "skeletonTower":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        }
+    },
+    "waterTower":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        }
+    },
+    "magmaTower":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": false
+        }
+    },
+    "grassWizard":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "ghostWizard":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "waterWizard":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    },
+    "fireWizard":
+    {
+        "idleUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "idleRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveUp": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveDown":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveLeft": 
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "moveRight":
+        {
+            "frames": [],
+            "period": 1000,
+            "loop": true
+        },
+        "attackUp":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackDown":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackLeft":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        },
+        "attackRight":
+        {
+            "frames": [],
+            "period": 2000,
+            "loop": false
+        }
+    }
+}
