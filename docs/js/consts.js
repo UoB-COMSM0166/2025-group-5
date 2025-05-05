@@ -3,8 +3,72 @@ let gameState = 'start'; // 游戏状态 start/levelSelect/playing/over
 let startButton;
 let gameTitle;
 let levelTitle; // 关卡选择标题
-let level1Button; // 关卡1按钮
-let level2Button; // 关卡2按钮
+
+// canvas
+canvasWidth = 1280;
+canvasHeight = 800;
+
+// ** —— 新增：开始界面动态图与关卡过场图资源配置 —— **
+const startScreenFiles = [
+  'resources/images/start/anim1.png',
+  'resources/images/start/anim2.png',
+  'resources/images/start/anim3.png',
+  'resources/images/start/anim4.png',
+  'resources/images/start/anim5.png',
+  'resources/images/start/anim6.png'
+];
+let startScreenImages = [];
+let startAnimFrame = 0;
+const startAnimInterval = 10; // 帧切换间隔
+let startAnimCounter = 0;
+
+// —— 新增：关卡过场图 —— 
+const interLevelFiles = [
+  'resources/images/transition/inter1.png',
+  'resources/images/transition/inter2.png',
+  'resources/images/transition/inter3.png',
+  'resources/images/transition/inter4.png'
+];
+let interLevelImages = [];
+let interLevelIndex = 0;
+let interTimer = 0;
+const interDuration = 180; // 3秒 @60fps
+
+// 3) 进入第 2-4 关前过场（占位前两个元素空字符串）
+const interEnterFiles = [
+  '', // index 0 unused
+  '', // index 1 unused
+  'resources/images/transition/enter2.png',
+  'resources/images/transition/enter3.png',
+  'resources/images/transition/enter4.png'
+];
+let interEnterImages = [];
+let interEnterIndex = 0;
+let EnterTimer = 0;
+const enterDuration = 300; // 5秒 @60fps
+
+// —— 新增：关卡选择界面资源 —— 
+const levelSelectBGFile = 'resources/images/selectlevel/Select_Total.png';
+let levelSelectBGImage;
+const levelBtnFiles = [
+  'resources/images/selectlevel/lock.png',
+  'resources/images/selectlevel/lock.png',
+  'resources/images/selectlevel/lock.png',
+  'resources/images/selectlevel/lock.png'
+];
+let levelBtnImages = [];
+const levelBtnPos = [
+  { x: 200, y: 300 },
+  { x: 500, y: 300 },
+  { x: 800, y: 300 },
+  { x: 1100, y: 300 }
+];
+const levelBtnSize = { w: 150, h: 150 };
+
+// 5) ESC 暂停菜单按钮尺寸与位置
+const pauseBtnSize    = { w: 150, h: 50 };
+const pauseBtnOffsetX = 200; // 相对画布中心左右偏移
+const pauseBtnPosY    = canvasHeight/2 - pauseBtnSize.h/2;
 
 let player;
 let enemies = [];
@@ -19,9 +83,7 @@ let attributes;
 let animationFile = './config/animationStruct.json';
 let animations;
 
-// canvas
-canvasWidth = 1280;
-canvasHeight = 800;
+
 
 // Game values
 // # Character
@@ -257,8 +319,26 @@ function preload() {
     level4LightTexture = loadImage(level4LightFile);
 
   /* 新增加载 */
-  startImg = loadImage(startImgFile);
+  // startImg = loadImage(startImgFile);
   levelSelectImg = loadImage(levelSelectImgFile);
+
+  // --- 新增：开始界面 6 帧动画 ---
+  for (let f of startScreenFiles) {
+    startScreenImages.push(loadImage(f));
+  }
+  // --- 新增：关卡胜利过场 ---
+  for (let f of interLevelFiles) {
+    interLevelImages.push(loadImage(f));
+  }
+  // --- 新增：进入第 2-4 关前过场 ---
+  for (let f of interEnterFiles) {
+    interEnterImages.push(f ? loadImage(f) : null);
+  }
+  // --- 新增：选关背景 & 按钮图 ---
+  levelSelectBGImage = loadImage(levelSelectBGFile);
+  for (let f of levelBtnFiles) {
+    levelBtnImages.push(loadImage(f));
+  }
 
   // p5 视频使用 createVideo，必须立即隐藏，防止自动播放
   story1Video = createVideo([story1VideoFile]);

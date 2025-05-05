@@ -1,11 +1,18 @@
 // init.js
 
-let canvasElem, canvasX, canvasY;
-let skipButton;
+// let level1, level2, level3, level4;
+// let attributes, animations;
+// let interTimer   = 0;  // 胜利过场计时
+// let enterTimer   = 0;  // 进入关卡过场计时
+let nextLevel    = 1;  // 点击选关后要进入的关卡
+let pausedState  = false;
+
+// let story1Video, story2Video, skipButton;
 
 async function setup() {
   // 创建并定位画布
   canvasElem = createCanvas(canvasWidth, canvasHeight);
+  frameRate(60);
   // 获取画布在页面上的位置
   canvasX = canvasElem.elt.offsetLeft;
   canvasY = canvasElem.elt.offsetTop;
@@ -13,6 +20,23 @@ async function setup() {
   // 预生成“Restart”按钮（Game Over 时用）
   startButton = createButton('Restart');
   startButton.hide();
+
+  // —— 初始化视频与 Skip 按钮 —— 
+  story1Video = createVideo(['resources/videos/story1.mp4']);
+  story1Video.size(canvasWidth, canvasHeight);
+  story1Video.position(0, 0);
+  story1Video.attribute('playsinline','');
+  story1Video.hide();
+
+  story2Video = createVideo(['resources/videos/story2_loop.mp4']);
+  story2Video.size(canvasWidth, canvasHeight);
+  story2Video.position(0, 0);
+  story2Video.attribute('playsinline','');
+  story2Video.hide();
+
+  skipButton = createButton('Skip');
+  skipButton.position(canvasWidth - 100, 20);
+  skipButton.hide();
 
   // 准备剧情视频，固定在画布范围
   story1Video.size(canvasWidth, canvasHeight);
@@ -614,53 +638,207 @@ function restartGame() {
 // 主循环，始终先填黑
 function draw() {
   background(0);
-
-  switch (gameState) {
-    case 'start':
-      image(startImg, 0, 0, width, height);
-      break;
-
-    case 'story1':
-    case 'story2':
-      // 视频覆盖画布
-      break;
-
-    case 'levelSelect':
-      image(levelSelectImg, 0, 0, width, height);
-      break;
-
-    case 'playing':
-      if (present_level === 1) level1.update();
-      else if (present_level === 2) level2.update();
-      else if (present_level === 3) level3.update();
-      else if (present_level === 4) level4.update();
-      break;
-
-    case 'over':
-      fill('red');
-      textSize(32);
-      text('Game Over', width / 2 - 80, height / 2);
-      startButton.show().position(
-        canvasX + canvasWidth / 2 - 55,
-        canvasY + canvasHeight / 2 + 40
-      );
-      startButton.mousePressed(restartGame);
-      break;
+  switch(gameState) {
+    case 'start':       drawStart();       break;
+    case 'story1':      drawStory1();      break;
+    case 'story2':      drawStory2();      break;
+    case 'levelSelect': drawLevelSelect(); break;
+    case 'interEnter':  drawInterEnter();  break;
+    case 'playing':     drawPlaying();     break;
+    case 'interLevel':  drawInterLevel();  break;
+    case 'paused':      drawPaused();      break;
+    case 'over':        drawGameOver();    break;
   }
 }
 
-// 键盘事件
+// —— 1. “start” 界面：按空格或鼠标开始，进入 story1 视频 —— 
+function drawStart(){
+  // —— 1. 计算动画帧索引 —— 
+  // framesPerImage：每张动画帧持续的 draw() 调用次数，你可以根据需要调节速度
+  const framesPerImage = 10;
+  const idx = Math.floor(frameCount / framesPerImage) % startScreenImages.length;
+
+  // —— 2. 清屏并绘制动画 —— 
+  background(0);                     // 黑底背景
+  imageMode(CENTER);                 
+  // 将第 idx 帧动画居中绘制
+  image(startScreenImages[idx], width/2, height/2);
+
+
+  if (keyIsDown(32) || mouseIsPressed) {
+    gameState = 'story1';
+    story1Video.show();
+    story1Video.play();
+    skipButton.show();
+  }
+}
+
+// —— 2. “story1” 过场：播放一次，可 Skip —— 
+function drawStory1(){
+  // 视频自己在 DOM 上
+  skipButton.mousePressed(()=>{
+    story1Video.stop(); story1Video.hide();
+    skipButton.hide();
+    gameState = 'story2';
+  });
+  story1Video.onended(()=>{
+    story1Video.hide();
+    skipButton.hide();
+    gameState = 'story2';
+  });
+}
+
+// —— 3. “story2” 过场：循环播放，可按空格或 Skip 进入选关 —— 
+function drawStory2(){
+  story2Video.show();
+  story2Video.loop();
+  skipButton.show();
+  skipButton.mousePressed(()=>{
+    story2Video.stop(); story2Video.hide();
+    skipButton.hide();
+    gameState = 'levelSelect';
+  });
+  if (keyIsDown(32)) {
+    story2Video.stop(); story2Video.hide();
+    skipButton.hide();
+    gameState = 'levelSelect';
+  }
+}
+
+// —— 4. “levelSelect” 界面 —— 
+function drawLevelSelect(){
+  imageMode(CENTER);
+  image(levelSelectBGImage, width/2, height/2, width, height);
+  for (let i=0; i<4; i++){
+    let p = levelBtnPos[i];
+    let over = 
+      mouseX > p.x - levelBtnSize.w/2 &&
+      mouseX < p.x + levelBtnSize.w/2 &&
+      mouseY > p.y - levelBtnSize.h/2 &&
+      mouseY < p.y + levelBtnSize.h/2;
+    let s = over?1.1:1.0;
+    push();
+      translate(p.x,p.y);
+      scale(s);
+      image(levelBtnImages[i],0,0,levelBtnSize.w,levelBtnSize.h);
+    pop();
+    if (over && mouseIsPressed){
+      nextLevel = i+1;
+      if (nextLevel>=2){
+        enterTimer=0;
+        gameState='interEnter';
+      } else {
+        startGame(1);
+      }
+    }
+  }
+}
+
+// —— 5. “interEnter”：进入 2–4 关前的 5 秒过场，可空格跳过 —— 
+function drawInterEnter(){
+  imageMode(CORNER);
+  let img = interEnterImages[nextLevel];
+  if (img) image(img,0,0,width,height);
+  enterTimer++;
+  if (keyIsDown(32) || enterTimer>60*5){
+    startGame(nextLevel);
+  }
+}
+
+// —— 6. “playing”：实际游戏，记得先重置 imageMode —— 
+function drawPlaying(){
+  imageMode(CORNER);
+  if      (present_level===1) level1.update();
+  else if (present_level===2) level2.update();
+  else if (present_level===3) level3.update();
+  else if (present_level===4) level4.update();
+}
+
+// —— 7. “interLevel”：关卡胜利后 3 秒过场，可空格跳过 —— 
+function drawInterLevel(){
+  imageMode(CORNER);
+  image(interLevelImages[present_level-1],0,0,width,height);
+  interTimer++;
+  if (keyIsDown(32) || interTimer>60*3){
+    interTimer=0;
+    gameState='levelSelect';
+  }
+}
+
+// —— 8. “paused”：ESC 调出，画面变灰，两个按钮 —— 
+function drawPaused(){
+  // 先画静态游戏画面（不更新逻辑）
+  imageMode(CORNER);
+  if      (present_level===1) level1.drawWithoutUpdate();
+  else if (present_level===2) level2.drawWithoutUpdate();
+  else if (present_level===3) level3.drawWithoutUpdate();
+  else if (present_level===4) level4.drawWithoutUpdate();
+
+  // 叠加灰层
+  fill(0,0,0,150);
+  rect(0,0,width,height);
+
+  // 画 Exit / Continue 按钮
+  for(let i=0;i<2;i++){
+    let txt = i===0?'Exit':'Continue';
+    let x   = width/2 + (i===0?-pauseBtnOffsetX:pauseBtnOffsetX);
+    let y   = pauseBtnPosY;
+    let w   = pauseBtnSize.w, h=pauseBtnSize.h;
+    let over = mouseX>x-w/2 && mouseX<x+w/2
+            && mouseY>y-h/2 && mouseY<y+h/2;
+    fill(over?'lightblue':'white');
+    rect(x-w/2,y-h/2,w,h,8);
+    fill('black');
+    textAlign(CENTER,CENTER);
+    textSize(20);
+    text(txt,x,y);
+    if (over && mouseIsPressed){
+      if (i===0){ // Exit
+        gameState='levelSelect';
+      } else {   // Continue
+        gameState='playing';
+      }
+    }
+  }
+}
+
+// —— 9. “over” 界面：失败后返回选关 —— 
+function drawGameOver(){
+  background(0);
+  fill('red'); textSize(48);
+  textAlign(CENTER,CENTER);
+  text('Game Over',width/2,height/2-50);
+  drawLevelSelect();
+}
+
+// 保留原有按键处理，仅加入跳过过场的逻辑
 function keyPressed() {
-  if (gameState === 'start' && key === ' ') {
-    startStory1();
-  } else if (gameState === 'story2' && key === ' ') {
-    enterLevelSelect();
-  } else if (gameState === 'playing') {
-    if (present_level === 1) level1.keyPressedInLevel();
+  if (gameState === 'interLevel' && key === ' ') {
+    interTimer = 60 * 3;
+  }
+  if (gameState === 'interEnter' && key === ' ') {
+    enterTimer = 60 * 5;
+  }
+  if (gameState === 'playing') {
+    if      (present_level === 1) level1.keyPressedInLevel();
     else if (present_level === 2) level2.keyPressedInLevel();
     else if (present_level === 3) level3.keyPressedInLevel();
     else if (present_level === 4) level4.keyPressedInLevel();
   }
+}
+
+function mousePressed() {
+  // 阻止原 DOM 事件干扰
+}
+
+// 保留原有 startGame，不改动
+function startGame(level) {
+  gameState = 'playing';
+  present_level = level;
+  if      (level === 1) level1.start();
+  else if (level === 2) level2.start();
+  else if (level === 3) level3.start();
+  else if (level === 4) level4.start();
 }
 
 // 首次交互后播放背景音乐
