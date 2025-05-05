@@ -51,10 +51,10 @@ const enterDuration = 300; // 5秒 @60fps
 const levelSelectBGFile = 'resources/images/selectlevel/Select_Total.png';
 let levelSelectBGImage;
 const levelBtnFiles = [
-  'resources/images/selectlevel/lock.png',
-  'resources/images/selectlevel/lock.png',
-  'resources/images/selectlevel/lock.png',
-  'resources/images/selectlevel/lock.png'
+  'resources/images/selectlevel/Lock.png',
+  'resources/images/selectlevel/Lock.png',
+  'resources/images/selectlevel/Lock.png',
+  'resources/images/selectlevel/Lock.png'
 ];
 let levelBtnImages = [];
 const levelBtnPos = [
