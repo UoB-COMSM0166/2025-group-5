@@ -1945,7 +1945,7 @@
             "type": "door",
             "position": {
                 "x": 0,
-                "y": 416
+                "y": 736 
             },
             "triggerDis": 50,
             "condition": {
@@ -1962,7 +1962,7 @@
                 "getInv": ["key1"],
                 "consumeInv": [],
                 "mapChange": true,
-                "prompt": "You win."
+                "prompt": "you have passed level1."
             },
             "expireAfterTriggered": false
         }

@@ -222,13 +222,13 @@
             "type": "magmaTower",
             "position": 
             {
-                "x": 320,
+                "x": 288,
                 "y": 384
             },
             "patrolPath":
             [
                 {
-                    "x": 320,
+                    "x": 288,
                     "y": 384
                 }
             ]
@@ -237,29 +237,14 @@
             "type": "magmaTower",
             "position": 
             {
-                "x": 544,
-                "y": 416
-            },
-            "patrolPath":
-            [
-                {
-                    "x": 544,
-                    "y": 416
-                }
-            ]
-        },
-        {
-            "type": "magmaTower",
-            "position": 
-            {
                 "x": 640,
-                "y": 256
+                "y": 224
             },
             "patrolPath":
             [
                 {
                     "x": 640,
-                    "y": 256
+                    "y": 224
                 }
             ]
         },
@@ -275,21 +260,6 @@
                 {
                     "x": 992,
                     "y": 288
-                }
-            ]
-        },
-        {
-            "type": "magmaTower",
-            "position": 
-            {
-                "x": 1184,
-                "y": 352
-            },
-            "patrolPath":
-            [
-                {
-                    "x": 1184,
-                    "y": 352
                 }
             ]
         },
@@ -727,6 +697,20 @@
         {
             "type": "wall",
             "position": {
+                "x": 1056,
+                "y": 224
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
+                "x": 1088,
+                "y": 224
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
                 "x": 288,
                 "y": 256
             }
@@ -735,6 +719,20 @@
             "type": "wall",
             "position": {
                 "x": 448,
+                "y": 256
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
+                "x": 544,
+                "y": 256
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
+                "x": 576,
                 "y": 256
             }
         },
@@ -813,6 +811,20 @@
             "position": {
                 "x": 1248,
                 "y": 256
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
+                "x": 544,
+                "y": 288
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
+                "x": 576,
+                "y": 288
             }
         },
         {
@@ -1455,6 +1467,20 @@
         {
             "type": "wall",
             "position": {
+                "x": 224,
+                "y": 576
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
+                "x": 256,
+                "y": 576
+            }
+        },
+        {
+            "type": "wall",
+            "position": {
                 "x": 512,
                 "y": 576
             }
@@ -1712,5 +1738,57 @@
             }
         }
     ],
-    "entities": []
+    "entities": 
+    [
+        {
+            "type": "chest1",
+            "position": {
+                "x": 288,
+                "y": 96
+            },
+            "triggerDis": 50,
+            "condition": {
+                "enemyCleared": true,
+                "inv": []
+            },
+            "unmatchedResult": {
+                "getInv": [],
+                "consumeInv": [],
+                "mapChange": false,
+                "prompt": "You need to kill all the enemies."
+            },
+            "matchedResult": {
+                "getInv": ["key4"],
+                "consumeInv": [],
+                "mapChange": false,
+                "prompt": "You have gotten the key to next level."
+            },
+            "expireAfterTriggered": true
+        },
+        {
+            "type": "door",
+            "position": {
+                "x": 0,
+                "y": 544
+            },
+            "triggerDis": 50,
+            "condition": {
+                "enemyCleared": false,
+                "inv": ["key4"]
+            },
+            "unmatchedResult": {
+                "getInv": [],
+                "consumeInv": [],
+                "mapChange": false,
+                "prompt": "You need to get the key to next level."
+            },
+            "matchedResult": {
+                "getInv": ["key4"],
+                "consumeInv": [],
+                "mapChange": true,
+                "prompt": "you win."
+            },
+            "expireAfterTriggered": false
+        }
+    ]
 }

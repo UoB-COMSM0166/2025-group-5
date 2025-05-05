@@ -164,7 +164,7 @@
     "waterTower":
     {
         "enemyId": 102,
-        "size": 32,
+        "size": 64,
         "attack": 4,
         "health": 100000,
         "speed": 0,
@@ -184,7 +184,7 @@
     "magmaTower":
     {
         "enemyId": 103,
-        "size": 32,
+        "size": 64,
         "attack": 4,
         "health": 100000,
         "speed": 0,
@@ -213,7 +213,7 @@
         "enemyType": "aoe",
         "cd": 120,
         "visionType": "round",
-        "shootSize": 30,
+        "shootSize": 15,
         "shootSpeed": 2,
         "shootDis": 100,
         "shootFormat": "yellow",
@@ -253,7 +253,7 @@
         "enemyType": "aoe",
         "cd": 120,
         "visionType": "round",
-        "shootSize": 30,
+        "shootSize": 15,
         "shootSpeed": 2,
         "shootDis": 100,
         "shootFormat": "yellow",
@@ -273,7 +273,7 @@
         "enemyType": "aoe",
         "cd": 120,
         "visionType": "round",
-        "shootSize": 30,
+        "shootSize": 15,
         "shootSpeed": 2,
         "shootDis": 100,
         "shootFormat": "yellow",
