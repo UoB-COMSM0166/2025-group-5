@@ -16,6 +16,8 @@ let isGameOver = false;
 // configuration
 let attributeFile = './config/attribute.json';
 let attributes;
+let animationFile = './config/animationStruct.json';
+let animations;
 
 // canvas
 canvasWidth = 1280;
@@ -62,7 +64,7 @@ let obstacleTexture;
 
 // slime
 let grassSlimeFile = 'resources/images/characters_and_obstacles/Slime/grass_slime/grass_slime move/slime_move_0.png';
-let ghostSlimeFile = 'resources/images/characters_and_obstacles/Slime/ghost_slime/ghost_slime move/slime_move_0.png';
+let ghostSlimeFile = 'resources/images/characters_and_obstacles/Slime/ghost_slime/ghost_slime_move_right/slime_move_0.png';
 let waterSlimeFile = 'resources/images/characters_and_obstacles/Slime/water_slime/water_slime move/slime_move_0.png';
 let fireSlimeFile = 'resources/images/characters_and_obstacles/Slime/fire_slime/fire_slime move/slime_move_0.png';
 let forestTowerFile = 'resources/images/characters_and_obstacles/tower/forestTower.png';

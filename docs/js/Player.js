@@ -4,12 +4,14 @@ class Player extends Character
     constructor(x, y, size,
         format, health, maxHealth, attack, status, speed,
         attackRange, warningRange, playerType, cd, visionType,
-        shootSize, shootSpeed, shootDis, shootFormat, skill
+        shootSize, shootSpeed, shootDis, shootFormat, skill, 
+        animationFlag, animationSet
     ) 
     {// Use playerTexture as the initial player image.
         super(x, y, size, format, health, 
             maxHealth, attack, 
-            status, speed);
+            status, speed, 
+            animationFlag, animationSet);
         this.projectiles = [];
         this.prevX = x;
         this.prevY = y;
@@ -33,6 +35,8 @@ class Player extends Character
 
         this.factSpeed = speed;
         this.factCd = cd;
+
+        this.state = "idleUp";
     }
 
     update() 
@@ -87,6 +91,8 @@ class Player extends Character
         this.abnormalTimerUpdate();
 
         this.fireEffect();
+
+        this.stateUpdate();
     }
 
     undoMove() 
@@ -170,7 +176,7 @@ class Player extends Character
             this.abnormalStatus = "fire";
             this.abnormalTimer = globalFireStatusTimer;
             this.speed = this.factSpeed;
-            this.cd = this.factSpeed / globalFireSpeedFactor;
+            this.cd = this.factCd / globalFireSpeedFactor;
         }
         else if(status === "water")
         {
@@ -186,6 +192,65 @@ class Player extends Character
         if(this.abnormalStatus === "fire" && this.abnormalTimer % 60 == 0)
         {
             this.changeHealth(- globalFireHealthPerSec);
+        }
+    }
+
+    stateUpdate()
+    {
+        if(this.attackCdTimer !== 0)
+        {
+            switch(this.lastDirection){
+                case "up": 
+                    this.state = 'attackUp';
+                    break;
+                case "down": 
+                    this.state = 'attackDown';
+                    break;
+                case "left": 
+                    this.state = 'attackLeft';
+                    break;
+                case "right": 
+                    this.state = 'attackRight';
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+        if (keyIsDown(UP_ARROW)) 
+        {
+            this.state = 'moveUp';
+        }
+        else if (keyIsDown(DOWN_ARROW)) 
+        {
+            this.state = 'moveDown';
+        }
+        else if (keyIsDown(LEFT_ARROW)) 
+        {
+            this.state = 'moveLeft';
+        }
+        else if (keyIsDown(RIGHT_ARROW)) 
+        {
+            this.state = 'moveRight';
+        } 
+        else
+        {
+            switch(this.lastDirection){
+                case "up": 
+                    this.state = 'idleUp';
+                    break;
+                case "down": 
+                    this.state = 'idleDown';
+                    break;
+                case "left": 
+                    this.state = 'idleLeft';
+                    break;
+                case "right": 
+                    this.state = 'idleRight';
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

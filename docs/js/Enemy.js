@@ -1,11 +1,14 @@
 // 敌人类
 class Enemy extends Character 
 {
-    constructor(enemyId, x, y, size, format, health, maxHealth, attack, status, speed, patrolPath,
+    constructor(enemyId, x, y, size, format, health, maxHealth, 
+        attack, status, speed, patrolPath,
         attackRange, warningRange, enemyType, cd, visionType,
-        shootSize, shootSpeed, shootDis, shootFormat, skill)
+        shootSize, shootSpeed, shootDis, shootFormat, skill, 
+        animationFlag, animationSet)
     {
-        super(x, y, size, format, health, maxHealth, attack, status, speed);
+        super(x, y, size, format, health, maxHealth, attack, 
+            status, speed, animationFlag, animationSet);
         this.enemyId = enemyId;
         this.prevX = x;
         this.prevY = y;
@@ -30,6 +33,8 @@ class Enemy extends Character
 
         this.factSpeed = speed;
         this.factCd = cd;
+
+        this.state = "moveLeft";
     }
 
     update(level) 
@@ -50,6 +55,8 @@ class Enemy extends Character
         this.abnormalTimerUpdate();
 
         this.fireEffect();
+
+        this.stateUpdate(level);
     }
 
     undoMove() 
@@ -250,6 +257,26 @@ class Enemy extends Character
         if(this.abnormalStatus === "fire" && this.abnormalTimer % 60 == 0)
         {
             this.changeHealth(- globalFireHealthPerSec);
+        }
+    }
+
+    stateUpdate(level)
+    {
+        if (!this.findPalyer) 
+        {
+            if(this.nextPatrolPoint.x - this.x >= 0)
+            {
+                if(this.attackCdTimer !== 0) this.state = "attackRight";
+                else this.state = "moveRight";
+            }
+        }
+        else 
+        {
+            if(level.player.x - this.x >= 0)
+            {
+                if(this.attackCdTimer !== 0) this.state = "attackAttack";
+                else this.state = "moveLeft";
+            }
         }
     }
 }

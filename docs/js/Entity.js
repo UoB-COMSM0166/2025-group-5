@@ -4,7 +4,7 @@ class Entity extends Character {
         unmatchedResult, matchedResult, expireAfterTriggered
     ) 
     {
-        super(x, y, Size, format, 0, 0, 0, charStatus.NORMAL, 0);
+        super(x, y, Size, format, 0, 0, 0, charStatus.NORMAL, 0, false, null);
         this.isPassable = isPassable;
         this.type = type;
         this.triggerDis = triggerDis;

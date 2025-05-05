@@ -1,6 +1,6 @@
 // 角色基类
 class Character {
-    constructor(x, y, size, format, health, maxHealth, attack, status, speed) 
+    constructor(x, y, size, format, health, maxHealth, attack, status, speed, animationFlag, animationSet) 
     {
         this.x = x;
         this.y = y;
@@ -19,40 +19,71 @@ class Character {
         this.attackCdTimer = 0;
         this.abnormalStatus = "none";
         this.abnormalTimer = 0;
+
+        this.animationFlag = animationFlag;
+        this.animator = new SpriteAnimator(animationSet);
+
+        this.state = "MovingLeft";
     }
 
     display() 
     {
         // fill the Character with pure color or image
-        if(Math.floor(this.invincibleTimer / globalInvincibleFlashingInterval)
-             % 2 === 0)
+        if(!this.animationFlag)
         {
-            if(this.format.image)
+            if(Math.floor(this.invincibleTimer / globalInvincibleFlashingInterval)
+                % 2 === 0)
             {
-                image(this.format.image, this.x, this.y, this.size, this.size);
+                if(this.format.image)
+                {
+                    image(this.format.image, this.x, this.y, this.size, this.size);
+                }
+                else
+                {
+                    fill(this.format.color);
+                    rect(this.x, this.y, this.size, this.size);
+                }
+                if(this.abnormalStatus === "water")
+                {
+                    noStroke();
+                    fill(0, 0, 255, 100);
+                    rect(this.x, this.y, this.size, this.size);
+                }
+                else if(this.abnormalStatus === "fire")
+                {
+                    noStroke();
+                    fill(255, 0, 0, 100);
+                    rect(this.x, this.y, this.size, this.size);
+                }
             }
-            else
-            {
-                fill(this.format.color);
-                rect(this.x, this.y, this.size, this.size);
-            }
-            if(this.abnormalStatus === "water")
-            {
-                noStroke();
-                fill(0, 0, 255, 100);
-                rect(this.x, this.y, this.size, this.size);
-            }
-            else if(this.abnormalStatus === "fire")
-            {
-                noStroke();
-                fill(255, 0, 0, 100);
-                rect(this.x, this.y, this.size, this.size);
-            }
+            // // Display the health of Player and Enemy
+            // if(this instanceof Player || this instanceof Enemy)
+            // {
+            //         this.drawHealthBar();
+            // }
         }
-        // Display the health of Player and Enemy
-        if(this instanceof Player || this instanceof Enemy)
+        else 
         {
-            this.drawHealthBar();
+            if(Math.floor(this.invincibleTimer / globalInvincibleFlashingInterval)
+                % 2 === 0)
+            {
+                this.animator.setState(this.state);
+                this.animator.update();
+                this.animator.draw(this.x, this.y, this.size, this.size);
+                if(this.abnormalStatus === "water")
+                {
+                    noStroke();
+                    fill(0, 0, 255, 100);
+                    rect(this.x, this.y, this.size, this.size);
+                }
+                else if(this.abnormalStatus === "fire")
+                {
+                    noStroke();
+                    fill(255, 0, 0, 100);
+                    rect(this.x, this.y, this.size, this.size);
+                }
+                this.drawHealthBar();
+            }
         }
     }
 

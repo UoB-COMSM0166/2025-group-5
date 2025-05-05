@@ -55,7 +55,8 @@ class Level
             attributes.player.playerType, attributes.player.cd,
             attributes.player.visionType, attributes.player.shootSize,
             attributes.player.shootSpeed, attributes.player.shootDis,
-            attributes.player.shootFormat, attributes.player.skill
+            attributes.player.shootFormat, attributes.player.skill,
+            attributes.player.animationFlag, animations["player"]
         );
         // 创建敌人对象
         this.createEnemies();
@@ -363,7 +364,9 @@ class Level
                 attributes[enemy.type].shootSpeed,
                 attributes[enemy.type].shootDis,
                 bullet_map[enemy.type],
-                attributes[enemy.type].skill
+                attributes[enemy.type].skill,
+                attributes[enemy.type].animationFlag, 
+                animations[enemy.type]
             );
             this.enemies.push(temp);
         }
@@ -473,7 +476,9 @@ class Level
                                         attributes[name].shootSpeed,
                                         attributes[name].shootDis,
                                         bullet_map[name],
-                                        attributes[name].skill
+                                        attributes[name].skill,
+                                        attributes[name].animationFlag, 
+                                        animations[name]
                                     );
                                 }
                             }
