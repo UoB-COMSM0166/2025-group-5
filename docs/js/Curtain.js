@@ -63,20 +63,20 @@ class Curtain{
                 switch(this.lastDirection)
                 {
                     case "down":
-                        sectorStartAngle = 5 * PI / 8;
-                        sectorEndAngle = 3 * PI / 8;
+                        sectorStartAngle = 3 * PI / 4;
+                        sectorEndAngle = 1 * PI / 4;
                         break;
                     case "up":
-                        sectorStartAngle = 13 * PI / 8;
-                        sectorEndAngle = 11 * PI / 8;
+                        sectorStartAngle = 7 * PI / 4;
+                        sectorEndAngle = 5 * PI / 4;
                         break;
                     case "left":
-                        sectorStartAngle = 9 * PI / 8;
-                        sectorEndAngle = 7 * PI / 8;
+                        sectorStartAngle = 5 * PI / 4;
+                        sectorEndAngle = 3 * PI / 4;
                         break;
                     case "right":
-                        sectorStartAngle = 17 * PI / 8;
-                        sectorEndAngle = 15 * PI / 8;
+                        sectorStartAngle = 9 * PI / 4;
+                        sectorEndAngle = 7 * PI / 4;
                         break;
                 }
                 beginContour();

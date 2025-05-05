@@ -100,6 +100,7 @@ const charMoving = Object.freeze({
 
 // # entity
 let chestFile = './resources/images/entities/Treasure_Chest_Close.png';
+let nextlevelFile = './resources/images/entities/next_level.png'
 
 // # Paths
 let level1ConfFile = './config/level1.json';
@@ -220,7 +221,7 @@ function preload() {
     image_map["skeletonTower_idle"] = loadImage(towerFile);
     image_map["faye_idle"] = loadImage(fayeFile);
     image_map["chest1_idle"] = loadImage(chestFile);
-    image_map["door_idle"] = null;
+    image_map["door_idle"] = loadImage(nextlevelFile);
     image_map["grassSlime_idle"] = loadImage(grassSlimeFile);
     image_map["ghostSlime_idle"] = loadImage(ghostSlimeFile);
     image_map["waterSlime_idle"] = loadImage(waterSlimeFile);

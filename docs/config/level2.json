@@ -141,21 +141,6 @@
             "type": "skeletonTower",
             "position": 
             {
-                "x": 1024,
-                "y": 512
-            },
-            "patrolPath":
-            [
-                {
-                    "x": 1024,
-                    "y": 512
-                }
-            ]
-        },
-        {
-            "type": "skeletonTower",
-            "position": 
-            {
                 "x": 416,
                 "y": 352
             },
@@ -3389,5 +3374,57 @@
             }
         }
     ],
-    "entities": []
+    "entities": 
+    [
+        {
+            "type": "chest1",
+            "position": {
+                "x": 224,
+                "y": 32
+            },
+            "triggerDis": 50,
+            "condition": {
+                "enemyCleared": true,
+                "inv": []
+            },
+            "unmatchedResult": {
+                "getInv": [],
+                "consumeInv": [],
+                "mapChange": false,
+                "prompt": "You need to kill all the enemies."
+            },
+            "matchedResult": {
+                "getInv": ["key2"],
+                "consumeInv": [],
+                "mapChange": false,
+                "prompt": "You have gotten the key to next level."
+            },
+            "expireAfterTriggered": true
+        },
+        {
+            "type": "door",
+            "position": {
+                "x": 1216,
+                "y": 416
+            },
+            "triggerDis": 50,
+            "condition": {
+                "enemyCleared": false,
+                "inv": ["key2"]
+            },
+            "unmatchedResult": {
+                "getInv": [],
+                "consumeInv": [],
+                "mapChange": false,
+                "prompt": "You need to get the key to next level."
+            },
+            "matchedResult": {
+                "getInv": ["key2"],
+                "consumeInv": [],
+                "mapChange": true,
+                "prompt": "you have passed level2."
+            },
+            "expireAfterTriggered": false
+        }
+    ]
 }
