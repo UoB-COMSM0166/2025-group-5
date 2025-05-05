@@ -269,12 +269,22 @@ class Enemy extends Character
                 if(this.attackCdTimer !== 0) this.state = "attackRight";
                 else this.state = "moveRight";
             }
+            else 
+            {
+                if(this.attackCdTimer !== 0) this.state = "attackLeft";
+                else this.state = "moveLeft";
+            }
         }
         else 
         {
             if(level.player.x - this.x >= 0)
             {
-                if(this.attackCdTimer !== 0) this.state = "attackAttack";
+                if(this.attackCdTimer !== 0) this.state = "attackRight";
+                else this.state = "moveRight";
+            }
+            else 
+            {
+                if(this.attackCdTimer !== 0) this.state = "attackLeft";
                 else this.state = "moveLeft";
             }
         }
