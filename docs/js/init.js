@@ -628,7 +628,7 @@ function drawStart(){
   background(0);                     // 黑底背景
   imageMode(CENTER);                 
   // 将第 idx 帧动画居中绘制
-  image(startScreenImages[idx], width/2, height/2);
+  // image(startScreenImages[idx], width/2, height/2);
   image(startScreenImages[idx], width/2, height/2+40);
 
 
