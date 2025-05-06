@@ -9,7 +9,7 @@
     {
         "size": 32,
         "attack": 100,
-        "health": 20,
+        "health": 200,
         "speed": 2,
         "attackRange": 100,
         "warningRange": 200,

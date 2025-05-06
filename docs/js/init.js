@@ -7,7 +7,7 @@
 let nextLevel    = 1;  // 点击选关后要进入的关卡
 let pausedState  = false;
 
-// let story1Video, story2Video, skipButton;
+let skipButton;
 
 async function setup() {
   // 创建并定位画布
@@ -34,9 +34,9 @@ async function setup() {
   story2Video.attribute('playsinline','');
   story2Video.hide();
 
-  skipButton = createButton('Skip');
-  skipButton.position(canvasWidth - 100, 20);
-  skipButton.hide();
+  // skipButton = createButton('Skip');
+  // skipButton.position(canvasWidth - 100, 20);
+  // skipButton.hide();
 
   // 准备剧情视频，固定在画布范围
   story1Video.size(canvasWidth, canvasHeight);
@@ -522,45 +522,10 @@ async function setup() {
   animations["fireWizard"]["attackRight"]["frames"].push(loadImage("resources/images/characters_and_obstacles/wizard/fire wizard/attack_right/attack_8.png"));
 }
 
-// 开始播放第一个剧情
-function startStory1() {
-  gameState = 'story1';
-  story1Video.show().play();
 
-  // Skip 按钮：60×30，画布右上角内边距10px
-  const btnW = 60, btnH = 30, m = 10;
-  skipButton = createButton('Skip');
-  skipButton.size(btnW, btnH);
-  skipButton.position(canvasX + canvasWidth - btnW - m, canvasY + m);
-  skipButton.mousePressed(enterLevelSelect);
 
-  story1Video.onended(startStory2);
-}
 
-// 切换到循环剧情2
-function startStory2() {
-  if (skipButton) {
-    skipButton.remove();
-    skipButton = null;
-  }
-  story1Video.hide().stop();
 
-  gameState = 'story2';
-  story2Video.show().loop();
-}
-
-// 进入关卡选择
-function enterLevelSelect() {
-  story1Video.hide().stop();
-  story2Video.hide().stop();
-  if (skipButton) {
-    skipButton.remove();
-    skipButton = null;
-  }
-
-  gameState = 'levelSelect';
-  selectLevel();
-}
 
 // 关卡选择：首次创建按钮，后续 show() 保证可见
 function selectLevel() {
@@ -662,47 +627,84 @@ function drawStart(){
   background(0);                     // 黑底背景
   imageMode(CENTER);                 
   // 将第 idx 帧动画居中绘制
-  image(startScreenImages[idx], width/2, height/2);
+  image(startScreenImages[idx], width/2, height/2-40);
 
 
   if (keyIsDown(32) || mouseIsPressed) {
-    gameState = 'story1';
-    story1Video.show();
-    story1Video.play();
-    skipButton.show();
+    startStory1(); 
   }
 }
 
 // —— 2. “story1” 过场：播放一次，可 Skip —— 
+function startStory1() {
+  gameMusic.stopBackground(); // 停止背景音乐 :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+  gameState = 'story1';
+  story1Video.position(canvasX, canvasY);
+  story1Video.show().play();
+
+  // 在画布内右上角创建 Skip 按钮
+  const btnW = 60, btnH = 30, m = 10;
+  skipButton = createButton('Skip');
+  skipButton.size(btnW, btnH);
+  skipButton.position(canvasX + canvasWidth - btnW - m, canvasY + m);
+  skipButton.mousePressed(enterLevelSelect);
+
+  story1Video.onended(startStory2);
+}
+
+// —— 2. “story1” 过场：播放一次，可 Skip —— 
 function drawStory1(){
-  // 视频自己在 DOM 上
+  // 视频已经在 DOM 上播放
   skipButton.mousePressed(()=>{
-    story1Video.stop(); story1Video.hide();
-    skipButton.hide();
-    gameState = 'story2';
-  });
-  story1Video.onended(()=>{
+    story1Video.stop();
     story1Video.hide();
     skipButton.hide();
-    gameState = 'story2';
+    enterLevelSelect();
   });
 }
 
-// —— 3. “story2” 过场：循环播放，可按空格或 Skip 进入选关 —— 
-function drawStory2(){
-  story2Video.show();
-  story2Video.loop();
-  skipButton.show();
-  skipButton.mousePressed(()=>{
-    story2Video.stop(); story2Video.hide();
-    skipButton.hide();
-    gameState = 'levelSelect';
-  });
-  if (keyIsDown(32)) {
-    story2Video.stop(); story2Video.hide();
-    skipButton.hide();
-    gameState = 'levelSelect';
+// —— 3. “story2” 过场：循环播放，可 Skip 或空格跳过 —— 
+function startStory2() {
+  if (skipButton) {
+    skipButton.remove();
+    skipButton = null;
   }
+  story1Video.hide().stop();
+  gameState = 'story2';
+  story2Video.position(canvasX, canvasY);
+  story2Video.show().loop();
+
+  // 在画布内右上角创建 Skip 按钮
+  const btnW = 60, btnH = 30, m = 10;
+  skipButton = createButton('Skip');
+  skipButton.size(btnW, btnH);
+  skipButton.position(canvasX + canvasWidth - btnW - m, canvasY + m);
+  skipButton.mousePressed(enterLevelSelect);
+
+  if (keyIsDown(32)) {
+    enterLevelSelect();
+  }
+}
+
+function drawStory2(){
+  skipButton.show();
+  skipButton.mousePressed(()=>enterLevelSelect());
+  if (keyIsDown(32)) {
+    enterLevelSelect();
+  }
+}
+
+// —— 4. 进入选关界面 —— 
+function enterLevelSelect() {
+  story1Video.hide().stop();
+  story2Video.hide().stop();
+  if (skipButton) {
+    skipButton.remove();
+    skipButton = null;
+  }
+  gameMusic.playBackground(); // 恢复背景音乐 :contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
+  gameState = 'levelSelect';
+  selectLevel();
 }
 
 // —— 4. “levelSelect” 界面 —— 

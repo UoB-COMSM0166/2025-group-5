@@ -326,6 +326,8 @@ function preload() {
   for (let f of startScreenFiles) {
     startScreenImages.push(loadImage(f));
   }
+
+
   // --- 新增：关卡胜利过场 ---
   for (let f of interLevelFiles) {
     interLevelImages.push(loadImage(f));
