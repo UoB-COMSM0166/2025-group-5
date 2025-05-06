@@ -1,0 +1,49 @@
+
+@startuml
+skinparam componentStyle rectangle
+actor User
+
+node "Browser\n(Chrome/Edge etc.)" as Browser {
+    component "index.html" as HTML
+    component "style.css" as CSS
+    [Phaser 3 Library] as Phaser
+    package "JavaScript Game" {
+        component "init.js" as Init
+        component "Game Loop" as GameLoop
+        package "Core Entities" {
+            component Character
+            component Player
+            component Enemy
+            component Obstacle
+            component Projectile
+        }
+        component "Level Manager" as LevelMgr
+        component "UI & HUD" as UI
+        component "Audio Manager" as AudioMgr
+        component "Animation System" as Anim
+    }
+}
+
+database "Assets\n(images, audio, JSON)" as Assets
+folder "Tests\n(Jest)" as Tests
+
+User --> Browser : Keyboard / Mouse Input
+Browser --> User : Rendered Frames
+
+HTML --> Phaser
+Init --> Phaser
+GameLoop --> Phaser
+Character --> Anim
+Player --> Character
+Enemy --> Character
+Obstacle --> Character
+Projectile --> Character
+LevelMgr --> Assets
+LevelMgr ..> GameLoop
+UI --> GameLoop
+AudioMgr --> Assets
+GameLoop --> AudioMgr
+GameLoop --> UI
+GameLoop --> LevelMgr
+Tests ..> Init : unit / integration tests
+@enduml
