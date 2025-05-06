@@ -5,7 +5,7 @@ class Player extends Character
         format, health, maxHealth, attack, status, speed,
         attackRange, warningRange, playerType, cd, visionType,
         shootSize, shootSpeed, shootDis, shootFormat, skill, 
-        animationFlag, animationSet
+        animationFlag, animationSet, inv
     ) 
     {// Use playerTexture as the initial player image.
         super(x, y, size, format, health, 
@@ -31,7 +31,7 @@ class Player extends Character
 
         this.skill = skill;
 
-        this.inv = [];
+        this.inv = inv;
 
         this.factSpeed = speed;
         this.factCd = cd;
