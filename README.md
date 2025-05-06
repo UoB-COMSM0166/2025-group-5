@@ -219,6 +219,8 @@ o	Additionally, we considered features like an infinite mode to enhance competit
 
 - Class diagram
   
+![](./homework/week5/class_diagram.png)
+
 ![](./homework/week5/class_diagram_full.png)
 
 - behavioural diagram
