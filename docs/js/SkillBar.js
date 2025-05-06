@@ -77,11 +77,11 @@ class SkillBar{
         this.numberList[id] ++;
     }
 
-    useSkill(id)
+    useSkill(id, transformFlag)
     {
         if(this.statusList[id] === true && this.numberList[id] > 0)
         {
-            this.numberList[id] --;
+            if(!transformFlag) this.numberList[id] --;
             return true;
         }
         else 

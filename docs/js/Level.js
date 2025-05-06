@@ -56,7 +56,8 @@ class Level
             attributes.player.visionType, attributes.player.shootSize,
             attributes.player.shootSpeed, attributes.player.shootDis,
             attributes.player.shootFormat, attributes.player.skill,
-            attributes.player.animationFlag, animations["player"]
+            attributes.player.animationFlag, animations["player"],
+            []
         );
         // 创建敌人对象
         this.createEnemies();
@@ -100,7 +101,11 @@ class Level
                 noStroke();
                 rect(0, 0, canvasWidth, canvasHeight);
                 this.endTimer ++;
-                if(this.endTimer === this.endMaxTimer) gameState = "levelSelect";
+                if(this.endTimer === this.endMaxTimer) 
+                {
+                    gameState = "levelSelect";
+                    this.reset();
+                }
             }
             else 
             {
@@ -446,7 +451,7 @@ class Level
                 || key === '5' || key === '6' || key === '7' || key === '8'
                 || key === '9')
             {
-                if(this.skillBar.useSkill(key - '1'))
+                if(this.skillBar.useSkill(key - '1', this.transformFlag))
                 {
                     if(!this.transformFlag)
                     {
@@ -478,7 +483,8 @@ class Level
                                         bullet_map[name],
                                         attributes[name].skill,
                                         attributes[name].animationFlag, 
-                                        animations[name]
+                                        animations[name],
+                                        this.tempPlayer.inv
                                     );
                                 }
                             }
@@ -548,5 +554,21 @@ class Level
         {
             this.endAnimation = true;
         }
+    }
+
+    reset()
+    {
+        this.enemies = [];
+        this.entities = [];
+        this.obstacles = [];
+        this.transformFlag = false;
+        this.promptFlag = false;
+        this.endFlag = false;
+        this.endAnimation = false;
+        this.endTimer = 0;
+        this.endMaxTimer = 90;
+        this.startAnimation = true;
+        this.startTimer = 0;
+        this.startMaxTimer = 90;
     }
 }

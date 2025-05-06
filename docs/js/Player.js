@@ -5,7 +5,7 @@ class Player extends Character
         format, health, maxHealth, attack, status, speed,
         attackRange, warningRange, playerType, cd, visionType,
         shootSize, shootSpeed, shootDis, shootFormat, skill, 
-        animationFlag, animationSet
+        animationFlag, animationSet, inv
     ) 
     {// Use playerTexture as the initial player image.
         super(x, y, size, format, health, 
@@ -31,7 +31,7 @@ class Player extends Character
 
         this.skill = skill;
 
-        this.inv = [];
+        this.inv = inv;
 
         this.factSpeed = speed;
         this.factCd = cd;
@@ -142,9 +142,9 @@ class Player extends Character
         if(this.attackCdTimer === 0)
         {
             let baseAngle = Math.floor(Math.random() * 31);
-            for(let i = 0; i < 12; i ++)
+            for(let i = 0; i < 8; i ++)
             {
-                let angle = (baseAngle + 30 * i) * (Math.PI / 180);
+                let angle = (baseAngle + 45 * i) * (Math.PI / 180);
                 this.projectiles.push(new Projectile(centerX, centerY, 
                     Math.cos(angle), Math.sin(angle), this.shootSize, 
                     this.shootSpeed, this.shootDis, this.shootFormat, this.skill));
