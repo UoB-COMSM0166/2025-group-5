@@ -214,10 +214,11 @@ o	Additionally, we considered features like an infinite mode to enhance competit
 
 - 15% ~750 words 
 - System architecture
+![](./homework/week5/system_architecture.png)
 - Class diagram
-![](./homework/week5/classUML.png)
-
+![](./homework/week5/class_diagram_full.png)
 - behavioural diagram
+![](./homework/week5/sequence_diagram.png)
 
 ### Implementation
 

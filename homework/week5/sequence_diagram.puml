@@ -1,0 +1,27 @@
+@startuml
+actor User
+participant Game
+participant Level
+participant Player
+participant Enemy
+
+User -> Game: Start Level
+Game -> Level: init()
+Level --> Level: loadJsonData()
+Game -> Level: start()
+Level -> Player: create()
+Level -> Enemy: create()
+User -> Player: Keyboard Input / move()
+Player -> Enemy: shoot()
+Enemy -> Player: takeDamage()
+
+loop Game Loop
+    Game -> Level: update()
+    Level -> Player: update()
+    Level -> Enemy: update()
+    Player -> Enemy: collisionCheck()
+    Enemy -> Player: attack()
+end
+
+Game -> User: Render Frame
+@enduml
