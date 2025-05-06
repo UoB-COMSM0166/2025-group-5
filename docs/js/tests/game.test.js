@@ -1,470 +1,360 @@
-// 游戏测试文件
+// 游戏白盒测试文件
 require('./jest.setup.js');
 
-// 导入被测试的代码
-const game = require('../init.js');
-const { setup, startStory1, startStory2, enterLevelSelect, startGame, restartGame, draw, keyPressed } = game;
+describe('游戏核心类测试', () => {
+    describe('Character类测试', () => {
+        let character;
+        beforeEach(() => {
+            character = new Character(100, 100, 50, 'red', 100, 100, 10, 'NORMAL', 5, false, {});
+        });
+
+        test('角色初始化测试', () => {
+            expect(character.x).toBe(100);
+            expect(character.y).toBe(100);
+            expect(character.size).toBe(50);
+            expect(character.health).toBe(100);
+            expect(character.maxHealth).toBe(100);
+            expect(character.attack).toBe(10);
+            expect(character.status).toBe('NORMAL');
+            expect(character.speed).toBe(5);
+        });
+
+        test('角色生命值变化测试', () => {
+            character.changeHealth(-20);
+            expect(character.health).toBe(80);
+            character.changeHealth(30);
+            expect(character.health).toBe(100); // 不能超过最大生命值
+            character.changeHealth(-120);
+            expect(character.health).toBe(0);
+            expect(character.status).toBe('DEAD');
+        });
+
+        test('角色状态变化测试', () => {
+            character.changeStatus('INVINCIBLE');
+            expect(character.status).toBe('INVINCIBLE');
+            expect(character.invincibleTimer).toBe(60);
+        });
+    });
+
+    describe('Player类测试', () => {
+        let player;
+        beforeEach(() => {
+            player = new Player(100, 100, 50, 'red', 100, 100, 10, 'NORMAL', 5, 
+                100, 200, 'shooting', 30, 'normal', 10, 5, 200, 'blue', 'fire', 
+                true, {}, []);
+        });
+
+        test('玩家移动测试', () => {
+            // 模拟键盘输入
+            global.keyIsDown = jest.fn().mockImplementation(key => {
+                return key === 'ArrowRight';
+            });
+            player.update();
+            expect(player.x).toBe(105); // 向右移动
+            expect(player.lastDirection).toBe('right');
+        });
+
+        test('玩家攻击测试', () => {
+            player.shoot();
+            expect(player.projectiles.length).toBe(1);
+            expect(player.attackCdTimer).toBe(30);
+        });
+
+        test('玩家技能测试', () => {
+            player.aoe();
+            expect(player.projectiles.length).toBe(8);
+            expect(player.attackCdTimer).toBe(30);
+        });
+    });
+
+    describe('Enemy类测试', () => {
+        let enemy;
+        let level;
+        beforeEach(() => {
+            enemy = new Enemy(1, 100, 100, 50, 'red', 100, 100, 10, 'NORMAL', 5,
+                [{x: 100, y: 100}, {x: 200, y: 200}], 100, 200, 'shooting', 30, 'normal',
+                10, 5, 200, 'blue', 'fire', true, {});
+            level = {
+                player: {
+                    x: 150,
+                    y: 150,
+                    size: 50
+                },
+                obstacles: []
+            };
+        });
+
+        test('敌人巡逻测试', () => {
+            enemy.update(level);
+            expect(enemy.x).toBe(101);
+            expect(enemy.y).toBe(101);
+        });
+
+        test('敌人追踪测试', () => {
+            enemy.findPalyer = true;
+            enemy.update(level);
+            expect(enemy.x).not.toBe(100);
+            expect(enemy.y).not.toBe(100);
+        });
+
+        test('敌人攻击测试', () => {
+            enemy.update(level);
+            expect(enemy.projectiles.length).toBe(1);
+        });
+    });
+
+    describe('Level类测试', () => {
+        let level;
+        beforeEach(() => {
+            level = new Level(1, {}, {}, {}, false);
+            level.jsonData = {
+                player: {
+                    position: {x: 100, y: 100}
+                },
+                enemies: [],
+                entities: [],
+                obstacles: []
+            };
+        });
+
+        test('关卡初始化测试', async () => {
+            await level.init();
+            expect(level.jsonData).toBeDefined();
+        });
+
+        test('关卡开始测试', () => {
+            level.start();
+            expect(level.player).toBeDefined();
+            expect(level.enemies).toEqual([]);
+            expect(level.obstacles).toEqual([]);
+        });
+
+        test('关卡更新测试', () => {
+            level.start();
+            level.update();
+            expect(level.player.display).toHaveBeenCalled();
+        });
+    });
+
+    describe('Projectile类测试', () => {
+        let projectile;
+        beforeEach(() => {
+            projectile = new Projectile(100, 100, 1, 0, 10, 5, 200, 'blue', 'fire');
+        });
+
+        test('子弹移动测试', () => {
+            projectile.update();
+            expect(projectile.x).toBe(110);
+            expect(projectile.y).toBe(100);
+        });
+
+        test('子弹碰撞测试', () => {
+            const character = {
+                x: 110,
+                y: 100,
+                size: 20
+            };
+            expect(projectile.isHit(character)).toBe(true);
+        });
+    });
+
+    describe('SpriteAnimator类测试', () => {
+        let animator;
+        beforeEach(() => {
+            animator = new SpriteAnimator({
+                idleUp: {
+                    frames: [1, 2, 3],
+                    period: 300,
+                    loop: true
+                }
+            });
+        });
+
+        test('动画状态切换测试', () => {
+            animator.setState('idleUp');
+            expect(animator.currentState).toBe('idleUp');
+            expect(animator.currentIndex).toBe(0);
+        });
+
+        test('动画更新测试', () => {
+            animator.setState('idleUp');
+            animator.update();
+            expect(animator.currentIndex).toBe(0);
+        });
+    });
+
+    describe('SkillBar类测试', () => {
+        let skillBar;
+        beforeEach(() => {
+            skillBar = new SkillBar(5, [], {}, [false, false, false, false, false], 
+                [0, 0, 0, 0, 0], 0, 0, 50, 50, 5, 20);
+        });
+
+        test('技能栏添加技能测试', () => {
+            skillBar.addSkill(1);
+            expect(skillBar.statusList[1]).toBe(true);
+            expect(skillBar.numberList[1]).toBe(1);
+        });
+
+        test('技能栏使用技能测试', () => {
+            skillBar.addSkill(1);
+            expect(skillBar.useSkill(1, false)).toBe(true);
+            expect(skillBar.numberList[1]).toBe(0);
+        });
+    });
+
+    describe('Curtain类测试', () => {
+        let curtain;
+        beforeEach(() => {
+            curtain = new Curtain(800, 600, 'black', 400, 300, 100, 'round', 150);
+        });
+
+        test('幕布更新测试', () => {
+            curtain.update(500, 400, 120, 'sector', 180, 'right');
+            expect(curtain.px).toBe(500);
+            expect(curtain.py).toBe(400);
+            expect(curtain.radius).toBe(120);
+            expect(curtain.shape).toBe('sector');
+            expect(curtain.sectorRadius).toBe(180);
+            expect(curtain.lastDirection).toBe('right');
+        });
+    });
+});
+
+describe('游戏初始化测试', () => {
+    beforeEach(() => {
+        gameState = 'start';
+        present_level = 0;
+    });
+
+    test('setup函数测试', async () => {
+        await setup();
+        expect(createCanvas).toHaveBeenCalledWith(canvasWidth, canvasHeight);
+        expect(createButton).toHaveBeenCalledTimes(2);
+        expect(createVideo).toHaveBeenCalledTimes(2);
+        expect(loadJsonData).toHaveBeenCalledTimes(2);
+    });
+});
 
 describe('游戏状态管理测试', () => {
     beforeEach(() => {
-        // 重置所有状态
-        global.gameState = 'start';
-        jest.clearAllMocks();
+        gameState = 'start';
+        present_level = 0;
     });
 
-    test('setup函数应该正确初始化游戏状态', async () => {
-        await setup();
-        expect(createCanvas).toHaveBeenCalledWith(canvasWidth, canvasHeight);
-        expect(createButton).toHaveBeenCalled();
-    });
-
-    test('startStory1应该开始第一个故事', () => {
+    test('游戏状态转换测试', () => {
+        // 开始游戏
         startStory1();
+        expect(gameState).toBe('story1');
         expect(story1Video.show).toHaveBeenCalled();
         expect(story1Video.play).toHaveBeenCalled();
-    });
 
-    test('startStory2应该开始第二个故事', () => {
+        // 进入故事2
         startStory2();
+        expect(gameState).toBe('story2');
         expect(story2Video.show).toHaveBeenCalled();
         expect(story2Video.loop).toHaveBeenCalled();
-    });
-});
 
-describe('关卡系统测试', () => {
-    beforeEach(() => {
-        global.level1 = {
-            init: jest.fn().mockResolvedValue(),
-            start: jest.fn(),
-            update: jest.fn()
-        };
-        global.level2 = {
-            init: jest.fn().mockResolvedValue(),
-            start: jest.fn(),
-            update: jest.fn()
-        };
-        global.present_level = 0;
-    });
+        // 进入关卡选择
+        enterLevelSelect();
+        expect(gameState).toBe('levelSelect');
 
-    test('测试关卡初始化', async () => {
-        await setup();
-        expect(level1.init).toHaveBeenCalled();
-        expect(level2.init).toHaveBeenCalled();
-    });
-
-    test('测试关卡切换', () => {
-        // 选择关卡1
-        startGame(1);
-        expect(gameState).toBe('playing');
-        expect(present_level).toBe(1);
-        expect(level1.start).toHaveBeenCalled();
-
-        // 选择关卡2
-        startGame(2);
-        expect(gameState).toBe('playing');
-        expect(present_level).toBe(2);
-        expect(level2.start).toHaveBeenCalled();
-    });
-});
-
-describe('资源管理测试', () => {
-    beforeEach(() => {
-        g_skillTextureList = [];
-        g_skillStatusList = [];
-        g_skillNumList = [];
-        g_skillNumber = 5;
-    });
-
-    test('测试资源加载', async () => {
-        await setup();
-        
-        // 验证视频资源
-        expect(story1Video.size).toHaveBeenCalledWith(canvasWidth, canvasHeight);
-        expect(story2Video.size).toHaveBeenCalledWith(canvasWidth, canvasHeight);
-        
-        // 验证技能资源
-        expect(g_skillTextureList.length).toBe(5);
-        expect(g_skillStatusList.length).toBe(5);
-        expect(g_skillNumList.length).toBe(5);
-        
-        // 验证属性配置
-        expect(attributes).toBeInstanceOf(Object);
+        // 重新开始游戏
+        restartGame();
+        expect(gameState).toBe('start');
     });
 });
 
 describe('游戏控制测试', () => {
     beforeEach(() => {
         gameState = 'start';
-        present_level = 1;
+        present_level = 0;
     });
 
-    test('测试键盘控制', () => {
-        // 开始游戏控制
-        keyPressed({ key: ' ' });
+    test('键盘控制测试', () => {
+        // 开始游戏
+        startStory1();
         expect(gameState).toBe('story1');
 
-        // 故事跳过控制
-        gameState = 'story2';
-        keyPressed({ key: ' ' });
-        expect(gameState).toBe('levelSelect');
+        // 跳过故事
+        startStory2();
+        expect(gameState).toBe('story2');
 
         // 游戏内控制
         gameState = 'playing';
         present_level = 1;
-        keyPressed({ key: 'ArrowLeft' });
+        const moveEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+        document.dispatchEvent(moveEvent);
         expect(level1.keyPressedInLevel).toHaveBeenCalled();
     });
 });
 
-describe('音频系统测试', () => {
+describe('游戏资源管理测试', () => {
     beforeEach(() => {
-        gameMusic = {
-            playBackground: jest.fn()
-        };
+        g_skillTextureList = [];
+        g_skillStatusList = [];
+        g_skillNumList = [];
+        g_skillNumber = 8;
     });
 
-    test('测试音频控制', () => {
-        // 模拟页面加载
-        window.onload();
-        expect(gameMusic.playBackground).not.toHaveBeenCalled();
-
-        // 模拟首次点击
-        document.dispatchEvent(new Event('click'));
-        expect(gameMusic.playBackground).toHaveBeenCalled();
-
-        // 验证事件监听器只触发一次
-        document.dispatchEvent(new Event('click'));
-        expect(gameMusic.playBackground).toHaveBeenCalledTimes(1);
+    test('资源加载测试', async () => {
+        await setup();
+        expect(g_skillTextureList.length).toBe(8);
+        expect(g_skillStatusList.length).toBe(8);
+        expect(g_skillNumList.length).toBe(8);
     });
 });
 
-describe('游戏主循环测试', () => {
-    beforeEach(() => {
+describe('游戏渲染测试', () => {
+    test('游戏渲染函数测试', () => {
+        // 开始界面
         gameState = 'start';
-        startImg = {};
-        levelSelectImg = {};
-    });
-
-    test('测试游戏主循环', () => {
-        // 测试开始状态
         draw();
-        expect(image).toHaveBeenCalledWith(startImg, 0, 0, width, height);
+        expect(background).toHaveBeenCalled();
 
-        // 测试故事状态
+        // 故事1界面
         gameState = 'story1';
         draw();
-        expect(background).toHaveBeenCalledWith(0);
+        expect(story1Video.show).toHaveBeenCalled();
 
-        // 测试关卡选择状态
+        // 故事2界面
+        gameState = 'story2';
+        draw();
+        expect(story2Video.show).toHaveBeenCalled();
+
+        // 关卡选择界面
         gameState = 'levelSelect';
         draw();
-        expect(image).toHaveBeenCalledWith(levelSelectImg, 0, 0, width, height);
+        expect(background).toHaveBeenCalled();
 
-        // 测试游戏进行状态
+        // 游戏界面
         gameState = 'playing';
-        present_level = 1;
         draw();
-        expect(level1.update).toHaveBeenCalled();
-
-        // 测试游戏结束状态
-        gameState = 'over';
-        draw();
-        expect(text).toHaveBeenCalledWith('Game Over', width / 2 - 80, height / 2);
-        expect(startButton.show).toHaveBeenCalled();
+        expect(level1.draw).toHaveBeenCalled();
     });
 });
 
-describe('游戏状态管理扩展测试', () => {
-    beforeEach(() => {
-        gameState = 'start';
-        story1Video = {
-            show: jest.fn(),
-            hide: jest.fn(),
-            play: jest.fn(),
-            stop: jest.fn(),
-            onended: jest.fn()
-        };
-        story2Video = {
-            show: jest.fn(),
-            hide: jest.fn(),
-            loop: jest.fn(),
-            stop: jest.fn()
-        };
-    });
+describe('游戏暂停测试', () => {
+    test('游戏暂停功能测试', () => {
+        gameState = 'playing';
+        pausedState = false;
+        const pauseEvent = new KeyboardEvent('keydown', { key: 'p' });
+        document.dispatchEvent(pauseEvent);
+        expect(pausedState).toBe(true);
+        expect(gameState).toBe('paused');
 
-    it('测试状态转换路径', () => {
-        // 测试所有可能的状态转换路径
-        const stateTransitions = [
-            ['start', 'story1'],
-            ['story1', 'story2'],
-            ['story2', 'levelSelect'],
-            ['levelSelect', 'playing'],
-            ['playing', 'over'],
-            ['over', 'start']
-        ];
-
-        stateTransitions.forEach(([from, to]) => {
-            gameState = from;
-            // 根据状态执行相应的转换操作
-            switch(from) {
-                case 'start':
-                    keyPressed({ key: ' ' });
-                    break;
-                case 'story1':
-                    story1Video.onended.getCall(0).args[0]();
-                    break;
-                case 'story2':
-                    keyPressed({ key: ' ' });
-                    break;
-                case 'levelSelect':
-                    startGame(1);
-                    break;
-                case 'playing':
-                    // 模拟游戏结束条件
-                    isGameOver = true;
-                    break;
-                case 'over':
-                    restartGame();
-                    break;
-            }
-            expect(gameState).toBe(to);
-        });
-    });
-
-    it('测试状态转换边界条件', () => {
-        // 测试无效状态转换
-        gameState = 'invalid';
-        keyPressed({ key: ' ' });
-        expect(gameState).toBe('invalid');
-
-        // 测试重复状态转换
-        gameState = 'story1';
-        keyPressed({ key: ' ' });
-        expect(gameState).toBe('story1');
+        document.dispatchEvent(pauseEvent);
+        expect(pausedState).toBe(false);
+        expect(gameState).toBe('playing');
     });
 });
 
-describe('关卡系统扩展测试', () => {
-    beforeEach(() => {
-        level1 = {
-            init: jest.fn().mockResolvedValue(),
-            start: jest.fn(),
-            update: jest.fn(),
-            keyPressedInLevel: jest.fn(),
-            checkCollision: jest.fn(),
-            spawnEnemy: jest.fn()
-        };
-        level2 = {
-            init: jest.fn().mockResolvedValue(),
-            start: jest.fn(),
-            update: jest.fn(),
-            keyPressedInLevel: jest.fn(),
-            checkCollision: jest.fn(),
-            spawnEnemy: jest.fn()
-        };
-    });
-
-    it('测试关卡内部逻辑', () => {
-        // 1. 碰撞检测
-        level1.checkCollision.returns(true);
-        level1.update();
-        expect(level1.checkCollision).toHaveBeenCalled();
-
-        // 2. 敌人生成
-        level1.spawnEnemy.returns({ x: 100, y: 100 });
-        level1.update();
-        expect(level1.spawnEnemy).toHaveBeenCalled();
-
-        // 3. 关卡进度
-        level1.progress = 0.5;
-        level1.update();
-        expect(level1.progress).toBeGreaterThan(0);
-    });
-
-    it('测试关卡资源管理', () => {
-        // 1. 资源预加载
-        level1.preloadResources = jest.fn();
-        level1.init();
-        expect(level1.preloadResources).toHaveBeenCalled();
-
-        // 2. 资源释放
-        level1.releaseResources = jest.fn();
-        level1.stop();
-        expect(level1.releaseResources).toHaveBeenCalled();
-    });
-});
-
-describe('游戏对象系统测试', () => {
-    beforeEach(() => {
-        player = {
-            x: 400,
-            y: 300,
-            speed: 5,
-            health: 100,
-            update: jest.fn(),
-            move: jest.fn(),
-            takeDamage: jest.fn()
-        };
-        enemies = [];
-        bullets = [];
-    });
-
-    it('测试游戏对象生命周期', () => {
-        // 1. 对象创建
-        const enemy = { x: 100, y: 100, health: 50 };
-        enemies.push(enemy);
-        expect(enemies.length).toBe(1);
-
-        // 2. 对象更新
-        player.update();
-        expect(player.update).toHaveBeenCalled();
-
-        // 3. 对象销毁
-        enemy.health = 0;
-        enemies = enemies.filter(e => e.health > 0);
-        expect(enemies.length).toBe(0);
-    });
-
-    it('测试对象交互', () => {
-        // 1. 碰撞检测
-        const bullet = { x: 400, y: 300, damage: 10 };
-        bullets.push(bullet);
-        player.takeDamage(bullet.damage);
-        expect(player.takeDamage).toHaveBeenCalledWith(bullet.damage);
-        expect(player.health).toBe(90);
-
-        // 2. 移动限制
-        player.move(1000, 1000);
-        expect(player.x).toBeLessThan(800);
-        expect(player.y).toBeLessThan(600);
-    });
-});
-
-describe('技能系统测试', () => {
-    beforeEach(() => {
-        skills = {
-            fireball: {
-                cooldown: 1000,
-                damage: 20,
-                lastUsed: 0,
-                use: jest.fn()
-            },
-            shield: {
-                cooldown: 2000,
-                duration: 5000,
-                active: false,
-                use: jest.fn()
-            }
-        };
-    });
-
-    it('测试技能冷却机制', () => {
-        // 1. 技能使用
-        skills.fireball.use();
-        expect(skills.fireball.use).toHaveBeenCalled();
-        expect(skills.fireball.lastUsed).toBeGreaterThan(0);
-
-        // 2. 冷却检查
-        const canUse = Date.now() - skills.fireball.lastUsed > skills.fireball.cooldown;
-        expect(canUse).toBe(false);
-    });
-
-    it('测试技能效果', () => {
-        // 1. 伤害技能
-        const enemy = { health: 100 };
-        skills.fireball.use(enemy);
-        expect(enemy.health).toBe(80);
-
-        // 2. 防御技能
-        skills.shield.use();
-        expect(skills.shield.active).toBe(true);
-        setTimeout(() => {
-            expect(skills.shield.active).toBe(false);
-        }, skills.shield.duration);
-    });
-});
-
-describe('游戏事件系统测试', () => {
-    beforeEach(() => {
-        eventListeners = {
-            'gameStart': [],
-            'gameOver': [],
-            'levelComplete': [],
-            'enemyKilled': []
-        };
-    });
-
-    it('测试事件订阅和发布', () => {
-        // 1. 事件订阅
-        const handler = jest.fn();
-        eventListeners['gameStart'].push(handler);
-        expect(eventListeners['gameStart'].length).toBe(1);
-
-        // 2. 事件发布
-        const event = { type: 'gameStart', data: {} };
-        eventListeners['gameStart'].forEach(h => h(event));
-        expect(handler).toHaveBeenCalledWith(event);
-
-        // 3. 事件取消订阅
-        eventListeners['gameStart'] = eventListeners['gameStart'].filter(h => h !== handler);
-        expect(eventListeners['gameStart'].length).toBe(0);
-    });
-});
-
-describe('游戏数据持久化测试', () => {
-    beforeEach(() => {
-        gameData = {
-            level: 1,
-            score: 0,
-            unlockedSkills: ['fireball'],
-            settings: {
-                sound: true,
-                music: true,
-                difficulty: 'normal'
-            }
-        };
-    });
-
-    it('测试数据保存和加载', () => {
-        // 1. 数据保存
-        const saveData = JSON.stringify(gameData);
-        localStorage.setItem('gameSave', saveData);
-        expect(localStorage.getItem('gameSave')).toBe(saveData);
-
-        // 2. 数据加载
-        const loadedData = JSON.parse(localStorage.getItem('gameSave'));
-        expect(loadedData.level).toBe(gameData.level);
-        expect(loadedData.score).toBe(gameData.score);
-
-        // 3. 数据验证
-        expect(loadedData.unlockedSkills).toEqual(gameData.unlockedSkills);
-        expect(loadedData.settings).toEqual(gameData.settings);
-    });
-});
-
-describe('游戏性能优化测试', () => {
-    beforeEach(() => {
-        gameObjects = [];
-        for (let i = 0; i < 1000; i++) {
-            gameObjects.push({
-                x: Math.random() * 800,
-                y: Math.random() * 600,
-                update: jest.fn()
-            });
-        }
-    });
-
-    it('测试对象池管理', () => {
-        // 1. 对象重用
-        const obj = gameObjects[0];
-        obj.active = false;
-        const newObj = gameObjects.find(o => !o.active);
-        expect(newObj).toEqual(obj);
-
-        // 2. 性能监控
-        const startTime = performance.now();
-        gameObjects.forEach(obj => obj.update());
-        const endTime = performance.now();
-        expect(endTime - startTime).toBeLessThan(16); // 60fps
+describe('游戏关卡测试', () => {
+    test('关卡切换测试', () => {
+        gameState = 'levelSelect';
+        nextLevel = 2;
+        startGame(nextLevel);
+        expect(present_level).toBe(2);
+        expect(gameState).toBe('playing');
     });
 }); 
