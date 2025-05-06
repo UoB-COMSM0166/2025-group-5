@@ -1,0 +1,29 @@
+@startuml
+skinparam classAttributeIconSize 0
+class Character
+class Curtain
+class Enemy
+class Entity
+class Level
+class Music
+class Obstacle
+class Player
+class Projectile
+class Prompt
+class SkillBar
+class SpriteAnimator
+Character <|-- Enemy
+Character <|-- Entity
+Character <|-- Obstacle
+Character <|-- Player
+Character --> SpriteAnimator
+Enemy --> Projectile
+Level --> Curtain
+Level --> Enemy
+Level --> Entity
+Level --> Obstacle
+Level --> Player
+Level --> Prompt
+Level --> SkillBar
+Player --> Projectile
+@enduml
