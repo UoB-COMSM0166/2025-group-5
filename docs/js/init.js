@@ -683,6 +683,7 @@ function startStory2() {
   skipButton.mousePressed(enterLevelSelect);
 
   if (keyIsDown(32)) {
+    gameState = 'levelSelect';
     enterLevelSelect();
   }
 }
@@ -690,9 +691,12 @@ function startStory2() {
 function drawStory2(){
   skipButton.show();
   skipButton.mousePressed(()=>enterLevelSelect());
-  if (keyIsDown(32)) {
-    enterLevelSelect();
-  }
+  // 确保视频在 DOM 上可见并循环播放
+  story2Video.show();
+  story2Video.loop();
+
+  // Skip 按钮只需 show，一旦创建后每帧都让它保持可见
+  skipButton.show();
 }
 
 // —— 4. 进入选关界面 —— 
@@ -821,6 +825,14 @@ function keyPressed() {
   }
   if (gameState === 'interEnter' && key === ' ') {
     enterTimer = 60 * 5;
+  }
+  // 如果当前正处于 story2 状态，且刚好按下空格
+  if (gameState === 'story2' && key === ' ') {
+    enterLevelSelect();
+  }
+  // 下面保留你的其它按键逻辑...
+  if (gameState === 'playing' && keyCode === ESCAPE) {
+    gameState = 'paused';
   }
   if (gameState === 'playing') {
     if      (present_level === 1) level1.keyPressedInLevel();
