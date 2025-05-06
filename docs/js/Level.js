@@ -101,7 +101,11 @@ class Level
                 noStroke();
                 rect(0, 0, canvasWidth, canvasHeight);
                 this.endTimer ++;
-                if(this.endTimer === this.endMaxTimer) gameState = "levelSelect";
+                if(this.endTimer === this.endMaxTimer) 
+                {
+                    gameState = "levelSelect";
+                    this.reset();
+                }
             }
             else 
             {
@@ -550,5 +554,21 @@ class Level
         {
             this.endAnimation = true;
         }
+    }
+
+    reset()
+    {
+        this.enemies = [];
+        this.entities = [];
+        this.obstacles = [];
+        this.transformFlag = false;
+        this.promptFlag = false;
+        this.endFlag = false;
+        this.endAnimation = false;
+        this.endTimer = 0;
+        this.endMaxTimer = 90;
+        this.startAnimation = true;
+        this.startTimer = 0;
+        this.startMaxTimer = 90;
     }
 }
