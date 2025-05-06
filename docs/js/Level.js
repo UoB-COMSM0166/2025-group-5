@@ -56,7 +56,8 @@ class Level
             attributes.player.visionType, attributes.player.shootSize,
             attributes.player.shootSpeed, attributes.player.shootDis,
             attributes.player.shootFormat, attributes.player.skill,
-            attributes.player.animationFlag, animations["player"]
+            attributes.player.animationFlag, animations["player"],
+            []
         );
         // 创建敌人对象
         this.createEnemies();
@@ -446,7 +447,7 @@ class Level
                 || key === '5' || key === '6' || key === '7' || key === '8'
                 || key === '9')
             {
-                if(this.skillBar.useSkill(key - '1'))
+                if(this.skillBar.useSkill(key - '1', this.transformFlag))
                 {
                     if(!this.transformFlag)
                     {
@@ -478,7 +479,8 @@ class Level
                                         bullet_map[name],
                                         attributes[name].skill,
                                         attributes[name].animationFlag, 
-                                        animations[name]
+                                        animations[name],
+                                        this.tempPlayer.inv
                                     );
                                 }
                             }
