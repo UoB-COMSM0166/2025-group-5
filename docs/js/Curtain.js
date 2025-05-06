@@ -35,7 +35,8 @@ class Curtain{
         }
         else
         {
-            fill(this.format.color);
+            // fill(this.format.color);
+            fill(0, 0, 0, 220);
             beginShape();
 
             vertex(0, 0);
