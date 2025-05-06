@@ -17,6 +17,7 @@ async function setup() {
   canvasX = canvasElem.elt.offsetLeft;
   canvasY = canvasElem.elt.offsetTop;
 
+
   // 预生成“Restart”按钮（Game Over 时用）
   startButton = createButton('Restart');
   startButton.hide();
@@ -627,7 +628,7 @@ function drawStart(){
   background(0);                     // 黑底背景
   imageMode(CENTER);                 
   // 将第 idx 帧动画居中绘制
-  image(startScreenImages[idx], width/2, height/2-40);
+  image(startScreenImages[idx], width/2, height/2+40);
 
 
   if (keyIsDown(32) || mouseIsPressed) {
