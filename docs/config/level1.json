@@ -1945,7 +1945,7 @@
             "type": "door",
             "position": {
                 "x": 0,
-                "y": 736 
+                "y": 416 
             },
             "triggerDis": 50,
             "condition": {
