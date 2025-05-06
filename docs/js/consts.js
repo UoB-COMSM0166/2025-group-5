@@ -88,7 +88,7 @@ let animations;
 // Game values
 // # Character
 let HealthBarHeight = 5;
-let globalInvincibleTimer = 120;
+let globalInvincibleTimer = 90;
 let globalInvincibleFlashingInterval = 10;
 let globalWaterStatusTimer = 300;
 let globalFireStatusTimer = 120;
