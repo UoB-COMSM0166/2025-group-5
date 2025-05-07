@@ -4,6 +4,9 @@
 // let attributes, animations;
 // let interTimer   = 0;  // 胜利过场计时
 // let enterTimer   = 0;  // 进入关卡过场计时
+
+// import { musicManager } from './music.js';
+
 let nextLevel    = 1;  // 点击选关后要进入的关卡
 let pausedState  = false;
 

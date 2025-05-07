@@ -103,7 +103,7 @@ class Level
                 this.endTimer ++;
                 if(this.endTimer === this.endMaxTimer) 
                 {
-                    gameState = "levelSelect";
+                    gameState = "interLevel";
                     levelCleared[present_level - 1] = true;
                     this.reset();
                 }
