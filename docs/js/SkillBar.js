@@ -51,6 +51,7 @@ class SkillBar{
                 fill("red");
                 noStroke();
                 textSize(this.textSize);
+                textStyle(BOLD);
                 let numberToDisplay = i + 1;
                 text(numberToDisplay, 
                     this.x + this.blankwidth + i * this.width, 
@@ -60,6 +61,7 @@ class SkillBar{
                 fill("yellow");
                 noStroke();
                 textSize(this.textSize);
+                textStyle(BOLD);
                 numberToDisplay = this.numberList[i];
                 text(numberToDisplay, 
                     this.x - this.blankwidth * 3 + i * this.width + this.width, 
