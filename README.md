@@ -33,8 +33,36 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 - 5% ~250 words 
 - Describe your game, what is based on, what makes it novel?
 
+2025/05/07
+  
+### **Dragon Adventure**  
+**Dragon Adventure** is a story-rich 2D action-adventure game. Guided by an immersive narrative, players battle various monsters to complete story-driven objectives.  
 
-**Dragon Adventure** is a story-rich 2D action-adventure game. Guided by an engaging narrative, players battle a variety of monsters to fulfill their story-driven objectives.
+---
+
+#### 🎮 **Game Inspiration**  
+Inspired by the pixel-style dungeon shooter *Soul Knight*—a game blending **roguelike** elements with **action-packed shooting**—**Dragon Adventure** carves its own identity by shifting focus away from flashy combat and weapon variety. Instead, it embraces a *"story-driven actions, actions shaping the story"* philosophy.  
+
+Unlike *Soul Knight*, which lacks a continuous plot and emphasizes grinding for EXP/resources, our game delivers a **deeper, more immersive experience**. This is achieved through:  
+- **Richly designed maps & enemies**  
+- **Dynamic vision mechanics**  
+- **Souls-like difficulty** to ensure engagement  
+
+Guided by the narrative, players must **analyze enemy behaviors and map layouts** carefully to progress—gradually uncovering the world's secrets along the way.  
+
+---
+
+##### **Example: Gameplay in Chapter 2**  
+After adapting to Chapter 1's challenges, players are **cursed by the final boss**, which logically restricts their **field of vision**. Forced to explore with **severely limited sight**, they soon realize the game's true depth:  
+- A seemingly mandatory path requires defeating a **powerful monster** with **low HP**—creating tense, strategic combat.  
+- Our **"Transformation Mechanic"** offers temporary solutions (e.g., bonus HP/abilities) to balance despair with hope.  
+
+---
+
+Through **interconnected design**, *Dragon Adventure* ensures players **deeply engage** with our meticulously crafted world—one challenge at a time.  
+
+————————————————————————————————
+**Dragon Adventure** is a story-rich 2D action-adventure game. Guided by an engaging narrative, players battle various monsters to fulfill their story-driven objectives.
 
 #### 🎮 Game Inspiration
 
