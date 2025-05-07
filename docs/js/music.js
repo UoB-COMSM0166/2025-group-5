@@ -4,12 +4,17 @@ class Music {
 
         this.bgMusic         = new Audio("resources/music/test.mp3");
         this.bgMusic.loop    = true;
-        this.bgMusic.baseVol = 0.2;
+        this.bgMusic.baseVol = 0.1;
         this.bgMusic.volume  = this.bgMusic.baseVol * this.master;
 
         this.sfx = {
             shoot: makeSfx("shoot.mp3"),
-            hit:   makeSfx("hit.mp3")
+            hit:   makeSfx("hit.mp3"),
+            start: makeSfx("Starting_Music.mp3"),
+            level1: makeSfx("Forest.mp3"),
+            level2: makeSfx("Graveyard.mp3"),
+            level3: makeSfx("Lake.mp3"),
+            level4: makeSfx("Lava.mp3")
         };
     }
 
@@ -20,6 +25,15 @@ class Music {
     stopBackground() {
         this.bgMusic.pause();
         this.bgMusic.currentTime = 0; // 重置音乐进度
+    }
+
+    playMusic(name) {
+        this.sfx[name].play();
+    }
+
+    stopMusic(name) {
+        this.sfx[name].pause();
+        this.sfx[name].currentTime = 0;
     }
 
     playSFX(name) {
