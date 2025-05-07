@@ -26,3 +26,17 @@ canvas {
     color: white;
     font-family: Arial, sans-serif;
 }
+
+.image-container {
+    position: absolute; /* 或 fixed，看你是否希望随页面滚动 */
+    top: 20px;
+    left: 0; /* 靠左对齐 */
+    height: 280px;
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    display: block;
+    max-height: 100%;
+    width: auto;
+  }
