@@ -758,17 +758,18 @@ function enterLevelSelect() {
     skipButton.remove();
     skipButton = null;
   }
-  gameMusic.stopLevel(1);
-  gameMusic.stopLevel(2);
-  gameMusic.stopLevel(3);
-  gameMusic.stopLevel(4);
-  gameMusic.playBackground(); 
+
   gameState = 'levelSelect';
   selectLevel();
 }
 
 // —— 2. 绘制“关卡选择”界面 —— 
 function drawLevelSelect() {
+  gameMusic.stopLevel(1);
+  gameMusic.stopLevel(2);
+  gameMusic.stopLevel(3);
+  gameMusic.stopLevel(4);
+  gameMusic.playBackground(); 
   // 根据已通关数 +1 选背景图（初次进入即 1）
   let unlockedCount = levelCleared.filter(b => b).length + 1;
   unlockedCount = constrain(unlockedCount, 1, 4);
