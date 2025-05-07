@@ -132,7 +132,7 @@ This not only ensured alignment and enthusiasm within the team during developmen
     **Then** the system gradually reveals those areas, encouraging exploration.
 
 ##### Use Case Model
-![image](https://github.com/user-attachments/assets/1242a9db-102c-47e6-b667-e2837060cc03)
+![](docs/README/Use_Case_Model.png)
 
 - **Brief Description**:  
   The player controls their character to attack and defeat monsters. Once a monster is defeated, the game system triggers the ability acquisition mechanism, granting the player a portion of the monster's power.
