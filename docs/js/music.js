@@ -8,16 +8,26 @@ class Music {
         this.bgMusic.volume  = this.bgMusic.baseVol * this.master;
         this.bgMusic.isPlaying = false;
 
+    // —— 关卡专属 BGM —— 
+        this.levels = {};
+        for (let i = 1; i <= 4; i++) {
+            const a = new Audio(`resources/music/level${i}.mp3`);
+            a.loop    = true;
+            a.baseVol = 0.2;
+            a.volume  = a.baseVol;
+            a.isPlaying = false;
+            this.levels[i] = a;
+        }
 
 
         this.sfx = {
             shoot: makeSfx("shoot.mp3"),
             hit:   makeSfx("hit.mp3"),
             start: makeSfx("Starting_Music.mp3"),
-            level1: makeSfx("Forest.mp3"),
-            level2: makeSfx("Graveyard.mp3"),
-            level3: makeSfx("Lake.mp3"),
-            level4: makeSfx("Lava.mp3")
+            // level1: makeSfx("Forest.mp3"),
+            // level2: makeSfx("Graveyard.mp3"),
+            // level3: makeSfx("Lake.mp3"),
+            // level4: makeSfx("Lava.mp3")
         };
     }
 
@@ -25,21 +35,51 @@ class Music {
     //     this.bgMusic.play();
     // }
 
-    async playBackground() {
-        if (this.bgMusic.isPlaying) return;
-        try {
-            await this.bgMusic.play();
-            this.bgMusic.isPlaying = true;
-        } catch (err) {
-        console.warn('背景音乐播放失败：', err);
-        }
-    }
+    // async playBackground() {
+    //     if (this.bgMusic.isPlaying) return;
+    //     try {
+    //         await this.bgMusic.play();
+    //         this.bgMusic.isPlaying = true;
+    //     } catch (err) {
+    //     console.warn('背景音乐播放失败：', err);
+    //     }
+    // }
 
-    stopBackground() {
-        this.bgMusic.pause();
-        this.bgMusic.isPlaying = false;
-        this.bgMusic.currentTime = 0; // 重置音乐进度
-    }
+    // stopBackground() {
+    //     this.bgMusic.pause();
+    //     this.bgMusic.isPlaying = false;
+    //     this.bgMusic.currentTime = 0; // 重置音乐进度
+    // }
+
+  // 播放／停止初始背景
+  playBackground() {
+    if (this.bgMusic.isPlaying) return;
+    this.bgMusic.currentTime = 0;
+    this.bgMusic.play();
+    this.bgMusic.isPlaying = true;
+  }
+  stopBackground() {
+    if (!this.bgMusic.isPlaying) return;
+    this.bgMusic.pause();
+    this.bgMusic.currentTime = 0;
+    this.bgMusic.isPlaying = false;
+  }
+
+  // 播放／停止指定关卡音乐（level: 1–4）
+  playLevel(level) {
+    const track = this.levels[level];
+    if (!track || track.isPlaying) return;
+    track.currentTime = 0;
+    track.play();
+    track.isPlaying = true;
+  }
+  stopLevel(level) {
+    const track = this.levels[level];
+    if (!track || !track.isPlaying) return;
+    track.pause();
+    track.currentTime = 0;
+    track.isPlaying = false;
+  }
 
     playMusic(name) {
         this.sfx[name].play();

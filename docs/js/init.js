@@ -758,6 +758,10 @@ function enterLevelSelect() {
     skipButton.remove();
     skipButton = null;
   }
+  gameMusic.stopLevel(1);
+  gameMusic.stopLevel(2);
+  gameMusic.stopLevel(3);
+  gameMusic.stopLevel(4);
   gameMusic.playBackground(); // 恢复背景音乐 :contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
   gameState = 'levelSelect';
   selectLevel();
@@ -812,10 +816,27 @@ function drawInterEnter(){
 // —— 6. “playing”：实际游戏，记得先重置 imageMode —— 
 function drawPlaying(){
   imageMode(CORNER);
-  if      (present_level===1) level1.update();
-  else if (present_level===2) level2.update();
-  else if (present_level===3) level3.update();
-  else if (present_level===4) level4.update();
+  if      (present_level===1){
+    gameMusic.stopBackground(); 
+    gameMusic.playLevel(1);
+    level1.update();
+
+  } 
+  else if (present_level===2){
+    gameMusic.stopBackground();
+    gameMusic.playLevel(2);
+    level2.update();
+  }
+  else if (present_level===3){
+    gameMusic.stopBackground();
+    gameMusic.playLevel(3);
+    level3.update();
+  } 
+  else if (present_level===4){
+    gameMusic.stopBackground();
+    gameMusic.playLevel(4);
+    level4.update();
+  } 
 }
 
 // —— 7. “interLevel”：关卡胜利后 3 秒过场，可空格跳过 —— 
