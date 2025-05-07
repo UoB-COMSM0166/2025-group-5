@@ -4,7 +4,7 @@ let startButton;
 let gameTitle;
 let levelTitle; // 关卡选择标题
 let vol = 5;
-let bri = 5;
+let bri = 8;
 let volUpButton;
 let volDownButton;
 let volDisplay;

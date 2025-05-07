@@ -25,37 +25,37 @@ async function setup() {
   // 预生成 "vol+", "vol-", "volValue", "bri+", "bri-", "briValue"
 
   volUpButton = createButton('vol+');
-  volUpButton.position(850, 475);
+  volUpButton.position(980, 475);
   volUpButton.size(150, 50);
   volUpButton.mousePressed(volUp);
   volUpButton.hide();
 
   volDownButton = createButton('vol-');
-  volDownButton.position(450, 475);
+  volDownButton.position(580, 475);
   volDownButton.size(150, 50);
   volDownButton.mousePressed(volDown);
   volDownButton.hide();
 
   volDisplay = createInput(vol.toString());
-  volDisplay.position(715, 475);
+  volDisplay.position(845, 475);
   volDisplay.size(20, 50);
   volDisplay.attribute('readonly', 'true');
   volDisplay.hide();
 
   briUpButton = createButton('bri+');
-  briUpButton.position(850, 675);
+  briUpButton.position(980, 675);
   briUpButton.size(150, 50);
   briUpButton.mousePressed(briUp);
   briUpButton.hide();
 
   briDownButton = createButton('bri-');
-  briDownButton.position(450, 675);
+  briDownButton.position(580, 675);
   briDownButton.size(150, 50);
   briDownButton.mousePressed(briDown);
   briDownButton.hide();
 
   briDisplay = createInput(bri.toString());
-  briDisplay.position(715, 675);
+  briDisplay.position(845, 675);
   briDisplay.size(20, 50);
   briDisplay.attribute('readonly', 'true');
   briDisplay.hide();
@@ -653,6 +653,13 @@ function draw() {
     case 'paused':      drawPaused();      break;
     case 'over':        drawGameOver();    break;
   }
+
+  if (bri < 10) {                   // bri 10 = 最亮，不加遮罩
+    noStroke();
+    const alpha = (10 - bri) * 25.5; 
+    fill(0, alpha); 
+    rect(0, 0, width, height); 
+  }
 }
 
 // —— 1. “start” 界面：按空格或鼠标开始，进入 story1 视频 —— 
@@ -934,9 +941,7 @@ function volUp()
   if (vol < 10) 
   {   
     vol ++;    
-    document.querySelectorAll('audio').forEach(a => {
-      a.volume = constrain(a.volume + 0.1, 0, 1);
-    });
+    gameMusic.setMasterVolume(vol / 10);
     volDisplay.value(vol); 
   }
 }
@@ -946,9 +951,7 @@ function volDown()
   if (vol > 0) 
   {   
     vol --;    
-    document.querySelectorAll('audio').forEach(a => {
-      a.volume = constrain(a.volume - 0.1, 0, 1);
-    });
+    gameMusic.setMasterVolume(vol / 10);
     volDisplay.value(vol);  
   }
 }
