@@ -22,6 +22,44 @@ async function setup() {
   startButton = createButton('Restart');
   startButton.hide();
 
+  // 预生成 "vol+", "vol-", "volValue", "bri+", "bri-", "briValue"
+
+  volUpButton = createButton('vol+');
+  volUpButton.position(850, 475);
+  volUpButton.size(150, 50);
+  volUpButton.mousePressed(volUp);
+  volUpButton.hide();
+
+  volDownButton = createButton('vol-');
+  volDownButton.position(450, 475);
+  volDownButton.size(150, 50);
+  volDownButton.mousePressed(volDown);
+  volDownButton.hide();
+
+  volDisplay = createInput(vol.toString());
+  volDisplay.position(715, 475);
+  volDisplay.size(20, 50);
+  volDisplay.attribute('readonly', 'true');
+  volDisplay.hide();
+
+  briUpButton = createButton('bri+');
+  briUpButton.position(850, 675);
+  briUpButton.size(150, 50);
+  briUpButton.mousePressed(briUp);
+  briUpButton.hide();
+
+  briDownButton = createButton('bri-');
+  briDownButton.position(450, 675);
+  briDownButton.size(150, 50);
+  briDownButton.mousePressed(briDown);
+  briDownButton.hide();
+
+  briDisplay = createInput(bri.toString());
+  briDisplay.position(715, 675);
+  briDisplay.size(20, 50);
+  briDisplay.attribute('readonly', 'true');
+  briDisplay.hide();
+
   // —— 初始化视频与 Skip 按钮 —— 
   story1Video = createVideo(['resources/videos/story1.mp4']);
   story1Video.size(canvasWidth, canvasHeight);
@@ -781,9 +819,19 @@ function drawPaused(){
   else if (present_level===3) level3.drawWithoutUpdate();
   else if (present_level===4) level4.drawWithoutUpdate();
 
-  // 叠加灰层
-  fill(0,0,0,150);
-  rect(0,0,width,height);
+  // // 叠加灰层
+  // fill(0,0,0,150);
+  // rect(0,0,width,height);
+  // 绘制底片
+  image(escSelectImg, 128, 0, 1024, 800);
+
+  // 画音量和亮度控制
+  volUpButton.show();
+  volDownButton.show();
+  volDisplay.show();
+  briUpButton.show();
+  briDownButton.show();
+  briDisplay.show();
 
   // 画 Exit / Continue 按钮
   for(let i=0;i<2;i++){
@@ -801,8 +849,20 @@ function drawPaused(){
     text(txt,x,y);
     if (over && mouseIsPressed){
       if (i===0){ // Exit
+        volUpButton.hide();
+        volDownButton.hide();
+        volDisplay.hide();
+        briUpButton.hide();
+        briDownButton.hide();
+        briDisplay.hide();
         gameState='levelSelect';
       } else {   // Continue
+        volUpButton.hide();
+        volDownButton.hide();
+        volDisplay.hide();
+        briUpButton.hide();
+        briDownButton.hide();
+        briDisplay.hide();
         gameState='playing';
       }
     }
@@ -859,3 +919,45 @@ function startGame(level) {
 // 首次交互后播放背景音乐
 window.onload = () => gameMusic.playBackground();
 document.addEventListener('click', () => gameMusic.playBackground(), { once: true });
+
+function volUp()
+{
+  if (vol < 10) 
+  {   
+    vol ++;    
+    document.querySelectorAll('audio').forEach(a => {
+      a.volume = constrain(a.volume + 0.1, 0, 1);
+    });
+    volDisplay.value(vol); 
+  }
+}
+
+function volDown()
+{
+  if (vol > 0) 
+  {   
+    vol --;    
+    document.querySelectorAll('audio').forEach(a => {
+      a.volume = constrain(a.volume - 0.1, 0, 1);
+    });
+    volDisplay.value(vol);  
+  }
+}
+
+function briUp()
+{
+  if (bri < 10) 
+  {   
+    bri ++;    
+    briDisplay.value(bri); 
+  }
+}
+
+function briDown()
+{
+  if (bri > 0) 
+  {     
+    bri --;    
+    briDisplay.value(bri); 
+  }
+}

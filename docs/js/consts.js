@@ -76,7 +76,7 @@ const levelBtnSize = { w: 150, h: 150 };
 // 5) ESC 暂停菜单按钮尺寸与位置
 const pauseBtnSize    = { w: 150, h: 50 };
 const pauseBtnOffsetX = 200; // 相对画布中心左右偏移
-const pauseBtnPosY    = canvasHeight/2 - pauseBtnSize.h/2;
+const pauseBtnPosY    = 270
 
 let player;
 let enemies = [];
