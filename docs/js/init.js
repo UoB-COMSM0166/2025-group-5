@@ -2,7 +2,7 @@
 
 // let level1, level2, level3, level4;
 // let attributes, animations;
-// let interTimer   = 0;  // 胜利过场计时
+// // let interTimer   = 0;  // 胜利过场计时
 // let enterTimer   = 0;  // 进入关卡过场计时
 
 // import { musicManager } from './music.js';
@@ -762,7 +762,7 @@ function enterLevelSelect() {
   gameMusic.stopLevel(2);
   gameMusic.stopLevel(3);
   gameMusic.stopLevel(4);
-  gameMusic.playBackground(); // 恢复背景音乐 :contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
+  gameMusic.playBackground(); 
   gameState = 'levelSelect';
   selectLevel();
 }
@@ -796,7 +796,10 @@ function drawLevelSelect() {
       mouseX >= area.x && mouseX <= area.x + area.w &&
       mouseY >= area.y && mouseY <= area.y + area.h
     ) {
-      startGame(i + 1);
+      nextLevel = i + 1;
+      // startGame(i + 1);
+      enterTimer = 0;
+      gameState = 'interEnter';
     }
   }
 }
@@ -805,9 +808,13 @@ function drawLevelSelect() {
 // —— 5. “interEnter”：进入 2–4 关前的 5 秒过场，可空格跳过 —— 
 function drawInterEnter(){
   imageMode(CORNER);
+  // EnterTimer =0;
   let img = interEnterImages[nextLevel];
+  // gameMusic.stopBackground();
+  // gameMusic.playLevel(nextLevel);
+  if(!img) startGame(nextLevel);
   if (img) image(img,0,0,width,height);
-  enterTimer++;
+    enterTimer++;
   if (keyIsDown(32) || enterTimer>60*5){
     startGame(nextLevel);
   }

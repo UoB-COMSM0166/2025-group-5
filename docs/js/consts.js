@@ -65,7 +65,7 @@ const levelSelectBGFiles = [
 let levelSelectBGImgs = [];
 
 // 关卡解锁状态，索引 0–3 对应第 1–4 关，初始都未通关
-let levelCleared = [false,false,false,false];
+let levelCleared = [true,true,true,true];
 
 // 按钮区域配置：手动调好 x/y/w/h 后，把 alpha 设为 0 形成“隐形”按钮
 const levelBtnAreas = [
