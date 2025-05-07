@@ -666,6 +666,7 @@ function drawStart(){
   background(0);                     // 黑底背景
   imageMode(CENTER);                 
   // 将第 idx 帧动画居中绘制
+  // image(startScreenImages[idx], width/2, height/2);
   image(startScreenImages[idx], width/2, height/2+40);
 
 
@@ -750,34 +751,40 @@ function enterLevelSelect() {
   selectLevel();
 }
 
-// —— 4. “levelSelect” 界面 —— 
-function drawLevelSelect(){
+// —— 2. 绘制“关卡选择”界面 —— 
+function drawLevelSelect() {
+  // 根据已通关数 +1 选背景图（初次进入即 1）
+  let unlockedCount = levelCleared.filter(b => b).length + 1;
+  unlockedCount = constrain(unlockedCount, 1, 4);
+
+  // 绘制对应背景
   imageMode(CENTER);
-  image(levelSelectBGImage, width/2, height/2, width, height);
-  for (let i=0; i<4; i++){
-    let p = levelBtnPos[i];
-    let over = 
-      mouseX > p.x - levelBtnSize.w/2 &&
-      mouseX < p.x + levelBtnSize.w/2 &&
-      mouseY > p.y - levelBtnSize.h/2 &&
-      mouseY < p.y + levelBtnSize.h/2;
-    let s = over?1.1:1.0;
-    push();
-      translate(p.x,p.y);
-      scale(s);
-      image(levelBtnImages[i],0,0,levelBtnSize.w,levelBtnSize.h);
-    pop();
-    if (over && mouseIsPressed){
-      nextLevel = i+1;
-      if (nextLevel>=2){
-        enterTimer=0;
-        gameState='interEnter';
-      } else {
-        startGame(1);
-      }
+  image(
+    levelSelectBGImgs[unlockedCount - 1],
+    width / 2, height / 2,
+    width, height
+  );
+
+  // 绘制并检测每个解锁按钮
+  for (let i = 0; i < unlockedCount; i++) {
+    let area = levelBtnAreas[i];
+    // 仅绘制透明边框，fill 全透明
+    noFill();
+    stroke(255, 0);
+    strokeWeight(2);
+    rect(area.x, area.y, area.w, area.h);
+
+    // 点击“隐形”按钮区域
+    if (
+      mouseIsPressed &&
+      mouseX >= area.x && mouseX <= area.x + area.w &&
+      mouseY >= area.y && mouseY <= area.y + area.h
+    ) {
+      startGame(i + 1);
     }
   }
 }
+
 
 // —— 5. “interEnter”：进入 2–4 关前的 5 秒过场，可空格跳过 —— 
 function drawInterEnter(){
@@ -806,6 +813,7 @@ function drawInterLevel(){
   interTimer++;
   if (keyIsDown(32) || interTimer>60*3){
     interTimer=0;
+    // levelCleared[present_level - 1] = true;
     gameState='levelSelect';
   }
 }
@@ -855,7 +863,8 @@ function drawPaused(){
         briUpButton.hide();
         briDownButton.hide();
         briDisplay.hide();
-        gameState='levelSelect';
+        // gameState='levelSelect';
+        enterLevelSelect();
       } else {   // Continue
         volUpButton.hide();
         volDownButton.hide();

@@ -56,22 +56,24 @@ let EnterTimer = 0;
 const enterDuration = 300; // 5秒 @60fps
 
 // —— 新增：关卡选择界面资源 —— 
-const levelSelectBGFile = 'resources/images/selectlevel/Select_Total.png';
-let levelSelectBGImage;
-const levelBtnFiles = [
-  'resources/images/selectlevel/Lock.png',
-  'resources/images/selectlevel/Lock.png',
-  'resources/images/selectlevel/Lock.png',
-  'resources/images/selectlevel/Lock.png'
+const levelSelectBGFiles = [
+  'resources/images/selectlevel/Select_BG1.png',
+  'resources/images/selectlevel/Select_BG2.png',
+  'resources/images/selectlevel/Select_BG3.png',
+  'resources/images/selectlevel/Select_BG4.png'
 ];
-let levelBtnImages = [];
-const levelBtnPos = [
-  { x: 200, y: 300 },
-  { x: 500, y: 300 },
-  { x: 800, y: 300 },
-  { x: 1100, y: 300 }
+let levelSelectBGImgs = [];
+
+// 关卡解锁状态，索引 0–3 对应第 1–4 关，初始都未通关
+let levelCleared = [false,false,false,false];
+
+// 按钮区域配置：手动调好 x/y/w/h 后，把 alpha 设为 0 形成“隐形”按钮
+const levelBtnAreas = [
+  { x:40, y:485, w:290, h:235, alpha: 0   }, // 第1关：完全透明
+  { x:350, y:485, w:275, h:235, alpha: 80  }, // 第2关：弱可见
+  { x:650, y:485, w:280, h:235, alpha: 150 }, // 第3关：中等可见
+  { x:955, y:485, w:290, h:235, alpha: 255 }  // 第4关：完全不透明
 ];
-const levelBtnSize = { w: 150, h: 150 };
 
 // 5) ESC 暂停菜单按钮尺寸与位置
 const pauseBtnSize    = { w: 150, h: 50 };
@@ -340,6 +342,9 @@ function preload() {
     startScreenImages.push(loadImage(f));
   }
 
+  for (let f of levelSelectBGFiles) {
+    levelSelectBGImgs.push(loadImage(f));
+  }
 
   // --- 新增：关卡胜利过场 ---
   for (let f of interLevelFiles) {
