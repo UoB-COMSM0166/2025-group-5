@@ -3,6 +3,14 @@ let gameState = 'start'; // 游戏状态 start/levelSelect/playing/over
 let startButton;
 let gameTitle;
 let levelTitle; // 关卡选择标题
+let vol = 5;
+let bri = 5;
+let volUpButton;
+let volDownButton;
+let volDisplay;
+let briUpButton;
+let briDownButton;
+let briDisplay;
 
 // canvas
 canvasWidth = 1280;
@@ -256,7 +264,7 @@ let g_skillBarY = 0;
 let g_skillBarHeight = 50;
 let g_skillBarWidth = 50;
 let g_skillBarBlankWidth = 5;
-let g_textSize = 16;
+let g_textSize = 25;
 
 /* ----------  新增：开场 / 剧情 / 选关 资源 ---------- */
 // 开始界面图片,
@@ -267,6 +275,10 @@ let startImg = [];
 // 选关界面底图
 let levelSelectImgFile = './resources/images/game_background/LevelSelect.jpg';
 let levelSelectImg;
+
+// ESC界面地图
+let escSelectImgFile = './resources/images/setting/Settings.png';
+let escSelectImg;
 
 // 剧情视频
 let story1VideoFile = './resources/videos/story1.mp4';   // 剧情介绍
@@ -321,6 +333,7 @@ function preload() {
   /* 新增加载 */
   // startImg = loadImage(startImgFile);
   levelSelectImg = loadImage(levelSelectImgFile);
+  escSelectImg = loadImage(escSelectImgFile);
 
   // --- 新增：开始界面 6 帧动画 ---
   for (let f of startScreenFiles) {
