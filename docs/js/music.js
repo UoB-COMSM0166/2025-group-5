@@ -6,6 +6,9 @@ class Music {
         this.bgMusic.loop    = true;
         this.bgMusic.baseVol = 0.1;
         this.bgMusic.volume  = this.bgMusic.baseVol * this.master;
+        this.bgMusic.isPlaying = false;
+
+
 
         this.sfx = {
             shoot: makeSfx("shoot.mp3"),
@@ -18,12 +21,23 @@ class Music {
         };
     }
 
-    playBackground() {
-        this.bgMusic.play();
+    // playBackground() {
+    //     this.bgMusic.play();
+    // }
+
+    async playBackground() {
+        if (this.bgMusic.isPlaying) return;
+        try {
+            await this.bgMusic.play();
+            this.bgMusic.isPlaying = true;
+        } catch (err) {
+        console.warn('背景音乐播放失败：', err);
+        }
     }
 
     stopBackground() {
         this.bgMusic.pause();
+        this.bgMusic.isPlaying = false;
         this.bgMusic.currentTime = 0; // 重置音乐进度
     }
 

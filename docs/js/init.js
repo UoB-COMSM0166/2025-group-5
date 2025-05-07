@@ -679,6 +679,8 @@ function drawStart(){
   // image(startScreenImages[idx], width/2, height/2);
   image(startScreenImages[idx], width/2, height/2+40);
 
+  gameMusic.playBackground();
+
 
   if (keyIsDown(32) || mouseIsPressed) {
     startStory1(); 
@@ -936,8 +938,8 @@ function startGame(level) {
 }
 
 // 首次交互后播放背景音乐
-window.onload = () => gameMusic.playBackground();
-document.addEventListener('click', () => gameMusic.playBackground(), { once: true });
+// window.onload = () => gameMusic.playBackground();
+// document.addEventListener('click', () => gameMusic.playBackground(), { once: true });
 
 function volUp()
 {
