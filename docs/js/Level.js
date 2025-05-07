@@ -104,6 +104,7 @@ class Level
                 if(this.endTimer === this.endMaxTimer) 
                 {
                     gameState = "levelSelect";
+                    levelCleared[present_level - 1] = true;
                     this.reset();
                 }
             }
