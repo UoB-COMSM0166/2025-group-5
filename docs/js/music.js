@@ -1,12 +1,15 @@
 class Music {
     constructor() {
-        this.bgMusic = new Audio("resources/music/test.mp3");
-        this.bgMusic.loop = true; // 让背景音乐循环播放
-        this.bgMusic.volume = 0.2; // 设置音量（0.0 - 1.0）
+        this.master = 1;
+
+        this.bgMusic         = new Audio("resources/music/test.mp3");
+        this.bgMusic.loop    = true;
+        this.bgMusic.baseVol = 0.2;
+        this.bgMusic.volume  = this.bgMusic.baseVol * this.master;
 
         this.sfx = {
-            shoot: new Audio("resources/music/shoot.mp3"),
-            hit: new Audio("resources/music/hit.mp3")
+            shoot: makeSfx("shoot.mp3"),
+            hit:   makeSfx("hit.mp3")
         };
     }
 
@@ -25,7 +28,22 @@ class Music {
             this.sfx[name].play();
         }
     }
+
+    setMasterVolume(v){
+        this.master = constrain(v, 0, 1);
+        this.bgMusic.volume = this.bgMusic.baseVol * this.master;
+        Object.values(this.sfx).forEach(a => {
+            a.volume = a.baseVol * this.master;
+        });
+    }
 }
 
 // 全局音乐对象
 const gameMusic = new Music();
+
+function makeSfx(file, base = 0.6) {
+    const a = new Audio(`resources/music/${file}`);
+    a.baseVol = base;
+    a.volume  = base;
+    return a;
+}
