@@ -3,6 +3,14 @@ let gameState = 'start'; // 游戏状态 start/levelSelect/playing/over
 let startButton;
 let gameTitle;
 let levelTitle; // 关卡选择标题
+let vol = 5;
+let bri = 5;
+let volUpButton;
+let volDownButton;
+let volDisplay;
+let briUpButton;
+let briDownButton;
+let briDisplay;
 
 // canvas
 canvasWidth = 1280;
@@ -48,22 +56,24 @@ let EnterTimer = 0;
 const enterDuration = 300; // 5秒 @60fps
 
 // —— 新增：关卡选择界面资源 —— 
-const levelSelectBGFile = 'resources/images/selectlevel/Select_Total.png';
-let levelSelectBGImage;
-const levelBtnFiles = [
-  'resources/images/selectlevel/Lock.png',
-  'resources/images/selectlevel/Lock.png',
-  'resources/images/selectlevel/Lock.png',
-  'resources/images/selectlevel/Lock.png'
+const levelSelectBGFiles = [
+  'resources/images/selectlevel/Select_BG1.png',
+  'resources/images/selectlevel/Select_BG2.png',
+  'resources/images/selectlevel/Select_BG3.png',
+  'resources/images/selectlevel/Select_BG4.png'
 ];
-let levelBtnImages = [];
-const levelBtnPos = [
-  { x: 200, y: 300 },
-  { x: 500, y: 300 },
-  { x: 800, y: 300 },
-  { x: 1100, y: 300 }
+let levelSelectBGImgs = [];
+
+// 关卡解锁状态，索引 0–3 对应第 1–4 关，初始都未通关
+let levelCleared = [false,false,false,false];
+
+// 按钮区域配置：手动调好 x/y/w/h 后，把 alpha 设为 0 形成“隐形”按钮
+const levelBtnAreas = [
+  { x:40, y:485, w:290, h:235, alpha: 0   }, // 第1关：完全透明
+  { x:350, y:485, w:275, h:235, alpha: 80  }, // 第2关：弱可见
+  { x:650, y:485, w:280, h:235, alpha: 150 }, // 第3关：中等可见
+  { x:955, y:485, w:290, h:235, alpha: 255 }  // 第4关：完全不透明
 ];
-const levelBtnSize = { w: 150, h: 150 };
 
 // 5) ESC 暂停菜单按钮尺寸与位置
 const pauseBtnSize    = { w: 150, h: 50 };
@@ -256,7 +266,7 @@ let g_skillBarY = 0;
 let g_skillBarHeight = 50;
 let g_skillBarWidth = 50;
 let g_skillBarBlankWidth = 5;
-let g_textSize = 16;
+let g_textSize = 25;
 
 /* ----------  新增：开场 / 剧情 / 选关 资源 ---------- */
 // 开始界面图片,
@@ -267,6 +277,10 @@ let startImg = [];
 // 选关界面底图
 let levelSelectImgFile = './resources/images/game_background/LevelSelect.jpg';
 let levelSelectImg;
+
+// ESC界面地图
+let escSelectImgFile = './resources/images/setting/Settings.png';
+let escSelectImg;
 
 // 剧情视频
 let story1VideoFile = './resources/videos/story1.mp4';   // 剧情介绍
@@ -321,12 +335,16 @@ function preload() {
   /* 新增加载 */
   // startImg = loadImage(startImgFile);
   levelSelectImg = loadImage(levelSelectImgFile);
+  escSelectImg = loadImage(escSelectImgFile);
 
   // --- 新增：开始界面 6 帧动画 ---
   for (let f of startScreenFiles) {
     startScreenImages.push(loadImage(f));
   }
 
+  for (let f of levelSelectBGFiles) {
+    levelSelectBGImgs.push(loadImage(f));
+  }
 
   // --- 新增：关卡胜利过场 ---
   for (let f of interLevelFiles) {
