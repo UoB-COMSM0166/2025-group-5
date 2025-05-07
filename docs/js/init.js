@@ -572,39 +572,39 @@ function selectLevel() {
   startButton.hide();
 
   // 首次创建
-  if (!level1Button) {
-    const btnW = 110, btnH = 40, gap = 20;
-    const x = canvasX + canvasWidth / 2 - btnW / 2;
-    const y1 = canvasY + canvasHeight / 2 - btnH / 2 - gap;
-    const y2 = y1 + btnH + gap;
-    const y3 = y2 + btnH + gap;
-    const y4 = y3 + btnH + gap;
+  // if (!level1Button) {
+  //   const btnW = 110, btnH = 40, gap = 20;
+  //   const x = canvasX + canvasWidth / 2 - btnW / 2;
+  //   const y1 = canvasY + canvasHeight / 2 - btnH / 2 - gap;
+  //   const y2 = y1 + btnH + gap;
+  //   const y3 = y2 + btnH + gap;
+  //   const y4 = y3 + btnH + gap;
 
-    level1Button = createButton('Level 1')
-      .size(btnW, btnH)
-      .position(x, y1)
-      .mousePressed(() => startGame(1));
+  //   level1Button = createButton('Level 1')
+  //     .size(btnW, btnH)
+  //     .position(x, y1)
+  //     .mousePressed(() => startGame(1));
 
-    level2Button = createButton('Level 2')
-      .size(btnW, btnH)
-      .position(x, y2)
-      .mousePressed(() => startGame(2));
+  //   level2Button = createButton('Level 2')
+  //     .size(btnW, btnH)
+  //     .position(x, y2)
+  //     .mousePressed(() => startGame(2));
 
-    level3Button = createButton('Level 3')
-      .size(btnW, btnH)
-      .position(x, y3)
-      .mousePressed(() => startGame(3));
+  //   level3Button = createButton('Level 3')
+  //     .size(btnW, btnH)
+  //     .position(x, y3)
+  //     .mousePressed(() => startGame(3));
 
-    level4Button = createButton('Level 4')
-      .size(btnW, btnH)
-      .position(x, y4)
-      .mousePressed(() => startGame(4));
-  }
+  //   level4Button = createButton('Level 4')
+  //     .size(btnW, btnH)
+  //     .position(x, y4)
+  //     .mousePressed(() => startGame(4));
+  // }
   // 保证显示
-  level1Button.show();
-  level2Button.show();
-  level3Button.show();
-  level4Button.show();
+  // level1Button.show();
+  // level2Button.show();
+  // level3Button.show();
+  // level4Button.show();
 }
 
 // 开始游戏并隐藏按钮
@@ -626,10 +626,10 @@ function startGame(level) {
     present_level = 4;
   }
 
-  level1Button.hide();
-  level2Button.hide();
-  level3Button.hide();
-  level4Button.hide();
+  // level1Button.hide();
+  // level2Button.hide();
+  // level3Button.hide();
+  // level4Button.hide();
 }
 
 // Game Over 后回到选关
