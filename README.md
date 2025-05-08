@@ -526,62 +526,135 @@ Finally, we conducted system testing to assess the game's performance and compat
 
 ### Process 
 
-- 15% ~750 words
+#### Overview
+| **Phase**                             | **Dates**      | **Focus**                                                                           | **Aligned Requirement Themes**                                                       |
+| ------------------------------------- | -------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Core Prototype**                    | Jan 28 – Mar 3 | Player & enemy class logic; HP, attack, movement; base visual mapping               | 🔸 *Challenge and Growth* foundation; mechanic feasibility                           |
+| **Single-Level Integration**          | Mar 4 – Mar 18 | Monster types, environment visuals, gameplay–art merge for one full level           | 🔸 *Immersive Narrative* (Level + Visual unity)                                      |
+| **Multi-Level & Config-Based Design** | Mar 18 – Apr 8 | Configurable logic, vision mechanics, new monster abilities, narrative scripting    | 🔸 *Challenge + Narrative Integration* (fog of war, transformation, branching logic) |
+| **System UI & Experience Polish**     | Apr 9 – Apr 22 | Menu systems, transitions, inter-level logic, prompts, tooltips                     | 🔸 *UX clarity, onboarding, non-core gameplay loop support*                          |
+| **Final Evaluation & Polish**         | Apr 23 – May 7 | Think-aloud response implementation, NASA-TLX tuning, polish, animation, hint hooks | 🔸 *Responsive Design + Validation of Immersion & Challenge*                         |
 
-- Teamwork. How did you work together, what tools did you use. Did you have team roles? Reflection on how you worked together.
+#### Team Structure and Evolution
 
-In our six-person software development team, the initial ideal model was to follow the principles of Agile development, clearly defining each team member’s role and responsibilities. Theoretically, we expected to improve efficiency through precise task allocation, such as the product owner gathering requirements and maintaining the product backlog, while the development team members would take on specific tasks based on their expertise.
+Our six-person game development team underwent a **natural evolution in collaboration structure**, transitioning from exploratory cooperation to a dual-track production model.
 
-However, the reality soon taught us a valuable lesson. At the start of the team formation, we were not fully aware of each other’s capabilities. It was only during task assignment that we discovered each member’s strengths and weaknesses. This led to some members feeling uncomfortable with tasks that didn’t align with their skills. Furthermore, personality differences also posed challenges, with a structured work style sometimes stifling creativity and lowering motivation among some team members.
+At the project’s outset, we aimed to follow a **classic Agile structure**, assigning hypothetical roles such as product owner, developer, and designer based on general principles. However, we soon realized that we **lacked a deep understanding of each other’s strengths, working preferences, and design instincts**. Early assignments revealed mismatches between skill sets and tasks, and strict roles occasionally constrained creativity and morale.
 
-To overcome these issues, we implemented several strategies. First, we organized team-building activities outside of formal work to enhance our understanding of each other’s personalities and abilities, leading to more reasonable task assignments.
+#### Phase 1: Unified Exploration Through Pair Programming (Before March 18)
 
-Simultaneously, we decided to split the team into two sub-teams: one for engineering and one for design. The engineering team strictly followed Agile and pair programming principles to ensure code quality and development efficiency, while the design team, under the guidance of the team leader, adopted a more flexible approach that encouraged the emergence of creative ideas, ensuring both efficient coding and fostering creativity in game design.
+In the initial phase, we agreed to **focus solely on building a working combat prototype**, postponing narrative, art, and polish. Our guiding principle was: **“Code first, meaning later.”** This decision allowed all members to engage directly with the most abstract and difficult part of game development—**core gameplay logic**—while gradually forming a shared mental model of how the game could evolve.
 
-### Engineering Team: Practicing Agile Development
+We practiced **rotating pair programming**, forming dynamic pairs that collaborated on movement, shooting, and collision systems. This flexible approach helped us:
+- Rapidly build a working **gameplay demo**;
+- Cultivate empathy between designers and coders;
+- Ensure every member gained baseline proficiency in front-end JS development.
 
-The engineering team became the stable core of the project, responsible for transforming ideas into functional code. They adhered to Agile development principles and used iterative cycles to progressively advance the project.
+Though we lacked a dedicated art pipeline, we reached a point where placeholders were necessary. At that time, we used **WeChat as a lightweight task board**, posting requests like "We need a basic enemy sprite to test aggro range." This strategy allowed us to **gauge interest and initiative**. Naturally, Xiao Wu, Yaxin Chen, and Yaoyao Shen began leading visual development tasks, while Jingwei Lin, Shaojie Yang, and Xinyi Zhou gravitated toward code.
 
-- **Daily Stand-ups**: Every morning, the engineering team would gather for a brief meeting. Each member would report on the tasks completed the previous day, the plan for the day, and any issues encountered. This practice enhanced communication efficiency, ensuring every team member was clear about the project’s progress.
+This shared hands-on foundation proved invaluable later—**everyone could read and reason about code**, enabling better cross-domain communication down the line.
 
-- **Task Management with Jira**: The engineering team used Jira to track task progress. Each task was detailed in Jira, including task descriptions, responsible parties, estimated completion times, and current status. This allowed the team to stay up to date with the project's developments in real time.
+#### Phase 2: Formation of Two Interlocking Sub-Teams (After March 18)
 
-- **Pair Programming**: The team adopted pair programming practices, where two developers shared a workstation: one writing code and the other reviewing it and providing feedback. This not only improved code quality but also encouraged knowledge sharing among team members.
+Following the completion of our demo, we entered a more structured phase and naturally split into **two sub-teams**:
 
-- **Continuous Integration/Continuous Deployment (CI/CD)**: The team set up automated build and deployment processes. Whenever code was committed to the version control system, the automated build tool would immediately compile and test the code. This process allowed the team to quickly identify issues and fix them, ensuring software stability and reliability.
+- **Visual Development Team**: Xiao Wu (narrative/story panels), Yaxin Chen (level/environment design), and Yaoyao Shen (transitional and UI visuals).
+- **Software Engineering Team**: Shaojie Yang and Xinyi Zhou (main development pairs), with Jingwei Lin (developer-tester and design–engineering bridge).
 
-- **Code Review**: Regular code reviews became an important practice within the engineering team. Team members would gather to review each other's code. This practice not only helped uncover potential issues but also fostered technical exchanges and learning among team members.
+##### Visual Development Team: Flexibility With Ownership
 
-- **Agile Core Values**: The engineering team strictly adhered to the core values of Agile development. They valued individuals and interactions over processes and tools, working software over comprehensive documentation, customer collaboration over contract negotiation, and responding to change over following a plan. This shift in mindset made the team more flexible and efficient, enabling them to quickly adapt to changes in project requirements.
+The visual team adopted a **modular, task-oriented approach** to content creation, maintaining consistent style across different story and interface components:
+- Xiao Wu focused on **narrative cohesion**, designing story cutscenes and environmental storytelling cues.
+- Yaxin Chen led **level mechanism ideation**, including cursed vision and stage-specific hazards.
+- Yaoyao Shen specialized in **interface and transitional moments**, ensuring the emotional and functional bridge between gameplay scenes.
 
-### Design Team: The Source of Creativity
+Though flexible, the team loosely followed the principles of **requirement engineering decomposition**: dividing story, interaction, and presentation roles across interdependent subsystems, often aligning with Acceptance Criteria defined earlier.
 
-The design team was the innovative driving force behind the project, responsible for injecting soul into the game. They operated in a relatively free mode, focusing on inspiration and creative realization.
+##### Engineering Team: Agile Execution and Cross-Syncing
 
-- **Brainstorming Sessions**: The design team regularly held brainstorming meetings, where team members could freely share ideas and concepts. These sessions sparked creativity among team members, bringing a wealth of inspiration to the game design.
+The engineering team upheld a rigorous **pair programming model**, adhering to Agile principles:
+- Daily standups ensured shared awareness and load balancing.
+- Jira was used for tracking backlog items, tasks, and progress milestones.
+- Continuous integration workflows enabled stable testing and deployment.
+- Frequent code reviews maintained **code quality and shared knowledge**.
 
-- **Prototyping**: The design team created low-fidelity prototypes early in the development process. These prototypes helped the team quickly validate the core mechanics and gameplay of the game. Through continuous iteration and refinement, the team gradually improved the game design.
+A special role emerged: **Jingwei Lin acted as the technical bridge** between design and development. While primarily focused on testing and system-level integration, Jingwei continuously **updated the visual team on the engine’s current capabilities**. This prevented overambitious ideas from being proposed before they were technically feasible, creating **mutual understanding between creativity and constraint**.
 
-- **User Research**: The design team recognized the importance of user needs. They conducted surveys, user interviews, and other forms of feedback collection to understand the players' expectations and preferences. This feedback provided valuable guidance for the game design.
+---
 
-- **Collaboration with Engineering**: Although the design team had a higher degree of freedom, they maintained close collaboration with the engineering team. Regular technical exchange meetings allowed the design team to stay updated on the technical feasibility, ensuring that their ideas could be realized within the technical constraints. This cross-team collaboration provided solid support for the game’s development.
+#### Reflections and Learnings
 
-- **Design Iteration**: The design team adopted an iterative approach to design. They continually refined the game’s design based on user feedback and technical feasibility, ensuring a balance between creativity, user experience, and playability.
+Looking back, our team structure reflects not rigid methodology, but **practical adaptability**:
+- We **started without fixed roles**, discovering strengths through action rather than assumptions.
+- We **unified around building something tangible first**, which grounded later abstract design decisions.
+- We then **segmented along natural skill boundaries**, not top-down roles.
+- Crucially, our **communication channels remained open and bi-directional**, with designers participating in code, and developers contributing to design thinking.
 
-- **Artistic Team’s Work Mode**: Drawing inspiration from the work modes of artistic teams, the design team emphasized the importance of freedom and inspiration. By providing team members with the space to freely explore their ideas, this approach not only sparked creativity but also made the game’s design unique and interesting.
+This hybrid model not only improved productivity but **enhanced mutual respect and cross-domain empathy**—which we believe is the cornerstone of any successful creative software project.
 
-Ultimately, this division of labor allowed our game development to follow the modular principles from requirements engineering while also gaining greater inspiration for game design. It laid the foundation for our game’s adventure-based exploration, rather than just focusing on combat. Through continuous reflection and adjustments, we overcame the difficulties encountered in the early stages and established a more efficient and harmonious team collaboration model.
+#### 🌀 Weekly Process and Sprint Rhythm
 
+Our team followed a **weekly sprint-based development cycle**, combining structured Agile routines with natural team dynamics. The rhythm allowed us to concentrate collaboration, leave room for individual execution, and maintain a constant feedback loop.
 
-### Conclusion
+#### 📆 Weekly Development Schedule
 
-- 10% ~500 words
+| **Stage**               | **Activity Description**                                                                                                                                         | **Time Slot**                          | **Collaboration Outcome**                                 |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|------------------------------------------------------------|
+| **Sprint Planning**     | After Monday's lecture, we spent one hour refining the week's goals. Using past effort data, we adjusted story points and selected realistic targets.            | Monday (post-lecture, 1 hr)            | Re-alignment & planning                                    |
+| **Synchronous Work**    | Tuesdays (lab + post-lab) and Thursday’s final class slot were our main joint dev sessions. ~60% of all collaborative work was completed during this window.     | Tuesday (full) + Thursday (evening)    | Pair programming, core feature integration                 |
+| **Independent Progress**| Members completed supporting tasks independently—e.g., polishing, asset design, minor bugs—based on progress from the sync stage.                                | Wednesday–Thursday                     | Individual advancement                                     |
+| **Team Building & Sync**| Fridays were used for team activities (e.g., hiking), which doubled as informal face-to-face syncs. We discussed blockers, refined features, and added new needs.| Friday (team activity)                 | Final merge, backlog reflection, new idea generation       |
 
-- Reflect on project as a whole. Lessons learned. Reflect on challenges. Future work. 
+---
+
+#### 🧪 Practical Examples
+
+- After completing the **demo in mid-March**, we used a Friday hiking session to sync on the **“cursed vision mechanic”**. This mechanic was then confirmed as a key feature in the Graveyard level, both technically feasible and narratively powerful.
+
+- In another Friday reflection, we recognized that **“level-complete animations”** were missing. Following a team-wide discussion, we scheduled them for visual implementation and successfully enhanced the sense of progress and narrative continuity.
+
+---
+
+This rhythm allowed us to maintain a healthy balance between focused collaboration and flexible creativity—empowering both our **engineering and design sub-teams** to thrive while staying aligned.
+
+### 🧾 Conclusion
+
+Looking back on the full development cycle of *Dragon Adventure*, our team reflects with both pride and humility. We began this journey with a clear creative ambition: to build a pixel-art action game that goes beyond fast-paced combat and introduces players to a meaningful, narrative-rich world. And while we achieved much of that vision, the path to it was nonlinear and filled with learning curves.
+
+One of our greatest achievements was the **integration of narrative and gameplay**, which remains a rarity in the pixel shooter genre. Through features such as **vision-limiting mechanics**, **enemy ability inheritance**, and **environment-driven storytelling**, we created a world that responds to the player both mechanically and emotionally. Our Graveyard level in particular demonstrated how design innovations like fog of war can increase difficulty while also deepening immersion. Players not only overcame new mechanical challenges, but also felt the story tighten around them.
+
+We also succeeded in realizing many of our key top-level goals from requirements engineering. Our user stories around *Challenge and Growth* led to modular systems like the **transformation mechanic**, which allowed players to tactically adapt by absorbing enemy skills. Meanwhile, the narrative integration criteria pushed us to implement visual transitions and lore-tied cutscenes that strengthened story continuity. These successes were validated in our **evaluation phase** through both **think-aloud studies** and **NASA-TLX** workload assessments, which confirmed that players felt a real increase in challenge and satisfaction from our design decisions.
+
+But these highlights were only possible because of the solid foundation we built during the early technical phases. The game architecture, from a centralized game loop to modular `Character` classes and JSON-driven level configuration, enabled us to iterate rapidly while maintaining structural coherence. Our design philosophy of **“code defines behavior, config defines variation”** gave the team—including non-programmers—the ability to contribute meaningfully throughout the process.
+
+That said, our journey was far from perfect. At the beginning, we had little concept of what software engineering truly required. We operated on instinct and informal coordination, often underestimating the importance of planning tools and structured workflows. It took us almost six weeks to build the prototype, which—while educational—left us with less time for polish and extra features. As deadlines approached, we often found ourselves racing against time, forced to leave several valuable ideas (such as dynamic player hint systems or deeper branching narrative paths) in the backlog.
+
+While our weekly Friday team-building sessions played an important role in team cohesion and project continuity, they were also our **only retrospective mechanism**. In contrast to standard Scrum practices—where *retrospective* and *review* meetings are formally distinct—we combined both into casual discussions. Though emotionally supportive, this approach may have hindered deeper technical and stakeholder engagement. In hindsight, if we had reached out earlier to other teams, TAs, or even Ruzanna, we could have better utilized the **external support systems** available to us. Some important insights were simply realized too late to act on.
+
+Through this experience, we also came to better understand ourselves as collaborators. By the project’s midpoint, we organically divided into specialized teams, improving both speed and morale. However, we acknowledge that our **collaboration tools were not always structured**, and task tracking could have been more rigorous. Learning from this, we are now better equipped to build high-functioning workflows from day one.
+
+Going forward, we feel more confident as software developers and designers. We’ve learned that great games aren't just the result of creativity but of disciplined iteration, collaborative compromise, and well-scaffolded architecture. In future versions or projects, we aim to build on our current systems by expanding feedback loops (e.g., rewards for ideal play), offering smarter in-game hints, and possibly developing deeper multiplayer or side-story modules that enrich the lore and increase replayability.
+
+> In short, *Dragon Adventure* was not just a game we made — it was the process through which we became a true game development team.
 
 ### Contribution Statement
 
-- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent. 
+### 🙌 Contribution Statement
+
+| Name            | Role                   | Primary Responsibilities                                                                                                                                     | Notes                                                                                                    |
+|-----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
+| **Xinyi Zhou**    | Programmer              | UI programming, **inter-level transitions**, configuration parsing, loading systems                                                                            | Focused on level selection, player state saving/loading, and polished system behaviors outside gameplay. |
+| **Jingwei Lin**   | Technical Bridge & Writer | Testing, class design, **team structure evolution**, **requirement and report authorship**, UML/class diagrams                                                 | Played a key role in shaping cross-team collaboration; drafted major report sections and visual models. |
+| **Xiao Wu**       | Narrative Designer      | Story system, worldbuilding, comic-style cutscenes                                                                                                             | Designed all narrative components; ensured story progression aligns with gameplay tone.                  |
+| **Yaxin Chen**    | Game Designer           | Level layout logic, transformation mechanic, cursed vision system                                                                                             | Designed vision-restricting gameplay and transformation; structured configuration for monsters/maps.     |
+| **Yaoyao Shen**   | Visual Designer         | UI assets, level-clear transitions, polish for menus and HUD                                                                                                   | Designed interface feedback, victory panels, and bridging visual elements.                              |
+
+---
+
+> 💡 **Note**: Despite differing focuses, all six members actively participated in **code review and collaborative development**, especially during the prototype and integration phases. This shared technical involvement fostered a strong team-wide understanding of the codebase.
+> 🎯 Ultimately, every team member contributed with full dedication and effort, ensuring that *Dragon Adventure* could reach its final form as a polished, immersive experience. Our collective passion and resilience were the foundation of the project’s success.
+
 
 ### Additional Marks
 
