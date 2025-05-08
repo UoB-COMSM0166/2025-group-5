@@ -639,8 +639,6 @@ Going forward, we feel more confident as software developers and designers. Weâ€
 
 ### Contribution Statement
 
-### ðŸ™Œ Contribution Statement
-
 | Name            | Role                   | Primary Responsibilities                                                                                                                                     | Notes                                                                                                    |
 |-----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
