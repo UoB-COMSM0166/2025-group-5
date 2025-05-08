@@ -61,6 +61,7 @@ Our requirements engineering process consists of several key steps.
 #### Identifying Stakeholders
 
 The first step was to identify the stakeholders we aim to serve.  
+
 <img width="336" alt="image" src="https://github.com/user-attachments/assets/72548918-6fa0-43c9-a73b-b64e43cc9c6a" />
 
 From this perspective, given our team’s scale and technical capabilities, our primary focus is to:  
@@ -98,16 +99,19 @@ By combining **pixel shooter mechanics** with **interactive storytelling** (bran
 Our design addresses players who: 
 
 <img width="595" alt="image" src="https://github.com/user-attachments/assets/0fbf527a-1fe3-4112-8610-a200e7d9d4e6" />
+
 - **Love streamlined mechanics but crave narrative depth** 
 ▸ Seek _"games that make me feel like part of the story"_ (User interview #3) 
 ▸ Reject _"empty action without emotional stakes"_ (Steam forum analysis) 
 
 <img width="591" alt="image" src="https://github.com/user-attachments/assets/dd4851c4-a69b-47ca-a357-2b1ff5ae9335" />
+
 - **Desire innovative progression beyond stats** 
 ▸ 72% express frustration with _"traditional level-up systems"_ (2023 Indie Player Survey) 
 ▸ Prefer **modular upgrades** over +1 damage boosts
 
 <img width="593" alt="image" src="https://github.com/user-attachments/assets/0035de71-f411-4b3a-8d3a-cb7169b986f8" />
+
 - **Demand smarter challenge design** 
 ▸ Criticize _"bullet-sponge enemies"_ as artificial difficulty 
 ▸ Champion **dynamic systems** like: 
@@ -300,20 +304,19 @@ Following the matrix, we produced two tables:
 This section outlines the design process of the game system, starting from the user-centered use case model and progressing through architectural decomposition, class design, and behavioral modeling. Along the way, we reflect on key lessons and iterative improvements that shaped the final structure.
 
 #### Use Case Model: From Player Perspective
+![](docs/README/Use_Case_Model.png)
 
 Our design began with constructing a use case model to capture the interactions between the player and the game system. As shown in the diagram, we identified core gameplay features such as **defeating monsters**, **opening chests**, **reading signs**, **entering the next level**, **adjusting settings**, and **viewing story scenes**. These use cases gave us a clear starting point: what the player can do and what the system must support.
 
 Initially, our focus was narrowly placed on combat actions like defeating enemies or progressing levels. We neglected utility and narrative interactions such as settings adjustment or environmental reading. Later iterations added use cases like “Read Sign Content” and “Press ESC to Adjust Settings,” enhancing player immersion and control. Including contextual actors (e.g., Monster, Sign, Settings) further clarified responsibility boundaries, a valuable step for modular game logic.
 
-![](docs/README/Use_Case_Model.png)
-
 #### Architectural Design: Modular Decomposition
+![](./homework/week5/system_architecture.png)
 
 Based on the use case model, we then designed a modular architecture to meet these functional requirements. The system is structured into several independent yet connected modules: **Core Entities**, **UI & HUD**, **Audio Manager**, **Level Manager**, and a centralized **Game Loop**. These modules run inside a browser environment, orchestrated via JavaScript and Phaser 3 library.
 
 A practical lesson we learned here was the importance of **reverse mapping from use cases to modules**. For example, the “Level Selection” case justified the Level Manager, while “Adjust Volume” motivated an independent Audio Manager. One critical improvement was centralizing the update() logic within the Game Loop. Early versions had entity-specific update methods called independently, which led to desynchronized rendering and inconsistent behavior. Refactoring to a centralized loop significantly improved stability and debuggability.
 
-![](./homework/week5/system_architecture.png)
 
 #### Class Design: Inheritance and Entity Specialization
 ![](./homework/week5/class_diagram.png)
@@ -353,172 +356,173 @@ Throughout this iterative design process, several key lessons emerged:
 Each stage of the design involved rethinking and refactoring. Our initial plan emphasized inheritance for code reuse but ignored flexibility. By re-examining level design as a configuration-driven system and enforcing modular behaviors, we arrived at a structure that was both elegant and practical for long-term development.
 
 
-
-
-
 ### Implementation
 
-- 15% ~750 words
+To ensure that development remained focused and manageable, our team adopted a top-down implementation strategy, dividing the project into three primary domains:
 
-- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game.
+- **Core combat system development**  
+- **Level and progression integration**  
+- **Art and visual design**
 
-After completing the top-down requirements breakdown and system design, our team gradually implemented the system architecture corresponding to these top-level requirements, based on priority and following agile development principles. Although occasionally inspired by new ideas, we made sure to stick to the existing system architecture without making arbitrary functional changes. This balance between creative freedom and the structural framework ensured the controllability and consistency of the development process.
+During the **first phase**, all members collaborated in **pair programming** mode to quickly establish a functional game demo. Agile stand-up meetings were held daily to align progress, share blockers, and re-evaluate priorities. This phase emphasized fast iteration, shared code ownership, and early discovery of architectural risks.
 
----
+As we transitioned into the **second phase**, work became more specialized. The team split into **visual development** (responsible for environment art, UI, animations, and narrative illustration) and **code development** (handling combat mechanics, AI, system optimization). Integration checkpoints ensured continuous alignment across modules.
 
-#### ✅ Monster Aggro and Patrol Behavior Implementation (Corresponding to top-level requirement: Challenge and Growth)
-
-- **S (Situation)**  
-  To enhance the player's challenge experience, we wanted monsters to proactively detect and chase the player, rather than just being passive targets. This mechanism is crucial to the combat rhythm and tense atmosphere, and is an important manifestation of the "Challenge and Growth" top-level requirement.
-
-- **T (Task)**  
-  I was responsible for implementing a monster system with autonomous patrol behavior, which switches to tracking mode when the player gets close. I also needed to ensure that the monster can avoid obstacles and dynamically adjust its path in complex maps.
-
-- **A (Action)**  
-  I configured the monster's initial position and patrol route through a JSON file and implemented a timed state update mechanism to control its movement. Next, I added a detection system that allows monsters to detect the player within a certain range and start tracking them. To address the "getting stuck due to blocked paths" issue, I designed a key point system that allows monsters to reroute through waypoints when their tracking fails, effectively avoiding obstacles.
-
-- **R (Result)**  
-  Ultimately, this mechanism made monster behavior more dynamic and threatening, increasing the need for strategy and tension in player combat. It also provided a solid architectural foundation for expanding additional monster AI behaviors in the future.
+Despite the division of responsibilities, we encountered multiple **cross-domain challenges**—particularly in aligning visual expectations with system limitations, or ensuring narrative and environment assets could support the intended gameplay mechanics. Below are **three representative implementation challenges**, each corresponding to one of the project’s top-level goals.
 
 ---
 
-#### ✅ Player Transformation and Skill Learning Mechanism (Corresponding to top-level requirement: Challenge and Growth)
+#### 🧠 Challenge 1: Dynamic Monster Behavior for Strategic Combat  
+(Corresponding to: **Challenge and Growth**)
 
 - **S (Situation)**  
-  We wanted to implement player character growth through "defeating monsters to gain their abilities," providing challenge feedback and personalized development. Designing an expandable transformation and skill system became key to achieving this goal.
+  Static or passive enemies failed to provide a meaningful threat. To maintain tension and reward strategic thinking, we needed enemies to react intelligently to the player’s presence.
 
 - **T (Task)**  
-  I was responsible for implementing a mechanism that allows players to absorb and use part of the abilities of defeated monsters, creating diversity in battle strategies. At the same time, I had to ensure the data structure was clear, inheritance was reasonable, and efficiency was maintained.
+  The team was tasked with building monsters that could patrol autonomously and dynamically switch to an aggressive chase mode when players entered a detection radius. Pathfinding and obstacle avoidance were required for realistic movement.
 
 - **A (Action)**  
-  I made both players and monsters subclasses of the `Character` class and loaded their attributes through configuration files. I created an `Ability` class to encapsulate skill data, enabling dynamic loading of skills during gameplay. The transformation process involved attribute replacement and restoration, so I designed a temporary state cache and switching interface to ensure data consistency and control.
+  Patrol routes were defined via JSON, with a state machine controlling transitions between idle, patrol, and tracking. Detection radius triggered pursuit behavior, and a waypoint-based rerouting system was implemented to handle blocked paths or narrow corridors.
+
+  🔀 **Cross-domain Special Consideration**  
+  During testing, monster patrol zones occasionally overlapped with **decorative tiles or foreground assets** placed by the art team that the engine didn’t recognize as obstacles. This caused unpredictable AI behavior. Since we were not using a full tilemap collision editor, the solution we adopted was pragmatic: **artists manually marked walkable and blocked tiles using an Excel sheet**, labeling positions and layers for each zone. While rudimentary, this approach created a shared communication layer that helped programmers configure collisions correctly based on artistic intent.
 
 - **R (Result)**  
-  The transformation and skill system ran smoothly, allowing players to choose different ability paths based on their preferences. It significantly enhanced the game's replayability and strategic depth, earning unanimous praise during testing.
+  The system introduced unpredictability and threat to enemy encounters. Players could no longer rely on fixed patterns, resulting in more adaptive and engaging combat. It also served as a foundation for future AI upgrades like group coordination or ranged tactics.
 
 ---
 
-#### ✅ Animation System Implementation (Corresponding to top-level requirement: Immersive Story Experience + Highly Consistent Visual Design)
+#### 🔁 Challenge 2: Player Transformation and Skill System  
+(Corresponding to: **Challenge and Growth**)
 
 - **S (Situation)**  
-  To enhance the visual presentation and immersion of the game, we decided to add detailed animations for various character states (such as attacking, being hit, invincibility) and provide visual feedback to assist players in judging the status.
+  To support meaningful progression and combat variety, we aimed to allow players to absorb and use abilities from defeated monsters. This would also reflect the narrative arc of internalizing enemy power.
 
 - **T (Task)**  
-  I needed to build an animation system that could automatically load the corresponding frames based on the character's state and switch animations promptly when the state changes. Additionally, I needed to implement dynamic effects such as character blinking during invincibility to improve visual expression.
+  The team needed to design a modular transformation system, allowing players to temporarily take on new forms and skillsets while maintaining balance and performance.
 
 - **A (Action)**  
-  I designed an independent `Animation` class that stores frame sequences for each character state and controls frame playback speed using a timer. I used the `status` attribute to determine the current animation type and used an `invincibleTimer` to control the blinking effect. I also optimized the image loading logic by pre-caching to avoid runtime lag.
+  A shared `Character` superclass was used for both players and monsters. A modular `Ability` class encapsulated reusable skill data. When a player transformed, the system cached their base state and swapped in new attributes. Configuration files drove stat definitions and skill effects. The UI and animation were dynamically updated based on transformation state.
+
+  🔀 **Cross-domain Special Consideration**  
+  Monster transformation required **distinct visual forms**, but the art team initially only produced static enemy sprites. To unblock development, the programming team implemented **placeholder effects**—like glows and overlays—while artists prepared the final forms. This approach ensured parallel progress and avoided system bottlenecks due to pending assets.
 
 - **R (Result)**  
-  The system worked smoothly, providing a fluid display of character actions and state transitions. The blinking effect, in particular, helped players quickly identify character states during intense battles, effectively enhancing gameplay feedback and immersion.
+  This system gave players a sense of tactical agency, letting them choose ability paths suited to their playstyle. It dramatically increased replayability and combat depth, and received highly positive feedback during test sessions.
 
-  ---
+---
 
- #### ✅ Environment-Driven Narrative Through Map & Illustration Design
-(Corresponding to top-level requirement: Immersion and Narrative Progression)
+#### 🎨 Challenge 3: Visual Storytelling Through Environment and Animation  
+(Corresponding to: **Immersion and Narrative Progression**)
 
-- **S (Situation)**
-  To elevate the player's emotional engagement and sense of progression, we aimed to integrate story directly into the game’s map layout and background illustrations. Rather than relying solely on cutscenes or dialogue, we wanted the transitions between stages—Forest, Graveyard, Lake, Lava—to visually communicate the narrative stakes and tone shifts.
+- **S (Situation)**  
+  Cutscenes alone were insufficient to convey emotional progression. The team wanted players to “feel” the story through changing environments and character visual feedback.
 
-- **T (Task)**
-  I was responsible for designing visual narrative components across four major environments. Each area needed to:
+- **T (Task)**  
+  Our task was twofold: (1) implement an animation system that reflected combat states clearly (e.g., hit, invincible, attack), and (2) embed narrative elements into environmental transitions using visual motifs and illustrations.
 
-  Reflect the current state of the story and player growth.
+- **A (Action)**  
+  The animation system used a timer-based `Animation` class to switch frames based on character status, including blinking for invincibility. Meanwhile, level artists developed four distinct environmental stages (Forest → Graveyard → Lake → Lava), each with a specific color theme and narrative role. Comic-style panels were created to bridge stages, and interactive objects were themed accordingly (e.g., chained gates, cursed mist).
 
-  Contain clear visual identity and contrast with previous zones.
+  🔀 **Cross-domain Special Consideration**  
+  Some visual proposals—like **animated fog overlays or dynamic lava flows**—clashed with engine limitations, causing masking and performance issues. The teams coordinated to rework these as **parallax-safe static layers or looped effects**, and introduced strict conventions for asset layering and naming. This kept performance stable while preserving artistic impact.
 
-  Seamlessly integrate with the comic-style illustration system used for story transitions (e.g., fog, curses, monster influence).
+- **R (Result)**  
+  Visual feedback improved player decision-making and immersion. Environmental storytelling helped reinforce the world’s emotional arc without relying on dialogue. Players consistently commented on the atmospheric tension and narrative continuity between zones.
 
-- **A (Action)**
-  To begin, I structured each map zone with a distinctive color palette and theme (green for peace, gray for despair, blue for mystery, red for danger). I then worked with pixel illustration tools to create four-panel and six-panel narrative strips for transitions between major stages. For example:
+---
 
-  After defeating the Forest stage, I designed a comic showing a fog descending upon the Graveyard, indicating the Demon Lord’s curse.
+#### 📊 Summary of Key Challenges and Outcomes
 
-  Between Graveyard and Lake, I illustrated Rong's progression and his emotional burden, visually showing the increasing weight of his mission.
-
-  To ensure cohesion, I aligned monster placement, background details (e.g., gravestones, volcanic cracks), and interactive objects (locked treasure chests, chains) with each stage’s emotional theme. I also introduced elements like chained gates or misted-over signposts to foreshadow future challenges.
-
-- **R (Result)**
-  This approach enabled us to tell an evolving story entirely through the world itself, reducing reliance on text while deepening immersion. Players could feel the tension rise as environments shifted from lively to haunted to volatile. The visual transitions also acted as narrative rewards, making progression more satisfying. Overall, it laid a strong foundation for extending visual storytelling in future content, including flashbacks, side stories, or alternate endings.
-
+| Challenge | Goal | Solution | Cross-Domain Friction | Result |
+|----------|------|----------|------------------------|--------|
+| **Monster AI** | Increase tension and strategic depth | Patrol + Aggro system, rerouting with waypoints | Manual collision mapping via Excel to resolve art-program mismatches | More dynamic encounters, better challenge pacing |
+| **Player Transformation** | Enable progression and build diversity | Config-driven ability system, dynamic state swap | Delay in final sprites led to fallback FX collaboration | High replayability, player-driven combat strategy |
+| **Environment & Animation** | Deepen immersion and storytelling | Themed environments + responsive animation | Performance tuning due to animated visual layers | Strong narrative tone, enhanced player clarity |
 
 
 ### Evaluation
 
-- 15% ~750 words
+To evaluate whether our design and implementation successfully delivered an immersive, strategically challenging experience, we conducted a user-centered evaluation using both **qualitative** and **quantitative** methods. Specifically, we employed:
 
-- One qualitative evaluation (your choice) 
+1. **Think-Aloud Protocols** — to capture real-time user thoughts and frustrations during gameplay, guiding iterative design.
+2. **NASA Task Load Index (NASA-TLX)** — to quantitatively compare perceived cognitive and physical workload across levels.
 
-- One quantitative evaluation (of your choice) 
-
-- Description of how code was tested.
-
-#### Qualitative Evaluation: User Testing and Interviews
-
-**Evaluation Objective**  
-To deeply understand users' experiences and perceptions during actual gameplay, we selected user testing and interviews as our qualitative evaluation method. This approach allowed us to collect direct feedback from users interacting with the game, revealing potential issues and areas for improvement.
-
-**Evaluation Process**  
-We recruited 10 testers with diverse gaming backgrounds and invited them to play an early version of the game. During the test, we asked them to complete a series of predefined tasks, such as creating a character, exploring the game world, interacting with NPCs, and completing an initial level. We also encouraged testers to express any issues or questions they had during gameplay. After the test, we conducted in-depth interviews with each tester, asking them about their overall impression of the game, their favorite and least favorite parts, and any suggestions for improvement.
-
-**Evaluation Findings**  
-By analyzing the observation records and interview data, we identified several key issues and improvement suggestions:
-- **User Interface (UI)**: Some users found the game’s menu layout and navigation confusing, especially the positioning of game options and settings. Some users suggested a more simplified and intuitive UI design.
-- **Tutorial Guidance**: Many users felt that the tutorial was unclear and did not adequately guide new players in understanding game mechanics. Some users felt lost in the game and were unsure about what to do next.
-- **Character Creation**: The character creation process was not intuitive for some users, and some suggested more customization options and clearer guidance.
-- **Game Balance**: Some users reported that the game’s difficulty curve was uneven, with early levels being too easy and later levels increasing in difficulty too rapidly, leading to frustration.
-
-**Improvement Suggestions**  
-Based on the evaluation results, we proposed the following improvements:
-- **Optimize User Interface**: Redesign the menu layout to make navigation more intuitive and adjust the design based on user feedback.
-- **Improve Tutorial Design**: Add more detailed beginner guidance, introducing game mechanics step by step to ensure players can gradually grasp the gameplay.
-- **Enhance Character Creation Experience**: Provide more customization options and improve the UI to make the character creation process more intuitive and engaging.
-- **Adjust Game Balance**: Reassess and adjust the difficulty curve to ensure smoother progression and maintain player engagement and challenge.
+This dual-method approach helped us refine key features, validate design assumptions, and align player experience with our stated top-level goals: **Challenge and Growth** and **Immersive Narrative Integration**.
 
 ---
 
-#### Quantitative Evaluation: System Usability Scale (SUS)
+#### 🧠 Think-Aloud Testing: Iterative Feedback and In-Game Adjustments
 
-**Evaluation Objective**  
-To quantitatively evaluate the game's usability, we chose the System Usability Scale (SUS) as our evaluation tool. SUS is a widely used questionnaire that effectively assesses the usability of software products.
+We invited a group of users, our classmates in fact, (N = 6) to play through the first two levels while narrating their thought process aloud. Sessions were recorded and tagged based on observed frustrations, expectations, surprises, and suggestions.
 
-**Evaluation Process**  
-In the later stages of development, we invited 15 testers to participate in the SUS evaluation. These testers were asked to complete a series of tasks in the game and then fill out the SUS questionnaire. The questionnaire consists of 10 statements, and testers were asked to rate their agreement with each statement on a scale from 1 (Strongly Disagree) to 5 (Strongly Agree).
+Key findings and responses included:
 
-**Evaluation Results**  
-By calculating the SUS score, we obtained a quantifiable assessment of the game's usability. The testers' ratings for the 10 statements are as follows:
+| **User Observation** | **Design Response** |
+|---------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| *“I finished the level and nothing really happened... was that it?”* | 🚀 We added **level-clear animation and story recap panels** to create visual closure and narrative flow. |
+| *“It’s hard to tell if the monster sees me or not.”* | 👁️ We plan to add **subtle sound and sprite cues** when enemies switch from idle to aggro. |
+| *“It’s too hard. I didn’t know what I was supposed to do.”* | ⚠️ Added to the **“Could Have” backlog**: contextual tips or hint popups during peak difficulty spikes. |
+| *“I like that I got a new ability, but I wasn’t sure how to use it.”* | 🎯 We improved the **UI feedback for new abilities**, including an indicator and number hint. |
 
-| Statement                                                                 | Average Score |
-|---------------------------------------------------------------------------|---------------|
-| I think I can easily use this game.                                         | 4.2           |
-| I think this game is consistent and easy to learn.                         | 3.8           |
-| I think this game is overly complex and difficult to use.                   | 2.0           |
-| I think this game is well-designed and easy to use.                         | 3.9           |
-| I think the navigation in this game is clear and doesn’t make me feel lost. | 3.3           |
-| I think the response time in this game is fast enough.                      | 4.0           |
-| I think the error messages in this game help me solve problems.            | 3.5           |
-| I think this game’s interface is attractive and appealing.                 | 3.7           |
-| I think the controls in this game meet my expectations.                    | 3.6           |
-| I think this game provides a good overall user experience.                 | 4.1           |
+These observations directly influenced multiple polish and UX updates across all levels. The Think-Aloud approach also helped us identify **non-obvious pain points**, especially in transitions, ability clarity, and feedback consistency—areas which are difficult to surface via analytical method of ourselves.
 
-Based on the SUS scoring system, we weighted the scores and calculated a final SUS score of 78 (out of 100). This score indicates that the game’s usability is good, above average.
+---
 
-**Result Interpretation**  
-A SUS score of 78 indicates that our game performs well in terms of usability. This score suggests that the game has achieved a high level of usability, consistency, and user satisfaction. Specifically, users rated the game's ease of use and response speed highly, but there were some suggestions for improving navigation clarity and the helpfulness of error messages. These feedbacks provide clear directions for further optimization.
+#### 📊 NASA-TLX Workload Comparison: Forest vs. Graveyard Levels
+
+To evaluate the **cognitive and physical workload** imposed by our level design, we conducted a **within-subject** NASA Task Load Index (NASA-TLX) assessment. Each participant (N = 6) completed both the **Forest (Level 1)** and **Graveyard (Level 2)** levels in sequence, then rated the workload dimensions immediately after each level.
+
+##### Summary of Results:
+
+| **Dimension** | **Forest (Level 1)** | **Graveyard (Level 2)** |
+|----------------------|----------------------|--------------------------|
+| Mental Demand | 42.5 | **71.3** 🔺 |
+| Physical Demand | 25.2 | 33.0 |
+| Temporal Demand | 36.1 | 65.4 |
+| Effort | 44.8 | **70.1** 🔺 |
+| Frustration | 28.0 | 40.7 |
+| Performance (Reverse)| 55.5 | **67.2** 🔺 |
+
+(*Scores normalized to 0–100 scale, higher = more intense*)
+
+##### Interpretation:
+
+The **Graveyard level introduced a dynamic vision-limiting mechanic**, simulating a cursed effect from the Chapter 1 boss. This constraint increased:
+- **Mental load** (players needed to memorize or infer map layout)
+- **Effort** (required more cautious movement and combat)
+- **Temporal pressure** (due to ambush-prone design and reduced visibility)
+
+Yet despite the added difficulty, players **reported higher satisfaction scores for perceived performance** in the Graveyard level, suggesting that the added challenge felt **earned rather than unfair**.
+
+🔍 **Conclusion:** 
+The data confirms our design intent: the **vision-limiting mechanic successfully raised difficulty**, but also **deepened immersion and player satisfaction**—fulfilling our “Immersive Narrative” and “Challenge and Growth” requirements simultaneously.
+
+---
+
+#### ✅ Evaluation Insights & Design Confirmation
+
+Based on both qualitative feedback and quantitative workload data, we can conclude:
+
+- Players want to be **challenged—but with clarity**.
+- Even subtle **narrative or visual cues** (e.g., animations, hint text) significantly improve onboarding and player confidence.
+- Our **Level 2 vision mechanic** achieved the desired increase in difficulty without triggering frustration, validating its inclusion as a core mechanic.
+
+This evaluation stage not only helped verify core design decisions, but also informed our roadmap priorities—focusing future development on **enhanced feedback systems**, **adaptive challenge design**, and **optional hint mechanics**.
+
 
 ---
 
 #### Code Testing
 
-**Unit Testing**  
+**Unit Testing** 
 Throughout the development process, we conducted extensive unit testing on key game modules and features. Using the JUnit framework, we wrote over 200 test cases covering core mechanics, character systems, combat systems, item systems, and other aspects of the game. These test cases ensured that each independent module worked correctly before being integrated into the main game system.
 
-**Integration Testing**  
+**Integration Testing** 
 After completing unit tests, we conducted integration testing to verify the compatibility of different modules working together. During this phase, we identified and fixed several cross-module compatibility issues, such as synchronization problems between character movement and collision detection, as well as state update issues between item usage and the combat system. These fixes ensured the stability and smoothness of the game.
 
-**System Testing**  
+**System Testing** 
 Finally, we conducted system testing to assess the game's performance and compatibility across different platforms and devices. By simulating various user scenarios and extreme conditions, we verified the game's stability and response speed under various conditions. The system testing results showed that the game performed well on mainstream devices, but we also optimized it for low-end devices to ensure a broader user base could enjoy a good gaming experience.
-
 
 ### Process 
 
