@@ -286,44 +286,22 @@ Following the matrix, we produced two tables:
 |----------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Must Have**  | 🔸 Mechanics Introduction with Narrative Link        | Introduces gameplay mechanics contextually, linking them to story beats. Low cost, high return on immersion and clarity.                                     |
 |                | 🔸 Core Combat & Vision Systems                      | Fundamental for interaction and game progression. Must be implemented early.                                                                                  |
-
 | **Should Have**| 🔸 World Introduction on Game Start                  | Uses narrated cutscene to set tone and world. Boosts onboarding and emotional connection.                                                                    |
 |                | 🔸 Recap & Context Before New Level                 | Provides narrative bridge and motivation for next area. Increases continuity.                                                                                 |
 |                | 🔸 Inherited Abilities Usage in Combat              | Allows players to apply prior progress against new threats. Key for player satisfaction and perceived growth.                                                |
 |                | 🔸 Challenge Solvable with Past Abilities           | Ensures progression feels meaningful and not reset per level. Reinforces learning loop.                                                                      |
-
 | **Could Have** | 🔸 Strategic Feedback Loop                           | Rewards memory and application of past knowledge. Adds to replay depth but non-essential.                                                                    |
 |                | 🔸 Hidden Optional Content                           | Encourages exploration. Increases depth but adds less to primary narrative or loop.                                                                          |
 |                | 🔸 Ability Combination Usage                         | Advanced layer of progression and customization. Useful for power users but optional for MVP.                                                                |
-
 | **Won’t Have** | 🔸 Cross-Platform Real-Time Multiplayer              | High development and maintenance cost. Outside current narrative-driven single-player focus.                                                                 |
-
-
-##### Use Case Model
-![](docs/README/Use_Case_Model.png)
-
-- **Brief Description**:  
-  The player controls their character to attack and defeat monsters. Once a monster is defeated, the game system triggers the ability acquisition mechanism, granting the player a portion of the monster's power.
-
-- **Basic Flow**:
-  1. The player encounters a monster and enters combat.
-  2. The player attacks the monster until its HP reaches zero.
-  3. The game system confirms the monster has been defeated and prompts an ability acquisition notification.
-  4. The player accepts the ability, and their character receives a corresponding power boost.
-
-- **Alternative Flows**:
-  - **Monster Defense Mode**:  
-    If the monster has special defensive traits and the player's attack method is ineffective, the monster enters a defense state. The player must adjust their strategy to continue the battle.
-  
-  - **Player Retreat**:  
-    If the player chooses to retreat mid-battle, the system confirms the retreat. The player forfeits the opportunity to gain the monster’s ability.
-
-
-
 
 ### Design
 
-- 15% ~750 words 
+#### Use Case Model
+![](docs/README/Use_Case_Model.png)
+
+
+
 - System architecture
   
 ![](./homework/week5/system_architecture.png)
