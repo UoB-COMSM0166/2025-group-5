@@ -10,7 +10,7 @@ class Music {
 
     // —— 关卡专属 BGM —— 
         this.levels = {};
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 0; i <= 4; i++) {
             const a = new Audio(`resources/music/level${i}.mp3`);
             a.loop    = true;
             a.baseVol = 0.2;

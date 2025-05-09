@@ -689,7 +689,7 @@ function drawStart(){
 
 // —— 2. “story1” 过场：播放一次，可 Skip —— 
 function startStory1() {
-  gameMusic.stopBackground(); // 停止背景音乐 :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+  gameMusic.stopBackground();
   gameState = 'story1';
   story1Video.position(canvasX, canvasY);
   story1Video.show().play();
@@ -740,14 +740,20 @@ function startStory2() {
 }
 
 function drawStory2(){
+  background(0);
   skipButton.show();
   skipButton.mousePressed(()=>enterLevelSelect());
   // 确保视频在 DOM 上可见并循环播放
-  story2Video.show();
-  story2Video.loop();
+  // 把当前视频帧画到画布上
+  // imageMode(CORNER);
+  // image(story2Video, canvasX, canvasY,
+  //       canvasWidth, canvasHeight);
 
   // Skip 按钮只需 show，一旦创建后每帧都让它保持可见
   skipButton.show();
+    if (keyIsDown(32)) {
+    enterLevelSelect();
+  }
 }
 
 // —— 4. 进入选关界面 —— 
