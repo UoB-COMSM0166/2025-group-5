@@ -8,93 +8,27 @@ global.document = dom.window.document;
 global.window = dom.window;
 global.navigator = dom.window.navigator;
 
-// 模拟 p5.js 环境
-global.canvasWidth = 800;
-global.canvasHeight = 600;
+// 游戏常量
+global.canvasWidth = 1280;
+global.canvasHeight = 800;
 global.width = canvasWidth;
 global.height = canvasHeight;
+global.frameRate = 60;
+global.HealthBarHeight = 5;
+global.globalInvincibleTimer = 90;
+global.globalWaterStatusTimer = 180;
+global.globalFireStatusTimer = 120;
 
-global.createCanvas = jest.fn().mockReturnValue({
-    width: 800,
-    height: 600,
-    getContext: jest.fn().mockReturnValue({
-        fillRect: jest.fn(),
-        drawImage: jest.fn(),
-        clearRect: jest.fn(),
-        beginPath: jest.fn(),
-        arc: jest.fn(),
-        fill: jest.fn(),
-        stroke: jest.fn(),
-        closePath: jest.fn()
-    })
-});
-
-global.createButton = jest.fn().mockReturnValue({
-    mousePressed: jest.fn(),
-    show: jest.fn(),
-    hide: jest.fn(),
-    position: jest.fn(),
-    size: jest.fn(),
-    style: jest.fn()
-});
-
-global.createVideo = jest.fn().mockReturnValue({
-    show: jest.fn(),
-    hide: jest.fn(),
-    play: jest.fn(),
-    pause: jest.fn(),
-    loop: jest.fn(),
-    volume: jest.fn()
-});
-
-global.image = jest.fn();
-global.background = jest.fn();
-global.text = jest.fn();
-global.textSize = jest.fn();
-global.fill = jest.fn();
-
-// 模拟游戏状态
+// 游戏状态
 global.gameState = 'start';
 global.isGameOver = false;
 global.present_level = 0;
 global.pausedState = false;
 global.nextLevel = 0;
 
-// 模拟视频对象
-global.story1Video = {
-    show: jest.fn(),
-    hide: jest.fn(),
-    play: jest.fn(),
-    pause: jest.fn(),
-    loop: jest.fn()
-};
-
-global.story2Video = {
-    show: jest.fn(),
-    hide: jest.fn(),
-    play: jest.fn(),
-    pause: jest.fn(),
-    loop: jest.fn()
-};
-
-// 模拟图片资源
-global.startImg = {};
-global.levelSelectImg = {};
-global.image_map = {
-    start: { width: 800, height: 600 },
-    levelSelect: { width: 800, height: 600 },
-    background: { width: 800, height: 600 }
-};
-
-// 模拟游戏对象
-global.g_skillTextureList = [];
-global.g_skillStatusList = [];
-global.g_skillNumList = [];
-global.g_skillNumber = 8;
-
-// 模拟游戏核心类
+// 定义所有类
 class Character {
-    constructor(x, y, size, color, health, maxHealth, attack, status, speed, isInvincible, animations) {
+    constructor(x, y, size, color, health, maxHealth, attack, status, speed, isInvincible, animations, isPlayer = false) {
         this.x = x;
         this.y = y;
         this.size = size;
@@ -107,6 +41,8 @@ class Character {
         this.isInvincible = isInvincible;
         this.animations = animations;
         this.invincibleTimer = 0;
+        this.isPlayer = isPlayer;
+        this.display = jest.fn();
     }
 
     changeHealth(amount) {
@@ -121,6 +57,10 @@ class Character {
         if (newStatus === 'INVINCIBLE') {
             this.invincibleTimer = 60;
         }
+    }
+
+    update() {
+        // 添加默认的 update 方法
     }
 }
 
@@ -300,7 +240,64 @@ class Curtain {
     }
 }
 
-// 导出模拟的类
+class Level {
+    constructor(id, jsonFile, bGTexture, lightTexture, curtainFlag) {
+        this.id = id;
+        this.jsonFile = jsonFile;
+        this.bGTexture = bGTexture;
+        this.lightTexture = lightTexture;
+        this.curtainFlag = curtainFlag;
+        this.player = null;
+        this.enemies = [];
+        this.projectiles = [];
+        this.entities = [];
+        this.obstacles = [];
+        this.isSpecial = false;
+        this.transformFlag = false;
+        this.promptFlag = false;
+        this.endFlag = false;
+        this.endAnimation = false;
+        this.endTimer = 0;
+        this.startAnimation = true;
+        this.startTimer = 0;
+    }
+
+    async init() {
+        // 初始化关卡
+        return Promise.resolve();
+    }
+
+    start() {
+        // 开始关卡
+        this.player = new Character(100, 100, 50, 'red', 100, 100, 10, 'NORMAL', 5, true, {}, true);
+    }
+
+    update() {
+        // 更新关卡状态
+        if (this.player) {
+            this.player.update();
+            this.player.display();
+        }
+        this.enemies.forEach(enemy => enemy.update(this));
+    }
+
+    reset() {
+        this.player = null;
+        this.enemies = [];
+        this.projectiles = [];
+        this.entities = [];
+        this.obstacles = [];
+        this.transformFlag = false;
+        this.promptFlag = false;
+        this.endFlag = false;
+        this.endAnimation = false;
+        this.endTimer = 0;
+        this.startAnimation = true;
+        this.startTimer = 0;
+    }
+}
+
+// 将类添加到全局对象
 global.Character = Character;
 global.Player = Player;
 global.Enemy = Enemy;
@@ -308,23 +305,145 @@ global.Projectile = Projectile;
 global.SpriteAnimator = SpriteAnimator;
 global.SkillBar = SkillBar;
 global.Curtain = Curtain;
-
-// 模拟关卡对象
-class Level {
-    constructor(number, conf, bg, light, isSpecial) {
-        this.number = number;
-        this.conf = conf;
-        this.bg = bg;
-        this.light = light;
-        this.isSpecial = isSpecial;
-    }
-
-    async init() {}
-    start() {}
-    update() {}
-}
-
 global.Level = Level;
+
+// 模拟画布和UI元素
+global.createCanvas = jest.fn().mockReturnValue({
+    width: canvasWidth,
+    height: canvasHeight,
+    getContext: jest.fn().mockReturnValue({
+        fillRect: jest.fn(),
+        drawImage: jest.fn(),
+        clearRect: jest.fn(),
+        beginPath: jest.fn(),
+        arc: jest.fn(),
+        fill: jest.fn(),
+        stroke: jest.fn(),
+        closePath: jest.fn()
+    })
+});
+
+global.createButton = jest.fn().mockReturnValue({
+    mousePressed: jest.fn(),
+    show: jest.fn(),
+    hide: jest.fn(),
+    position: jest.fn(),
+    size: jest.fn(),
+    style: jest.fn()
+});
+
+global.createVideo = jest.fn().mockReturnValue({
+    show: jest.fn(),
+    hide: jest.fn(),
+    play: jest.fn(),
+    pause: jest.fn(),
+    loop: jest.fn(),
+    volume: jest.fn()
+});
+
+// 模拟视频对象
+global.story1Video = {
+    show: jest.fn(),
+    hide: jest.fn(),
+    play: jest.fn(),
+    pause: jest.fn(),
+    loop: jest.fn()
+};
+
+global.story2Video = {
+    show: jest.fn(),
+    hide: jest.fn(),
+    play: jest.fn(),
+    pause: jest.fn(),
+    loop: jest.fn()
+};
+
+// 模拟图片资源
+global.startImg = {};
+global.levelSelectImg = {};
+global.image_map = {
+    start: { width: canvasWidth, height: canvasHeight },
+    levelSelect: { width: canvasWidth, height: canvasHeight },
+    background: { width: canvasWidth, height: canvasHeight }
+};
+
+// 模拟游戏对象
+global.g_skillTextureList = [];
+global.g_skillStatusList = [];
+global.g_skillNumList = [];
+global.g_skillNumber = 8;
+
+// 游戏属性配置
+global.attributes = {
+    grassSlime: { health: 150 },
+    ghostSlime: { health: 100 },
+    waterSlime: { health: 120 },
+    fireSlime: { health: 130 }
+};
+
+// 模拟 level1 对象
+global.level1 = new Level(1, 'level1.json', {}, {}, true);
+level1.player = new Player(400, 300, 30, 'blue', 100, 100, 10, 'NORMAL', 5, 50, 100, 'single', 30, 'aoe', 20, 30, 100, 'red', 'special', false, {}, []);
+level1.start = jest.fn();
+level1.update = jest.fn();
+level1.reset = jest.fn();
+level1.keyPressedInLevel = jest.fn();
+
+// 模拟游戏函数
+global.setup = jest.fn().mockImplementation(async () => {
+    createCanvas(canvasWidth, canvasHeight);
+    const startButton = createButton('开始游戏');
+    const skipButton = createButton('跳过');
+    const story1Video = createVideo('assets/videos/story1.mp4');
+    const story2Video = createVideo('assets/videos/story2.mp4');
+    
+    // 加载资源
+    image_map.start = { width: canvasWidth, height: canvasHeight };
+    image_map.levelSelect = { width: canvasWidth, height: canvasHeight };
+    image_map.background = { width: canvasWidth, height: canvasHeight };
+    
+    // 初始化技能列表
+    for (let i = 0; i < g_skillNumber; i++) {
+        g_skillTextureList.push({});
+        g_skillStatusList.push(false);
+        g_skillNumList.push(0);
+    }
+    
+    return Promise.resolve();
+});
+
+global.draw = jest.fn();
+
+// 添加键盘事件处理
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'p') {
+        pausedState = !pausedState;
+        gameState = pausedState ? 'paused' : 'playing';
+    } else if (gameState === 'playing') {
+        level1.keyPressedInLevel(event);
+    }
+});
+
+// 模拟加载 JSON 数据
+global.loadJsonData = jest.fn().mockImplementation(() => Promise.resolve({
+    player: {
+        position: { x: 100, y: 100 }
+    },
+    enemies: [],
+    entities: [],
+    obstacles: []
+}));
+
+// 其他全局函数
+global.image = jest.fn();
+global.background = jest.fn();
+global.text = jest.fn();
+global.textSize = jest.fn();
+global.fill = jest.fn();
+global.keyIsDown = jest.fn().mockReturnValue(false);
+
+// 其他全局变量
+global.animations = {};
 global.level1ConfFile = {};
 global.level2ConfFile = {};
 global.level3ConfFile = {};
@@ -338,120 +457,22 @@ global.level2LightTexture = {};
 global.level3LightTexture = {};
 global.level4LightTexture = {};
 
-// 模拟加载 JSON 数据
-global.loadJsonData = jest.fn().mockImplementation((path, callback) => {
-    callback({
-        player: {
-            position: { x: 100, y: 100 }
-        },
-        enemies: [],
-        entities: [],
-        obstacles: []
-    });
-});
-
-// 模拟游戏常量
-global.frameRate = 30;
-
-// 模拟动画数据
-global.animations = {
-    player: {
-        idleUp: { frames: [1, 2, 3], period: 300, loop: true },
-        idleDown: { frames: [1, 2, 3], period: 300, loop: true },
-        idleLeft: { frames: [1, 2, 3], period: 300, loop: true },
-        idleRight: { frames: [1, 2, 3], period: 300, loop: true },
-        walkUp: { frames: [1, 2, 3], period: 300, loop: true },
-        walkDown: { frames: [1, 2, 3], period: 300, loop: true },
-        walkLeft: { frames: [1, 2, 3], period: 300, loop: true },
-        walkRight: { frames: [1, 2, 3], period: 300, loop: true }
-    },
-    grassSlime: {
-        idleUp: { frames: [] },
-        idleDown: { frames: [] },
-        idleLeft: { frames: [] },
-        idleRight: { frames: [] },
-        moveUp: { frames: [] },
-        moveDown: { frames: [] },
-        moveLeft: { frames: [] },
-        moveRight: { frames: [] }
-    },
-    ghostSlime: {
-        idleUp: { frames: [] },
-        idleDown: { frames: [] },
-        idleLeft: { frames: [] },
-        idleRight: { frames: [] },
-        moveUp: { frames: [] },
-        moveDown: { frames: [] },
-        moveLeft: { frames: [] },
-        moveRight: { frames: [] }
-    },
-    waterSlime: {
-        idleUp: { frames: [] },
-        idleDown: { frames: [] },
-        idleLeft: { frames: [] },
-        idleRight: { frames: [] },
-        moveUp: { frames: [] },
-        moveDown: { frames: [] },
-        moveLeft: { frames: [] },
-        moveRight: { frames: [] }
-    },
-    fireSlime: {
-        idleUp: { frames: [] },
-        idleDown: { frames: [] },
-        idleLeft: { frames: [] },
-        idleRight: { frames: [] },
-        moveUp: { frames: [] },
-        moveDown: { frames: [] },
-        moveLeft: { frames: [] },
-        moveRight: { frames: [] }
-    }
+// 导出所有类
+module.exports = {
+    Character,
+    Player,
+    Enemy,
+    Projectile,
+    SpriteAnimator,
+    SkillBar,
+    Curtain,
+    Level
 };
 
-// 模拟属性数据
-global.attributes = {
-    grassSlime: {
-        health: 100,
-        attack: 10,
-        speed: 5
-    },
-    ghostSlime: {
-        health: 40,
-        attack: 4,
-        speed: 4
-    },
-    waterSlime: {
-        health: 60,
-        attack: 6,
-        speed: 2
-    },
-    fireSlime: {
-        health: 70,
-        attack: 7,
-        speed: 3
-    }
-};
-
-// 模拟关卡
-global.level1 = {
-    start: jest.fn(),
-    update: jest.fn(),
-    draw: jest.fn(),
-    keyPressedInLevel: jest.fn(),
-    player: {
-        x: 100,
-        y: 100,
-        size: 50,
-        display: jest.fn()
-    }
-};
-
-// 模拟键盘状态
-global.keyIsDown = jest.fn().mockReturnValue(false);
-
-// 模拟游戏函数
 global.startGame = jest.fn().mockImplementation(level => {
     gameState = 'playing';
     present_level = level;
+    level1.start();
     if (level === 2) {
         attributes.grassSlime.health = 150; // 第二关提高难度
     }
@@ -478,405 +499,45 @@ global.restartGame = jest.fn().mockImplementation(() => {
     present_level = 0;
 });
 
-global.draw = jest.fn();
-
-// 添加事件监听器
-document.addEventListener('keydown', event => {
-    if (event.key === ' ') {
-        if (gameState === 'start') {
-            startStory1();
-        } else if (gameState === 'story1') {
-            startStory2();
-        } else if (gameState === 'story2') {
-            enterLevelSelect();
-        }
-    } else if (event.key === 'p') {
-        pausedState = !pausedState;
-        gameState = pausedState ? 'paused' : 'playing';
-    } else if (gameState === 'playing') {
-        level1.keyPressedInLevel(event);
-    }
-});
-
-// 设置JSDOM环境
-const { JSDOM } = require('jsdom');
-const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
-global.document = dom.window.document;
-global.window = dom.window;
-global.navigator = dom.window.navigator;
-
-// 模拟p5.js函数
-global.createCanvas = jest.fn().mockReturnValue({
-    width: 800,
-    height: 600
-});
-
-global.createButton = jest.fn().mockReturnValue({
-    mousePressed: jest.fn(),
-    position: jest.fn(),
-    size: jest.fn()
-});
-
-global.createVideo = jest.fn().mockReturnValue({
-    show: jest.fn(),
-    play: jest.fn(),
-    loop: jest.fn(),
-    hide: jest.fn()
-});
-
-// 游戏常量
-global.canvasWidth = 800;
-global.canvasHeight = 600;
-global.frameRate = 60;
-
-// 游戏状态
-global.gameState = 'start';
-global.present_level = 0;
-global.pausedState = false;
-global.nextLevel = 0;
-
-// 游戏资源
-global.image_map = {};
-global.animations = {};
-global.g_skillTextureList = [];
-global.g_skillStatusList = [];
-global.g_skillNumList = [];
-global.g_skillNumber = 8;
-
-// 模拟游戏类
-class Character {
-    constructor(x, y, size, color, health, maxHealth, attack, status, speed, isPlayer, attributes) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.color = color;
-        this.health = health;
-        this.maxHealth = maxHealth;
-        this.attack = attack;
-        this.status = status;
-        this.speed = speed;
-        this.isPlayer = isPlayer;
-        this.attributes = attributes;
-        this.invincibleTimer = 0;
-    }
-
-    changeHealth(amount) {
-        this.health = Math.max(0, Math.min(this.maxHealth, this.health + amount));
-        if (this.health === 0) {
-            this.status = 'DEAD';
-        }
-    }
-
-    changeStatus(status) {
-        this.status = status;
-        if (status === 'INVINCIBLE') {
-            this.invincibleTimer = 60;
-        }
-    }
-}
-
-class Player extends Character {
-    constructor(x, y, size, color, health, maxHealth, attack, status, speed,
-                mana, maxMana, attackType, attackCd, attackType2, attack2, speed2,
-                maxMana2, color2, attackType3, isPlayer, attributes, projectiles) {
-        super(x, y, size, color, health, maxHealth, attack, status, speed, isPlayer, attributes);
-        this.mana = mana;
-        this.maxMana = maxMana;
-        this.attackType = attackType;
-        this.attackCd = attackCd;
-        this.attackCdTimer = 0;
-        this.attackType2 = attackType2;
-        this.attack2 = attack2;
-        this.speed2 = speed2;
-        this.maxMana2 = maxMana2;
-        this.color2 = color2;
-        this.attackType3 = attackType3;
-        this.projectiles = projectiles || [];
-        this.lastDirection = 'right';
-    }
-
-    update() {
-        if (global.keyIsDown('ArrowRight')) {
-            this.x += this.speed;
-            this.lastDirection = 'right';
-        }
-        if (global.keyIsDown('ArrowLeft')) {
-            this.x -= this.speed;
-            this.lastDirection = 'left';
-        }
-        if (global.keyIsDown('ArrowUp')) {
-            this.y -= this.speed;
-        }
-        if (global.keyIsDown('ArrowDown')) {
-            this.y += this.speed;
-        }
-    }
-
-    shoot() {
-        if (this.attackCdTimer <= 0) {
-            this.projectiles.push(new Projectile(this.x, this.y, 1, 0, 10, 5, 200, 'blue', 'fire'));
-            this.attackCdTimer = this.attackCd;
-        }
-    }
-
-    aoe() {
-        if (this.attackCdTimer <= 0) {
-            for (let i = 0; i < 8; i++) {
-                this.projectiles.push(new Projectile(this.x, this.y, Math.cos(i * Math.PI / 4), Math.sin(i * Math.PI / 4), 10, 5, 200, 'blue', 'fire'));
-            }
-            this.attackCdTimer = this.attackCd;
-        }
-    }
-}
-
-class Enemy extends Character {
-    constructor(id, x, y, size, color, health, maxHealth, attack, status, speed,
-                path, mana, maxMana, attackType, attackCd, attackType2, attack2,
-                speed2, maxMana2, color2, attackType3, isPlayer, attributes) {
-        super(x, y, size, color, health, maxHealth, attack, status, speed, isPlayer, attributes);
-        this.id = id;
-        this.path = path;
-        this.mana = mana;
-        this.maxMana = maxMana;
-        this.attackType = attackType;
-        this.attackCd = attackCd;
-        this.attackCdTimer = 0;
-        this.attackType2 = attackType2;
-        this.attack2 = attack2;
-        this.speed2 = speed2;
-        this.maxMana2 = maxMana2;
-        this.color2 = color2;
-        this.attackType3 = attackType3;
-        this.projectiles = [];
-        this.findPalyer = false;
-    }
-
-    update(level) {
-        if (this.findPalyer) {
-            const dx = level.player.x - this.x;
-            const dy = level.player.y - this.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist > 0) {
-                this.x += (dx / dist) * this.speed;
-                this.y += (dy / dist) * this.speed;
-            }
-        } else {
-            this.x += 1;
-            this.y += 1;
-        }
-
-        if (this.attackCdTimer <= 0) {
-            this.projectiles.push(new Projectile(this.x, this.y, 1, 0, 10, 5, 200, 'blue', 'fire'));
-            this.attackCdTimer = this.attackCd;
-        }
-    }
-}
-
-class Projectile {
-    constructor(x, y, dx, dy, speed, size, damage, color, type) {
-        this.x = x;
-        this.y = y;
-        this.dx = dx;
-        this.dy = dy;
-        this.speed = speed;
-        this.size = size;
-        this.damage = damage;
-        this.color = color;
-        this.type = type;
-    }
-
-    update() {
-        this.x += this.dx * this.speed;
-        this.y += this.dy * this.speed;
-    }
-
-    isHit(character) {
-        const dx = this.x - character.x;
-        const dy = this.y - character.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        return dist < (this.size + character.size) / 2;
-    }
-}
-
-class SpriteAnimator {
-    constructor(animations) {
-        this.animations = animations;
-        this.currentState = 'idleUp';
-        this.currentIndex = 0;
-        this.timer = 0;
-    }
-
-    setState(state) {
-        if (this.currentState !== state) {
-            this.currentState = state;
-            this.currentIndex = 0;
-            this.timer = 0;
-        }
-    }
-
-    update() {
-        this.timer += 1;
-        if (this.timer >= this.animations[this.currentState].period) {
-            this.timer = 0;
-            this.currentIndex = (this.currentIndex + 1) % this.animations[this.currentState].frames.length;
-        }
-    }
-}
-
-class SkillBar {
-    constructor(skillNumber, skillTextureList, skillStatusList, statusList, numberList, x, y, width, height, gap, size) {
-        this.skillNumber = skillNumber;
-        this.skillTextureList = skillTextureList;
-        this.skillStatusList = skillStatusList;
-        this.statusList = statusList;
-        this.numberList = numberList;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.gap = gap;
-        this.size = size;
-    }
-
-    addSkill(index) {
-        this.statusList[index] = true;
-        this.numberList[index] = 1;
-    }
-
-    useSkill(index, isAoe) {
-        if (this.statusList[index] && this.numberList[index] > 0) {
-            this.numberList[index]--;
-            return true;
-        }
-        return false;
-    }
-}
-
-class Curtain {
-    constructor(width, height, color, px, py, radius, shape, sectorRadius) {
-        this.width = width;
-        this.height = height;
-        this.color = color;
-        this.px = px;
-        this.py = py;
-        this.radius = radius;
-        this.shape = shape;
-        this.sectorRadius = sectorRadius;
-        this.lastDirection = 'right';
-    }
-
-    update(px, py, radius, shape, sectorRadius, lastDirection) {
-        this.px = px;
-        this.py = py;
-        this.radius = radius;
-        this.shape = shape;
-        this.sectorRadius = sectorRadius;
-        this.lastDirection = lastDirection;
-    }
-}
-
-class Level {
-    constructor(id, jsonData, image_map, animations, isPlayer) {
-        this.id = id;
-        this.jsonData = jsonData;
-        this.image_map = image_map;
-        this.animations = animations;
-        this.isPlayer = isPlayer;
-        this.player = null;
-        this.enemies = [];
-        this.obstacles = [];
-    }
-
-    async init() {
-        this.jsonData = await loadJsonData();
-    }
-
-    start() {
-        this.player = new Player(100, 100, 50, 'red', 100, 100, 10, 'NORMAL', 5,
-            100, 200, 'shooting', 30, 'normal', 10, 5, 200, 'blue', 'fire',
-            true, {}, []);
-        this.enemies = [];
-        this.obstacles = [];
-    }
-
-    update() {
-        if (this.player) {
-            this.player.update();
-            this.player.display = jest.fn();
-        }
-    }
-
-    keyPressedInLevel = jest.fn();
-}
-
-// 模拟游戏函数
-global.setup = jest.fn().mockImplementation(async () => {
-    createCanvas(canvasWidth, canvasHeight);
-    createButton('开始游戏');
-    createButton('跳过');
-    createVideo('story1.mp4');
-    createVideo('story2.mp4');
-    await loadJsonData();
-});
-
 global.draw = jest.fn().mockImplementation(() => {
+    background();
     if (gameState === 'start') {
-        background();
+        image(startImg, 0, 0);
     } else if (gameState === 'story1') {
         story1Video.show();
+        story1Video.play();
     } else if (gameState === 'story2') {
         story2Video.show();
+        story2Video.loop();
     } else if (gameState === 'levelSelect') {
-        background();
+        image(levelSelectImg, 0, 0);
     } else if (gameState === 'playing') {
-        level1.draw();
+        // 绘制游戏场景
     }
 });
 
-global.background = jest.fn();
-global.story1Video = createVideo('story1.mp4');
-global.story2Video = createVideo('story2.mp4');
-global.level1 = new Level(1, {}, {}, {}, false);
+global.setup = async function() {
+    createCanvas(canvasWidth, canvasHeight);
+    const startButton = createButton('开始游戏');
+    const skipButton = createButton('跳过');
+    const story1Video = createVideo('assets/videos/story1.mp4');
+    const story2Video = createVideo('assets/videos/story2.mp4');
+    
+    // 加载资源
+    image_map.start = { width: canvasWidth, height: canvasHeight };
+    image_map.levelSelect = { width: canvasWidth, height: canvasHeight };
+    image_map.background = { width: canvasWidth, height: canvasHeight };
+    
+    // 初始化技能列表
+    for (let i = 0; i < g_skillNumber; i++) {
+        g_skillTextureList.push({});
+        g_skillStatusList.push(false);
+        g_skillNumList.push(0);
+    }
+    
+    return Promise.resolve();
+};
 
-global.startStory1 = jest.fn().mockImplementation(() => {
-    gameState = 'story1';
-    story1Video.show();
-    story1Video.play();
-});
-
-global.startStory2 = jest.fn().mockImplementation(() => {
-    gameState = 'story2';
-    story2Video.show();
-    story2Video.loop();
-});
-
-global.enterLevelSelect = jest.fn().mockImplementation(() => {
-    gameState = 'levelSelect';
-});
-
-global.startGame = jest.fn().mockImplementation((level) => {
-    present_level = level;
-    gameState = 'playing';
-});
-
-global.restartGame = jest.fn().mockImplementation(() => {
-    gameState = 'start';
-    present_level = 0;
-});
-
-global.loadJsonData = jest.fn().mockResolvedValue({
-    player: {
-        position: { x: 100, y: 100 }
-    },
-    enemies: [],
-    entities: [],
-    obstacles: []
-});
-
-// 模拟键盘事件
-global.keyIsDown = jest.fn().mockReturnValue(false);
-
-// 模拟性能API
-global.performance = {
-    now: jest.fn().mockReturnValue(0)
-}; 
+// 添加关卡实例
+global.level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture, true);
+level1.start = jest.fn(); 

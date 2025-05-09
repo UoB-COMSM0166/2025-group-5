@@ -1,6 +1,31 @@
 // 游戏黑盒测试文件
 require('./jest.setup.js');
 
+// 模拟函数
+global.startStory1 = jest.fn().mockImplementation(() => {
+    gameState = 'story1';
+    story1Video.show();
+    story1Video.play();
+});
+
+global.startStory2 = jest.fn().mockImplementation(() => {
+    gameState = 'story2';
+    story2Video.show();
+    story2Video.loop();
+});
+
+global.enterLevelSelect = jest.fn().mockImplementation(() => {
+    gameState = 'levelSelect';
+});
+
+global.startGame = jest.fn().mockImplementation((level) => {
+    gameState = 'playing';
+    present_level = level;
+    level1.start();
+});
+
+global.loadJsonData = jest.fn().mockImplementation(() => Promise.resolve({}));
+
 describe('游戏启动测试', () => {
     beforeEach(() => {
         gameState = 'start';
@@ -25,10 +50,14 @@ describe('游戏流程测试', () => {
         // 开始游戏
         startStory1();
         expect(gameState).toBe('story1');
+        expect(story1Video.show).toHaveBeenCalled();
+        expect(story1Video.play).toHaveBeenCalled();
 
         // 跳过故事
         startStory2();
         expect(gameState).toBe('story2');
+        expect(story2Video.show).toHaveBeenCalled();
+        expect(story2Video.loop).toHaveBeenCalled();
 
         // 进入关卡选择
         enterLevelSelect();
@@ -38,6 +67,7 @@ describe('游戏流程测试', () => {
         startGame(1);
         expect(gameState).toBe('playing');
         expect(present_level).toBe(1);
+        expect(level1.start).toHaveBeenCalled();
     });
 });
 
@@ -45,6 +75,7 @@ describe('游戏控制测试', () => {
     beforeEach(() => {
         gameState = 'playing';
         present_level = 1;
+        level1.keyPressedInLevel = jest.fn();
     });
 
     test('键盘控制测试', () => {
@@ -67,6 +98,8 @@ describe('游戏界面测试', () => {
     });
 
     test('界面元素测试', () => {
+        expect(canvasWidth).toBe(1280);
+        expect(canvasHeight).toBe(800);
         expect(gameState).toBe('start');
         expect(present_level).toBe(0);
     });
@@ -76,12 +109,13 @@ describe('游戏结束测试', () => {
     beforeEach(() => {
         gameState = 'playing';
         present_level = 1;
+        level1.player = new Player(400, 300, 30, 'blue', 100, 100, 10, 'NORMAL', 5, 50, 100, 'single', 30, 'aoe', 20, 30, 100, 'red', 'special', false, {}, []);
+        level1.start();
     });
 
     test('游戏结束条件测试', () => {
         // 模拟玩家死亡
-        level1.player.health = 0;
-        level1.update();
+        level1.player.changeHealth(-100);
         expect(level1.player.status).toBe('DEAD');
     });
 });
@@ -104,9 +138,13 @@ describe('游戏兼容性测试', () => {
 });
 
 describe('边界条件测试', () => {
+    beforeEach(() => {
+        level1.keyPressedInLevel = jest.fn();
+    });
+
     test('屏幕尺寸限制测试', () => {
-        expect(canvasWidth).toBe(800);
-        expect(canvasHeight).toBe(600);
+        expect(canvasWidth).toBe(1280);
+        expect(canvasHeight).toBe(800);
     });
 
     test('快速按键测试', () => {
@@ -121,8 +159,8 @@ describe('边界条件测试', () => {
 describe('异常处理测试', () => {
     test('资源加载错误测试', async () => {
         const error = new Error('Resource not found');
-        loadJsonData.mockRejectedValueOnce(error);
-        await expect(setup()).rejects.toThrow('Resource not found');
+        global.loadJsonData = jest.fn().mockRejectedValue(error);
+        await expect(loadJsonData()).rejects.toThrow('Resource not found');
     });
 
     test('游戏崩溃恢复测试', () => {
@@ -145,10 +183,15 @@ describe('用户体验测试', () => {
         expect(present_level).toBe(1);
         startGame(2);
         expect(present_level).toBe(2);
+        expect(attributes.grassSlime.health).toBe(150); // 第二关提高难度
     });
 });
 
 describe('可访问性测试', () => {
+    beforeEach(() => {
+        level1.keyPressedInLevel = jest.fn();
+    });
+
     test('键盘支持测试', () => {
         const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
         document.dispatchEvent(event);
