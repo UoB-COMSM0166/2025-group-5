@@ -221,11 +221,11 @@ class Level
                     {
                         this.enemies[i].changeHealth(- this.player.getAttack());
                         this.enemies[i].changeStatus(charStatus.INVINCIBLE);
+                        this.enemies[i].changeAbnormalStatus(this.player.skill);
                         if(this.enemies[i].getHealth() === 0)
                         { // remove dead enemy.
                             this.skillBar.addSkill(this.enemies[i].getEnemyId());
                             this.enemies.splice(i, 1);
-                            this.enemies[i].changeAbnormalStatus(this.player.skill);
                         }
                     }
                 }
