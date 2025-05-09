@@ -10,7 +10,7 @@ class Music {
 
     // —— 关卡专属 BGM —— 
         this.levels = {};
-        for (let i = 0; i <= 4; i++) {
+        for (let i = 1; i <= 4; i++) {
             const a = new Audio(`resources/music/level${i}.mp3`);
             a.loop    = true;
             a.baseVol = 0.2;
@@ -100,6 +100,13 @@ class Music {
     setMasterVolume(v){
         this.master = constrain(v, 0, 1);
         this.bgMusic.volume = this.bgMusic.baseVol * this.master;
+
+  // —— 新增：关卡专属 BGM 一并调整 —— 
+  for (const lvl in this.levels) {
+    const track = this.levels[lvl];
+    track.volume = track.baseVol * this.master;
+  }
+
         Object.values(this.sfx).forEach(a => {
             a.volume = a.baseVol * this.master;
         });
