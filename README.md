@@ -364,7 +364,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 #### 🧠 Challenge 1: Adaptive Monster Behavior  
 *A necessary foundation for [Souls-like layered difficulty](#ac-growth-2).*
 
-<img src="./report/challenge1.pic.jpg" width="640"/>
+<img src="./report/challenge1.pic.jpg" width="840" alt="Adaptive Monster Behavior Presentation"/>
 - **S**: Static enemies failed to create meaningful tension.  
 - **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
 - **A**: Behavior states (Idle, Patrol, Track) were driven by JSON. Rerouting logic handled blocked paths.  
