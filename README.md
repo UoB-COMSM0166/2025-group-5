@@ -144,7 +144,7 @@ Some players desired more onboarding for understanding new mechanics like limite
 
 ---
 
-**[AC1: Progression-Based Problem Solving](#ac-growth-1)**  
+**<a name="ac-growth-1"></a>AC1: Progression-Based Problem Solving**  
 > *Given* the player has unlocked transformation abilities,  
 > *When* they encounter negative status effects (e.g., burn, slow),  
 > *Then* they can activate an appropriate transformation to neutralize it.
