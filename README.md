@@ -212,59 +212,130 @@ Our prioritization process placed **player impact at the center**—balancing ef
 
 ### Design
 
-This section outlines the design process of the game system, starting from the user-centered use case model and progressing through architectural decomposition, class design, and behavioral modeling. Along the way, we reflect on key lessons and iterative improvements that shaped the final structure.
+### 🧱 Design
 
-#### Use Case Model: From Player Perspective
-![](docs/README/Use_Case_Model.png)
+Our system design followed a top-down, user-centered methodology. We began by modeling gameplay behavior from the player’s perspective and iteratively transformed these abstractions into concrete architecture, class structure, configuration logic, and real-time behavior.
 
-Our design began with constructing a use case model to capture the interactions between the player and the game system. As shown in the diagram, we identified core gameplay features such as **defeating monsters**, **opening chests**, **reading signs**, **entering the next level**, **adjusting settings**, and **viewing story scenes**. These use cases gave us a clear starting point: what the player can do and what the system must support.
+---
 
-Initially, our focus was narrowly placed on combat actions like defeating enemies or progressing levels. We neglected utility and narrative interactions such as settings adjustment or environmental reading. Later iterations added use cases like “Read Sign Content” and “Press ESC to Adjust Settings,” enhancing player immersion and control. Including contextual actors (e.g., Monster, Sign, Settings) further clarified responsibility boundaries, a valuable step for modular game logic.
+#### 🎮 Use Case Model: From Player Perspective
 
-#### Architectural Design: Modular Decomposition
-![](./homework/week5/system_architecture.png)
+![Use Case Model](docs/README/Use_Case_Model.png)
 
-Based on the use case model, we then designed a modular architecture to meet these functional requirements. The system is structured into several independent yet connected modules: **Core Entities**, **UI & HUD**, **Audio Manager**, **Level Manager**, and a centralized **Game Loop**. These modules run inside a browser environment, orchestrated via JavaScript and Phaser 3 library.
+We first identified key interactions between the player and the game, such as:
+- Defeating monsters  
+- Opening chests  
+- Reading signs  
+- Entering next levels  
+- Adjusting settings  
+- Viewing story cutscenes  
 
-A practical lesson we learned here was the importance of **reverse mapping from use cases to modules**. For example, the “Level Selection” case justified the Level Manager, while “Adjust Volume” motivated an independent Audio Manager. One critical improvement was centralizing the update() logic within the Game Loop. Early versions had entity-specific update methods called independently, which led to desynchronized rendering and inconsistent behavior. Refactoring to a centralized loop significantly improved stability and debuggability.
+This model provided a **functional blueprint** for system requirements and shaped our later module decomposition. For instance, "Read Sign" informed UI interaction handling, and "Adjust Settings" justified separating out an **Audio Manager**.
 
+> 🧩 This model emphasized gameplay beyond combat—ensuring immersive narrative and utility actions had technical support from the start.
 
-#### Class Design: Inheritance and Entity Specialization
-![](./homework/week5/class_diagram.png)
+---
 
-![](./homework/week5/class_diagram_full.png)
+#### 🧱 Architecture Design: From Use Cases to Modules
 
-With the system modules defined, we moved to class-level design. A core part of this was modeling the **Character** superclass, from which **Player**, **Enemy**, **Obstacle**, and **Projectile** inherit. Each subclass implements its specialized behavior while reusing shared logic such as movement, state management, and health tracking.
+![System Architecture](./homework/week5/system_architecture.png)
 
-In our first attempt, we placed all logic in a monolithic `Entity` class to achieve reuse, but this led to bloated, unmanageable code. The move to a polymorphic hierarchy was a major breakthrough, improving maintainability and clarity. Each entity class (e.g., Enemy or Player) now encapsulates only the behaviors it owns, like patrol or shooting for enemies, and keyboard control for the player.
+We mapped use cases to concrete modules within a Phaser 3 browser game engine. Major components include:
+- `CoreEntity`: Player, Enemy, Projectile, Obstacle  
+- `UI/HUD`: Text, Prompts, Cutscene Display  
+- `AudioManager`: Volume and sound effects  
+- `LevelManager`: Map loading and transitions  
+- `GameLoop`: Central logic orchestrator  
 
-We also implemented reusable UI components like `Curtain` and `Prompt`, which were originally hardcoded into the game loop. Refactoring them into standalone classes with consistent display() and update() interfaces made them modular and extensible.
+A major architectural evolution was our shift to **configuration-driven design**. Instead of embedding entity attributes in code, we loaded a central **JSON file** defining:
+- Player/enemy stats (health, speed, skills, vision type)  
+- Level dimensions  
+- Object properties (chests, doors, hazards)  
+- Special abilities and visual behaviors  
 
-#### Level Configuration: Beyond Hardcoding
+---
 
-A critical turning point in our design thinking occurred during level design. At first, we hardcoded level layouts and enemy stats using embedded JSON files. This approach worked for prototyping but lacked scalability and flexibility.
+##### 📦 Example: JSON-Defined Enemy Entry
 
-Initially, we only focused on class inheritance for code reuse, and in terms of level design, we only thought of hardcoding configuration files. Later, we realized that **level configuration could serve as a parameterization tool**—by designing configuration files to define enemy types, positions, trigger zones, and even map styles, we could decouple gameplay logic from level content. This not only maximized code reuse but also empowered non-programmers to participate in level design by simply editing config files. This approach turned into a core strategy in our design: **code handles behavior, configuration defines variation**.
+```json
+"fireSlime": {
+  "enemyId": 3,
+  "size": 32,
+  "attack": 3,
+  "health": 10,
+  "enemyType": "collision",
+  "skill": "fire",
+  "visionType": "round"
+}
+```
 
-#### Sequence Modeling: Dynamic Behavior Over Time
+This configuration-first architecture brought **four critical advantages**:
 
-![](./homework/week5/sequence_diagram.png)
+- 🔁 **Rapid iteration**: Designers could rebalance difficulty or try new enemy types without touching core code.
+- ✍️ **Non-coder participation**: Visual and narrative team members contributed directly by editing JSON.
+- 🔍 **Separation of concern**: Code handled behavior, config defined variation.
+- 🔓 **Scalability**: Easily expanded with new levels, vision styles, enemy abilities, and transformation mappings.
 
-To visualize how entities interact over time, we created sequence diagrams showing player and system interactions across the **Game**, **Level**, **Player**, and **Enemy** components. The diagram illustrates how starting a level triggers `init()` and `create()` methods, how player input results in movement or shooting, and how updates propagate through the game loop.
+> 💡 This was key in our narrative-mechanic fusion: story-based curses and ability effects were made possible because our system could switch behavior via configuration.
 
-One lesson we learned here was the importance of consistent interfaces. By requiring each major entity to implement an `update()` method, we ensured they could all be synchronized in the game loop. Collision detection (`collisionCheck()`), rendering, and state transitions became easier to debug and extend.
+---
 
-#### Reflective Lessons and Design Techniques
+### 🧬 Class Design: Inheritance and Specialization
 
-Throughout this iterative design process, several key lessons emerged:
+At the class level, we implemented:
 
-- **Start from user behavior**, not implementation. Designing from the player's perspective helped ensure gameplay was intuitive and feature-complete.
-- **Abstract progressively**: move from high-level use cases to concrete modules, then into object-oriented classes and finally dynamic sequences.
-- **Centralize game loop logic** to maintain update consistency across the system.
-- **Favor configuration over hardcoding** for flexibility in level and gameplay tuning. This shift was crucial in making the game scalable.
-- **Use interface unification** (e.g., common update(), display()) to enable polymorphic handling and simplify integration.
+- `Character`: shared logic for movement, health, status  
+- Subclasses like `Player`, `Enemy`, `Projectile`  
+- Animation-capable subclasses via a unified interface  
+- Reusable UI classes like `Curtain` and `Prompt`  
 
-Each stage of the design involved rethinking and refactoring. Our initial plan emphasized inheritance for code reuse but ignored flexibility. By re-examining level design as a configuration-driven system and enforcing modular behaviors, we arrived at a structure that was both elegant and practical for long-term development.
+Early on, we experimented with a monolithic `Entity` class, but this became unmanageable. Our final hierarchy used **polymorphism and interface unification** to promote:
+
+- ✅ Maintainability  
+- 🎨 Visual consistency  
+- 🔗 Loose coupling for animation and logic  
+
+> 🔄 Every renderable class follows a shared `update()` protocol—this made it easy to sync visuals, collisions, and interactions in the core loop.
+
+---
+
+### 🗺️ Level Configuration: Beyond Hardcoding
+
+In early prototypes, we hardcoded enemy positions and map layouts using inlined JSON. This proved brittle and blocked collaboration.
+
+By converting level logic into **externally editable configuration files**, we enabled:
+
+- ⚡ Quick experimentation with level size and style  
+- 🎨 Designer-led content creation without coding  
+- 🔄 Fully decoupled map–logic pairing  
+
+> ✨ *Example*: Our visual team could build a forest dungeon with fog and slow-debuff monsters—just by tweaking enemy types and map settings in JSON.
+
+---
+
+### ⏱️ Sequence Modeling: Dynamic Behavior Over Time
+
+We visualized the real-time interactions of `Player`, `Enemy`, and `GameLoop` using **sequence diagrams**:
+
+- On level start, `create()` spawns entities via config  
+- Inputs update player state, triggering projectiles or transformations  
+- Enemy logic responds based on detection range and config flags  
+- `update()` functions ensure all objects are synchronized  
+
+> 🔁 *Unifying game behavior under `update()` streamlined debugging, made animation control simpler, and helped avoid desync bugs.*
+
+---
+
+### 🧠 Key Design Insights
+
+- ✅ **Start from the player**: Use cases anchored all later design  
+- 🧱 **Modularize early**: Logical boundaries enabled parallel development  
+- 💾 **Favor configuration over hardcoding**: Gave designers real control  
+- ♻️ **Unify interfaces**: Standard `update()` and `display()` made integration easy  
+- 🚫 **Don’t overfit to one abstraction**: We began with inheritance but added modularity and data separation as flexibility needs grew  
+
+> 📌 *In the end, our system is robust not because of complexity, but because each layer—use case, architecture, class, config, behavior—was built to support the next one.*
+
 
 
 ### Implementation
