@@ -29,6 +29,13 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 ## Project Report
 
 ### Introduction
+<img src="./report/start0.pic.jpg" width="640"/>
+<img src="./report/start1.pic.jpg" width="640"/>
+<img src="./report/start2.pic.jpg" width="640"/>
+<img src="./report/start3.pic.jpg" width="640"/>
+<img src="./report/start4.pic.jpg" width="640"/>
+<img src="./report/start5.pic.jpg" width="640"/>
+
 
 **Dragon Adventure** is a 2D pixel-art action-adventure game that fuses **souls-like difficulty** with a **narrative-first progression system**. Rather than relying on flashy weapons or random upgrades, the game challenges players through **intentional design**, where every mechanic is grounded in story, and every obstacle is thematically justified.
 
@@ -43,9 +50,46 @@ At the heart of the experience is a three-layered design philosophy:
 3. **Transformation: Strategic Empowerment Through Narrative**  
    To survive such extreme conditions, players rely on the core **transformation system**. By defeating monsters, they can temporarily **absorb their abilities**—such as gaining extra health, new attacks, or **curing negative status effects** like blindness. These powers are not just upgrades—they’re responses to the world’s cruelty, giving players **narrative-justified tools to push forward**.
 
-A typical scenario in Chapter 2: with vision severely limited, the player faces an elite enemy with low HP but devastating attacks. Only by defeating and **transforming into that monster** can they gain the clarity and strength needed to progress—turning despair into strategy.
 
-This tight synergy between **punishment, narrative, and tactical agency** defines *Dragon Adventure*. The result is a difficulty that is not just hard, but **immersively, meaningfully hard**—and always conquerable through understanding, memory, and adaptation.
+### 🧟 Monster Introduction
+
+| **Monster Type** | **Forest** | **Graveyard** | **Lake** | **Volcano** |
+|------------------|------------|---------------|----------|-------------|
+| **Slime**  
+_Melee attacker; high defense; medium speed_ | <img src="./report/greenslime.jpg" width="200"/> <br/> Green Slime | <img src="./report/greyslime.jpg" width="200"/> <br/> Grey Slime | <img src="./report/blueslime.jpg" width="200"/> <br/> Blue Slime | <img src="./report/redslime.jpg" width="200"/> <br/> Red Slime |
+| **Mage**  
+_Area damage; low health; medium speed_ | — | <img src="./report/ghost.jpg" width="200"/> <br/> Ghost Mage | <img src="./report/waterGhost.jpg" width="200"/> <br/> Water Mage | <img src="./report/fireghost.pic.jpg" width="200"/> <br/> Fire Mage |
+| **Tower**  
+_High attack; immobile and invulnerable_  
+_Lake: slows player / Volcano: burns player_ | <img src="./report/grassTower.jpg" width="200"/> <br/> Grass Tower | <img src="./report/GhostTower.pic.jpg" width="200"/> <br/> Ghost Tower | <img src="./report/waterTower.pic.jpg" width="200"/> <br/> Water Tower | <img src="./report/fireTower.jpg" width="200"/> <br/> Fire Tower |
+
+
+
+Monster Introduction
+0.level
+<img src="./report/forest.pic.jpg" width="640"/>
+<img src="./report/grayyard.pic.jpg" width="640"/>
+<img src="./report/lake.pic.jpg" width="640"/>
+<img src="./report/mountain.pic.jpg" width="640"/>
+
+1.slime
+<img src="./report/greenslime.jpg" width="640"/>
+<img src="./report/greyslime.jpg" width="640"/>
+<img src="./report/blueslime.jpg" width="640"/>
+<img src="./report/redslime.jpg" width="640"/>
+
+2.法师
+<img src="./report/ghost.jpg" width="640"/>
+<img src="./report/waterGhost.jpg" width="640"/>
+<img src="./report/fireghost.pic.jpg" width="640"/>
+
+3.防御塔
+<img src="./report/grassTower.jpg" width="640"/>
+<img src="./report/GhostTower.pic.jpg" width="640"/>
+<img src="./report/waterTower.pic.jpg" width="640"/>
+<img src="./report/fireTower.jpg" width="640"/>
+
+
 
 ### Requirements
 
