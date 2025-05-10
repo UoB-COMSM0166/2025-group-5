@@ -105,13 +105,13 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 
 ---
 
-##### 🎭 Immersive Narrative Experience
+##### 1. Immersive Narrative Experience
 
 > *As a player, I want story and gameplay to feel interconnected, so that my actions carry emotional weight in the world.*
 
 ---
 
-**AC1: World Introduction via Story Cutscene**  
+**[AC1: World Introduction via Story Cutscene](#ac-immersive-1)**  
 > *Given* the player starts a new game,  
 > *When* the session begins,  
 > *Then* a 30-second narrated cutscene introduces key lore (curse, player identity, stakes).
@@ -123,7 +123,7 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 
 ---
 
-**AC2: Narrative-Driven Transitions & Mechanic Introduction**  
+**[AC2: Narrative-Driven Transitions & Mechanic Introduction](#ac-immersive-2)**  
 > *Given* the player completes a level,  
 > *When* the next level begins,  
 > *Then* a narrative recap and lore-linked mechanic intro is presented.
@@ -138,13 +138,13 @@ Some players desired more onboarding for understanding new mechanics like limite
 
 ---
 
-##### 🧠 Challenge and Growth Through Player Agency
+##### 2. Challenge and Growth Through Player Agency
 
 > *As a player, I want to grow through earned abilities so I can overcome challenges and feel my mastery deepen.*
 
 ---
 
-**AC1: Progression-Based Problem Solving**  
+**[AC1: Progression-Based Problem Solving](#ac-growth-1)**  
 > *Given* the player has unlocked transformation abilities,  
 > *When* they encounter negative status effects (e.g., burn, slow),  
 > *Then* they can activate an appropriate transformation to neutralize it.
@@ -156,7 +156,7 @@ Some players desired more onboarding for understanding new mechanics like limite
 
 ---
 
-**AC2: Souls-like Difficulty via Layered Design**  
+**[AC2: Souls-like Difficulty via Layered Design](#ac-growth-2)**  
 > *Given* the player enters a level,  
 > *When* they face multiple hazards (combat, layout, limited sight),  
 > *Then* the challenge emerges from interaction, not stat inflation.
@@ -360,7 +360,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 ---
 
 #### 🧠 Challenge 1: Adaptive Monster Behavior  
-*Linked to: 🧠 AC2 – Souls-like Layered Difficulty*
+*Linked to: [🧠 AC2 – Souls-like Layered Difficulty](#ac-growth-2)*
 
 - **S**: Static enemies failed to create meaningful tension.  
 - **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
@@ -373,7 +373,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 ---
 
 #### 🔁 Challenge 2: Player Transformation System  
-*Linked to: 🧠 AC1 – Problem Solving with Abilities*
+*Linked to: [🧠 AC1 – Problem Solving with Abilities](#ac-growth-1)*
 
 - **S**: We needed progression that let players react to hazards using earned abilities.  
 - **T**: Implement a modular transformation system that swaps player state and visuals.  
@@ -386,7 +386,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 ---
 
 #### 🎨 Challenge 3: Visual Storytelling  
-*Linked to: 🎭 AC1 & AC2 – Narrative Integration*
+*Linked to: [🎭 AC1 & AC2 – Narrative Integration](#ac-immersive-1)*
 
 - **S**: Text-only storytelling lacked emotional depth.  
 - **T**: Embed narrative in spatial transitions and reactive animations.  
@@ -410,6 +410,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 These were not just engineering tasks—they were the **mechanical realization of player-facing promises** in our requirements.  
 Each implementation answered specific Acceptance Criteria, while also honoring the flexibility and iterative spirit at the heart of our backlog philosophy.
+
 
 ### Evaluation
 
