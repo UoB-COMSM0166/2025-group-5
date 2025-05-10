@@ -100,7 +100,7 @@ let animations;
 let HealthBarHeight = 5;
 let globalInvincibleTimer = 90;
 let globalInvincibleFlashingInterval = 10;
-let globalWaterStatusTimer = 300;
+let globalWaterStatusTimer = 180;
 let globalFireStatusTimer = 120;
 let globalWaterSpeedFactor = 0.5;
 let globalFireSpeedFactor = 0.5;
