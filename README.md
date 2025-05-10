@@ -361,30 +361,12 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 ---
 
-#### Challenge 1: Adaptive Monster Behavior  
-*A necessary foundation for [Souls-like layered difficulty](#ac-growth-2).*
-
-<p align="center">
-  <img src="./report/challenge1.pic.jpg" width="900"/><br>
-  <em>Figure 1. Adaptive Monster Behavior – Presentation</em>
-</p>
-
-- **S**: Static enemies failed to create meaningful tension.  
-- **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
-- **A**: Behavior states (Idle, Patrol, Track) were driven by JSON. Rerouting logic handled blocked paths.  
-
-  *Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
-
-- **R**: Combat became unpredictable and reactive. This enabled difficulty to emerge from behavior, not inflated stats.
-
----
-
-#### Challenge 2: Player Transformation System  
+#### Challenge 1: Player Transformation System  
 *Required to support [problem-solving through earned abilities](#ac-growth-1).*
 
 <p align="center">
-  <img src="./report/challenge2.pic.jpg" width="900"/><br>
-  <em>Figure 2. Player Transformation System – Presentation</em>
+  <img src="./report/challenge2.pic.jpg" width="800"/><br>
+  <em>Figure 1. Player Transformation System – Presentation</em>
 </p>
 
 - **S**: We needed progression that let players react to hazards using earned abilities.  
@@ -397,12 +379,12 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 ---
 
-#### Challenge 3: Visual Storytelling  
+#### Challenge 2: Visual Storytelling  
 *Essential to deliver [narrative immersion across transitions](#ac-immersive-1).*
 
 <p align="center">
-  <img src="./report/challenge3.pic.jpg" width="900"/><br>
-  <em>Figure 3. Visual Storytelling – Presentation</em>
+  <img src="./report/challenge3.pic.jpg" width="800"/><br>
+  <em>Figure 2. Visual Storytelling – Presentation</em>
 </p>
 
 - **S**: Text-only storytelling lacked emotional depth.  
@@ -415,13 +397,31 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 ---
 
+#### Challenge 3: Adaptive Monster Behavior  
+*A necessary foundation for [Souls-like layered difficulty](#ac-growth-2).*
+
+<p align="center">
+  <img src="./report/challenge1.pic.jpg" width="800"/><br>
+  <em>Figure 3. Adaptive Monster Behavior – Presentation</em>
+</p>
+
+- **S**: Static enemies failed to create meaningful tension.  
+- **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
+- **A**: Behavior states (Idle, Patrol, Track) were driven by JSON. Rerouting logic handled blocked paths.  
+
+  *Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
+
+- **R**: Combat became unpredictable and reactive. This enabled difficulty to emerge from behavior, not inflated stats.
+
+---
+
 #### Summary: Engineering as Requirement Fulfillment
 
 | Challenge               | Design Necessity                         | Solution                             | Result                                |
 |------------------------|-------------------------------------------|--------------------------------------|----------------------------------------|
-| Monster Behavior        | Tactical difficulty through smart enemies | Config-based state machine + reroute | Skill-based enemy encounters           |
 | Player Transformation   | Responsive growth via new abilities       | Cached state + config mapping        | Replayability, problem-solving depth   |
 | Visual Storytelling     | Worldbuilding through environment & flow  | Themed levels + visual feedback      | Emotional continuity, player immersion |
+| Monster Behavior        | Tactical difficulty through smart enemies | Config-based state machine + reroute | Skill-based enemy encounters           |
 
 ---
 
