@@ -35,11 +35,6 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 <p align="center" style="display:flex; flex-direction:column; justify-content:center;">
   <img src="./report/start0.pic.jpg" width="250"/>
 </p>
-
-<p align="center"><em>
-  The first frame above marks the beginning of our opening cutscene—an in-game illustrated sequence that introduces the world’s core lore and emotional tone. As the player starts the game, this animation visually narrates their awakening, the looming curse, and the journey ahead.
-</em></p>
-
 <p align="center">
   <img src="./report/start1.pic.jpg" width="150"/>
   <img src="./report/start2.pic.jpg" width="150"/>
