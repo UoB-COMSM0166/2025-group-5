@@ -47,250 +47,139 @@ A typical scenario in Chapter 2: with vision severely limited, the player faces 
 
 This tight synergy between **punishment, narrative, and tactical agency** defines *Dragon Adventure*. The result is a difficulty that is not just hard, but **immersively, meaningfully hard**—and always conquerable through understanding, memory, and adaptation.
 
-### Requirements 
+### 📋 Requirements
 
-Our requirements engineering process consists of several key steps.
+To structure and guide our development, we followed a six-step requirements engineering process:
 
-#### Identifying Stakeholders
+1. **Stakeholder Identification** 
+2. **Understanding Environment & Capabilities** 
+3. **Market Research & User Persona Analysis** 
+4. **Definition of Top-Level Needs** 
+5. **Epic and Acceptance Criteria Design** 
+6. **Innovative Prioritization Evaluation**
 
-The first step was to identify the stakeholders we aim to serve.  
+---
+
+### 1. 🎯 Stakeholders & Environment Awareness
 
 <img width="336" alt="image" src="https://github.com/user-attachments/assets/72548918-6fa0-43c9-a73b-b64e43cc9c6a" />
 
-From this perspective, given our team’s scale and technical capabilities, our primary focus is to:  
-**✅ Deliver a distinct gameplay style and experience** to establish _competitive differentiation_ from other groups.  
+We began by identifying our direct stakeholders: 
+- **Target players** 
+- **Team contributors (devs, designers, artists)**
 
-While adhering to industry trends, we prioritize:  
-**🔹 Honoring team members' creative preferences** — A **shared vision** dramatically boosts development motivation and execution quality.  
+> 📌 *This report intentionally omits instructors and TAs as direct stakeholders—this decision and its retrospective impact will be discussed in the Conclusion section.*
 
-#### Industry trend & Player Persona & Top-Level Needs
+This step sharpened our understanding of our team’s environment: 
+a small, cross-functional group with limited resources but creative freedom. Recognizing our technical constraints and the competitive class setting, we asked: 
+> “How do we differentiate ourselves meaningfully?”
 
-##### **Industry Context & Narrative Opportunity in Pixel Shooters**  
+---
 
-**Current Market Landscape:**  
-Many pixel shooter games (e.g., _Broforce_, _Enter the Gungeon_, _Nuclear Throne_) focus on **fast-paced mechanics** and **progression systems**, often with **minimal narrative**:  
-- **Broforce**: Criticized for having _"no comprehensible story"_ (Rock Paper Shotgun, 2015)  
-- **Enter the Gungeon**: Framed around a single joke (_"a gun that can kill the past"_) with shallow plot (PC Gamer, 2016)  
-- **Nuclear Throne**: Developers admitted to using only a _"bare minimum of backstory"_ (Edge Magazine, 2015)  
-
-**Player Demand Shifts:**  
-- **53% of gamers** now prefer single-player games for _story immersion_ (YouGov, 2024)  
-- Players rank **"strong story & believable characters"** above graphics/combat (IBT, 2021)  
-- Academic studies (Schott & Burn, 2020; Isbister, 2017) confirm narrative boosts **emotional engagement** and **retention**  
-
-**Strategic Opportunity:**  
-> _"Narrative immersion is now a competitive differentiator"_ — J. Schell (2020)  
-
-By combining **pixel shooter mechanics** with **interactive storytelling** (branching dialogue, meaningful choices), your game can:  
-1. **Stand out** in a saturated indie market  
-2. **Attract story-driven players** underserved by current offerings  
-3. **Create deeper emotional investment** through character agency  
-
-##### **Target User Profile Summary**
-
-**Key Insights:** 
-Our design addresses players who: 
-
+### 2. 🔍 Research & Differentiation
 <img width="595" alt="image" src="https://github.com/user-attachments/assets/0fbf527a-1fe3-4112-8610-a200e7d9d4e6" />
-
-- **Love streamlined mechanics but crave narrative depth** 
-▸ Seek _"games that make me feel like part of the story"_ (User interview #3) 
-▸ Reject _"empty action without emotional stakes"_ (Steam forum analysis) 
-
 <img width="591" alt="image" src="https://github.com/user-attachments/assets/dd4851c4-a69b-47ca-a357-2b1ff5ae9335" />
-
-- **Desire innovative progression beyond stats** 
-▸ 72% express frustration with _"traditional level-up systems"_ (2023 Indie Player Survey) 
-▸ Prefer **modular upgrades** over +1 damage boosts
-
 <img width="593" alt="image" src="https://github.com/user-attachments/assets/0035de71-f411-4b3a-8d3a-cb7169b986f8" />
 
-- **Demand smarter challenge design** 
-▸ Criticize _"bullet-sponge enemies"_ as artificial difficulty 
-▸ Champion **dynamic systems** like: 
-- Enemy behavior adaptation 
-- Physics-based puzzles 
-- Emergent combat scenarios 
 
-**Design Implications:** 
-> _"Players don’t want harder games—they want fairer, more inventive ones."_ — GameDev Digest (2024)
+We observed that pixel shooters like *Enter the Gungeon* and *Broforce* focus heavily on **moment-to-moment action** but lack cohesive **story structures**:
 
-#### User Stories & Requirements Breakdown
-##### Epic: Immersive Narrative Experience
+- “No comprehensible story” – *Rock Paper Shotgun, 2015 (Broforce)* 
+- “A gun that kills the past, but little else” – *PC Gamer, 2016 (Gungeon)* 
+- Developers of *Nuclear Throne* admitted to writing only “the bare minimum” (Edge, 2015)
 
-###### User Story  
-As a player, I want to build a meaningful connection with the game world, so that I feel immersed and emotionally engaged while playing.
+Meanwhile, **YouGov (2024)** reports 53% of players now prefer **narrative-based single-player games**, and **Isbister (2017)** confirms narrative significantly boosts **emotional immersion and retention**.
+
+This inspired us to build a player experience around two top-level design goals:
+- **Immersive Narrative Integration**
+- **Challenge and Growth through Player Agency**
 
 ---
 
-###### Acceptance Criteria 1: World Introduction on Game Start  
-- *Given* the player is on the main game interface and starts a new game session,  
-- *When* the player enters the game for the first time,  
-- *Then* the system displays an illustrated cutscene accompanied by voice narration that introduces the game world, lasting at least 30 seconds and covering three key lore elements.
+### 3. 🧩 Epic: Immersive Narrative Experience
 
-###### Product Backlog  
-- Create a concise and compelling main narrative introducing:
-  - the world’s origin or central conflict,
-  - the player’s role or identity,
-  - the stakes of the journey.
-- Format the script for audio narration and visual cutscenes.
-- Ensure tone aligns with the target audience.
-- Keep the introduction under 30 seconds and include 3+ story beats.
-- Develop storyboard visuals matching game style.
-- Source or record narration synchronized with visual flow.
+**User Story** 
+> As a player, I want the story and gameplay to feel interconnected, so that my actions have meaning in the world.
 
 ---
 
-###### Acceptance Criteria 2: Recap & Context Before New Level  
-- *Given* the player has completed the current level and is transitioning to the next one,  
-- *When* the level-end sequence is triggered,  
-- *Then* the system displays a contextual story recap (text or narration) that includes at least two new plot points or environmental hints.
+**AC1. World Introduction via Story Cutscene** 
+Players begin the game with a short (30s) illustrated cutscene and narration.
 
-###### Product Backlog  
-- Design level transition screens using illustrated panels, narration, or short cutscenes.
-- Summarize past events and foreshadow next area.
-- Include at least two narrative/environmental cues:
-  - visual foreshadowing,
-  - music motifs,
-  - lore-relevant objects.
-- Support passive or interactive playback.
-- Ensure stylistic and narrative continuity.
+📌 **Backlog (evolving):**
+- [✓] Text-based intro → upgraded to narrated illustrated panel sequence 
+- [✓] Included 3+ lore beats (curse origin, player identity, stakes) 
+- [✓] Synced VO and scene transitions post-feedback
 
 ---
 
-###### Acceptance Criteria 3: Mechanics Introduction with Narrative Link  
-- *Given* the player enters a new level,  
-- *When* a new game mechanic is introduced,  
-- *Then* the system provides a narrative prompt linking it to existing lore, and confirms player understanding through interaction.
+**AC2. Transitions + Narrative-Based Mechanic Intro** 
+Each level features recap content, and new mechanics are introduced narratively.
 
-###### Product Backlog  
-- Design and document new mechanics per level with:
-  - intended function,
-  - interaction rules,
-  - player behavior expectations.
-- Use short prompts or voice lines to narratively justify each mechanic.
-- Include an interaction checkpoint to confirm understanding (e.g., use mechanic once).
-- Example: cursed swamp introduced via story event (“the forest was corrupted”).
+📌 **Backlog (iterative):**
+- [✓] Comic panels used between major zones (Forest → Graveyard) 
+- [✓] Vision-restricting mechanic introduced through “curse” lore 
+- [ ] Tutorial validation missing (e.g., no confirmation for mechanic understanding)
+
+🛠️ *Observation*: Players appreciated the narrative flow, but hinted at slight onboarding confusion.
 
 ---
 
-###### Acceptance Criteria 4: Narrative Integration of Mechanics  
-- *Given* a new mechanic is introduced,  
-- *When* the player encounters it,  
-- *Then* it is explained using in-game narrative elements linked to ongoing story events.
+### 4. 🧠 Epic: Challenge and Growth
 
-###### Product Backlog  
-- Create lore-driven triggers (text, voiceover, in-game event) for each new mechanic.
-- Tie explanations to story context or existing world logic.
-- Ensure the narrative enhances immersion and mechanic clarity.
+**User Story** 
+> As a player, I want to grow through experience and overcome increasingly complex challenges using my earned abilities.
 
 ---
 
-###### Acceptance Criteria 5: Level Transition Visual & Interactive Presentation  
-- *Given* a level is completed,  
-- *When* transitioning to the next level,  
-- *Then* the system presents a visual/narrative transition that includes at least two cues to new gameplay or story elements.
+**AC1. Use of Past Abilities to Solve New Problems** 
+Players should use acquired powers (e.g., transformations) to deal with new mechanics or hazards.
 
-###### Product Backlog  
-- Design level-end recaps that:
-  - summarize progress,
-  - introduce next area through lore.
-- Use visuals, narration, or animation aligned with the game’s aesthetic.
-- Integrate two or more of the following:
-  - visual hints,
-  - audio cues,
-  - symbolic props.
-- Allow optional interaction or passive viewing.
----
-
-##### Epic: Challenge and Growth
-
-###### User Story  
-As a player, I want to encounter meaningful and diverse types of challenges, and understand how my past progress or abilities help me overcome them, so that I feel mentally engaged and develop a deeper connection with the game through growth and mastery.
+📌 **Backlog:**
+- [✓] Transformations mapped to mechanics (e.g., recover vision after curse) 
+- [✓] Visual indicators updated to show ability usage 
+- [ ] Future scaling still manual—not adaptive
 
 ---
 
-###### Acceptance Criteria 1: Ability-Based Challenge Resolution  
-- *Given* the player enters a new level,  
-- *When* they face a high-risk scenario (e.g., monster attack, negative status effect),  
-- *Then* they can apply previously earned abilities to overcome the situation.
+**AC2. Multi-Layered Difficulty Design** 
+Each level combines combat AI, spatial layout, and visual limitation to create “Souls-like” challenge.
 
-###### Acceptance Criteria 2: Inherited Ability Visibility  
-- *Given* the player has gained an ability in an earlier level,  
-- *When* they encounter a related challenge,  
-- *Then* the ability is available and visually indicated, and effectively counters the challenge.
+📌 **Backlog:**
+- [✓] Graveyard’s vision limitation increases mental load 
+- [✓] Enemies have dash-speed boost within aggro range 
+- [✓] Limited enemy vision allows skilled players to "kite" effectively 
+- [ ] Future: optional hints for stuck players (currently in “Could Have” tier)
 
----
-
-###### Product Backlog 1: Multi-Angle Challenge Design  
-- Design layered challenges including:
-  - **Environmental**: e.g., narrow paths forcing combat.
-  - **Enemy-based**: e.g., invulnerable towers requiring strategy.
-  - **Visual constraints**: e.g., fog of war, blind spots.
-  - **Status effects**: e.g., poison, slow, confusion zones.
-- Ensure each challenge is:
-  - testable in isolation,
-  - scalable in combination,
-  - increases in difficulty logically.
+🛠️ *Insight*: The balance between enemy aggression and player escape window offered satisfying tension.
 
 ---
 
-###### Product Backlog 2: Inherited Abilities System  
-- Implement a system where past actions grant passive or active abilities:
-  - Example: defeating a miniboss grants immunity to poison.
-- Abilities must:
-  - trigger visual/audio feedback when activated,
-  - map to specific challenge types,
-  - feel meaningful and earned through prior gameplay.
+### 5. 🗂️ Value-Oriented Prioritization
+
+We adopted **Planning Poker** not only for estimating **effort**, but also for **evaluating player value**—an innovative extension beyond typical Scrum practice.
+
+After consensus rounds, we mapped the results onto a **MoSCoW model**, enabling binary classification by both value and cost.
+
+| Priority | Key Features |
+|----------------|------------------------------------------------------------------------------|
+| **Must Have** | Core combat loop, vision mechanic, transformation-based progression |
+| **Should Have**| Comic-style transitions, narration, visual hints for ability usage |
+| **Could Have** | In-game guidance systems, ability combination logic, bonus areas |
+| **Won’t Have** | Online real-time multiplayer (high cost, low narrative fit) |
 
 ---
 
-###### Product Backlog 3: Strategic Preparation Feedback Loop  
-- Encourage players to apply memory and mastery of past content:
-  - Reuse visual motifs or environment cues that suggest effective counters.
-  - Design scenarios where “learning from the past” leads to successful navigation.
-- Reinforce reward for preparedness through:
-  - smoother gameplay,
-  - faster resolutions,
-  - optional bonus rewards when optimal tactics are used.
+### ✅ Summary
 
+Through structured analysis and iterative reflection, we transformed abstract aspirations into testable design goals. Our requirements engineering was grounded in:
 
-###### Priority Ranking
+- **Contextual awareness of team limits and user demand** 
+- **A narrative–mechanic fusion model for challenge and story** 
+- **Player-driven growth via logically integrated abilities** 
+- **Innovative prioritization** using Planning Poker + MoSCoW synthesis
 
-To ensure an effective and collaborative prioritization of our feature set, our team adopted the **Planning Poker** method. 
-Each team member independently estimated the **value** (player impact) and **implementation effort** (development cost) of every feature based on its **acceptance criteria**. 
-After discussing outlier scores and reaching consensus, we assigned final point values for both axes.
-
-With those scores in place, we mapped each feature into a **2×2 priority matrix** structured by:
-
-- **High vs. Low Player Value**
-- **High vs. Low Implementation Effort**
-
-This helped us visually identify features that are:
-- ✅ Core to the gameplay loop,
-- 💬 Supporting emotional engagement,
-- 🧩 Providing gameplay depth without overburdening development resources.
-
-Following the matrix, we produced two tables:
-|                      | **Low Effort 🛠️**                                                                                             | **High Effort 🛠️**                                                                                              |
-|----------------------|-----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| **High Value 💡**     | ✅ **Must Have** <br> 🔸 *Mechanics Introduction with Narrative Link* <br>💡8 / 🛠️3 <br> 🔸 *Core Combat & Vision Systems* <br>💡10 / 🛠️5 | ✅ **Should Have** <br> 🔸 *World Introduction on Game Start* <br>💡8 / 🛠️8 <br> 🔸 *Recap & Context Before New Level* <br>💡7 / 🛠️8 <br> 🔸 *Inherited Abilities Usage in Combat* <br>💡7 / 🛠️8 <br> 🔸 *Challenge Solvable with Past Abilities* <br>💡7 / 🛠️8 |
-| **Low Value 💡**      | ⚠️ **Could Have** <br> 🔸 *Strategic Feedback Loop* <br>💡5 / 🛠️5 <br> 🔸 *Hidden Optional Content* <br>💡3 / 🛠️3 | ⚠️ **Could Have** <br> 🔸 *Ability Combination Usage* <br>💡5 / 🛠️13                                             |
-| **Misaligned / Overkill** | 🚫 **Won’t Have** <br> 🔸 *Cross-Platform Real-Time Multiplayer Support* <br>💡2 / 🛠️21                               |                                                                                                                 |
-
-
-| **Priority**   | **Feature Module**                                  | **Description**                                                                                                                                               |
-|----------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Must Have**  | 🔸 Mechanics Introduction with Narrative Link        | Introduces gameplay mechanics contextually, linking them to story beats. Low cost, high return on immersion and clarity.                                     |
-|                | 🔸 Core Combat & Vision Systems                      | Fundamental for interaction and game progression. Must be implemented early.                                                                                  |
-| **Should Have**| 🔸 World Introduction on Game Start                  | Uses narrated cutscene to set tone and world. Boosts onboarding and emotional connection.                                                                    |
-|                | 🔸 Recap & Context Before New Level                 | Provides narrative bridge and motivation for next area. Increases continuity.                                                                                 |
-|                | 🔸 Inherited Abilities Usage in Combat              | Allows players to apply prior progress against new threats. Key for player satisfaction and perceived growth.                                                |
-|                | 🔸 Challenge Solvable with Past Abilities           | Ensures progression feels meaningful and not reset per level. Reinforces learning loop.                                                                      |
-| **Could Have** | 🔸 Strategic Feedback Loop                           | Rewards memory and application of past knowledge. Adds to replay depth but non-essential.                                                                    |
-|                | 🔸 Hidden Optional Content                           | Encourages exploration. Increases depth but adds less to primary narrative or loop.                                                                          |
-|                | 🔸 Ability Combination Usage                         | Advanced layer of progression and customization. Useful for power users but optional for MVP.                                                                |
-| **Won’t Have** | 🔸 Cross-Platform Real-Time Multiplayer              | High development and maintenance cost. Outside current narrative-driven single-player focus.                                                                 |
+Crucially, our product backlogs were never static—they **evolved based on evaluation feedback, development feasibility, and playtest data**. This flexibility ensured that *Dragon Adventure* could stay responsive without sacrificing vision.
 
 ### Design
 
