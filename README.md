@@ -66,6 +66,8 @@ We progressed through **five interlocking phases**, each informing and refining 
 
 #### 📍 1. Stakeholders & Team Context
 
+<img width="536" alt="image" src="https://github.com/user-attachments/assets/a3618ef4-e913-463d-971c-cd1f6f409db7" />
+
 We identified our primary stakeholders as:
 
 - 🎮 **Target players**  
