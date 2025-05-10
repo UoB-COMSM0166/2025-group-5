@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/634ce2af-ece8-4aa9-8b73-6b4c19cf7f6b)# 2025-group-5
+# 2025-group-5
 2025 COMSM0166 group 5
 
 ## Dragon Adventure
