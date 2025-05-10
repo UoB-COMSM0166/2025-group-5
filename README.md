@@ -337,105 +337,79 @@ Our sequence diagrams helped visualize runtime logic:
 
 ### Implementation
 
-To ensure that development remained focused and outcome-aligned, we adopted a **top-down, goal-driven implementation strategy**. This allowed us to map our execution phases directly onto the **core design goals** defined in our requirements:
+To keep development outcome-aligned and manageable, we adopted a **top-down implementation strategy** mapped to our design goals:
 
-- 🎭 *Immersive Narrative Experience* 
+- 🎭 *Immersive Narrative Experience*  
 - 🧠 *Challenge and Growth Through Player Agency*
 
-We divided our work into three major tracks:
+Work was divided into three tracks:
 
-- ⚔️ **Core combat system development** 
-- 🗺️ **Level and progression integration** 
-- 🎨 **Art and visual design**
-
----
-
-During the **initial phase**, all members engaged in **dedicated 2-hour pair programming blocks each day**. This lightweight, high-focus collaboration enabled fast prototyping and early architectural feedback without the overhead of daily stand-up meetings. Emphasis was placed on **rapid iteration**, shared ownership, and early discovery of design misalignments.
-
-In the **refinement phase**, responsibilities became specialized across code and visual design. However, integration remained frequent, with checkpoints ensuring consistent delivery across combat, art, and narrative systems.
-
-Crucially, many of our development decisions were shaped by the principles outlined in our **Iterative Backlog Development** process—especially:
-
-- **Shifting technical feasibility** (e.g., adapting rendering pipelines) 
-- **Narrative integration opportunities** (e.g., environment as story) 
-
-Below are three representative cross-domain challenges that demonstrate how we **translated requirements into engineered solutions**.
+- ⚔️ **Core combat system**  
+- 🗺️ **Level and progression**  
+- 🎨 **Art and narrative visuals**
 
 ---
 
-#### 🧠 Challenge 1: Dynamic Monster Behavior for Strategic Combat 
-(Corresponds to: **Challenge and Growth Through Player Agency – AC2**)
+During the **early phase**, team members engaged in **daily 2-hour pair programming blocks**. This enabled fast prototyping and early architectural validation without formal stand-ups. We prioritized shared ownership and rapid iteration to surface misalignments early.
 
-- **S (Situation)** 
-Static enemies undermined our design goal of **Souls-like tension**. Players quickly memorized patterns, reducing perceived difficulty and replay value.
+Later, the team split into visual and code roles while maintaining **tight integration checkpoints**. Many decisions reflected principles from our **Iterative Backlog Development**, particularly:
 
-- **T (Task)** 
-We needed enemies with **reactive behavior**—able to patrol, detect, and chase the player within defined “aggro” ranges, creating tactical risk.
-
-- **A (Action)** 
-Enemy behavior was encoded through state machines (Idle, Patrol, Track). Patrols and detection ranges were defined in external JSON configs. A rerouting logic was added to allow pursuit in complex layouts.
-
-🔀 **Cross-domain Friction** 
-Since we didn't use a full tilemap editor, **artist-designed visuals didn’t reflect pathable space**. The solution: artists provided an **Excel-based grid annotation**, labeling collision tiles. This low-tech bridge was aligned with our principle of flexibility under technical constraints.
-
-- **R (Result)** 
-Enemy encounters became unpredictable and player-driven. The implementation fulfilled AC2 by **shifting challenge from numbers to behaviors**—a key goal of our design.
+- **Shifting technical feasibility**  
+- **Narrative integration opportunities**
 
 ---
 
-#### 🔁 Challenge 2: Player Transformation and Skill System 
-(Corresponds to: **Challenge and Growth Through Player Agency – AC1**)
+#### 🧠 Challenge 1: Adaptive Monster Behavior  
+*Linked to: 🧠 AC2 – Souls-like Layered Difficulty*
 
-- **S (Situation)** 
-To satisfy AC1’s goal of progression through earned ability, we needed players to dynamically gain and activate enemy-like powers.
+- **S**: Static enemies failed to create meaningful tension.  
+- **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
+- **A**: Behavior states (Idle, Patrol, Track) were driven by JSON. Rerouting logic handled blocked paths.  
 
-- **T (Task)** 
-Build a transformation system where player forms and stats change based on acquired abilities, while maintaining visual feedback and balance.
+  🔀 *Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
 
-- **A (Action)** 
-We implemented transformation logic using a `Character` superclass and modular `Ability` class. Configuration files dictated which transformations countered which status debuffs.
-
-🔀 **Cross-domain Friction** 
-To unblock parallel visual development, we **repurposed enemy UI sprites** directly for transformation forms. This was only possible because our rendering logic was decoupled from functional logic—an explicit result of our **early modularization and configuration-driven architecture** (as emphasized in our Iterative Backlog principles).
-
-- **R (Result)** 
-Players could resolve status effects (burn, slow) in immersive and mechanically coherent ways. The system directly addressed AC1 by reinforcing **skill-based problem-solving with visual narrative grounding**.
+- **R**: Combat became unpredictable and reactive. This fulfilled the requirement for skill-based, behavior-driven difficulty.
 
 ---
 
-#### 🎨 Challenge 3: Visual Storytelling Through Environment and Animation 
-(Corresponds to: **Immersive Narrative Experience – AC1 & AC2**)
+#### 🔁 Challenge 2: Player Transformation System  
+*Linked to: 🧠 AC1 – Problem Solving with Abilities*
 
-- **S (Situation)** 
-Narrative text alone felt disconnected from gameplay. We aimed to deliver **emotional context through spatial transitions and reactive visuals**.
+- **S**: We needed progression that let players react to hazards using earned abilities.  
+- **T**: Implement a modular transformation system that swaps player state and visuals.  
+- **A**: `Character` and `Ability` classes structured logic; configs mapped forms to debuffs.  
 
-- **T (Task)** 
-Link story beats to level transitions, animations, and environmental design—fulfilling the player-facing story experience described in both ACs.
+  🔀 *Friction*: Final visuals weren’t ready. We reused **enemy UI sprites** for transformations—made possible by our rendering–logic decoupling from early modularization.
 
-- **A (Action)** 
-Each level zone (Forest → Graveyard → Lake → Lava) was given its own palette, motif, and transitions. Animations were managed through a timer-based system that responded to player state (e.g., invincibility blinking).
-
-🔀 **Cross-domain Friction** 
-Effects like **fog overlays and lava flows** caused performance issues. In line with our “Shifting Technical Feasibility” principle, we adapted these into **layer-safe parallax textures and visual loops**, balancing fidelity with stability.
-
-- **R (Result)** 
-Visual elements communicated gameplay state and narrative beats simultaneously—bringing our AC1 and AC2 goals to life in a seamless, non-verbal way.
+- **R**: Players overcame burn/slow with narrative-consistent mechanics, fulfilling the progression-through-agency goal.
 
 ---
 
-#### 📊 Summary: Challenge Completion as Requirement Fulfillment
+#### 🎨 Challenge 3: Visual Storytelling  
+*Linked to: 🎭 AC1 & AC2 – Narrative Integration*
 
-| Challenge | Design Goal | AC Link | Solution Summary | Result |
-|------------------------|---------------------------------------------|------------------|------------------------------------------------|--------|
-| Monster Behavior | Tactical challenge via adaptive enemies | 🧠 AC2 | Config-based patrol + aggro with rerouting | Engaging, skill-based encounters |
-| Player Transformation | Growth through reactive, earned abilities | 🧠 AC1 | Cached state swap + UI reuse for transformation | Replayability, tactical freedom |
-| Visual Storytelling | Narrative immersion via gameplay space | 🎭 AC1 & AC2 | Themed levels, animation + visual integration | Strong emotional pacing and clarity |
+- **S**: Text-only storytelling lacked emotional depth.  
+- **T**: Embed narrative in spatial transitions and reactive animations.  
+- **A**: Each level (e.g., Graveyard) had unique palette and motifs. Animations reflected combat states like invincibility via blinking.  
+
+  🔀 *Friction*: Fog/lava effects caused performance drops. We replaced them with **parallax-safe textures and loops**, keeping visuals coherent.
+
+- **R**: Story and gameplay felt tightly connected—reinforcing narrative immersion without dialogue.
 
 ---
 
-Each of these implementation efforts directly reflected our commitment to **Iterative Backlog Refinement** and **value-centered delivery**. 
-They were not just engineering hurdles—but **essential enablers of the player promises made in our design**.
+#### 📊 Summary: Engineering as Requirement Fulfillment
 
+| Challenge               | Linked Goal                            | Solution                             | Result                                |
+|------------------------|-----------------------------------------|--------------------------------------|----------------------------------------|
+| Monster Behavior        | 🧠 AC2 – Layered Challenge              | Config-based state machine + reroute | Skill-based enemy encounters           |
+| Player Transformation   | 🧠 AC1 – Ability Solves Debuffs        | Cached state + config mapping        | Replayability, problem-solving depth   |
+| Visual Storytelling     | 🎭 AC1 & AC2 – Narrative Integration   | Themed levels + visual feedback      | Emotional continuity, player immersion |
+
+---
+
+These were not just engineering tasks—they were the **mechanical realization of player-facing promises** in our requirements.  
+Each implementation answered specific Acceptance Criteria, while also honoring the flexibility and iterative spirit at the heart of our backlog philosophy.
 
 ### Evaluation
 
