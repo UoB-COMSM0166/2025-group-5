@@ -365,7 +365,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 *A necessary foundation for [Souls-like layered difficulty](#ac-growth-2).*
 
 <p align="center">
-  <img src="./report/challenge1.pic.jpg" width="800"/><br>
+  <img src="./report/challenge1.pic.jpg" width="900"/><br>
   <em>Figure 1. Adaptive Monster Behavior – Presentation</em>
 </p>
 
@@ -383,7 +383,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 *Required to support [problem-solving through earned abilities](#ac-growth-1).*
 
 <p align="center">
-  <img src="./report/challenge2.pic.jpg" width="800"/><br>
+  <img src="./report/challenge2.pic.jpg" width="900"/><br>
   <em>Figure 2. Player Transformation System – Presentation</em>
 </p>
 
@@ -401,7 +401,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 *Essential to deliver [narrative immersion across transitions](#ac-immersive-1).*
 
 <p align="center">
-  <img src="./report/challenge3.pic.jpg" width="800"/><br>
+  <img src="./report/challenge3.pic.jpg" width="900"/><br>
   <em>Figure 3. Visual Storytelling – Presentation</em>
 </p>
 
