@@ -53,15 +53,17 @@ At the heart of the experience is a three-layered design philosophy:
 
 ### 🧟 Monster Introduction
 
-| **Monster Type** | **Forest** | **Graveyard** | **Lake** | **Volcano** |
-|------------------|------------|---------------|----------|-------------|
+### 🧟 Monster Introduction
+
+|              | <img src="./report/forest.pic.jpg" width="200"/><br/>**Forest** | <img src="./report/grayyard.pic.jpg" width="200"/><br/>**Graveyard** | <img src="./report/lake.pic.jpg" width="200"/><br/>**Lake** | <img src="./report/mountain.pic.jpg" width="200"/><br/>**Volcano** |
+|--------------|-----------------------------------------|--------------------------------------------|------------------------------------|----------------------------------------|
 | **Slime**  
-_Melee attacker; high defense; medium speed_ | <img src="./report/greenslime.jpg" width="200"/> <br/> Green Slime | <img src="./report/greyslime.jpg" width="200"/> <br/> Grey Slime | <img src="./report/blueslime.jpg" width="200"/> <br/> Blue Slime | <img src="./report/redslime.jpg" width="200"/> <br/> Red Slime |
+*Melee attacker; high defense; medium speed* | <img src="./report/greenslime.jpg" width="200"/><br/>Green Slime | <img src="./report/greyslime.jpg" width="200"/><br/>Grey Slime | <img src="./report/blueslime.jpg" width="200"/><br/>Blue Slime | <img src="./report/redslime.jpg" width="200"/><br/>Red Slime |
 | **Mage**  
-_Area damage; low health; medium speed_ | — | <img src="./report/ghost.jpg" width="200"/> <br/> Ghost Mage | <img src="./report/waterGhost.jpg" width="200"/> <br/> Water Mage | <img src="./report/fireghost.pic.jpg" width="200"/> <br/> Fire Mage |
+*Area damage; low health; medium speed* | — | <img src="./report/ghost.jpg" width="200"/><br/>Ghost Mage | <img src="./report/waterGhost.jpg" width="200"/><br/>Water Mage | <img src="./report/fireghost.pic.jpg" width="200"/><br/>Fire Mage |
 | **Tower**  
-_High attack; immobile and invulnerable_  
-_Lake: slows player / Volcano: burns player_ | <img src="./report/grassTower.jpg" width="200"/> <br/> Grass Tower | <img src="./report/GhostTower.pic.jpg" width="200"/> <br/> Ghost Tower | <img src="./report/waterTower.pic.jpg" width="200"/> <br/> Water Tower | <img src="./report/fireTower.jpg" width="200"/> <br/> Fire Tower |
+*High attack; immobile and invulnerable* | <img src="./report/grassTower.jpg" width="200"/><br/>Grass Tower | <img src="./report/GhostTower.pic.jpg" width="200"/><br/>Ghost Tower | <img src="./report/waterTower.pic.jpg" width="200"/><br/>Water Tower | <img src="./report/fireTower.jpg" width="200"/><br/>Fire Tower |
+
 
 
 
