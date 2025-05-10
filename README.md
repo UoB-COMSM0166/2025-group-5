@@ -337,87 +337,104 @@ Our sequence diagrams helped visualize runtime logic:
 
 ### Implementation
 
-To ensure that development remained focused and manageable, our team adopted a top-down implementation strategy, dividing the project into three primary domains:
+To ensure that development remained focused and outcome-aligned, we adopted a **top-down, goal-driven implementation strategy**. This allowed us to map our execution phases directly onto the **core design goals** defined in our requirements:
 
-- **Core combat system development**  
-- **Level and progression integration**  
-- **Art and visual design**
+- 🎭 *Immersive Narrative Experience* 
+- 🧠 *Challenge and Growth Through Player Agency*
 
-During the **first phase**, all members collaborated in **pair programming** mode to quickly establish a functional game demo. Agile stand-up meetings were held daily to align progress, share blockers, and re-evaluate priorities. This phase emphasized fast iteration, shared code ownership, and early discovery of architectural risks.
+We divided our work into three major tracks:
 
-As we transitioned into the **second phase**, work became more specialized. The team split into **visual development** (responsible for environment art, UI, animations, and narrative illustration) and **code development** (handling combat mechanics, AI, system optimization). Integration checkpoints ensured continuous alignment across modules.
-
-Despite the division of responsibilities, we encountered multiple **cross-domain challenges**—particularly in aligning visual expectations with system limitations, or ensuring narrative and environment assets could support the intended gameplay mechanics. Below are **three representative implementation challenges**, each corresponding to one of the project’s top-level goals.
-
----
-
-#### 🧠 Challenge 1: Dynamic Monster Behavior for Strategic Combat  
-(Corresponding to: **Challenge and Growth**)
-
-- **S (Situation)**  
-  Static or passive enemies failed to provide a meaningful threat. To maintain tension and reward strategic thinking, we needed enemies to react intelligently to the player’s presence.
-
-- **T (Task)**  
-  The team was tasked with building monsters that could patrol autonomously and dynamically switch to an aggressive chase mode when players entered a detection radius. Pathfinding and obstacle avoidance were required for realistic movement.
-
-- **A (Action)**  
-  Patrol routes were defined via JSON, with a state machine controlling transitions between idle, patrol, and tracking. Detection radius triggered pursuit behavior, and a waypoint-based rerouting system was implemented to handle blocked paths or narrow corridors.
-
-  🔀 **Cross-domain Special Consideration**  
-  During testing, monster patrol zones occasionally overlapped with **decorative tiles or foreground assets** placed by the art team that the engine didn’t recognize as obstacles. This caused unpredictable AI behavior. Since we were not using a full tilemap collision editor, the solution we adopted was pragmatic: **artists manually marked walkable and blocked tiles using an Excel sheet**, labeling positions and layers for each zone. While rudimentary, this approach created a shared communication layer that helped programmers configure collisions correctly based on artistic intent.
-
-- **R (Result)**  
-  The system introduced unpredictability and threat to enemy encounters. Players could no longer rely on fixed patterns, resulting in more adaptive and engaging combat. It also served as a foundation for future AI upgrades like group coordination or ranged tactics.
+- ⚔️ **Core combat system development** 
+- 🗺️ **Level and progression integration** 
+- 🎨 **Art and visual design**
 
 ---
 
-#### 🔁 Challenge 2: Player Transformation and Skill System  
-(Corresponding to: **Challenge and Growth**)
+During the **initial phase**, all members engaged in **dedicated 2-hour pair programming blocks each day**. This lightweight, high-focus collaboration enabled fast prototyping and early architectural feedback without the overhead of daily stand-up meetings. Emphasis was placed on **rapid iteration**, shared ownership, and early discovery of design misalignments.
 
-- **S (Situation)**  
-  To support meaningful progression and combat variety, we aimed to allow players to absorb and use abilities from defeated monsters. This would also reflect the narrative arc of internalizing enemy power.
+In the **refinement phase**, responsibilities became specialized across code and visual design. However, integration remained frequent, with checkpoints ensuring consistent delivery across combat, art, and narrative systems.
 
-- **T (Task)**  
-  The team needed to design a modular transformation system, allowing players to temporarily take on new forms and skillsets while maintaining balance and performance.
+Crucially, many of our development decisions were shaped by the principles outlined in our **Iterative Backlog Development** process—especially:
 
-- **A (Action)**  
-  A shared `Character` superclass was used for both players and monsters. A modular `Ability` class encapsulated reusable skill data. When a player transformed, the system cached their base state and swapped in new attributes. Configuration files drove stat definitions and skill effects. The UI and animation were dynamically updated based on transformation state.
+- **Shifting technical feasibility** (e.g., adapting rendering pipelines) 
+- **Narrative integration opportunities** (e.g., environment as story) 
 
-  🔀 **Cross-domain Special Consideration**  
-  Monster transformation required **distinct visual forms**, but the art team initially only produced static enemy sprites. To unblock development, the programming team implemented **placeholder effects**—like glows and overlays—while artists prepared the final forms. This approach ensured parallel progress and avoided system bottlenecks due to pending assets.
-
-- **R (Result)**  
-  This system gave players a sense of tactical agency, letting them choose ability paths suited to their playstyle. It dramatically increased replayability and combat depth, and received highly positive feedback during test sessions.
+Below are three representative cross-domain challenges that demonstrate how we **translated requirements into engineered solutions**.
 
 ---
 
-#### 🎨 Challenge 3: Visual Storytelling Through Environment and Animation  
-(Corresponding to: **Immersion and Narrative Progression**)
+#### 🧠 Challenge 1: Dynamic Monster Behavior for Strategic Combat 
+(Corresponds to: **Challenge and Growth Through Player Agency – AC2**)
 
-- **S (Situation)**  
-  Cutscenes alone were insufficient to convey emotional progression. The team wanted players to “feel” the story through changing environments and character visual feedback.
+- **S (Situation)** 
+Static enemies undermined our design goal of **Souls-like tension**. Players quickly memorized patterns, reducing perceived difficulty and replay value.
 
-- **T (Task)**  
-  Our task was twofold: (1) implement an animation system that reflected combat states clearly (e.g., hit, invincible, attack), and (2) embed narrative elements into environmental transitions using visual motifs and illustrations.
+- **T (Task)** 
+We needed enemies with **reactive behavior**—able to patrol, detect, and chase the player within defined “aggro” ranges, creating tactical risk.
 
-- **A (Action)**  
-  The animation system used a timer-based `Animation` class to switch frames based on character status, including blinking for invincibility. Meanwhile, level artists developed four distinct environmental stages (Forest → Graveyard → Lake → Lava), each with a specific color theme and narrative role. Comic-style panels were created to bridge stages, and interactive objects were themed accordingly (e.g., chained gates, cursed mist).
+- **A (Action)** 
+Enemy behavior was encoded through state machines (Idle, Patrol, Track). Patrols and detection ranges were defined in external JSON configs. A rerouting logic was added to allow pursuit in complex layouts.
 
-  🔀 **Cross-domain Special Consideration**  
-  Some visual proposals—like **animated fog overlays or dynamic lava flows**—clashed with engine limitations, causing masking and performance issues. The teams coordinated to rework these as **parallax-safe static layers or looped effects**, and introduced strict conventions for asset layering and naming. This kept performance stable while preserving artistic impact.
+🔀 **Cross-domain Friction** 
+Since we didn't use a full tilemap editor, **artist-designed visuals didn’t reflect pathable space**. The solution: artists provided an **Excel-based grid annotation**, labeling collision tiles. This low-tech bridge was aligned with our principle of flexibility under technical constraints.
 
-- **R (Result)**  
-  Visual feedback improved player decision-making and immersion. Environmental storytelling helped reinforce the world’s emotional arc without relying on dialogue. Players consistently commented on the atmospheric tension and narrative continuity between zones.
+- **R (Result)** 
+Enemy encounters became unpredictable and player-driven. The implementation fulfilled AC2 by **shifting challenge from numbers to behaviors**—a key goal of our design.
 
 ---
 
-#### 📊 Summary of Key Challenges and Outcomes
+#### 🔁 Challenge 2: Player Transformation and Skill System 
+(Corresponds to: **Challenge and Growth Through Player Agency – AC1**)
 
-| Challenge | Goal | Solution | Cross-Domain Friction | Result |
-|----------|------|----------|------------------------|--------|
-| **Monster AI** | Increase tension and strategic depth | Patrol + Aggro system, rerouting with waypoints | Manual collision mapping via Excel to resolve art-program mismatches | More dynamic encounters, better challenge pacing |
-| **Player Transformation** | Enable progression and build diversity | Config-driven ability system, dynamic state swap | Delay in final sprites led to fallback FX collaboration | High replayability, player-driven combat strategy |
-| **Environment & Animation** | Deepen immersion and storytelling | Themed environments + responsive animation | Performance tuning due to animated visual layers | Strong narrative tone, enhanced player clarity |
+- **S (Situation)** 
+To satisfy AC1’s goal of progression through earned ability, we needed players to dynamically gain and activate enemy-like powers.
+
+- **T (Task)** 
+Build a transformation system where player forms and stats change based on acquired abilities, while maintaining visual feedback and balance.
+
+- **A (Action)** 
+We implemented transformation logic using a `Character` superclass and modular `Ability` class. Configuration files dictated which transformations countered which status debuffs.
+
+🔀 **Cross-domain Friction** 
+To unblock parallel visual development, we **repurposed enemy UI sprites** directly for transformation forms. This was only possible because our rendering logic was decoupled from functional logic—an explicit result of our **early modularization and configuration-driven architecture** (as emphasized in our Iterative Backlog principles).
+
+- **R (Result)** 
+Players could resolve status effects (burn, slow) in immersive and mechanically coherent ways. The system directly addressed AC1 by reinforcing **skill-based problem-solving with visual narrative grounding**.
+
+---
+
+#### 🎨 Challenge 3: Visual Storytelling Through Environment and Animation 
+(Corresponds to: **Immersive Narrative Experience – AC1 & AC2**)
+
+- **S (Situation)** 
+Narrative text alone felt disconnected from gameplay. We aimed to deliver **emotional context through spatial transitions and reactive visuals**.
+
+- **T (Task)** 
+Link story beats to level transitions, animations, and environmental design—fulfilling the player-facing story experience described in both ACs.
+
+- **A (Action)** 
+Each level zone (Forest → Graveyard → Lake → Lava) was given its own palette, motif, and transitions. Animations were managed through a timer-based system that responded to player state (e.g., invincibility blinking).
+
+🔀 **Cross-domain Friction** 
+Effects like **fog overlays and lava flows** caused performance issues. In line with our “Shifting Technical Feasibility” principle, we adapted these into **layer-safe parallax textures and visual loops**, balancing fidelity with stability.
+
+- **R (Result)** 
+Visual elements communicated gameplay state and narrative beats simultaneously—bringing our AC1 and AC2 goals to life in a seamless, non-verbal way.
+
+---
+
+#### 📊 Summary: Challenge Completion as Requirement Fulfillment
+
+| Challenge | Design Goal | AC Link | Solution Summary | Result |
+|------------------------|---------------------------------------------|------------------|------------------------------------------------|--------|
+| Monster Behavior | Tactical challenge via adaptive enemies | 🧠 AC2 | Config-based patrol + aggro with rerouting | Engaging, skill-based encounters |
+| Player Transformation | Growth through reactive, earned abilities | 🧠 AC1 | Cached state swap + UI reuse for transformation | Replayability, tactical freedom |
+| Visual Storytelling | Narrative immersion via gameplay space | 🎭 AC1 & AC2 | Themed levels, animation + visual integration | Strong emotional pacing and clarity |
+
+---
+
+Each of these implementation efforts directly reflected our commitment to **Iterative Backlog Refinement** and **value-centered delivery**. 
+They were not just engineering hurdles—but **essential enablers of the player promises made in our design**.
 
 
 ### Evaluation
