@@ -47,7 +47,7 @@ A typical scenario in Chapter 2: with vision severely limited, the player faces 
 
 This tight synergy between **punishment, narrative, and tactical agency** defines *Dragon Adventure*. The result is a difficulty that is not just hard, but **immersively, meaningfully hard**—and always conquerable through understanding, memory, and adaptation.
 
-### 🎮 Requirements
+### Requirements
 
 ---
 
