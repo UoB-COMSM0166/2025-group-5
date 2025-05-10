@@ -28,31 +28,24 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 
 ## Project Report
 
-### Introduction 缺游戏元素介绍，关卡图
-**Dragon Adventure** is a story-rich 2D action-adventure game. Guided by an immersive narrative, players battle various monsters to complete story-driven objectives.  
+### Introduction
 
----
+**Dragon Adventure** is a 2D pixel-art action-adventure game that fuses **souls-like difficulty** with a **narrative-first progression system**. Rather than relying on flashy weapons or random upgrades, the game challenges players through **intentional design**, where every mechanic is grounded in story, and every obstacle is thematically justified.
 
-#### 🎮 **Game Inspiration**  
-Inspired by the pixel-style dungeon shooter *Soul Knight*—a game blending **roguelike** elements with **action-packed shooting**—**Dragon Adventure** carves its own identity by shifting focus away from flashy combat and weapon variety. Instead, it embraces a *"story-driven actions, actions shaping the story"* philosophy.  
+At the heart of the experience is a three-layered design philosophy:
 
-Unlike *Soul Knight*, which lacks a continuous plot and emphasizes grinding for EXP/resources, our game delivers a **deeper, more immersive experience**. This is achieved through:  
-- **Richly designed maps & enemies**  
-- **Dynamic vision mechanics**  
-- **Souls-like difficulty** to ensure engagement  
+1. **Punishing but Purposeful: Souls-Like Difficulty**  
+   Combat in *Dragon Adventure* is unforgiving. Enemies hit hard, and healing is limited. Players must master timing, spacing, and strategic movement. But this isn’t difficulty for its own sake—each challenge is crafted to evoke tension, risk, and eventual satisfaction. Inspired by *Souls* games, we aim for difficulty that **feels earned**, not random.
 
-Guided by the narrative, players must **analyze enemy behaviors and map layouts** carefully to progress—gradually uncovering the world's secrets along the way.  
+2. **Story as the Driver of Challenge**  
+   Every difficulty spike in the game comes from the narrative. In Chapter 2, after defeating the first boss, players are **cursed and lose most of their vision**. This isn’t fog or visual blur—it’s a **narrative-induced blindness** that forces players to **explore in near-total darkness**, relying on memory, audio cues, and deduction. This immersive mechanic reinforces the story world while redefining how players perceive and navigate danger.
 
----
+3. **Transformation: Strategic Empowerment Through Narrative**  
+   To survive such extreme conditions, players rely on the core **transformation system**. By defeating monsters, they can temporarily **absorb their abilities**—such as gaining extra health, new attacks, or **curing negative status effects** like blindness. These powers are not just upgrades—they’re responses to the world’s cruelty, giving players **narrative-justified tools to push forward**.
 
-##### **Example: Gameplay in Chapter 2**  
-After adapting to Chapter 1's challenges, players are **cursed by the final boss**, which logically restricts their **field of vision**. Forced to explore with **severely limited sight**, they soon realize the game's true depth:  
-- A seemingly mandatory path requires defeating a **powerful monster** with **low HP**—creating tense, strategic combat.  
-- Our **"Transformation Mechanic"** offers temporary solutions (e.g., bonus HP/abilities) to balance despair with hope.  
+A typical scenario in Chapter 2: with vision severely limited, the player faces an elite enemy with low HP but devastating attacks. Only by defeating and **transforming into that monster** can they gain the clarity and strength needed to progress—turning despair into strategy.
 
----
-
-Through **interconnected design**, *Dragon Adventure* ensures players **deeply engage** with our meticulously crafted world—one challenge at a time.  
+This tight synergy between **punishment, narrative, and tactical agency** defines *Dragon Adventure*. The result is a difficulty that is not just hard, but **immersively, meaningfully hard**—and always conquerable through understanding, memory, and adaptation.
 
 ### Requirements 
 
