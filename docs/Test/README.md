@@ -1,1 +1,33 @@
+**黑盒测试**
 
+本次黑盒测试覆盖了多个方面的功能验证，确保游戏从启动到结束过程中的稳定性与交互逻辑。首先，我们进行了游戏启动测试，验证游戏初始化是否正常、初始状态是否正确加载，并对关卡设置进行检查。随后，通过游戏控制测试，确保键盘输入响应及时，暂停功能有效，以及玩家移动控制系统运行正常。在游戏界面测试中，我们检查了画布尺寸、状态信息显示及各类界面元素的呈现情况。游戏结束测试方面，验证玩家死亡条件是否正确触发，游戏是否能够正常进入结束状态。边界条件测试主要涵盖屏幕尺寸限制、快速按键输入以及输入极限情况下的表现。异常处理测试则关注资源加载错误、崩溃恢复机制和错误状态处理。最后，我们还进行了可访问性测试，评估键盘控制的支持程度、输入的响应能力以及整体操作的便捷性，确保游戏对所有用户友好。
+
+This black-box testing process comprehensively evaluates the functionality of the game from initialization to termination. The game startup tests confirmed that the game initializes correctly, the initial state is properly loaded, and level settings are correctly applied. In the game control tests, we verified that keyboard input is responsive, pause functionality works as intended, and the movement control system operates smoothly. The interface tests examined the canvas dimensions, the display of in-game status information, and the rendering of UI elements. The game termination tests validated that the player's death conditions are triggered accurately and the game transitions into a proper end state. Boundary condition tests were conducted to evaluate behavior under screen size constraints, rapid key inputs, and extreme value inputs. The exception handling tests focused on how the game reacts to resource loading failures, crash recovery mechanisms, and error state management. Finally, accessibility tests assessed keyboard support, input responsiveness, and the overall ease of interaction, ensuring that the game remains user-friendly for all players.
+
+ **白盒测试**
+
+本轮测试对游戏内部逻辑进行了细致的**白盒测试**。在 Level 类测试 中，我们验证了类的初始化过程、关键方法的功能正确性、属性赋值情况及内部数据结构的完整性。同时，针对 游戏状态转换，测试了各类状态的切换逻辑、状态一致性以及触发条件的准确性。在 对象交互测试 中，重点检查了游戏中各对象之间的交互逻辑，包括碰撞检测系统、伤害计算机制及状态更新行为。此外，还通过 内部逻辑测试，确保游戏核心算法、数据处理流程以及业务逻辑实现的正确性和稳定性。
+
+测试覆盖范围广泛，包括 功能测试（涵盖游戏核心功能、用户交互功能与系统功能），性能测试（响应速度、资源占用、运行效率），兼容性测试（不同浏览器、设备与运行环境的适配能力），以及 安全性测试（数据安全、操作安全和状态稳定性）。在测试重点方面，黑盒测试聚焦于功能完整性、用户体验、异常处理与边界条件，而白盒测试则关注代码质量、逻辑正确性、对象交互以及状态管理。
+
+
+
+This testing process included  detailed white-box testing to ensure the reliability of the game’s internal logic. In the Level class tests, we verified the class initialization process, functionality of key methods, accuracy of property assignments, and the completeness of underlying data structures. The game state transition tests focused on the correctness of state switching logic, consistency across different game states, and the precise triggering of state changes. In object interaction tests, we examined the logic governing interactions between game entities, including collision detection systems, damage calculation mechanisms, and the update of object statuses. Additionally, internal logic tests were conducted to validate the correctness and stability of the game’s core algorithms, data handling processes, and business logic.
+
+The scope of testing covered multiple dimensions: functional testing (core gameplay functions, user interactions, and system features), performance testing (response times, resource usage, and execution efficiency), compatibility testing (browser support, device adaptation, and runtime environment compatibility), and security testing (data integrity, operational safety, and state consistency). In terms of testing focus, black-box testing emphasized feature completeness, user experience, exception handling, and boundary conditions, while white-box testing targeted code quality, logical correctness, object interactions, and state management.
+
+ **本次测试的核心目标**在于全面验证游戏功能的实现效果，确保用户交互正常响应、系统功能稳定运行，并通过代码审查与运行测试双重手段保障软件质量。同时，我们亦注重用户体验层面的优化，确保游戏在操作流畅性、界面友好性和响应及时性等方面达到良好标准。
+
+The primary objective of this testing cycle was to validate the functional behavior of the game, ensure smooth user interaction, and maintain the overall system stability. By combining code-level inspection with runtime behavior analysis, the testing process also contributes to quality assurance. Furthermore, user experience considerations were central, aiming to ensure fluid controls, friendly interfaces, and responsive performance throughout gameplay.
+
+ 
+
+**游戏模拟环境初始化代码说明：**
+
+该段代码用于在 Node.js 中模拟浏览器环境，支持对 HTML5 Canvas 游戏逻辑的测试。通过 jsdom 构造 document 和 window，并用 jest.fn() 模拟 canvas、button、video 等方法，避免真实依赖浏览器。同时定义了 Character、Player、Enemy、Projectile 等核心类，并初始化游戏状态、全局变量和关卡对象，以便在测试中调用和验证各类行为逻辑。
+
+Game Simulation Environment Initialization Code Description:
+
+This code sets up a simulated browser environment in Node.js to support testing of HTML5 Canvas game logic. It uses jsdom to create document and window, and mocks functions like canvas, button, and video using jest.fn() to avoid relying on an actual browser. Core classes such as Character, Player, Enemy, and Projectile are defined, and global game states, variables, and level objects are initialized to allow for function calls and behavior verification during testing.
+
+ 
