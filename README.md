@@ -111,7 +111,7 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 
 ---
 
-**[AC1: World Introduction via Story Cutscene](#ac-immersive-1)**  
+**<a name="ac-immersive-1"></a>AC1: World Introduction via Story Cutscene**  
 > *Given* the player starts a new game,  
 > *When* the session begins,  
 > *Then* a 30-second narrated cutscene introduces key lore (curse, player identity, stakes).
@@ -123,7 +123,7 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 
 ---
 
-**[AC2: Narrative-Driven Transitions & Mechanic Introduction](#ac-immersive-2)**  
+**<a name="ac-immersive-2"></a>AC2: Narrative-Driven Transitions & Mechanic Introduction**  
 > *Given* the player completes a level,  
 > *When* the next level begins,  
 > *Then* a narrative recap and lore-linked mechanic intro is presented.
@@ -156,7 +156,7 @@ Some players desired more onboarding for understanding new mechanics like limite
 
 ---
 
-**[AC2: Souls-like Difficulty via Layered Design](#ac-growth-2)**  
+****<a name="ac-growth-2"></a>AC2: Souls-like Difficulty via Layered Design**  
 > *Given* the player enters a level,  
 > *When* they face multiple hazards (combat, layout, limited sight),  
 > *Then* the challenge emerges from interaction, not stat inflation.
