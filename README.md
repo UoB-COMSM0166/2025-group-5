@@ -94,6 +94,8 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 📊 In contrast:  
 - **YouGov (2024)**: 53% of players prefer narrative-driven solo games  
 - **Isbister (2017)**: Narrative boosts retention and emotional immersion
+  
+<img src="./report/profile.pic.jpg" width="640"/>
 
 ➡️ These insights led to two **top-level goals**:  
 - 🎭 **Immersive Narrative Experience**  
@@ -362,6 +364,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 #### 🧠 Challenge 1: Adaptive Monster Behavior  
 *A necessary foundation for [Souls-like layered difficulty](#ac-growth-2).*
 
+<img src="./report/challenge1.pic.jpg" width="640"/>
 - **S**: Static enemies failed to create meaningful tension.  
 - **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
 - **A**: Behavior states (Idle, Patrol, Track) were driven by JSON. Rerouting logic handled blocked paths.  
@@ -375,6 +378,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 #### 🔁 Challenge 2: Player Transformation System  
 *Required to support [problem-solving through earned abilities](#ac-growth-1).*
 
+<img src="./report/challenge2.pic.jpg" width="640"/>
 - **S**: We needed progression that let players react to hazards using earned abilities.  
 - **T**: Implement a modular transformation system that swaps player state and visuals.  
 - **A**: `Character` and `Ability` classes structured logic; configs mapped forms to debuffs.  
@@ -388,6 +392,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 #### 🎨 Challenge 3: Visual Storytelling  
 *Essential to deliver [narrative immersion across transitions](#ac-immersive-1).*
 
+<img src="./report/challenge3.pic.jpg" width="640"/>
 - **S**: Text-only storytelling lacked emotional depth.  
 - **T**: Embed narrative in spatial transitions and reactive animations.  
 - **A**: Each level (e.g., Graveyard) had unique palette and motifs. Animations reflected combat states like invincibility via blinking.  
