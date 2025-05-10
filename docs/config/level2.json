@@ -3338,7 +3338,7 @@
             "type": "chest1",
             "position": {
                 "x": 224,
-                "y": 32
+                "y": 96
             },
             "triggerDis": 50,
             "condition": {
