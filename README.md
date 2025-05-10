@@ -1,4 +1,4 @@
-# 2025-group-5
+![image](https://github.com/user-attachments/assets/634ce2af-ece8-4aa9-8b73-6b4c19cf7f6b)# 2025-group-5
 2025 COMSM0166 group 5
 
 ## Dragon Adventure
@@ -17,7 +17,7 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 
 ## Your Group
 
-![476503e3c1b6ee88141646ae3185dc3](https://github.com/user-attachments/assets/c2967a31-532e-441b-b989-8fff3739c796)
+<img src="./report/WeChat505e81ce8ee4f072ac67f30dd286e9c4.jpg" width="700"/>
 
 - Group member 1, Jingwei Lin, qw24858@bristol.ac.uk, ZhiyiJaved
 - Group member 2, Xiao Wu, ev24875@bristol.ac.uk, Alfie-wuxiao
