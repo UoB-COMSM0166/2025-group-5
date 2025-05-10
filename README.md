@@ -360,7 +360,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 ---
 
 #### 🧠 Challenge 1: Adaptive Monster Behavior  
-*Linked to: [🧠 AC2 – Souls-like Layered Difficulty](#ac-growth-2)*
+*A necessary foundation for [Souls-like layered difficulty](#ac-growth-2).*
 
 - **S**: Static enemies failed to create meaningful tension.  
 - **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
@@ -368,12 +368,12 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
   🔀 *Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
 
-- **R**: Combat became unpredictable and reactive. This fulfilled the requirement for skill-based, behavior-driven difficulty.
+- **R**: Combat became unpredictable and reactive. This enabled difficulty to emerge from behavior, not inflated stats.
 
 ---
 
 #### 🔁 Challenge 2: Player Transformation System  
-*Linked to: [🧠 AC1 – Problem Solving with Abilities](#ac-growth-1)*
+*Required to support [problem-solving through earned abilities](#ac-growth-1).*
 
 - **S**: We needed progression that let players react to hazards using earned abilities.  
 - **T**: Implement a modular transformation system that swaps player state and visuals.  
@@ -381,12 +381,12 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
   🔀 *Friction*: Final visuals weren’t ready. We reused **enemy UI sprites** for transformations—made possible by our rendering–logic decoupling from early modularization.
 
-- **R**: Players overcame burn/slow with narrative-consistent mechanics, fulfilling the progression-through-agency goal.
+- **R**: Players overcame burn/slow with narrative-consistent mechanics, reinforcing ability-driven growth.
 
 ---
 
 #### 🎨 Challenge 3: Visual Storytelling  
-*Linked to: [🎭 AC1 & AC2 – Narrative Integration](#ac-immersive-1)*
+*Essential to deliver [narrative immersion across transitions](#ac-immersive-1).*
 
 - **S**: Text-only storytelling lacked emotional depth.  
 - **T**: Embed narrative in spatial transitions and reactive animations.  
@@ -394,22 +394,22 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
   🔀 *Friction*: Fog/lava effects caused performance drops. We replaced them with **parallax-safe textures and loops**, keeping visuals coherent.
 
-- **R**: Story and gameplay felt tightly connected—reinforcing narrative immersion without dialogue.
+- **R**: Story and gameplay felt tightly connected—reinforcing immersion without explicit exposition.
 
 ---
 
 #### 📊 Summary: Engineering as Requirement Fulfillment
 
-| Challenge               | Linked Goal                            | Solution                             | Result                                |
-|------------------------|-----------------------------------------|--------------------------------------|----------------------------------------|
-| Monster Behavior        | 🧠 AC2 – Layered Challenge              | Config-based state machine + reroute | Skill-based enemy encounters           |
-| Player Transformation   | 🧠 AC1 – Ability Solves Debuffs        | Cached state + config mapping        | Replayability, problem-solving depth   |
-| Visual Storytelling     | 🎭 AC1 & AC2 – Narrative Integration   | Themed levels + visual feedback      | Emotional continuity, player immersion |
+| Challenge               | Design Necessity                         | Solution                             | Result                                |
+|------------------------|-------------------------------------------|--------------------------------------|----------------------------------------|
+| Monster Behavior        | Tactical difficulty through smart enemies | Config-based state machine + reroute | Skill-based enemy encounters           |
+| Player Transformation   | Responsive growth via new abilities       | Cached state + config mapping        | Replayability, problem-solving depth   |
+| Visual Storytelling     | Worldbuilding through environment & flow  | Themed levels + visual feedback      | Emotional continuity, player immersion |
 
 ---
 
 These were not just engineering tasks—they were the **mechanical realization of player-facing promises** in our requirements.  
-Each implementation answered specific Acceptance Criteria, while also honoring the flexibility and iterative spirit at the heart of our backlog philosophy.
+Each implementation answered specific design intentions while honoring the **flexibility and iterative spirit** of our backlog development.
 
 
 ### Evaluation
