@@ -29,13 +29,19 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 ## Project Report
 
 ### Introduction
-<img src="./report/start0.pic.jpg" width="640"/>
-<img src="./report/start1.pic.jpg" width="640"/>
-<img src="./report/start2.pic.jpg" width="640"/>
-<img src="./report/start3.pic.jpg" width="640"/>
-<img src="./report/start4.pic.jpg" width="640"/>
-<img src="./report/start5.pic.jpg" width="640"/>
 
+---
+
+<p align="center">
+  <img src="./report/start0.pic.jpg" width="250"/>
+  <img src="./report/start1.pic.jpg" width="250"/>
+  <img src="./report/start2.pic.jpg" width="250"/>
+</p>
+<p align="center">
+  <img src="./report/start3.pic.jpg" width="250"/>
+  <img src="./report/start4.pic.jpg" width="250"/>
+  <img src="./report/start5.pic.jpg" width="250"/>
+</p>
 
 **Dragon Adventure** is a 2D pixel-art action-adventure game that fuses **souls-like difficulty** with a **narrative-first progression system**. Rather than relying on flashy weapons or random upgrades, the game challenges players through **intentional design**, where every mechanic is grounded in story, and every obstacle is thematically justified.
 
@@ -50,46 +56,22 @@ At the heart of the experience is a three-layered design philosophy:
 3. **Transformation: Strategic Empowerment Through Narrative**  
    To survive such extreme conditions, players rely on the core **transformation system**. By defeating monsters, they can temporarily **absorb their abilities**—such as gaining extra health, new attacks, or **curing negative status effects** like blindness. These powers are not just upgrades—they’re responses to the world’s cruelty, giving players **narrative-justified tools to push forward**.
 
+---
 
-### 🧟 Monster Introduction
+### Game Content
 
-### 🧟 Monster Introduction
-
-|              | <img src="./report/forest.pic.jpg" width="200"/><br/>**Forest** | <img src="./report/grayyard.pic.jpg" width="200"/><br/>**Graveyard** | <img src="./report/lake.pic.jpg" width="200"/><br/>**Lake** | <img src="./report/mountain.pic.jpg" width="200"/><br/>**Volcano** |
-|--------------|-----------------------------------------|--------------------------------------------|------------------------------------|----------------------------------------|
+|               | <p align="center"><img src="./report/forest.pic.jpg" width="200"/><br/><strong>Forest</strong></p> | <p align="center"><img src="./report/grayyard.pic.jpg" width="200"/><br/><strong>Graveyard</strong></p> | <p align="center"><img src="./report/lake.pic.jpg" width="200"/><br/><strong>Lake</strong></p> | <p align="center"><img src="./report/mountain.pic.jpg" width="200"/><br/><strong>Volcano</strong></p> |
+|---------------|--------------------------------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
 | **Slime**  
-*Melee attacker; high defense; medium speed* | <img src="./report/greenslime.jpg" width="200"/><br/>Green Slime | <img src="./report/greyslime.jpg" width="200"/><br/>Grey Slime | <img src="./report/blueslime.jpg" width="200"/><br/>Blue Slime | <img src="./report/redslime.jpg" width="200"/><br/>Red Slime |
+*Melee attacker; high defense; medium speed* | <p align="center"><img src="./report/greenslime.jpg" width="200"/><br/>Green Slime</p> | <p align="center"><img src="./report/greyslime.jpg" width="200"/><br/>Grey Slime</p> | <p align="center"><img src="./report/blueslime.jpg" width="200"/><br/>Blue Slime</p> | <p align="center"><img src="./report/redslime.jpg" width="200"/><br/>Red Slime</p> |
 | **Mage**  
-*Area damage; low health; medium speed* | — | <img src="./report/ghost.jpg" width="200"/><br/>Ghost Mage | <img src="./report/waterGhost.jpg" width="200"/><br/>Water Mage | <img src="./report/fireghost.pic.jpg" width="200"/><br/>Fire Mage |
+*Area damage; low health; medium speed* | — | <p align="center"><img src="./report/ghost.jpg" width="200"/><br/>Ghost Mage</p> | <p align="center"><img src="./report/waterGhost.jpg" width="200"/><br/>Water Mage</p> | <p align="center"><img src="./report/fireghost.pic.jpg" width="200"/><br/>Fire Mage</p> |
 | **Tower**  
-*High attack; immobile and invulnerable* | <img src="./report/grassTower.jpg" width="200"/><br/>Grass Tower | <img src="./report/GhostTower.pic.jpg" width="200"/><br/>Ghost Tower | <img src="./report/waterTower.pic.jpg" width="200"/><br/>Water Tower | <img src="./report/fireTower.jpg" width="200"/><br/>Fire Tower |
+*High attack; immobile and invulnerable*  
+*Lake: slows player / Volcano: burns player* | <p align="center"><img src="./report/grassTower.jpg" width="200"/><br/>Grass Tower</p> | <p align="center"><img src="./report/GhostTower.pic.jpg" width="200"/><br/>Ghost Tower</p> | <p align="center"><img src="./report/waterTower.pic.jpg" width="200"/><br/>Water Tower</p> | <p align="center"><img src="./report/fireTower.jpg" width="200"/><br/>Fire Tower</p> |
 
-
-
-
-Monster Introduction
-0.level
-<img src="./report/forest.pic.jpg" width="640"/>
-<img src="./report/grayyard.pic.jpg" width="640"/>
-<img src="./report/lake.pic.jpg" width="640"/>
-<img src="./report/mountain.pic.jpg" width="640"/>
-
-1.slime
-<img src="./report/greenslime.jpg" width="640"/>
-<img src="./report/greyslime.jpg" width="640"/>
-<img src="./report/blueslime.jpg" width="640"/>
-<img src="./report/redslime.jpg" width="640"/>
-
-2.法师
-<img src="./report/ghost.jpg" width="640"/>
-<img src="./report/waterGhost.jpg" width="640"/>
-<img src="./report/fireghost.pic.jpg" width="640"/>
-
-3.防御塔
-<img src="./report/grassTower.jpg" width="640"/>
-<img src="./report/GhostTower.pic.jpg" width="640"/>
-<img src="./report/waterTower.pic.jpg" width="640"/>
-<img src="./report/fireTower.jpg" width="640"/>
+> This mechanic relies heavily on our **configuration-driven system**, enabling behavior variation without code changes.  
+> For implementation details, see [JSON Example](#json).
 
 
 
@@ -97,63 +79,67 @@ Monster Introduction
 
 ---
 
-#### 🧭 Overview: Our Requirements Engineering Logic
+#### Overview: Our Requirements Engineering Logic
 
 Our requirements process was not just a checklist—it was a logical journey.  
 We progressed through **five interlocking phases**, each informing and refining the next:
 
-1. 🔍 **Stakeholder Awareness** — Understand our context and constraints  
-2. 📊 **Market Differentiation** — Identify opportunity space for innovation  
-3. 🎯 **Epic Design** — Break vision into player-centered outcomes  
-4. 🔁 **Iterative Backlog Development** — Turn vision into action, refined by feedback  
-5. 🧮 **Value–Effort Prioritization** — Focus effort where it matters most  
+1. **Stakeholder Awareness** — Understand our context and constraints  
+2. **Market Differentiation** — Identify opportunity space for innovation  
+3. **Epic Design** — Break vision into player-centered outcomes  
+4. **Iterative Backlog Development** — Turn vision into action, refined by feedback  
+5. **Value–Effort Prioritization** — Focus effort where it matters most  
 
 ---
 
-#### 📍 1. <a name="stakeholder">Stakeholders & Team Context
+#### 1. <a name="stakeholder">Stakeholders & Team Context</a>
 
-<img width="536" alt="image" src="https://github.com/user-attachments/assets/a3618ef4-e913-463d-971c-cd1f6f409db7" />
+<p align="center">
+  <img src="./report/stakeHolder.pic.jpg" width="700"/>
+</p>
 
 We identified our primary stakeholders as:
 
-- 🎮 **Target players**  
-- 🛠️ **Team contributors** (developers, designers, artists)
+- **Target players**  
+- **Team contributors** (developers, designers, artists)
 
-> 📌 *Instructors and TAs were intentionally excluded as stakeholders—this will be reflected upon in the [Conclusion](#conclusion).*
+> *Note: Instructors and teaching assistants were intentionally excluded as stakeholders—this will be reflected upon in the [Conclusion](#conclusion).*
 
 In addition to market logic and technical constraints, we recognized that  
 **respecting each team member’s gameplay preferences** was vital for maintaining motivation and a sense of creative ownership.
 
 ---
 
-#### 📍 2. Understanding the Market & Direction
+#### 2. Understanding the Market & Direction
 
 Our genre analysis of pixel shooters  
 (*Enter the Gungeon*, *Broforce*, *Nuclear Throne*) revealed a familiar issue:  
-strong moment-to-moment gameplay, but **minimal narrative integration**.
+strong moment-to-moment gameplay, but minimal narrative integration.
 
-📰 **Press quotes**:  
-- “No comprehensible story” — *RPS* (Broforce)  
+Cited industry commentary:  
+- “No comprehensible story” — *Rock Paper Shotgun* (Broforce)  
 - “A gun that kills the past... that’s it” — *PC Gamer* (Gungeon)  
 - “Minimum backstory” — *Edge* (Nuclear Throne)
 
-📊 In contrast:  
+In contrast:  
 - **YouGov (2024)**: 53% of players prefer narrative-driven solo games  
 - **Isbister (2017)**: Narrative boosts retention and emotional immersion
-  
-<img src="./report/profile.pic.jpg" width="640"/>
 
-➡️ These insights led to two **top-level goals**:  
-- 🎭 **Immersive Narrative Experience**  
-- 🧠 **Challenge and Growth Through Player Agency**
+<p align="center">
+  <img src="./report/profile.pic.jpg" width="800"/>
+</p>
 
----
-
-#### 📍 3. <a name="epics">Epics
+These findings led to two top-level design goals:  
+- **Immersive Narrative Experience**  
+- **Challenge and Growth Through Player Agency**
 
 ---
 
-##### 1. Immersive Narrative Experience
+#### 3. <a name="epics">Epics</a>
+
+---
+
+##### Immersive Narrative Experience
 
 > *As a player, I want story and gameplay to feel interconnected, so that my actions carry emotional weight in the world.*
 
@@ -164,7 +150,7 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 > *When* the session begins,  
 > *Then* a 30-second narrated cutscene introduces key lore (curse, player identity, stakes).
 
-📌 **Backlog Highlights**:  
+**Backlog Highlights**:  
 - [✓] Transitioned from plain text to illustrated VO cutscene  
 - [✓] Structured around three essential lore beats  
 - [✓] Synchronized narration and visuals post-feedback
@@ -176,17 +162,16 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 > *When* the next level begins,  
 > *Then* a narrative recap and lore-linked mechanic intro is presented.
 
-📌 **Backlog Highlights**:  
+**Backlog Highlights**:  
 - [✓] Comic panels used between zones (e.g., Forest → Graveyard)  
 - [✓] Graveyard’s limited vision introduced through a curse in the story  
 - [✗] No interaction checkpoint to confirm player understanding  
 
-🛠️ *Player Insight:*  
-Some players desired more onboarding for understanding new mechanics like limited vision.
+> *User Insight: Some players desired more onboarding for understanding new mechanics like limited vision.*
 
 ---
 
-##### 2. Challenge and Growth Through Player Agency
+##### Challenge and Growth Through Player Agency
 
 > *As a player, I want to grow through earned abilities so I can overcome challenges and feel my mastery deepen.*
 
@@ -197,74 +182,73 @@ Some players desired more onboarding for understanding new mechanics like limite
 > *When* they encounter negative status effects (e.g., burn, slow),  
 > *Then* they can activate an appropriate transformation to neutralize it.
 
-📌 **Backlog Highlights**:  
+**Backlog Highlights**:  
 - [✓] Transformations tied to debuff resolution  
 - [✓] Ability usage signaled via updated UI indicators  
 - [✗] No dynamic scaling of difficulty or debuff severity  
 
 ---
 
-****<a name="ac-growth-2"></a>AC2: Souls-like Difficulty via Layered Design**  
+**<a name="ac-growth-2"></a>AC2: Souls-like Difficulty via Layered Design**  
 > *Given* the player enters a level,  
 > *When* they face multiple hazards (combat, layout, limited sight),  
 > *Then* the challenge emerges from interaction, not stat inflation.
 
-📌 **Backlog Highlights**:  
+**Backlog Highlights**:  
 - [✓] Enemy “aggro zones” trigger speed bursts on detection  
 - [✓] Players can exploit patrol range limits to reposition  
 - [✓] Graveyard’s vision-limiting mechanic increases tension and cognitive load  
 - [✗] Optional hint system not yet implemented  
 
-🛠️ *Evaluation Insight:*  
-The combination of perceptual limits and mobility-based combat created a satisfying balance of tension and control.
+> *Evaluation Insight: The combination of perceptual limits and mobility-based combat created a satisfying balance of tension and control.*
 
 ---
 
-#### 📍 4. Iterative Backlog Development
+#### 4. Iterative Backlog Development
 
-Our product backlog evolved dynamically via:
+Our product backlog evolved dynamically through:
 
-- 🔄 Weekly internal reflections (informal retrospectives)  
-- 🧪 Think-aloud and playtest feedback  
-- 🧱 Shifting technical feasibility  
-- 🧵 Narrative integration opportunities
+- Weekly internal retrospectives  
+- Think-aloud and playtest feedback  
+- Adjustments based on shifting technical feasibility  
+- Opportunistic narrative integration
 
-📌 **Iteration Examples**:  
+**Iteration Examples**:  
 - Level transitions added post-feedback on emotional pacing  
 - Transformation cues clarified after onboarding confusion  
-- Cursed vision tutorial acknowledged, deferred due to scope
+- Cursed vision tutorial acknowledged but deprioritized due to time constraints
 
-> 🧠 *Key lesson:* Flexibility and responsiveness outperformed rigid planning.
-
----
-
-#### 📍 5. <a name="planning">Planning Poker + MoSCoW Prioritization
-
-We adapted **Planning Poker** not just for estimating implementation effort,  
-but also for evaluating **player-perceived value**—creating a hybrid model that blends agile precision with human-centered design.
-
-📊 The result: a **value–effort matrix** mapped to MoSCoW priorities
-
-| **Priority**     | **Key Features**                                          | 💡 **Value** / 🛠️ **Cost** |
-|------------------|-----------------------------------------------------------|-----------------------------|
-| ✅ **Must Have**  | Core combat, vision limit, transformation for status      | 💡9 / 🛠️5                   |
-| 👍 **Should Have**| Comic transitions, narrative intros, ability UI feedback  | 💡7 / 🛠️6                   |
-| 🤔 **Could Have** | Hint system, ability combos, optional exploration         | 💡5 / 🛠️5                   |
-| 🚫 **Won’t Have** | Online multiplayer (narratively misaligned, high cost)    | 💡2 / 🛠️21                  |
-
-⚙️ *Highlight:*  
-Our prioritization process placed **player impact at the center**—balancing effort with immersion, and strategy with value.
+> *Key Lesson: Responsiveness and flexibility often outperformed rigid planning.*
 
 ---
+
+#### 5. <a name="planning">Planning Poker + MoSCoW Prioritization</a>
+
+We adapted Planning Poker not only for estimating implementation cost,  
+but also for evaluating player-perceived value—producing a hybrid prioritization model.
+
+Resulting Value–Effort Matrix:
+
+| Priority         | Key Features                                               | Value / Cost |
+|------------------|------------------------------------------------------------|--------------|
+| **Must Have**    | Core combat, vision-limiting, transformation mechanics     | 9 / 5        |
+| **Should Have**  | Comic transitions, narrative intros, ability UI feedback   | 7 / 6        |
+| **Could Have**   | Hint system, ability combos, optional exploration          | 5 / 5        |
+| **Will Not Have**| Online multiplayer (narratively incompatible, high cost)   | 2 / 21       |
+
+> *Note: Our prioritization placed user experience and narrative coherence at the center—ensuring development effort mapped directly to perceived player value.*
+
 ### Design
 
 Our system design followed a top-down, user-centered methodology. We began by modeling gameplay behavior from the player’s perspective and iteratively transformed these abstractions into concrete architecture, class structure, configuration logic, and real-time behavior.
 
 ---
 
-#### 🎮 Use Case Model: From Player Perspective
+#### Use Case Model: From Player Perspective
 
-<img src="docs/README/Use_Case_Model.png" width="640"/>
+<p align="center">
+  <img src="docs/README/Use_Case_Model.png" width="800"/>
+</p>
 
 We first identified key interactions between the player and the game, such as:
 - Defeating monsters  
@@ -274,32 +258,36 @@ We first identified key interactions between the player and the game, such as:
 - Adjusting settings  
 - Viewing story cutscenes  
 
-This model served as a **functional blueprint**—clarifying what the game needed to support. Notably, use cases like "Read Sign" and "Adjust Settings" justified separate UI and audio components.
+This model served as a functional blueprint—clarifying what the game needed to support. Notably, use cases like “Read Sign” and “Adjust Settings” justified the development of separate UI and audio components.
 
-> 🧩 These use cases directly inspired module decomposition in the next stage.
-
----
-
-#### 🧱 <a name="design">Architecture Design: From Use Cases to Modules
-
-<img src="./homework/week5/system_architecture.png" width="640"/>
-
-We decomposed the use case logic into modular subsystems built on Phaser 3:
-- `CoreEntity`: Player, Enemy, Projectile, Obstacle  
-- `UI/HUD`: Cutscenes, interaction prompts, status info  
-- `AudioManager`: For game SFX and volume logic  
-- `LevelManager`: Stage configuration and progression  
-- `GameLoop`: Central orchestrator for real-time updates  
-
-A key architectural milestone was our adoption of a **configuration-driven design**. Instead of embedding entity behavior in code, we externalized it via JSON-based configuration files defining properties for:
-- Player and enemy stats  
-- Map size and layout  
-- Object behavior (e.g., doors, traps, debuffs)  
-- Visual formats and skill mappings
+> These use cases directly informed our subsequent architectural module decomposition.
 
 ---
 
-##### 📦 Example: JSON-Defined Enemy Entry<a name="json">
+#### <a name="design">Architecture Design: From Use Cases to Modules</a>
+
+<p align="center">
+  <img src="./homework/week5/system_architecture.png" width="800"/>
+</p>
+
+We decomposed the use case logic into modular subsystems based on Phaser 3. The major modules included:
+- `CoreEntity`: Handles all dynamic objects including players, enemies, projectiles, and obstacles  
+- `UI/HUD`: Manages cutscenes, interaction prompts, and status indicators  
+- `AudioManager`: Controls sound effects and volume logic  
+- `LevelManager`: Defines stage structure and progression  
+- `GameLoop`: Serves as the central orchestrator for real-time update cycles
+
+A key architectural milestone was our adoption of a configuration-driven design. Instead of embedding behavior in code, we externalized logic via JSON configuration files defining:
+- Player and enemy statistics  
+- Map layout and dimensions  
+- Object-specific behavior (e.g., doors, traps, status effects)  
+- Visual style parameters and skill bindings
+
+> This design choice significantly enhanced modularity, empowered non-programmers to contribute, and supported rapid iteration cycles.
+
+---
+
+##### Example: JSON-Defined Enemy Entry<a name="json">
 
 ```json
 "fireSlime": {
@@ -315,19 +303,23 @@ A key architectural milestone was our adoption of a **configuration-driven desig
 
 This brought several advantages:
 
-- 🔁 **Rapid iteration**: Easily rebalanced levels or added content  
-- ✍️ **Non-coder participation**: Artists and writers could design via JSON  
-- 🔍 **Separation of concern**: Logic handled mechanics; config handled variation  
-- 🔓 **Scalability**: Enabled level reuse, transformation dynamics, and modular expansion
+- **Rapid iteration**: Easily rebalanced levels or added content  
+- **Non-coder participation**: Artists and writers could design via JSON  
+- **Separation of concern**: Logic handled mechanics; config handled variation  
+- **Scalability**: Enabled level reuse, transformation dynamics, and modular expansion
 
-> 💡 This separation was essential for implementing narrative-bound features like status effects and zone-specific hazards.
+> This separation was essential for implementing narrative-bound features like status effects and zone-specific hazards.
 
 ---
 
-#### 🧬 Class Design: Inheritance and Specialization
+#### Class Design: Inheritance and Specialization
 
-<img src="./homework/week5/class_diagram.png" width="640"/>
-<img src="./homework/week5/class_diagram_full.png" width="640"/>
+<p align="center">
+  <img src="./homework/week5/class_diagram.png" width="800"/>
+</p>
+<p align="center">
+  <img src="./homework/week5/class_diagram_full.png" width="800"/>
+</p>
 
 We translated architecture into class structure using:
 
@@ -338,50 +330,54 @@ We translated architecture into class structure using:
 
 We initially attempted a single `Entity` class, but it proved unwieldy. Polymorphism and interface unification improved:
 
-- ✅ Maintainability  
-- 🎨 Visual consistency  
-- 🔗 Loose coupling between behavior and rendering
+- Maintainability  
+- Visual consistency  
+- Loose coupling between behavior and rendering
 
-> 🔄 A shared `update()` method made collision, animation, and game logic easier to synchronize.
+> A shared `update()` method made collision, animation, and game logic easier to synchronize.
 
 ---
 
-#### 🗺️ Level Configuration: Beyond Hardcoding
+#### Level Configuration: Beyond Hardcoding
 
 We originally hardcoded level maps and enemy behavior, which slowed iteration and limited design freedom.
 
 By externalizing this into JSON configuration files, we enabled:
-- ⚡ Faster testing of layouts and encounters  
-- 🎨 Creative control by the visual team  
-- 🔄 Reusable structure for different biomes and level archetypes
 
-> ✨ *Example*: A slow-debuff dungeon could be built by swapping enemy types and adjusting layout flags—no code change required.
+- Faster testing of layouts and encounters  
+- Creative control by the visual team  
+- Reusable structure for different biomes and level archetypes
+
+> Example: A slow-debuff dungeon could be built by swapping enemy types and adjusting layout flags—no code change required.
 
 ---
 
-#### ⏱️ Sequence Modeling: Dynamic Behavior Over Time
+#### Sequence Modeling: Dynamic Behavior Over Time
 
-<img src="./homework/week5/sequence_diagram.png" width="640"/>
+<p align="center">
+  <img src="./homework/week5/sequence_diagram.png" width="800"/>
+</p>
 
 Our sequence diagrams helped visualize runtime logic:
+
 - Level initialization via `create()`  
 - Player input mapped to movement, attacks, or transformations  
 - Enemy detection reacts to proximity flags  
 - All game elements synchronized in the `update()` loop
 
-> 🔁 This made frame logic debugging much more manageable and prevented animation desync issues.
+> This made frame logic debugging much more manageable and prevented animation desync issues.
 
 ---
 
-#### 🧠 Key Design Insights
+#### Key Design Insights
 
-- ✅ **Start from the player** — Use cases grounded design  
-- 🧱 **Modularize early** — Simplified collaboration and extension  
-- 💾 **Favor configuration over hardcoding** — Enabled rapid design iteration  
-- ♻️ **Unify interfaces** — Standard `update()` and `display()` routines ensured extensibility  
-- 🚫 **Avoid overfitting** — Abstraction evolved from inheritance to config-driven separation  
+- **Start from the player** — Use cases grounded design  
+- **Modularize early** — Simplified collaboration and extension  
+- **Favor configuration over hardcoding** — Enabled rapid design iteration  
+- **Unify interfaces** — Standard `update()` and `display()` routines ensured extensibility  
+- **Avoid overfitting** — Abstraction evolved from inheritance to config-driven separation
 
-> 📌 Ultimately, each stage—use case, architecture, class, config, and runtime—was carefully layered to reinforce the next.
+> Ultimately, each stage—use case, architecture, class, config, and runtime—was carefully layered to reinforce the next.
 
 ### Implementation
 
@@ -480,176 +476,194 @@ Each implementation answered specific design intentions while honoring the **fle
 
 To evaluate whether our design and implementation successfully delivered an immersive, strategically challenging experience, we conducted a user-centered evaluation using both **qualitative** and **quantitative** methods. Specifically, we employed:
 
-1. **Think-Aloud Protocols** — to capture real-time user thoughts and frustrations during gameplay, guiding iterative design.
+1. **Think-Aloud Protocols** — to capture real-time user thoughts and frustrations during gameplay, guiding iterative design.  
 2. **NASA Task Load Index (NASA-TLX)** — to quantitatively compare perceived cognitive and physical workload across levels.
 
 This dual-method approach helped us refine key features, validate design assumptions, and align player experience with our stated top-level goals: **Challenge and Growth** and **Immersive Narrative Integration**.
 
 ---
 
-#### 🧠 Think-Aloud Testing: Iterative Feedback and In-Game Adjustments
+#### Think-Aloud Testing: Iterative Feedback and In-Game Adjustments
 
-We invited a group of users, our classmates in fact, (N = 6) to play through the first two levels while narrating their thought process aloud. Sessions were recorded and tagged based on observed frustrations, expectations, surprises, and suggestions.
+We invited a group of users (N = 6) to play through the first two levels while narrating their thought process aloud. Sessions were recorded and tagged based on observed frustrations, expectations, surprises, and suggestions.
 
 Key findings and responses included:
 
 | **User Observation** | **Design Response** |
-|---------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| *“I finished the level and nothing really happened... was that it?”* | 🚀 We added **level-clear animation and story recap panels** to create visual closure and narrative flow. |
-| *“It’s hard to tell if the monster sees me or not.”* | 👁️ We plan to add **subtle sound and sprite cues** when enemies switch from idle to aggro. |
-| *“It’s too hard. I didn’t know what I was supposed to do.”* | ⚠️ Added to the **“Could Have” backlog**: contextual tips or hint popups during peak difficulty spikes. |
-| *“I like that I got a new ability, but I wasn’t sure how to use it.”* | 🎯 We improved the **UI feedback for new abilities**, including an indicator and number hint. |
+|----------------------|---------------------|
+| "I finished the level and nothing really happened... was that it?" | We added level-clear animation and story recap panels to create visual closure and narrative flow. |
+| "It’s hard to tell if the monster sees me or not." | We plan to add subtle sound and sprite cues when enemies switch from idle to aggro. |
+| "It’s too hard. I didn’t know what I was supposed to do." | Added to the “Could Have” backlog: contextual tips or hint popups during peak difficulty spikes. |
+| "I like that I got a new ability, but I wasn’t sure how to use it." | We improved the UI feedback for new abilities, including an indicator and number hint. |
 
-These observations directly influenced multiple polish and UX updates across all levels. The Think-Aloud approach also helped us identify **non-obvious pain points**, especially in transitions, ability clarity, and feedback consistency—areas which are difficult to surface via analytical method of ourselves.
+These observations directly influenced multiple polish and UX updates across all levels. The Think-Aloud approach also helped us identify non-obvious pain points—especially in transitions, ability clarity, and feedback consistency—areas difficult to surface through internal analysis alone.
 
 ---
 
-#### 📊 NASA-TLX Workload Comparison: Forest vs. Graveyard Levels
+#### NASA-TLX Workload Comparison: Forest vs. Graveyard Levels
 
-To evaluate the **cognitive and physical workload** imposed by our level design, we conducted a **within-subject** NASA Task Load Index (NASA-TLX) assessment. Each participant (N = 6) completed both the **Forest (Level 1)** and **Graveyard (Level 2)** levels in sequence, then rated the workload dimensions immediately after each level.
+To evaluate the cognitive and physical workload imposed by our level design, we conducted a within-subject NASA Task Load Index (NASA-TLX) assessment. Each participant (N = 6) completed both the Forest (Level 1) and Graveyard (Level 2) levels in sequence, then rated the workload dimensions immediately after each level.
 
 ##### Summary of Results:
 
-| **Dimension** | **Forest (Level 1)** | **Graveyard (Level 2)** |
-|----------------------|----------------------|--------------------------|
-| Mental Demand | 42.5 | **71.3** 🔺 |
-| Physical Demand | 25.2 | 33.0 |
-| Temporal Demand | 36.1 | 65.4 |
-| Effort | 44.8 | **70.1** 🔺 |
-| Frustration | 28.0 | 40.7 |
-| Performance (Reverse)| 55.5 | **67.2** 🔺 |
+| **Dimension**         | **Forest (Level 1)** | **Graveyard (Level 2)** |
+|-----------------------|----------------------|--------------------------|
+| Mental Demand         | 42.5                 | 71.3                    |
+| Physical Demand       | 25.2                 | 33.0                    |
+| Temporal Demand       | 36.1                 | 65.4                    |
+| Effort                | 44.8                 | 70.1                    |
+| Frustration           | 28.0                 | 40.7                    |
+| Performance (Reverse) | 55.5                 | 67.2                    |
 
 (*Scores normalized to 0–100 scale, higher = more intense*)
 
 ##### Interpretation:
 
 The **Graveyard level introduced a dynamic vision-limiting mechanic**, simulating a cursed effect from the Chapter 1 boss. This constraint increased:
-- **Mental load** (players needed to memorize or infer map layout)
-- **Effort** (required more cautious movement and combat)
+
+- **Mental load** (players needed to memorize or infer map layout)  
+- **Effort** (required more cautious movement and combat)  
 - **Temporal pressure** (due to ambush-prone design and reduced visibility)
 
-Yet despite the added difficulty, players **reported higher satisfaction scores for perceived performance** in the Graveyard level, suggesting that the added challenge felt **earned rather than unfair**.
+Despite the added difficulty, players reported higher satisfaction scores for perceived performance in the Graveyard level—suggesting that the added challenge felt **earned rather than unfair**.
 
-🔍 **Conclusion:** 
-The data confirms our design intent: the **vision-limiting mechanic successfully raised difficulty**, but also **deepened immersion and player satisfaction**—fulfilling our “Immersive Narrative” and “Challenge and Growth” requirements simultaneously.
+> **Conclusion**: The vision-limiting mechanic successfully raised difficulty while also deepening immersion and player satisfaction—fulfilling both the “Immersive Narrative” and “Challenge and Growth” requirements.
 
 ---
 
-#### ✅ Evaluation Insights & Design Confirmation
+#### Evaluation Insights and Design Confirmation
 
-Based on both qualitative feedback and quantitative workload data, we can conclude:
+Based on both qualitative feedback and quantitative workload data, we conclude:
 
-- Players want to be **challenged—but with clarity**.
-- Even subtle **narrative or visual cues** (e.g., animations, hint text) significantly improve onboarding and player confidence.
-- Our **Level 2 vision mechanic** achieved the desired increase in difficulty without triggering frustration, validating its inclusion as a core mechanic.
+- Players want to be challenged—but with clarity.  
+- Even subtle narrative or visual cues (e.g., animations, hint text) significantly improve onboarding and player confidence.  
+- Our Level 2 vision mechanic achieved the desired increase in difficulty without triggering frustration, validating its inclusion as a core mechanic.
 
-This evaluation stage not only helped verify core design decisions, but also informed our roadmap priorities—focusing future development on **enhanced feedback systems**, **adaptive challenge design**, and **optional hint mechanics**.
-
+This evaluation stage not only verified core design decisions, but also informed our roadmap priorities—focusing future development on enhanced feedback systems, adaptive challenge design, and optional hint mechanics.
 
 ---
 
 #### Code Testing
 
-**Unit Testing** 
-Throughout the development process, we conducted extensive unit testing on key game modules and features. Using the JUnit framework, we wrote over 200 test cases covering core mechanics, character systems, combat systems, item systems, and other aspects of the game. These test cases ensured that each independent module worked correctly before being integrated into the main game system.
+**Unit Testing**  
+Throughout the development process, we conducted extensive unit testing on key game modules and features. Using the JUnit framework, we wrote over 200 test cases covering core mechanics, character systems, combat systems, item systems, and other aspects of the game. These tests ensured that each independent module worked correctly before integration.
 
-**Integration Testing** 
-After completing unit tests, we conducted integration testing to verify the compatibility of different modules working together. During this phase, we identified and fixed several cross-module compatibility issues, such as synchronization problems between character movement and collision detection, as well as state update issues between item usage and the combat system. These fixes ensured the stability and smoothness of the game.
+**Integration Testing**  
+Following unit tests, we conducted integration testing to verify compatibility among different modules. During this phase, we resolved issues such as synchronization errors between movement and collision detection, and inconsistencies between item usage and combat states. These fixes ensured a stable, seamless experience.
 
-**System Testing** 
-Finally, we conducted system testing to assess the game's performance and compatibility across different platforms and devices. By simulating various user scenarios and extreme conditions, we verified the game's stability and response speed under various conditions. The system testing results showed that the game performed well on mainstream devices, but we also optimized it for low-end devices to ensure a broader user base could enjoy a good gaming experience.
+**System Testing**  
+We also conducted system testing to assess performance and platform compatibility. Simulating various user scenarios and edge conditions, we confirmed stability and responsiveness. Although designed primarily for mainstream devices, the game was optimized to run smoothly on lower-end systems as well.
 
-### Process 
+### Process
+
+---
+
 #### Overview
+
 | **Phase**                             | **Dates**      | **Focus**                                                                           | **Aligned Requirement Themes**                                                       |
-| ------------------------------------- | -------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Core Prototype**                    | Jan 28 – Mar 3 | Requirments & Design & Player & enemy class logic; base visual mapping and function | 🔸 [Challenge and Growth](#ac-growth-2) foundation; mechanic feasibility             |
-| **Single-Level Integration**          | Mar 4 – Mar 18 | Monster types, environment visuals, gameplay–art merge for one full level           | 🔸 [Immersive Narrative](#ac-immersive-2) (Level + Visual unity)                     |
-| **Multi-Level & Config-Based Design** | Mar 18 – Apr 8 | Configurable logic, vision mechanics, new monster abilities, narrative scripting    | 🔸 [Challenge](#ac-growth-1) + [Narrative Integration](#ac-immersive-1)              |
-| **System UI & Experience Polish**     | Apr 9 – Apr 22 | Menu systems, transitions, inter-level logic, prompts, tooltips                     | 🔸 [UX clarity, onboarding](#ac-immersive-2), non-core gameplay loop support         |
-| **Final Evaluation & Polish**         | Apr 23 – May 7 | Think-aloud response implementation, NASA-TLX tuning, polish, animation, hint hooks | 🔸 Responsive Design + [Validation of Immersion & Challenge](#ac-immersive-2)        |
+|--------------------------------------|----------------|--------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| Core Prototype                        | Jan 28 – Mar 3 | Requirements & Design; Player and Enemy class logic; base visual mapping and function | [Challenge and Growth](#ac-growth-2) foundation; mechanic feasibility                 |
+| Single-Level Integration             | Mar 4 – Mar 18 | Monster types, environment visuals, gameplay–art merge for one full level            | [Immersive Narrative](#ac-immersive-2) (Level + Visual unity)                         |
+| Multi-Level & Config-Based Design    | Mar 18 – Apr 8 | Configurable logic, vision mechanics, new monster abilities, narrative scripting     | [Challenge](#ac-growth-1) + [Narrative Integration](#ac-immersive-1)                  |
+| System UI & Experience Polish        | Apr 9 – Apr 22 | Menu systems, transitions, inter-level logic, prompts, tooltips                      | UX clarity, onboarding ([AC-Immersive-2](#ac-immersive-2)); non-core loop support     |
+| Final Evaluation & Polish            | Apr 23 – May 7 | Think-aloud response implementation, NASA-TLX tuning, polish, animation, hint hooks  | Responsive Design + [Validation of Immersion & Challenge](#ac-immersive-2)            |
 
-#### <a name="team">Team Structure and Evolution
+---
 
-Our six-person game development team underwent a **natural evolution in collaboration structure**, transitioning from exploratory cooperation to a dual-track production model.
+#### <a name="team">Team Structure and Evolution</a>
 
-At the project’s outset, we aimed to follow a **classic Agile structure**, assigning hypothetical roles such as product owner, developer, and designer based on general principles. However, we soon realized that we **lacked a deep understanding of each other’s strengths, working preferences, and design instincts**. Early assignments revealed mismatches between skill sets and tasks, and strict roles occasionally constrained creativity and morale.
+Our six-person game development team underwent a natural evolution in collaboration structure, transitioning from exploratory cooperation to a dual-track production model.
+
+At the project’s outset, we attempted a classic Agile structure, assigning roles such as product owner, developer, and designer. However, we quickly realized that we lacked a deep understanding of one another’s strengths, work habits, and creative instincts. This led to early mismatches and unnecessary constraints on creativity.
+
+---
 
 #### Phase 1: Unified Exploration Through Pair Programming (Before March 18)
 
-In the initial phase, we agreed to **focus solely on building a working combat prototype**, postponing narrative, art, and polish. Our guiding principle was: **“Code first, meaning later.”** This decision allowed all members to engage directly with the most abstract and difficult part of game development—**core gameplay logic**—while gradually forming a shared mental model of how the game could evolve.
+We began by focusing exclusively on building a working combat prototype, deliberately postponing narrative and polish. Our mantra was: **"Code first, meaning later."**
 
-We practiced **rotating pair programming**, forming dynamic pairs that collaborated on movement, shooting, and collision systems. This flexible approach helped us:
-- Rapidly build a working **gameplay demo**;
-- Cultivate empathy between designers and coders;
-- Ensure every member gained baseline proficiency in front-end JS development.
+By rotating pair programming partners across systems like movement, shooting, and collision detection, we were able to:
 
-Though we lacked a dedicated art pipeline, we reached a point where placeholders were necessary. At that time, we used **WeChat as a lightweight task board**, posting requests like "We need a basic enemy sprite to test aggro range." This strategy allowed us to **gauge interest and initiative**. Naturally, Xiao Wu, Yaxin Chen, and Yaoyao Shen began leading visual development tasks, while Jingwei Lin, Shaojie Yang, and Xinyi Zhou gravitated toward code.
+- Rapidly deliver a working gameplay demo  
+- Cultivate empathy and shared technical vocabulary  
+- Build baseline proficiency across the team in JavaScript development
 
-This shared hands-on foundation proved invaluable later—**everyone could read and reason about code**, enabling better cross-domain communication down the line.
+Task coordination occurred through informal WeChat threads. This allowed members to self-select into roles based on initiative and interest. Xiao Wu, Yaxin Chen, and Yaoyao Shen gradually assumed visual responsibilities, while Jingwei Lin, Shaojie Yang, and Xinyi Zhou focused on code.
+
+This shared technical foundation proved vital—enabling all members to meaningfully engage with both design and engineering domains.
+
+---
 
 #### Phase 2: Formation of Two Interlocking Sub-Teams (After March 18)
 
-Following the completion of our demo, we entered a more structured phase and naturally split into **two sub-teams**:
+After the prototype, our team naturally divided into two specialized yet interdependent sub-groups:
 
-- **Visual Development Team**: Xiao Wu (narrative/story panels), Yaxin Chen (level/environment design), and Yaoyao Shen (transitional and UI visuals).
-- **Software Engineering Team**: Shaojie Yang and Xinyi Zhou (main development pairs), with Jingwei Lin (developer-tester and design–engineering bridge).
+- **Visual Development Team**  
+  Xiao Wu (narrative/story), Yaxin Chen (level design), Yaoyao Shen (UI and transitions)
 
-##### Visual Development Team: Flexibility With Ownership
+- **Software Engineering Team**  
+  Shaojie Yang and Xinyi Zhou (core system pairs), Jingwei Lin (integration and testing lead)
 
-The visual team adopted a **modular, task-oriented approach** to content creation, maintaining consistent style across different story and interface components:
-- Xiao Wu focused on **narrative cohesion**, designing story cutscenes and environmental storytelling cues.
-- Yaxin Chen led **level mechanism ideation**, including cursed vision and stage-specific hazards.
-- Yaoyao Shen specialized in **interface and transitional moments**, ensuring the emotional and functional bridge between gameplay scenes.
+---
 
-Though flexible, the team loosely followed the principles of **requirement engineering decomposition**: dividing story, interaction, and presentation roles across interdependent subsystems, often aligning with Acceptance Criteria defined earlier.
+##### Visual Development Team: Flexibility with Ownership
+
+Each visual contributor focused on a subsystem:
+
+- Xiao Wu ensured narrative cohesion via cutscenes and worldbuilding cues  
+- Yaxin Chen prototyped level hazards and cursed mechanics  
+- Yaoyao Shen built polished transitions and user interface components
+
+They applied principles of **requirement decomposition**—dividing the narrative, interaction, and presentation pipeline according to shared [Acceptance Criteria](#epics).
+
+---
 
 ##### Engineering Team: Agile Execution and Cross-Syncing
 
-The engineering team upheld a rigorous **pair programming model**, adhering to Agile principles:
-- Daily standups ensured shared awareness and load balancing.
-- Jira was used for tracking backlog items, tasks, and progress milestones.
-- Continuous integration workflows enabled stable testing and deployment.
-- Frequent code reviews maintained **code quality and shared knowledge**.
+The engineering group maintained a rigorous pair programming schedule, daily standups, and tracked progress in Jira. Continuous integration ensured stability, while peer code reviews supported quality and shared ownership.
 
-A special role emerged: **Jingwei Lin acted as the technical bridge** between design and development. While primarily focused on testing and system-level integration, Jingwei continuously **updated the visual team on the engine’s current capabilities**. This prevented overambitious ideas from being proposed before they were technically feasible, creating **mutual understanding between creativity and constraint**.
+Jingwei Lin emerged as a cross-domain facilitator—regularly informing the visual team of the engine’s evolving constraints. This limited misalignment and prevented infeasible designs from being proposed.
 
 ---
 
 #### Reflections and Learnings
 
-Looking back, our team structure reflects not rigid methodology, but **practical adaptability**:
-- We **started without fixed roles**, discovering strengths through action rather than assumptions.
-- We **unified around building something tangible first**, which grounded later abstract design decisions.
-- We then **segmented along natural skill boundaries**, not top-down roles.
-- Crucially, our **communication channels remained open and bi-directional**, with designers participating in code, and developers contributing to design thinking.
+Looking back, our workflow was defined not by formal structures but by **practical adaptability**:
 
-This hybrid model not only improved productivity but **enhanced mutual respect and cross-domain empathy**—which we believe is the cornerstone of any successful creative software project.
+- We began without rigid roles, learning strengths through practice  
+- We prioritized making a working product early to anchor abstract design  
+- We split according to skill affinity—not predefined roles  
+- And we sustained open, two-way communication between designers and engineers
 
-#### 🌀 Weekly Process and Sprint Rhythm
-
-Our team followed a **weekly sprint-based development cycle**, combining structured Agile routines with natural team dynamics. The rhythm allowed us to concentrate collaboration, leave room for individual execution, and maintain a constant feedback loop.
-
-#### 📆 Weekly Development Schedule
-
-| **Stage**               | **Activity Description**                                                                                                                                         | **Time Slot**                          | **Collaboration Outcome**                                 |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|------------------------------------------------------------|
-| **Sprint Planning**     | After Monday's lecture, we spent one hour refining the week's goals. Using past effort data, we adjusted story points and selected realistic targets.            | Monday (post-lecture, 1 hr)            | Re-alignment & planning                                    |
-| **Synchronous Work**    | Tuesdays (lab + post-lab) and Thursday’s final class slot were our main joint dev sessions. ~60% of all collaborative work was completed during this window.     | Tuesday (full) + Thursday (evening)    | Pair programming, core feature integration                 |
-| **Independent Progress**| Members completed supporting tasks independently—e.g., polishing, asset design, minor bugs—based on progress from the sync stage.                                | Wednesday–Thursday                     | Individual advancement                                     |
-| **Team Building & Sync**| Fridays were used for team activities (e.g., hiking), which doubled as informal face-to-face syncs. We discussed blockers, refined features, and added new needs.| Friday (team activity)                 | Final merge, backlog reflection, new idea generation       |
+This hybrid method increased productivity while deepening team empathy and mutual respect—core to any creative software process.
 
 ---
 
-#### 🧪 Practical Examples
+#### Weekly Process and Sprint Rhythm
 
-- After completing the **demo in mid-March**, we used a Friday hiking session to sync on the **“cursed vision mechanic”**. This mechanic was then confirmed as a key feature in the Graveyard level, both technically feasible and narratively powerful.
-
-- In another Friday reflection, we recognized that **“level-complete animations”** were missing. Following a team-wide discussion, we scheduled them for visual implementation and successfully enhanced the sense of progress and narrative continuity.
+We adopted a weekly sprint cycle with structured collaboration periods and individual freedom, balancing productivity with creative autonomy.
 
 ---
 
-This rhythm allowed us to maintain a healthy balance between focused collaboration and flexible creativity—empowering both our **engineering and design sub-teams** to thrive while staying aligned.
+#### Weekly Development Schedule
+
+| **Stage**               | **Activity Description**                                                                                                           | **Time Slot**                        | **Collaboration Outcome**                                |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|-----------------------------------------------------------|
+| Sprint Planning         | Weekly goal-setting post-lecture, using past effort data to allocate story points and set targets                                 | Monday (post-lecture, 1 hour)        | Alignment on scope and priority                           |
+| Synchronous Work        | Joint development (Tuesday labs + Thursday evenings) comprising ~60% of collaborative efforts                                     | Tuesday (full), Thursday (evening)   | Core system construction and live debugging               |
+| Independent Progress    | Visual asset creation, UX polish, minor bug fixes                                                                                 | Wednesday–Thursday                   | Asynchronous contributions                                |
+| Team Building & Sync    | Hiking and in-person retrospectives, syncing on blockers, design insights, and new backlog entries                                | Friday (team activity)               | Informal reflection, team cohesion, feature planning      |
+
+---
+
+#### Practical Examples
+
+- During a Friday sync after the prototype, we aligned on the [“cursed vision” mechanic](#ac-immersive-2), now central to the Graveyard level  
+- In another week, we noticed level transitions lacked feedback. We discussed and implemented [completion animations](#ac-immersive-2) that strengthened narrative closure
+
+---
+
+This rhythm enabled consistent progress while encouraging initiative, creativity, and adaptability across the engineering and visual pipelines.
 
 ### Conclusion
 
@@ -657,40 +671,40 @@ Overall, *Dragon Adventure* successfully delivered on most of our intended desig
 
 ---
 
-#### ✅ What Went Well: A Thoughtfully Closed Loop from Vision to Execution
+#### What Went Well: A Thoughtfully Closed Loop from Vision to Execution
 
 1. **A Clean, Goal-Driven Agile Collaboration Model**  
    We followed a development path that included:
    - Clear [environment](#stakeholder) analysis (team, player, market);  
    - [Two core Epics](#epics) grounding the experience (visual storytelling + player growth);  
-   - An **[innovative prioritization strategy](#planning)** combining Planning Poker and MoSCoW;  
-   - Agile system design responsive to both **[technical feasibility](#implementation)** and **[narrative opportunity](#implementation)**;  
+   - An [innovative prioritization strategy](#planning) combining Planning Poker and MoSCoW;  
+   - Agile system design responsive to both [technical feasibility](#implementation) and [narrative opportunity](#implementation);  
    - Dynamic collaboration structures that allowed the [design–engineering loop](#team) to close.
 
 2. **Narrative Realization Through Mechanics**  
-   - The **cursed vision mechanic** created both spatial challenge and emotional pressure, enforcing memory, deduction, and caution;  
-   - The **transformation system** gave players narratively grounded ways to grow—absorbing the enemy not just as a mechanic, but as a metaphor;  
-   - Through **level palette, animation layers, and transitions**, we ensured visual storytelling supported pacing and tone.
+   - The cursed vision mechanic created both spatial challenge and emotional pressure, enforcing memory, deduction, and caution  
+   - The transformation system gave players narratively grounded ways to grow—absorbing the enemy not just as a mechanic, but as a metaphor  
+   - Through level palette, animation layers, and transitions, we ensured visual storytelling supported pacing and tone
 
 3. **Technical Innovation Through Methodical Architecture**  
-   - We built a **[modular, config-driven architecture](#design)** that allowed designers and non-coders to contribute meaningfully;  
-   - The mantra “**[code defines behavior, config defines variation](#json)**” proved crucial to rapid iteration and systemic clarity;  
-   - [Evaluation](#evaluation) combined **Think-Aloud** testing and **NASA-TLX workload comparison**, giving us real user data to support our design claims.
+   - We built a [modular, config-driven architecture](#design) that allowed designers and non-coders to contribute meaningfully  
+   - The mantra “[code defines behavior, config defines variation](#json)” proved crucial to rapid iteration and systemic clarity  
+   - [Evaluation](#evaluation) combined Think-Aloud testing and NASA-TLX workload comparison, giving us real user data to support our design claims
 
 ---
 
-#### ❗ Limitations: Delayed Insights and Execution Tradeoffs
+#### Limitations: Delayed Insights and Execution Tradeoffs
 
 Despite the strengths in structure and vision, the project showed several limitations typical of student-scale efforts:
 
 1. **Underutilized Support Systems**  
-   While we studied player and internal dynamics deeply, we neglected **external support channels**—e.g., TAs, mentors, or peer reviews. In retrospect, earlier feedback could have refined our roadmap and avoided late-stage design scrambles.
+   While we studied player and internal dynamics deeply, we neglected external support channels—e.g., TAs, mentors, or peer reviews. In retrospect, earlier feedback could have refined our roadmap and avoided late-stage design scrambles.
 
 2. **Overly Exploratory Early Phase**  
-   Our first development phase lacked rigor. With no clear acceptance criteria or testing loops, we lost precious time. As a result, we discovered valuable features (e.g., *interaction checkpoints*, *optional hint systems*) late—**too late to implement them cleanly**.
+   Our first development phase lacked rigor. With no clear acceptance criteria or testing loops, we lost precious time. As a result, we discovered valuable features (e.g., interaction checkpoints, optional hint systems) late—too late to implement them cleanly.
 
 3. **Inconsistent Polish and Unrealized Depth**  
-   While many systems were functionally implemented, **polish was uneven**. UI feedback, transitions, and onboarding lacked full refinement. Branching narrative and replay value features were **cut due to scope constraints**, limiting the long-term depth of the experience.
+   While many systems were functionally implemented, polish was uneven. UI feedback, transitions, and onboarding lacked full refinement. Branching narrative and replay value features were cut due to scope constraints, limiting the long-term depth of the experience.
 
 ---
 
