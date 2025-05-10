@@ -341,14 +341,14 @@ Our sequence diagrams helped visualize runtime logic:
 
 To keep development outcome-aligned and manageable, we adopted a **top-down implementation strategy** mapped to our design goals:
 
-- 🎭 *Immersive Narrative Experience*  
-- 🧠 *Challenge and Growth Through Player Agency*
+- *Immersive Narrative Experience*  
+- *Challenge and Growth Through Player Agency*
 
 Work was divided into three tracks:
 
-- ⚔️ **Core combat system**  
-- 🗺️ **Level and progression**  
-- 🎨 **Art and narrative visuals**
+- **Core combat system**  
+- **Level and progression**  
+- **Art and narrative visuals**
 
 ---
 
@@ -361,49 +361,61 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 ---
 
-#### 🧠 Challenge 1: Adaptive Monster Behavior  
+#### Challenge 1: Adaptive Monster Behavior  
 *A necessary foundation for [Souls-like layered difficulty](#ac-growth-2).*
 
-<img src="./report/challenge1.pic.jpg" width="840" alt="Adaptive Monster Behavior Presentation"/>
+<p align="center">
+  <img src="./report/challenge1.pic.jpg" width="800"/><br>
+  <em>Figure 1. Adaptive Monster Behavior – Presentation</em>
+</p>
+
 - **S**: Static enemies failed to create meaningful tension.  
 - **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
 - **A**: Behavior states (Idle, Patrol, Track) were driven by JSON. Rerouting logic handled blocked paths.  
 
-  🔀 <a name="implementation">*Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
+  *Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
 
 - **R**: Combat became unpredictable and reactive. This enabled difficulty to emerge from behavior, not inflated stats.
 
 ---
 
-#### 🔁 Challenge 2: Player Transformation System  
+#### Challenge 2: Player Transformation System  
 *Required to support [problem-solving through earned abilities](#ac-growth-1).*
 
-<img src="./report/challenge2.pic.jpg" width="640"/>
+<p align="center">
+  <img src="./report/challenge2.pic.jpg" width="800"/><br>
+  <em>Figure 2. Player Transformation System – Presentation</em>
+</p>
+
 - **S**: We needed progression that let players react to hazards using earned abilities.  
 - **T**: Implement a modular transformation system that swaps player state and visuals.  
 - **A**: `Character` and `Ability` classes structured logic; configs mapped forms to debuffs.  
 
-  🔀 *Friction*: Final visuals weren’t ready. We reused **enemy UI sprites** for transformations—made possible by our rendering–logic decoupling from early modularization.
+  *Friction*: Final visuals weren’t ready. We reused **enemy UI sprites** for transformations—made possible by our rendering–logic decoupling from early modularization.
 
 - **R**: Players overcame burn/slow with narrative-consistent mechanics, reinforcing ability-driven growth.
 
 ---
 
-#### 🎨 Challenge 3: Visual Storytelling  
+#### Challenge 3: Visual Storytelling  
 *Essential to deliver [narrative immersion across transitions](#ac-immersive-1).*
 
-<img src="./report/challenge3.pic.jpg" width="640"/>
+<p align="center">
+  <img src="./report/challenge3.pic.jpg" width="800"/><br>
+  <em>Figure 3. Visual Storytelling – Presentation</em>
+</p>
+
 - **S**: Text-only storytelling lacked emotional depth.  
 - **T**: Embed narrative in spatial transitions and reactive animations.  
 - **A**: Each level (e.g., Graveyard) had unique palette and motifs. Animations reflected combat states like invincibility via blinking.  
 
-  🔀 *Friction*: Fog/lava effects caused performance drops. We replaced them with **parallax-safe textures and loops**, keeping visuals coherent.
+  *Friction*: Fog/lava effects caused performance drops. We replaced them with **parallax-safe textures and loops**, keeping visuals coherent.
 
 - **R**: Story and gameplay felt tightly connected—reinforcing immersion without explicit exposition.
 
 ---
 
-#### 📊 Summary: Engineering as Requirement Fulfillment
+#### Summary: Engineering as Requirement Fulfillment
 
 | Challenge               | Design Necessity                         | Solution                             | Result                                |
 |------------------------|-------------------------------------------|--------------------------------------|----------------------------------------|
@@ -415,6 +427,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 These were not just engineering tasks—they were the **mechanical realization of player-facing promises** in our requirements.  
 Each implementation answered specific design intentions while honoring the **flexibility and iterative spirit** of our backlog development.
+
 
 
 ### Evaluation<a name="evaluation">
