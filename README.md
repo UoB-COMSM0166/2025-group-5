@@ -64,7 +64,7 @@ We progressed through **five interlocking phases**, each informing and refining 
 
 ---
 
-#### 📍 1. Stakeholders & Team Context
+#### 📍 1. <a name="stakeholder">Stakeholders & Team Context
 
 <img width="536" alt="image" src="https://github.com/user-attachments/assets/a3618ef4-e913-463d-971c-cd1f6f409db7" />
 
@@ -101,7 +101,7 @@ strong moment-to-moment gameplay, but **minimal narrative integration**.
 
 ---
 
-#### 📍 3. Epics
+#### 📍 3. <a name="epics">Epics
 
 ---
 
@@ -190,7 +190,7 @@ Our product backlog evolved dynamically via:
 
 ---
 
-#### 📍 5. Planning Poker + MoSCoW Prioritization
+#### 📍 5. <a name="planning">Planning Poker + MoSCoW Prioritization
 
 We adapted **Planning Poker** not just for estimating implementation effort,  
 but also for evaluating **player-perceived value**—creating a hybrid model that blends agile precision with human-centered design.
@@ -232,7 +232,7 @@ This model served as a **functional blueprint**—clarifying what the game neede
 
 ---
 
-#### 🧱 Architecture Design: From Use Cases to Modules
+#### 🧱 <a name="design">Architecture Design: From Use Cases to Modules
 
 <img src="./homework/week5/system_architecture.png" width="640"/>
 
@@ -251,7 +251,7 @@ A key architectural milestone was our adoption of a **configuration-driven desig
 
 ---
 
-##### 📦 Example: JSON-Defined Enemy Entry
+##### 📦 Example: JSON-Defined Enemy Entry<a name="json">
 
 ```json
 "fireSlime": {
@@ -366,7 +366,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 - **T**: Build enemies that patrol and chase dynamically using aggro range detection.  
 - **A**: Behavior states (Idle, Patrol, Track) were driven by JSON. Rerouting logic handled blocked paths.  
 
-  🔀 *Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
+  🔀 <a name="implementation">*Friction*: Art assets didn’t align with pathable space. Artists annotated walkable zones via **Excel-based grid tags**, allowing accurate pathfinding setup.
 
 - **R**: Combat became unpredictable and reactive. This enabled difficulty to emerge from behavior, not inflated stats.
 
@@ -412,7 +412,7 @@ These were not just engineering tasks—they were the **mechanical realization o
 Each implementation answered specific design intentions while honoring the **flexibility and iterative spirit** of our backlog development.
 
 
-### Evaluation
+### Evaluation<a name="evaluation">
 
 To evaluate whether our design and implementation successfully delivered an immersive, strategically challenging experience, we conducted a user-centered evaluation using both **qualitative** and **quantitative** methods. Specifically, we employed:
 
@@ -505,7 +505,7 @@ Finally, we conducted system testing to assess the game's performance and compat
 | **System UI & Experience Polish**     | Apr 9 – Apr 22 | Menu systems, transitions, inter-level logic, prompts, tooltips                     | 🔸 [UX clarity, onboarding](#ac-immersive-2), non-core gameplay loop support         |
 | **Final Evaluation & Polish**         | Apr 23 – May 7 | Think-aloud response implementation, NASA-TLX tuning, polish, animation, hint hooks | 🔸 Responsive Design + [Validation of Immersion & Challenge](#ac-immersive-2)        |
 
-#### Team Structure and Evolution
+#### <a name="team">Team Structure and Evolution
 
 Our six-person game development team underwent a **natural evolution in collaboration structure**, transitioning from exploratory cooperation to a dual-track production model.
 
@@ -587,25 +587,58 @@ Our team followed a **weekly sprint-based development cycle**, combining structu
 
 This rhythm allowed us to maintain a healthy balance between focused collaboration and flexible creativity—empowering both our **engineering and design sub-teams** to thrive while staying aligned.
 
-### <a name="conclusion">Conclusion
+### Conclusion
 
-Looking back on the full development cycle of *Dragon Adventure*, our team reflects with both pride and humility. We began this journey with a clear creative ambition: to build a pixel-art action game that goes beyond fast-paced combat and introduces players to a meaningful, narrative-rich world. And while we achieved much of that vision, the path to it was nonlinear and filled with learning curves.
+Overall, *Dragon Adventure* successfully delivered on most of our intended design goals, especially in its attempt to **fuse narrative and challenge into a cohesive gameplay experience**. Through this project, we gained not just technical and design skills, but a deeper methodological understanding of **why games work the way they do**. That said, compared to polished commercial titles, *Dragon Adventure* stands more as a **proof of concept and a methodological exploration**—valuable in ideas, yet limited in finish and scope.
 
-One of our greatest achievements was the **integration of narrative and gameplay**, which remains a rarity in the pixel shooter genre. Through features such as **vision-limiting mechanics**, **enemy ability inheritance**, and **environment-driven storytelling**, we created a world that responds to the player both mechanically and emotionally. Our Graveyard level in particular demonstrated how design innovations like fog of war can increase difficulty while also deepening immersion. Players not only overcame new mechanical challenges, but also felt the story tighten around them.
+---
 
-We also succeeded in realizing many of our key top-level goals from requirements engineering. Our user stories around *Challenge and Growth* led to modular systems like the **transformation mechanic**, which allowed players to tactically adapt by absorbing enemy skills. Meanwhile, the narrative integration criteria pushed us to implement visual transitions and lore-tied cutscenes that strengthened story continuity. These successes were validated in our **evaluation phase** through both **think-aloud studies** and **NASA-TLX** workload assessments, which confirmed that players felt a real increase in challenge and satisfaction from our design decisions.
+#### ✅ What Went Well: A Thoughtfully Closed Loop from Vision to Execution
 
-But these highlights were only possible because of the solid foundation we built during the early technical phases. The game architecture, from a centralized game loop to modular `Character` classes and JSON-driven level configuration, enabled us to iterate rapidly while maintaining structural coherence. Our design philosophy of **“code defines behavior, config defines variation”** gave the team—including non-programmers—the ability to contribute meaningfully throughout the process.
+1. **A Clean, Goal-Driven Agile Collaboration Model**  
+   We followed a development path that included:
+   - Clear [environment](#stakeholder) analysis (team, player, market);  
+   - [Two core Epics](#epics) grounding the experience (visual storytelling + player growth);  
+   - An **[innovative prioritization strategy](#planning)** combining Planning Poker and MoSCoW;  
+   - Agile system design responsive to both **[technical feasibility](#implementation)** and **[narrative opportunity](#implementation)**;  
+   - Dynamic collaboration structures that allowed the [design–engineering loop](#team) to close.
 
-That said, our journey was far from perfect. At the beginning, we had little concept of what software engineering truly required. We operated on instinct and informal coordination, often underestimating the importance of planning tools and structured workflows. It took us almost six weeks to build the prototype, which—while educational—left us with less time for polish and extra features. As deadlines approached, we often found ourselves racing against time, forced to leave several valuable ideas (such as dynamic player hint systems or deeper branching narrative paths) in the backlog.
+2. **Narrative Realization Through Mechanics**  
+   - The **cursed vision mechanic** created both spatial challenge and emotional pressure, enforcing memory, deduction, and caution;  
+   - The **transformation system** gave players narratively grounded ways to grow—absorbing the enemy not just as a mechanic, but as a metaphor;  
+   - Through **level palette, animation layers, and transitions**, we ensured visual storytelling supported pacing and tone.
 
-While our weekly Friday team-building sessions played an important role in team cohesion and project continuity, they were also our **only retrospective mechanism**. In contrast to standard Scrum practices—where *retrospective* and *review* meetings are formally distinct—we combined both into casual discussions. Though emotionally supportive, this approach may have hindered deeper technical and stakeholder engagement. In hindsight, if we had reached out earlier to other teams, TAs, or even Ruzanna, we could have better utilized the **external support systems** available to us. Some important insights were simply realized too late to act on.
+3. **Technical Innovation Through Methodical Architecture**  
+   - We built a **[modular, config-driven architecture](#design)** that allowed designers and non-coders to contribute meaningfully;  
+   - The mantra “**[code defines behavior, config defines variation](#json)**” proved crucial to rapid iteration and systemic clarity;  
+   - [Evaluation](#evaluation) combined **Think-Aloud** testing and **NASA-TLX workload comparison**, giving us real user data to support our design claims.
 
-Through this experience, we also came to better understand ourselves as collaborators. By the project’s midpoint, we organically divided into specialized teams, improving both speed and morale. However, we acknowledge that our **collaboration tools were not always structured**, and task tracking could have been more rigorous. Learning from this, we are now better equipped to build high-functioning workflows from day one.
+---
 
-Going forward, we feel more confident as software developers and designers. We’ve learned that great games aren't just the result of creativity but of disciplined iteration, collaborative compromise, and well-scaffolded architecture. In future versions or projects, we aim to build on our current systems by expanding feedback loops (e.g., rewards for ideal play), offering smarter in-game hints, and possibly developing deeper multiplayer or side-story modules that enrich the lore and increase replayability.
+#### ❗ Limitations: Delayed Insights and Execution Tradeoffs
 
-> In short, *Dragon Adventure* was not just a game we made — it was the process through which we became a true game development team.
+Despite the strengths in structure and vision, the project showed several limitations typical of student-scale efforts:
+
+1. **Underutilized Support Systems**  
+   While we studied player and internal dynamics deeply, we neglected **external support channels**—e.g., TAs, mentors, or peer reviews. In retrospect, earlier feedback could have refined our roadmap and avoided late-stage design scrambles.
+
+2. **Overly Exploratory Early Phase**  
+   Our first development phase lacked rigor. With no clear acceptance criteria or testing loops, we lost precious time. As a result, we discovered valuable features (e.g., *interaction checkpoints*, *optional hint systems*) late—**too late to implement them cleanly**.
+
+3. **Inconsistent Polish and Unrealized Depth**  
+   While many systems were functionally implemented, **polish was uneven**. UI feedback, transitions, and onboarding lacked full refinement. Branching narrative and replay value features were **cut due to scope constraints**, limiting the long-term depth of the experience.
+
+---
+
+In summary, we didn’t just make a game—we completed an **end-to-end creative and technical learning process**. From vision to design, implementation to evaluation, we stayed grounded in the player experience while embracing the challenges of game development as students.
+
+Looking ahead, we hope to build on this foundation with features like:
+- Smarter feedback and reward loops  
+- Optional guided hints or adaptive challenges  
+- Expanded lore, replayable side content, or multiplayer layers
+
+> *Dragon Adventure* wasn’t just the game we built—it was the **process that made us a real development team**.
+
 
 ### Contribution Statement
 
