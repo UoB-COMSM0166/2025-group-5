@@ -49,128 +49,130 @@ This tight synergy between **punishment, narrative, and tactical agency** define
 
 ### Requirements
 
+#### 🧭 Overview: Our Requirements Engineering Logic
+
+Our requirements process was not just a checklist—it was a logical journey. We progressed through **five interlocking phases**, each informing and refining the next:
+
+1. **Stakeholder Awareness**: Understand our context and constraints.
+2. **Market Differentiation**: Identify opportunity space for innovation.
+3. **Epic Design**: Break vision into player-centered outcomes.
+4. **Iterative Backlog Development**: Turn vision into action, refined by feedback.
+5. **Prioritization via Value–Effort Mapping**: Focus effort where it matters most.
+
+---
+
 #### 📍 1. Stakeholders & Team Context
-<img width="336" alt="image" src="https://github.com/user-attachments/assets/40a12174-1d10-4cba-beb7-6ad2c9cc1881" />
 
 We identified our primary stakeholders as:
 - **Target players** (end users)
 - **Team contributors** (developers, designers, artists)
 
-> 📌 *Instructors and TAs were intentionally excluded here, due to initial underestimation of their role. This reflection will be discussed in the Conclusion section.*
+> 📌 *Instructors and TAs were intentionally excluded as stakeholders—this will be reflected upon in the Conclusion.*
 
-Beyond recognizing external expectations, we also respected internal ones. That is:
-> 🎮 *A game only works when the team is excited to build it.*
+In addition to market logic and technical constraints, we recognized that **honoring each team member’s gameplay preferences** was crucial to maintain engagement and ownership throughout development.
 
-Thus, **honoring team members’ gameplay preferences** became an early principle—ensuring the game would not only stand out in the market, but also **sustain our collective motivation**.
-
-This, along with our technical limitations and competitive classroom setting, led us to ask:
-> “How can we differentiate ourselves meaningfully, while staying motivated and grounded?”
+This perspective framed our question: 
+> “How do we deliver something distinct, grounded in our abilities, and personally motivating?”
 
 ---
 
 #### 📍 2. Understanding the Market & Direction
 
-Through reviewing games like *Enter the Gungeon* and *Broforce*, we observed that many pixel shooters lean heavily on moment-to-moment combat but lack story integration:
+We studied similar pixel shooters (becasue we love them) like *Enter the Gungeon*, *Broforce*, and *Nuclear Throne* and noted a common issue: engaging mechanics, but **shallow or absent narrative**.
 
-- “No comprehensible story” — *Broforce*, RPS (2015)  
-- “A joke with a gun” — *Gungeon*, PC Gamer (2016)  
-- “Minimum backstory” — *Nuclear Throne*, Edge (2015)
+Quotes from the press:
+- “No comprehensible story” — *Broforce*, RPS 
+- “A gun that kills the past... that’s it” — *Gungeon*, PC Gamer 
+- “Minimum backstory” — *Nuclear Throne*, Edge
 
-However, **53% of gamers** now prefer **narrative-driven single-player titles** (YouGov, 2024), and research by **Isbister (2017)** confirms story boosts emotional engagement and long-term retention.
+At the same time, **YouGov (2024)** found 53% of players now prefer **narrative-driven games**, and **Isbister (2017)** confirms narrative boosts retention and emotional immersion.
 
-From this, we derived two top-level goals:
+🧭 From this, we defined two **top-level design goals**:
 - **Immersive Narrative Experience**
-- **Challenge and Growth through Player Agency**
+- **Challenge and Growth Through Player Agency**
 
 ---
 
-#### 📍 3. Epic: Immersive Narrative Experience
+#### 📍 3. Epics
+
+##### 🎭 Immersive Narrative Experience
 
 > *As a player, I want story and gameplay to feel interconnected, so that my actions carry emotional weight in the world.*
 
-**AC1: Story Cutscene & World Introduction**  
-Players begin the game with a 30-second, illustrated cutscene (later upgraded with voice-over) covering lore beats like:
-- Curse origin,
-- Player identity,
-- Stakes of the journey.
+**AC1: Story Cutscene & World Introduction** 
+Players begin with a 30-second cutscene covering core lore elements (e.g., curse, player identity, stakes).
 
-📌 **Backlog (dynamic):**
-- [✓] Initial text → illustrated narration  
-- [✓] Lore milestones integrated  
-- [✓] VO synchronized based on feedback
+📌 **Backlog Highlights:**
+- [✓] Upgraded from text to illustrated narration with VO 
+- [✓] Lore beats structured clearly 
+- [✓] VO synced with scene transitions based on feedback
 
-**AC2: Transition & Mechanic Introduction via Narrative**  
-Each level features recap scenes and introduces new mechanics (e.g., vision limitation) through narrative hooks.
+**AC2: Transition & Mechanic Introduction via Narrative** 
+Each level transition narrates the story and introduces new gameplay mechanics (e.g., cursed vision).
 
-📌 **Backlog (evolving):**
-- [✓] Forest → Graveyard transition using comics  
-- [✓] Cursed vision explained narratively  
-- [✗] No input validation hook for new mechanic understanding
+📌 **Backlog Highlights:**
+- [✓] Comic transitions for zone changes (e.g., Forest → Graveyard) 
+- [✓] Curse-based vision limit introduced narratively 
+- [✗] No interactive tutorial checkpoint implemented
 
-🛠️ *Insight:* Good emotional progression, but onboarding clarity could improve.
+🛠️ *Player insight:* While the flow worked emotionally, some players needed more onboarding for new mechanics.
 
 ---
 
-#### 📍 4. Epic: Challenge and Growth Through Player Agency
+##### 🧠 Challenge and Growth Through Player Agency
 
-> *As a player, I want to grow through my acquired abilities, so I can overcome increasingly layered and fair challenges.*
+> *As a player, I want to grow through my earned abilities so I can solve new problems and feel my mastery deepen.*
 
-**AC1: Past Abilities Unlock New Solutions**  
-Abilities (e.g., transformations) must tie into gameplay progression—such as restoring vision after a curse.
+**AC1: Progression-Based Problem Solving** 
+Abilities earned earlier (e.g., transformations) must help solve later obstacles (e.g., curse removal).
 
-📌 **Backlog:**
-- [✓] Transformation mapped to curse removal  
-- [✓] Visual feedback for ability status  
-- [✗] No adaptive difficulty or contextual help
+📌 **Backlog Highlights:**
+- [✓] Transformation logic tied to curse resolution 
+- [✓] Ability indicators updated during gameplay 
+- [✗] Difficulty still manually scaled—no adaptivity yet
 
-**AC2: Souls-like Layered Challenge Design**  
-Challenge stems not from HP boosts, but from:
-- AI dash-speed within aggro radius,
-- Limited player visibility,
-- Tactical map layouts.
+**AC2: Multi-Layered Souls-like Difficulty** 
+Levels must challenge through enemy AI, map constraints, and sensory limitations—not raw stats.
 
-📌 **Backlog:**
-- [✓] Graveyard level increased mental/temporal demand  
-- [✓] Vision-limited kiting options preserved fairness  
-- [✗] Optional hint system still under “Could Have”
+📌 **Backlog Highlights:**
+- [✓] Dash-boosted enemies in aggro zones 
+- [✓] Player’s limited sight creates tactical “kite” opportunities 
+- [✓] Graveyard level increased both temporal and mental load 
+- [✗] Hint system remains in “Could Have” backlog
 
-🛠️ *Insight:* Fine-tuned tension emerged from enemy aggression + counterplay design.
+🛠️ *Evaluation insight:* Difficulty was fair due to the space to counterattack or retreat intelligently.
+
+---
+
+#### 📍 4. Iterative Backlog Development
+
+Our backlogs were never static—they evolved with:
+- Weekly informal retrospectives, which will be explained in Process
+- Playtest feedback
+- Technical discoveries
+- Narrative pacing improvements
+
+📌 Examples:
+- Level-end recaps added based on emotional drop-off 
+- Transformation hints clarified mid-sprint 
+- Tutorial checkpoint for cursed vision flagged but postponed
+
+> 🧠 *Core takeaway:* Responsiveness and flexibility mattered as much as initial planning.
 
 ---
 
 #### 📍 5. Planning Poker + MoSCoW Prioritization
 
-We extended **Planning Poker** beyond effort estimation—applying it to **player value** scoring. Each team member voted on:
-- 💡 **Player Value** (how impactful the feature is)
-- 🛠️ **Development Effort**
+We **extended Planning Poker** to evaluate not just implementation effort but also **player-perceived value**, resulting in a **value–cost mapping**.
 
-This enabled an actionable **MoSCoW matrix**, informed by gameplay value.
+| **Priority** | **Key Features** | 💡 **Value** / 🛠️ **Cost** |
+|----------------|----------------------------------------------------------|------------------------------|
+| **Must Have** | Core combat, vision mechanic, transformation loop | 💡9 / 🛠️5 |
+| **Should Have**| Comic transitions, narration, ability feedback | 💡7 / 🛠️6 |
+| **Could Have** | In-game tips, ability combinations, hidden areas | 💡5 / 🛠️5 |
+| **Won’t Have** | Real-time co-op (low value, high technical complexity) | 💡2 / 🛠️21 |
 
-| **Priority**   | **Key Features**                                         | **💡 Value / 🛠️ Cost** |
-|----------------|----------------------------------------------------------|--------------------------|
-| **Must Have**  | Combat, cursed vision, transformation loop               | 💡9 / 🛠️5               |
-| **Should Have**| Transitions, narration, ability feedback UI              | 💡7 / 🛠️6               |
-| **Could Have** | Hint system, ability combo logic, hidden zones           | 💡5 / 🛠️5               |
-| **Won’t Have** | Real-time online co-op (low impact, high complexity)     | 💡2 / 🛠️21              |
-
-🧠 *Highlight:* This hybrid method allowed us to align value and feasibility dynamically.
-
----
-
-#### 📍 6. Backlog Flexibility & Iterative Response
-
-All product backlogs were **continuously iterated** based on:
-- Think-aloud testing
-- Sprint outcomes
-- Feasibility discoveries
-- Narrative polish needs
-
-For example:
-- Level recaps expanded after user feedback  
-- Vision-limit effects scaled with environmental transitions  
-- Ability UI was added mid-sprint to clarify transformation usage
-
-⚙️ *Conclusion:* Backlogs were **never static**—they evolved in sync with player experience goals and implementation constraints.
+⚙️ *Innovation highlight:* This method blends MoSCoW’s clarity with agile granularity—driven by value, not just effort.
 
 
 ### Design
