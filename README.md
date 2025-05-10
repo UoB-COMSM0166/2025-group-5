@@ -17,7 +17,7 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 
 ## Your Group
 
-<img src="./report/WeChat505e81ce8ee4f072ac67f30dd286e9c4.jpg" width="700"/>
+<img align="center" src="./report/WeChat505e81ce8ee4f072ac67f30dd286e9c4.jpg" width="800"/>
 
 - Group member 1, Jingwei Lin, qw24858@bristol.ac.uk, ZhiyiJaved
 - Group member 2, Xiao Wu, ev24875@bristol.ac.uk, Alfie-wuxiao
@@ -32,18 +32,23 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 
 ---
 
-<p align="center">
+<p align="center" style="display:flex; flex-direction:column; justify-content:center;">
   <img src="./report/start0.pic.jpg" width="250"/>
-  <img src="./report/start1.pic.jpg" width="250"/>
-  <img src="./report/start2.pic.jpg" width="250"/>
 </p>
 <p align="center">
+  <img src="./report/start1.pic.jpg" width="250"/>
+  <img src="./report/start2.pic.jpg" width="250"/>
   <img src="./report/start3.pic.jpg" width="250"/>
+</p>
+<p align="center">
   <img src="./report/start4.pic.jpg" width="250"/>
   <img src="./report/start5.pic.jpg" width="250"/>
 </p>
 
 **Dragon Adventure** is a 2D pixel-art action-adventure game that fuses **souls-like difficulty** with a **narrative-first progression system**. Rather than relying on flashy weapons or random upgrades, the game challenges players through **intentional design**, where every mechanic is grounded in story, and every obstacle is thematically justified.
+
+> *"He who fights with monsters should be careful lest he thereby become a monster. And if you gaze long into an abyss, the abyss also gazes into you."* — Friedrich Nietzsche  
+> *Ironically, our game compels the dragon-slaying hero to become the dragon in order to survive.* [figure out](#transformation)
 
 At the heart of the experience is a three-layered design philosophy:
 
@@ -72,8 +77,6 @@ At the heart of the experience is a three-layered design philosophy:
 
 > This mechanic relies heavily on our **configuration-driven system**, enabling behavior variation without code changes.  
 > For implementation details, see [JSON Example](#json).
-
-
 
 ### Requirements
 
@@ -405,7 +408,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 #### Challenge 1: Player Transformation System  
 *Required to support [problem-solving through earned abilities](#ac-growth-1).*
-
+<a name="transformation">
 <p align="center">
   <img src="./report/challenge1.pic.jpg" width="900"/><br>
   <em>Figure 1. Player Transformation System – Presentation</em>
