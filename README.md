@@ -47,139 +47,126 @@ A typical scenario in Chapter 2: with vision severely limited, the player faces 
 
 This tight synergy between **punishment, narrative, and tactical agency** defines *Dragon Adventure*. The result is a difficulty that is not just hard, but **immersively, meaningfully hard**—and always conquerable through understanding, memory, and adaptation.
 
-### 📋 Requirements
+### Requirements
 
-To structure and guide our development, we followed a six-step requirements engineering process:
+To structure and guide development, we followed a six-step process grounded in practical limitations and creative ambition:
 
-1. **Stakeholder Identification** 
-2. **Understanding Environment & Capabilities** 
-3. **Market Research & User Persona Analysis** 
-4. **Definition of Top-Level Needs** 
-5. **Epic and Acceptance Criteria Design** 
-6. **Innovative Prioritization Evaluation**
-
----
-
-### 1. 🎯 Stakeholders & Environment Awareness
-
-<img width="336" alt="image" src="https://github.com/user-attachments/assets/72548918-6fa0-43c9-a73b-b64e43cc9c6a" />
-
-We began by identifying our direct stakeholders: 
-- **Target players** 
-- **Team contributors (devs, designers, artists)**
-
-> 📌 *This report intentionally omits instructors and TAs as direct stakeholders—this decision and its retrospective impact will be discussed in the Conclusion section.*
-
-This step sharpened our understanding of our team’s environment: 
-a small, cross-functional group with limited resources but creative freedom. Recognizing our technical constraints and the competitive class setting, we asked: 
-> “How do we differentiate ourselves meaningfully?”
+1. **Stakeholder Identification**  
+2. **Understanding Team Environment & Constraints**  
+3. **Market Research & User Persona Framing**  
+4. **Top-Level Needs Definition**  
+5. **Epic and Acceptance Criteria Design**  
+6. **Prioritization via MoSCoW + Value Scoring**
 
 ---
 
-### 2. 🔍 Research & Differentiation
-<img width="595" alt="image" src="https://github.com/user-attachments/assets/0fbf527a-1fe3-4112-8610-a200e7d9d4e6" />
-<img width="591" alt="image" src="https://github.com/user-attachments/assets/dd4851c4-a69b-47ca-a357-2b1ff5ae9335" />
-<img width="593" alt="image" src="https://github.com/user-attachments/assets/0035de71-f411-4b3a-8d3a-cb7169b986f8" />
+### 1. 🎯 Stakeholders & Team Context
 
+We identified our key stakeholders as:
+- **Target players** (the end users)
+- **Team members** (developers, designers, artists)
 
-We observed that pixel shooters like *Enter the Gungeon* and *Broforce* focus heavily on **moment-to-moment action** but lack cohesive **story structures**:
+> 📌 *This report intentionally omits professors and TAs as primary stakeholders. While initially viewed as passive observers, we later realized the missed opportunity to better engage them as support assets. This reflection will be further discussed in the Conclusion.*
 
-- “No comprehensible story” – *Rock Paper Shotgun, 2015 (Broforce)* 
-- “A gun that kills the past, but little else” – *PC Gamer, 2016 (Gungeon)* 
-- Developers of *Nuclear Throne* admitted to writing only “the bare minimum” (Edge, 2015)
-
-Meanwhile, **YouGov (2024)** reports 53% of players now prefer **narrative-based single-player games**, and **Isbister (2017)** confirms narrative significantly boosts **emotional immersion and retention**.
-
-This inspired us to build a player experience around two top-level design goals:
-- **Immersive Narrative Integration**
-- **Challenge and Growth through Player Agency**
+Recognizing our creative freedom yet technical constraints in a class-wide competition, we clarified the question:
+> “How do we meaningfully differentiate ourselves?”
 
 ---
 
-### 3. 🧩 Epic: Immersive Narrative Experience
+### 2. 🔍 Research-Informed Differentiation
 
-**User Story** 
-> As a player, I want the story and gameplay to feel interconnected, so that my actions have meaning in the world.
+Market analysis showed most pixel-action games (e.g., *Broforce*, *Enter the Gungeon*) excel at fast mechanics but lack cohesive story:
+
+- *Broforce* — “No comprehensible story” (*RPS*, 2015)  
+- *Enter the Gungeon* — “One-joke premise” (*PC Gamer*, 2016)  
+- *Nuclear Throne* — “Bare minimum of backstory” (*Edge*, 2015)
+
+Meanwhile, **YouGov (2024)** reports that 53% of gamers prefer **narrative-driven single-player games**, and **Isbister (2017)** shows narrative boosts engagement and retention.
+
+This led us to define two concurrent and complementary top-level goals, each elaborated as an epic.
 
 ---
 
-**AC1. World Introduction via Story Cutscene** 
-Players begin the game with a short (30s) illustrated cutscene and narration.
+### 3. 🧱 Epics
+
+#### 🧩 Immersive Narrative Experience
+
+> **User Story:** As a player, I want story and gameplay to feel interconnected, so that my actions have emotional impact and narrative meaning.
+
+**AC1: World Introduction via Cutscene & Lore**  
+Players begin with a 30-second comic-style cutscene (later voiced) covering:
+- Curse origin,
+- Player identity,
+- Narrative stakes.
 
 📌 **Backlog (evolving):**
-- [✓] Text-based intro → upgraded to narrated illustrated panel sequence 
-- [✓] Included 3+ lore beats (curse origin, player identity, stakes) 
-- [✓] Synced VO and scene transitions post-feedback
+- [✓] Text → illustrated narration  
+- [✓] 3+ lore beats  
+- [✓] Voice-over synced post-feedback
+
+**AC2: Seamless Level Transition & Mechanic Justification**  
+Levels narratively justify mechanics (e.g., “curse” introduces limited vision), and transition scenes reinforce continuity.
+
+📌 **Backlog (evolving):**
+- [✓] Comic panels between zones  
+- [✓] Mechanic introduced via story  
+- [ ] No input confirmation system (e.g., gate or hook)
+
+🛠️ *Insight:* Narrative flow was strong, but clarity on mechanic comprehension was lacking.
 
 ---
 
-**AC2. Transitions + Narrative-Based Mechanic Intro** 
-Each level features recap content, and new mechanics are introduced narratively.
+#### 🧠 Challenge and Growth Through Player Agency
 
-📌 **Backlog (iterative):**
-- [✓] Comic panels used between major zones (Forest → Graveyard) 
-- [✓] Vision-restricting mechanic introduced through “curse” lore 
-- [ ] Tutorial validation missing (e.g., no confirmation for mechanic understanding)
+> **User Story:** As a player, I want to grow through learned abilities and strategic mastery, so that I overcome difficulty in meaningful ways.
 
-🛠️ *Observation*: Players appreciated the narrative flow, but hinted at slight onboarding confusion.
-
----
-
-### 4. 🧠 Epic: Challenge and Growth
-
-**User Story** 
-> As a player, I want to grow through experience and overcome increasingly complex challenges using my earned abilities.
-
----
-
-**AC1. Use of Past Abilities to Solve New Problems** 
-Players should use acquired powers (e.g., transformations) to deal with new mechanics or hazards.
+**AC1: Past Abilities Enable Problem Solving**  
+Transformations or skills must apply to future challenges, tying gameplay to logical progression.
 
 📌 **Backlog:**
-- [✓] Transformations mapped to mechanics (e.g., recover vision after curse) 
-- [✓] Visual indicators updated to show ability usage 
-- [ ] Future scaling still manual—not adaptive
+- [✓] e.g., regain vision post-curse via transformation  
+- [✓] Visual ability indicators  
+- [ ] No adaptive difficulty or suggestion logic
 
----
-
-**AC2. Multi-Layered Difficulty Design** 
-Each level combines combat AI, spatial layout, and visual limitation to create “Souls-like” challenge.
+**AC2: Souls-Like Multi-Factor Difficulty**  
+Challenge arises from enemy AI (e.g., dash within aggro), map layout, and vision constraints.
 
 📌 **Backlog:**
-- [✓] Graveyard’s vision limitation increases mental load 
-- [✓] Enemies have dash-speed boost within aggro range 
-- [✓] Limited enemy vision allows skilled players to "kite" effectively 
-- [ ] Future: optional hints for stuck players (currently in “Could Have” tier)
+- [✓] Graveyard: high mental load via limited vision  
+- [✓] Enemies dash when triggered  
+- [✓] Tight enemy vision allows strategic "pulling"  
+- [ ] Optional hints still in "Could Have" tier
 
-🛠️ *Insight*: The balance between enemy aggression and player escape window offered satisfying tension.
+🛠️ *Insight:* Balancing aggression with counterplay created a satisfying “difficult but fair” rhythm.
 
 ---
 
-### 5. 🗂️ Value-Oriented Prioritization
+### 4. 📊 Prioritization: MoSCoW + Planning Poker Innovation
 
-We adopted **Planning Poker** not only for estimating **effort**, but also for **evaluating player value**—an innovative extension beyond typical Scrum practice.
+We applied **Planning Poker** not only for effort estimation, but innovatively for **value assessment**—an extension beyond its usual Scrum use. Each team member scored features on **💡 player value** and **🛠️ dev effort**, enabling MoSCoW-based sorting.
 
-After consensus rounds, we mapped the results onto a **MoSCoW model**, enabling binary classification by both value and cost.
+| **Priority**   | **Key Features**                                                  | **💡 Value / 🛠️ Cost** |
+|----------------|--------------------------------------------------------------------|--------------------------|
+| **Must Have**  | Combat loop, cursed vision, transformation system                  | 💡9 / 🛠️5               |
+| **Should Have**| Comic transitions, narration, ability UI feedback                  | 💡7 / 🛠️6               |
+| **Could Have** | Hint system, ability combos, bonus zones                           | 💡5 / 🛠️5               |
+| **Won’t Have** | Online co-op (high cost, low narrative fit)                        | 💡2 / 🛠️21              |
 
-| Priority | Key Features |
-|----------------|------------------------------------------------------------------------------|
-| **Must Have** | Core combat loop, vision mechanic, transformation-based progression |
-| **Should Have**| Comic-style transitions, narration, visual hints for ability usage |
-| **Could Have** | In-game guidance systems, ability combination logic, bonus areas |
-| **Won’t Have** | Online real-time multiplayer (high cost, low narrative fit) |
+✅ **Result**: The matrix enabled pragmatic focus, preserving immersion while balancing feasibility.
 
 ---
 
 ### ✅ Summary
 
-Through structured analysis and iterative reflection, we transformed abstract aspirations into testable design goals. Our requirements engineering was grounded in:
+Through a structured six-step process, we:
+- Diagnosed our working environment and stakeholder needs
+- Positioned our product through narrative–mechanic differentiation
+- Aligned gameplay with story progression and challenge pacing
+- Applied player-centered iteration across evolving backlogs
+- Innovated by applying Planning Poker for dual-axis prioritization
 
-- **Contextual awareness of team limits and user demand** 
-- **A narrative–mechanic fusion model for challenge and story** 
-- **Player-driven growth via logically integrated abilities** 
-- **Innovative prioritization** using Planning Poker + MoSCoW synthesis
+This ensured our vision for *Dragon Adventure* remained both ambitious and realistically achievable.
 
-Crucially, our product backlogs were never static—they **evolved based on evaluation feedback, development feasibility, and playtest data**. This flexibility ensured that *Dragon Adventure* could stay responsive without sacrificing vision.
 
 ### Design
 
