@@ -44,11 +44,13 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
   <img src="./report/start1.pic.jpg" width="250"/>
   <img src="./report/start2.pic.jpg" width="250"/>
   <img src="./report/start3.pic.jpg" width="250"/>
-</p>
-<p align="center">
   <img src="./report/start4.pic.jpg" width="250"/>
   <img src="./report/start5.pic.jpg" width="250"/>
 </p>
+
+<p align="center"><em>
+  These five storyboard frames collectively serve as a visual synopsis of the game's inciting events: the world’s fall into corruption, the rise of monstrous forces, and the protagonist’s descent into a cursed journey. This visual narrative establishes the emotional stakes before gameplay begins.
+</em></p>
 
 **Dragon Adventure** is a 2D pixel-art action-adventure game that fuses **souls-like difficulty** with a **narrative-first progression system**. Rather than relying on flashy weapons or random upgrades, the game challenges players through **intentional design**, where every mechanic is grounded in story, and every obstacle is thematically justified.
 
