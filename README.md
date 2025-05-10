@@ -41,11 +41,11 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 </em></p>
 
 <p align="center">
-  <img src="./report/start1.pic.jpg" width="250"/>
-  <img src="./report/start2.pic.jpg" width="250"/>
-  <img src="./report/start3.pic.jpg" width="250"/>
-  <img src="./report/start4.pic.jpg" width="250"/>
-  <img src="./report/start5.pic.jpg" width="250"/>
+  <img src="./report/start1.pic.jpg" width="200"/>
+  <img src="./report/start2.pic.jpg" width="200"/>
+  <img src="./report/start3.pic.jpg" width="200"/>
+  <img src="./report/start4.pic.jpg" width="200"/>
+  <img src="./report/start5.pic.jpg" width="200"/>
 </p>
 
 <p align="center"><em>
