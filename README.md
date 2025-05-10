@@ -73,7 +73,7 @@ We identified our primary stakeholders as:
 - 🎮 **Target players**  
 - 🛠️ **Team contributors** (developers, designers, artists)
 
-> 📌 *Instructors and TAs were intentionally excluded as stakeholders—this will be reflected upon in the Conclusion.*
+> 📌 *Instructors and TAs were intentionally excluded as stakeholders—this will be reflected upon in the [Conclusion](#conclusion).*
 
 In addition to market logic and technical constraints, we recognized that  
 **respecting each team member’s gameplay preferences** was vital for maintaining motivation and a sense of creative ownership.
@@ -499,12 +499,11 @@ Finally, we conducted system testing to assess the game's performance and compat
 #### Overview
 | **Phase**                             | **Dates**      | **Focus**                                                                           | **Aligned Requirement Themes**                                                       |
 | ------------------------------------- | -------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Core Prototype**                    | Jan 28 – Mar 3 | Player & enemy class logic; HP, attack, movement; base visual mapping               | 🔸 [Challenge and Growth](#ac-growth-2) foundation; mechanic feasibility             |
+| **Core Prototype**                    | Jan 28 – Mar 3 | Requirments & Design & Player & enemy class logic; base visual mapping and function | 🔸 [Challenge and Growth](#ac-growth-2) foundation; mechanic feasibility             |
 | **Single-Level Integration**          | Mar 4 – Mar 18 | Monster types, environment visuals, gameplay–art merge for one full level           | 🔸 [Immersive Narrative](#ac-immersive-2) (Level + Visual unity)                     |
-| **Multi-Level & Config-Based Design** | Mar 18 – Apr 8 | Configurable logic, vision mechanics, new monster abilities, narrative scripting    | 🔸 [Challenge](#ac-growth-1) + [Narrative Integration](#ac-immersive-2)              |
+| **Multi-Level & Config-Based Design** | Mar 18 – Apr 8 | Configurable logic, vision mechanics, new monster abilities, narrative scripting    | 🔸 [Challenge](#ac-growth-1) + [Narrative Integration](#ac-immersive-1)              |
 | **System UI & Experience Polish**     | Apr 9 – Apr 22 | Menu systems, transitions, inter-level logic, prompts, tooltips                     | 🔸 [UX clarity, onboarding](#ac-immersive-2), non-core gameplay loop support         |
-| **Final Evaluation & Polish**         | Apr 23 – May 7 | Think-aloud response implementation, NASA-TLX tuning, polish, animation, hint hooks | 🔸 [Responsive Design](#ac-growth-2) + [Validation of Immersion & Challenge](#ac-immersive-2) |
-
+| **Final Evaluation & Polish**         | Apr 23 – May 7 | Think-aloud response implementation, NASA-TLX tuning, polish, animation, hint hooks | 🔸 Responsive Design + [Validation of Immersion & Challenge](#ac-immersive-2)        |
 
 #### Team Structure and Evolution
 
@@ -588,7 +587,7 @@ Our team followed a **weekly sprint-based development cycle**, combining structu
 
 This rhythm allowed us to maintain a healthy balance between focused collaboration and flexible creativity—empowering both our **engineering and design sub-teams** to thrive while staying aligned.
 
-### 🧾 Conclusion
+### <a name="conclusion">Conclusion
 
 Looking back on the full development cycle of *Dragon Adventure*, our team reflects with both pride and humility. We began this journey with a clear creative ambition: to build a pixel-art action game that goes beyond fast-paced combat and introduces players to a meaningful, narrative-rich world. And while we achieved much of that vision, the path to it was nonlinear and filled with learning curves.
 
