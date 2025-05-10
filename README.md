@@ -110,7 +110,7 @@ Levels narratively justify mechanics (e.g., “curse” introduces limited visio
 📌 **Backlog (evolving):**
 - [✓] Comic panels between zones  
 - [✓] Mechanic introduced via story  
-- [ ] No input confirmation system (e.g., gate or hook)
+- [✗] No input confirmation system (e.g., gate or hook)
 
 🛠️ *Insight:* Narrative flow was strong, but clarity on mechanic comprehension was lacking.
 
@@ -126,7 +126,7 @@ Transformations or skills must apply to future challenges, tying gameplay to log
 📌 **Backlog:**
 - [✓] e.g., regain vision post-curse via transformation  
 - [✓] Visual ability indicators  
-- [ ] No adaptive difficulty or suggestion logic
+- [✗] No adaptive difficulty or suggestion logic
 
 **AC2: Souls-Like Multi-Factor Difficulty**  
 Challenge arises from enemy AI (e.g., dash within aggro), map layout, and vision constraints.
@@ -135,7 +135,7 @@ Challenge arises from enemy AI (e.g., dash within aggro), map layout, and vision
 - [✓] Graveyard: high mental load via limited vision  
 - [✓] Enemies dash when triggered  
 - [✓] Tight enemy vision allows strategic "pulling"  
-- [ ] Optional hints still in "Could Have" tier
+- [✗] Optional hints still in "Could Have" tier
 
 🛠️ *Insight:* Balancing aggression with counterplay created a satisfying “difficult but fair” rhythm.
 
