@@ -148,8 +148,6 @@ These findings led to two top-level design goals:
 
 > *As a player, I want story and gameplay to feel interconnected, so that my actions carry emotional weight in the world.*
 
----
-
 **<a name="ac-immersive-1"></a>AC1: World Introduction via Story Cutscene**  
 > *Given* the player starts a new game,  
 > *When* the session begins,  
@@ -159,8 +157,6 @@ These findings led to two top-level design goals:
 - [✓] Transitioned from plain text to illustrated VO cutscene  
 - [✓] Structured around three essential lore beats  
 - [✓] Synchronized narration and visuals post-feedback
-
----
 
 **<a name="ac-immersive-2"></a>AC2: Narrative-Driven Transitions & Mechanic Introduction**  
 > *Given* the player completes a level,  
@@ -180,8 +176,6 @@ These findings led to two top-level design goals:
 
 > *As a player, I want to grow through earned abilities so I can overcome challenges and feel my mastery deepen.*
 
----
-
 **<a name="ac-growth-1"></a>AC1: Progression-Based Problem Solving**  
 > *Given* the player has unlocked transformation abilities,  
 > *When* they encounter negative status effects (e.g., burn, slow),  
@@ -191,8 +185,6 @@ These findings led to two top-level design goals:
 - [✓] Transformations tied to debuff resolution  
 - [✓] Ability usage signaled via updated UI indicators  
 - [✗] No dynamic scaling of difficulty or debuff severity  
-
----
 
 **<a name="ac-growth-2"></a>AC2: Souls-like Difficulty via Layered Design**  
 > *Given* the player enters a level,  
