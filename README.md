@@ -4,9 +4,6 @@
 ## Dragon Adventure
 
 Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-5/)
-The Canvas: https://editor.p5js.org/chyx-17/full/gs4csAz5Y
-change color：press 'R','G', 'B'.
-change shape: press '1','2','3'.
 
 Your game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
 
@@ -27,8 +24,18 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 - Group member 6, Yaxin Chen, mq24914@bristol.ac.uk, chyx-17
 
 ## Project Report
+[Introduction](#Introduction)
+[Game Content](#Game_Content)
+[Requirements](#Requirements)
+[Design](#Design)
+[Implementation](#Implementation)
+[Evaluation](#evaluation)
+[Process](#Process)
+[Conclusion](#Conclusion)
+[Contribution Statement](#Contribution_Statement)
+[Additional Marks](#Additional_Marks)
 
-### Introduction
+### <a name="Introduction">Introduction</a>
 
 <p align="center" style="display:flex; flex-direction:column; justify-content:center;">
   <img src="./report/start0.pic.jpg" width="250"/>
@@ -63,7 +70,7 @@ At the heart of the experience is a three-layered design philosophy:
 
 ---
 
-### Game Content
+### <a name="Game_Content">Game Content</a>
 
 |               | <p align="center"><img src="./report/forest.pic.jpg" width="200"/><br/><strong>Forest</strong></p> | <p align="center"><img src="./report/grayyard.pic.jpg" width="200"/><br/><strong>Graveyard</strong></p> | <p align="center"><img src="./report/lake.pic.jpg" width="200"/><br/><strong>Lake</strong></p> | <p align="center"><img src="./report/mountain.pic.jpg" width="200"/><br/><strong>Volcano</strong></p> |
 |---------------|--------------------------------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
@@ -78,7 +85,7 @@ At the heart of the experience is a three-layered design philosophy:
 > This mechanic relies heavily on our **configuration-driven system**, enabling behavior variation without code changes.  
 > For implementation details, see [JSON Example](#json).
 
-### Requirements
+### <a name="Requirements">Requirements</a>
 
 #### Overview: Our Requirements Engineering Logic
 
@@ -231,7 +238,7 @@ Resulting Value–Effort Matrix:
 
 > *Note: Our prioritization placed user experience and narrative coherence at the center—ensuring development effort mapped directly to perceived player value.*
 
-### Design
+### <a name="Design">Design</a>
 
 Our system design followed a top-down, user-centered methodology. We began by modeling gameplay behavior from the player’s perspective and iteratively transformed these abstractions into concrete architecture, class structure, configuration logic, and real-time behavior.
 
@@ -280,7 +287,7 @@ A key architectural milestone was our adoption of a configuration-driven design.
 
 ---
 
-##### Example: JSON-Defined Enemy Entry<a name="json">
+##### Example: JSON-Defined Enemy Entry<a name="json"></a>
 
 ```json
 "fireSlime": {
@@ -311,7 +318,13 @@ This brought several advantages:
   <img src="./homework/week5/class_diagram.png" width="800"/>
 </p>
 <p align="center">
-  <img src="./homework/week5/class_diagram_full.png" width="800"/>
+  <img src="./report/class part1.pic.jpg" width="800"/>
+</p>
+<p align="center">
+  <img src="./report/class part2.pic.jpg" width="800"/>
+</p>
+<p align="center">
+  <img src="./report/class part3.pic.jpg" width="800"/>
 </p>
 
 We translated architecture into class structure using:
@@ -372,7 +385,7 @@ Our sequence diagrams helped visualize runtime logic:
 
 > Ultimately, each stage—use case, architecture, class, config, and runtime—was carefully layered to reinforce the next.
 
-### Implementation
+### <a name="Implementation">Implementation</a>
 
 To keep development outcome-aligned and manageable, we adopted a **top-down implementation strategy** mapped to our design goals:
 
@@ -398,7 +411,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 #### Challenge 1: Player Transformation System  
 *Required to support [problem-solving through earned abilities](#ac-growth-1).*
-<a name="transformation">
+<a name="transformation"></a>
 <p align="center">
   <img src="./report/challenge1.pic.jpg" width="900"/><br>
   <em>Figure 1. Player Transformation System – Presentation</em>
@@ -465,7 +478,7 @@ Each implementation answered specific design intentions while honoring the **fle
 
 
 
-### Evaluation<a name="evaluation">
+### Evaluation<a name="evaluation"></a>
 
 To evaluate whether our design and implementation successfully delivered an immersive, strategically challenging experience, we conducted a user-centered evaluation using both **qualitative** and **quantitative** methods. Specifically, we employed:
 
@@ -538,25 +551,53 @@ This evaluation stage not only verified core design decisions, but also informed
 
 #### Code Testing
 
-**Black Box Testing**
+-----
+##### **White-Box Testing**
 
-This black-box testing process comprehensively evaluates the functionality of the game from initialization to termination. The **game startup tests** confirmed that the game initializes correctly, the initial state is properly loaded, and level settings are correctly applied. In the **game control tests**, we verified that keyboard input is responsive, pause functionality works as intended, and the movement control system operates smoothly. The **interface tests** examined the canvas dimensions, the display of in-game status information, and the rendering of UI elements. The **game termination tests** validated that the player's death conditions are triggered accurately and the game transitions into a proper end state. **Boundary condition tests** were conducted to evaluate behavior under screen size constraints, rapid key inputs, and extreme value inputs. The **exception handling tests** focused on how the game reacts to resource loading failures, crash recovery mechanisms, and error state management. Finally, **accessibility tests** assessed keyboard support, input responsiveness, and the overall ease of interaction, ensuring that the game remains user-friendly for all players.
+White-box testing focused on validating the internal logic and structure of the game at the source code level.
 
-**White Box Testing**
+- **Level Class Testing** evaluated initialization processes, method functionality, property assignment accuracy, and structural integrity.
+- **State Transition Testing** ensured correct logic for switching between game states, precise triggering conditions, and consistent behavior.
+- **Object Interaction Testing** assessed logic for player, enemy, and projectile interactions, including collision detection, damage calculation, and state updates.
+- **Core Logic and Algorithm Testing** verified the stability and correctness of key algorithms and data handling processes, ensuring well-defined business logic.
 
-This testing process included detailed white-box testing to ensure the reliability of the game’s internal logic. In the **Level class tests**, we verified the class initialization process, functionality of key methods, accuracy of property assignments, and the completeness of underlying data structures. The **game state transition tests** focused on the correctness of state switching logic, consistency across different game states, and the precise triggering of state changes. In **object interaction tests**, we examined the logic governing interactions between game entities, including collision detection systems, damage calculation mechanisms, and the update of object statuses. Additionally, **internal logic tests** were conducted to validate the correctness and stability of the game’s core algorithms, data handling processes, and business logic.
+This stage emphasized code quality, logical precision, and structural robustness, laying a solid foundation for stable gameplay.
 
-The scope of testing covered multiple dimensions: **functional testing** (core gameplay functions, user interactions, and system features), **performance testing** (response times, resource usage, and execution efficiency), **compatibility testing** (browser support, device adaptation, and runtime environment compatibility), and **security testing** (data integrity, operational safety, and state consistency). In terms of testing focus, **black-box testing** emphasized feature completeness, user experience, exception handling, and boundary conditions, while **white-box testing** targeted code quality, logical correctness, object interactions, and state management.
 
-**Core goal of this test**
+-----
+##### **Black-Box Testing**
 
-The primary objective of this testing cycle was to validate the functional behavior of the game, ensure smooth user interaction, and maintain the overall system stability. By combining code-level inspection with runtime behavior analysis, the testing process also contributes to quality assurance. Furthermore, user experience considerations were central, aiming to ensure fluid controls, friendly interfaces, and responsive performance throughout gameplay.
+Black-box testing evaluated the game's external behavior from the user’s perspective, without relying on source code.
 
-**Game Simulation Environment Initialization Code Description:**
+- **Startup and Loading Tests** confirmed proper initialization, resource loading, and level setup.
+- **Control and Input Tests** validated keyboard responsiveness, functional pause controls, and smooth character movement.
+- **UI and Display Tests** checked canvas dimensions, status indicators, and UI rendering accuracy.
+- **Termination Tests** verified that player death conditions triggered appropriate end-state transitions.
+- **Boundary Condition Tests** evaluated performance under rapid input, screen resizing, and extreme user actions.
+- **Exception Handling Tests** observed the system's ability to handle resource failures, crash recovery, and error states.
+- **Accessibility Tests** focused on keyboard navigation, input responsiveness, and ease of interaction to ensure inclusive gameplay.
 
-This code sets up a simulated browser environment in Node.js to support testing of HTML5 Canvas game logic. It uses jsdom to create document and window, and mocks functions like canvas, button, and video using jest.fn() to avoid relying on an actual browser. Core classes such as Character, Player, Enemy, and Projectile are defined, and global game states, variables, and level objects are initialized to allow for function calls and behavior verification during testing.
+These tests emphasized functional completeness, stability under edge cases, and a seamless user experience.
 
-**Equivalence_Partitoning_table**
+-----
+##### **Testing Scope and Objectives**
+
+The testing covered multiple dimensions:
+
+- **Functional Testing**: Validated gameplay mechanics, system operations, and user interactions.
+- **Performance Testing**: Measured responsiveness, resource efficiency, and execution speed.
+- **Compatibility Testing**: Ensured smooth operation across browsers, screen sizes, and devices.
+- **Security Testing**: Checked data integrity, safe handling of system states, and resilience against faults.
+
+The **core objective** was to verify reliable game behavior, smooth user interaction, and consistent system performance across different conditions. The combination of white-box logic validation and black-box runtime analysis supported comprehensive quality assurance.
+
+-----
+##### **Simulation Environment Setup**
+
+A simulated browser environment was built using **Node.js** and **jsdom**, with `jest.fn()` used to mock elements like canvas, buttons, and video components. Core classes such as `Character`, `Player`, `Enemy`, and `Projectile` were defined. Global variables and level instances were initialized to allow function testing and behavior validation without relying on a browser.
+
+-----
+##### **Equivalence_Partitoning_table**
 
 | Test Function | Input Condition / Action | Valid Equivalence Class | Invalid/Boundary Class | Expected Result |
 | :-- | :-- | :-- | :-- | :-- |
@@ -573,7 +614,7 @@ This code sets up a simulated browser environment in Node.js to support testing 
 | Accessibility & Localization | Keyboard input & language setting | Recognises keys and language attribute exists | No response or 'lang' undefined | Keyboard works and language attribute exists |
 | Save Game State | Set and check gameState and present_level | State saved and restored correctly | State lost or overwritten | State remains correct |
 
-### Process
+### <a name="Process">Process</a>
 
 #### Overview
 
@@ -619,7 +660,7 @@ After the prototype, our team naturally divided into two specialized yet interde
   Xiao Wu (narrative/story), Yaxin Chen (level design), Yaoyao Shen (UI and transitions)
 
 - **Software Engineering Team**  
-  Shaojie Yang and Xinyi Zhou (core system pairs), Jingwei Lin (integration and testing lead)
+  Shaojie Yang and Xinyi Zhou (core system pairs), Jingwei Lin (integration), Yaxin Chen(White Box test), Xiao Wu(Black Box test)
 
 ---
 
@@ -628,7 +669,7 @@ After the prototype, our team naturally divided into two specialized yet interde
 Each visual contributor focused on a subsystem:
 
 - Xiao Wu ensured narrative cohesion via cutscenes and worldbuilding cues  
-- Yaxin Chen prototyped level hazards and cursed mechanics  
+- Yaxin Chen prototyped level hazards, cursed mechanics. Define all the attributes of players and enemies.  
 - Yaoyao Shen built polished transitions and user interface components
 
 They applied principles of **requirement decomposition**—dividing the narrative, interaction, and presentation pipeline according to shared [Acceptance Criteria](#epics).
@@ -639,7 +680,9 @@ They applied principles of **requirement decomposition**—dividing the narrativ
 
 The engineering group maintained a rigorous pair programming schedule, daily standups, and tracked progress in Jira. Continuous integration ensured stability, while peer code reviews supported quality and shared ownership.
 
-Jingwei Lin emerged as a cross-domain facilitator—regularly informing the visual team of the engine’s evolving constraints. This limited misalignment and prevented infeasible designs from being proposed.
+Yang Shaojie and Lin Jingwei from the engineering team communicated with Chen Yaxin and Shen Yaoyao from the design team to complete the map application, monster design and numerical design to improve the playability of the game;
+
+At the same time, Wu Xiao from the design team collaborated with Zhou Xinyi from the engineering team to complete the development of UI design, scene transition, exit options and other functions, gradually improving the game aesthetics and design logic.
 
 ---
 
@@ -682,7 +725,7 @@ We adopted a weekly sprint cycle with structured collaboration periods and indiv
 
 This rhythm enabled consistent progress while encouraging initiative, creativity, and adaptability across the engineering and visual pipelines.
 
-### Conclusion
+### <a name="Conclusion">Conclusion</a>
 
 Overall, *Dragon Adventure* successfully delivered on most of our intended design goals, especially in its attempt to **fuse narrative and challenge into a cohesive gameplay experience**. Through this project, we gained not just technical and design skills, but a deeper methodological understanding of **why games work the way they do**. That said, compared to polished commercial titles, *Dragon Adventure* stands more as a **proof of concept and a methodological exploration**—valuable in ideas, yet limited in finish and scope.
 
@@ -735,16 +778,16 @@ Looking ahead, we hope to build on this foundation with features like:
 > *Dragon Adventure* wasn’t just the game we built—it was the **process that made us a real development team**.
 
 
-### Contribution Statement
+### <a name="Contribution_Statement">Contribution Statement</a>
 
 | Name            | Role                   | Primary Responsibilities                                                                                                                                     | Notes                                                                                                    |
 |-----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
-| **Xinyi Zhou**    | Programmer              | UI programming, **inter-level transitions**, configuration parsing, loading systems                                                                            | Focused on level selection, player state saving/loading, and polished system behaviors outside gameplay. |
-| **Jingwei Lin**   | Technical Bridge & Writer | Testing, class design, **team structure evolution**, **requirement and report authorship**, UML/class diagrams                                                 | Played a key role in shaping cross-team collaboration; drafted major report sections and visual models. |
-| **Xiao Wu**       | Narrative Designer      | Story system, worldbuilding, comic-style cutscenes                                                                                                             | Designed all narrative components; ensured story progression aligns with gameplay tone.                  |
-| **Yaxin Chen**    | Game Designer           | Level layout logic, transformation mechanic, cursed vision system                                                                                             | Designed vision-restricting gameplay and transformation; structured configuration for monsters/maps.     |
-| **Yaoyao Shen**   | Visual Designer         | UI assets, level-clear transitions, polish for menus and HUD                                                                                                   | Designed interface feedback, victory panels, and bridging visual elements.                              |
+| **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming, **class implementation**, UML/class                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
+| **Xinyi Zhou**    | Programmer              | UI programming, **inter-level transitions**, configuration parsing, loading systems, requirement,  **music configuration**                                                                            | Focused on level selection, player state saving/loading, and polished system behaviors outside gameplay. |
+| **Jingwei Lin**   | Technical Bridge & Writer | class design, **team structure evolution**, **requirement and report authorship** ,diagrams                                                 | Played a key role in shaping cross-team collaboration; drafted major report sections and visual models. |
+| **Xiao Wu**       | Narrative Designer      | **Black Box testing**, Story system, worldbuilding, **comic-style cutscenes**, requirement                                                                                                             | Designed all narrative components; ensured story progression aligns with gameplay tone.                  |
+| **Yaxin Chen**    | Game Designer           | **White Box testing**, **Level layout logic**, transformation mechanic, cursed vision system, requirement                                                                                             | Designed vision-restricting gameplay and transformation; structured configuration for monsters/maps.     |
+| **Yaoyao Shen**   | Visual Designer         | **UI assets**, **level-clear transitions**, polish for menus and HUD, requirement,diagrams                                                                                                    | Designed interface feedback, victory panels, and bridging visual elements.                              |
 
 ---
 
@@ -753,7 +796,7 @@ Looking ahead, we hope to build on this foundation with features like:
 > 🎯 Ultimately, every team member contributed with full dedication and effort, ensuring that *Dragon Adventure* could reach its final form as a polished, immersive experience. Our collective passion and resilience were the foundation of the project’s success.
 
 
-### Additional Marks
+### <a name="Additional_Marks">Additional Marks</a>
 
 You can delete this section in your own repo, it's just here for information. in addition to the marks above, we will be marking you on the following two points:
 
