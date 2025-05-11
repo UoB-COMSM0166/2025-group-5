@@ -4,9 +4,6 @@
 ## Dragon Adventure
 
 Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-5/)
-The Canvas: https://editor.p5js.org/chyx-17/full/gs4csAz5Y
-change color：press 'R','G', 'B'.
-change shape: press '1','2','3'.
 
 Your game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
 
@@ -27,8 +24,18 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 - Group member 6, Yaxin Chen, mq24914@bristol.ac.uk, chyx-17
 
 ## Project Report
+[Introduction](#Introduction)
+[Game Content](#Game_Content)
+[Requirements](#Requirements)
+[Design](#Design)
+[Implementation](#Implementation)
+[Evaluation](#evaluation)
+[Process](#Process)
+[Conclusion](#Conclusion)
+[Contribution Statement](#Contribution_Statement)
+[Additional Marks](#Additional_Marks)
 
-### Introduction
+### <a name="Introduction">Introduction</a>
 
 ---
 
@@ -65,7 +72,7 @@ At the heart of the experience is a three-layered design philosophy:
 
 ---
 
-### Game Content
+### <a name="Game_Content">Game Content</a>
 
 |               | <p align="center"><img src="./report/forest.pic.jpg" width="200"/><br/><strong>Forest</strong></p> | <p align="center"><img src="./report/grayyard.pic.jpg" width="200"/><br/><strong>Graveyard</strong></p> | <p align="center"><img src="./report/lake.pic.jpg" width="200"/><br/><strong>Lake</strong></p> | <p align="center"><img src="./report/mountain.pic.jpg" width="200"/><br/><strong>Volcano</strong></p> |
 |---------------|--------------------------------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
@@ -80,7 +87,7 @@ At the heart of the experience is a three-layered design philosophy:
 > This mechanic relies heavily on our **configuration-driven system**, enabling behavior variation without code changes.  
 > For implementation details, see [JSON Example](#json).
 
-### Requirements
+### <a name="Requirements">Requirements</a>
 
 ---
 
@@ -243,7 +250,7 @@ Resulting Value–Effort Matrix:
 
 > *Note: Our prioritization placed user experience and narrative coherence at the center—ensuring development effort mapped directly to perceived player value.*
 
-### Design
+### <a name="Design">Design</a>
 
 Our system design followed a top-down, user-centered methodology. We began by modeling gameplay behavior from the player’s perspective and iteratively transformed these abstractions into concrete architecture, class structure, configuration logic, and real-time behavior.
 
@@ -384,7 +391,7 @@ Our sequence diagrams helped visualize runtime logic:
 
 > Ultimately, each stage—use case, architecture, class, config, and runtime—was carefully layered to reinforce the next.
 
-### Implementation
+### <a name="Implementation">Implementation</a>
 
 To keep development outcome-aligned and manageable, we adopted a **top-down implementation strategy** mapped to our design goals:
 
@@ -477,7 +484,7 @@ Each implementation answered specific design intentions while honoring the **fle
 
 
 
-### Evaluation<a name="evaluation">
+### Evaluation<a name="evaluation"></a>
 
 To evaluate whether our design and implementation successfully delivered an immersive, strategically challenging experience, we conducted a user-centered evaluation using both **qualitative** and **quantitative** methods. Specifically, we employed:
 
@@ -585,7 +592,7 @@ This code sets up a simulated browser environment in Node.js to support testing 
 | Accessibility & Localization | Keyboard input & language setting | Recognises keys and language attribute exists | No response or 'lang' undefined | Keyboard works and language attribute exists |
 | Save Game State | Set and check gameState and present_level | State saved and restored correctly | State lost or overwritten | State remains correct |
 
-### Process
+### <a name="Process">Process</a>
 
 ---
 
@@ -696,7 +703,7 @@ We adopted a weekly sprint cycle with structured collaboration periods and indiv
 
 This rhythm enabled consistent progress while encouraging initiative, creativity, and adaptability across the engineering and visual pipelines.
 
-### Conclusion
+### <a name="Conclusion">Conclusion</a>
 
 Overall, *Dragon Adventure* successfully delivered on most of our intended design goals, especially in its attempt to **fuse narrative and challenge into a cohesive gameplay experience**. Through this project, we gained not just technical and design skills, but a deeper methodological understanding of **why games work the way they do**. That said, compared to polished commercial titles, *Dragon Adventure* stands more as a **proof of concept and a methodological exploration**—valuable in ideas, yet limited in finish and scope.
 
@@ -749,16 +756,16 @@ Looking ahead, we hope to build on this foundation with features like:
 > *Dragon Adventure* wasn’t just the game we built—it was the **process that made us a real development team**.
 
 
-### Contribution Statement
+### <a name="Contribution_Statement">Contribution Statement</a>
 
 | Name            | Role                   | Primary Responsibilities                                                                                                                                     | Notes                                                                                                    |
 |-----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
-| **Xinyi Zhou**    | Programmer              | UI programming, **inter-level transitions**, configuration parsing, loading systems                                                                            | Focused on level selection, player state saving/loading, and polished system behaviors outside gameplay. |
-| **Jingwei Lin**   | Technical Bridge & Writer | Testing, class design, **team structure evolution**, **requirement and report authorship**, UML/class diagrams                                                 | Played a key role in shaping cross-team collaboration; drafted major report sections and visual models. |
-| **Xiao Wu**       | Narrative Designer      | Story system, worldbuilding, comic-style cutscenes                                                                                                             | Designed all narrative components; ensured story progression aligns with gameplay tone.                  |
-| **Yaxin Chen**    | Game Designer           | Level layout logic, transformation mechanic, cursed vision system                                                                                             | Designed vision-restricting gameplay and transformation; structured configuration for monsters/maps.     |
-| **Yaoyao Shen**   | Visual Designer         | UI assets, level-clear transitions, polish for menus and HUD                                                                                                   | Designed interface feedback, victory panels, and bridging visual elements.                              |
+| **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming, class implementation, UML/class                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
+| **Xinyi Zhou**    | Programmer              | UI programming, **inter-level transitions**, configuration parsing, loading systems, requirement,  **music configuration**                                                                            | Focused on level selection, player state saving/loading, and polished system behaviors outside gameplay. |
+| **Jingwei Lin**   | Technical Bridge & Writer | class design, **team structure evolution**, **requirement and report authorship** ,diagrams                                                 | Played a key role in shaping cross-team collaboration; drafted major report sections and visual models. |
+| **Xiao Wu**       | Narrative Designer      | **Black testing**, Story system, worldbuilding, comic-style cutscenes, requirement                                                                                                             | Designed all narrative components; ensured story progression aligns with gameplay tone.                  |
+| **Yaxin Chen**    | Game Designer           | White testing, Level layout logic, transformation mechanic, cursed vision system, requirement                                                                                             | Designed vision-restricting gameplay and transformation; structured configuration for monsters/maps.     |
+| **Yaoyao Shen**   | Visual Designer         | UI assets, level-clear transitions, polish for menus and HUD, requirement,diagrams                                                                                                    | Designed interface feedback, victory panels, and bridging visual elements.                              |
 
 ---
 
@@ -767,7 +774,7 @@ Looking ahead, we hope to build on this foundation with features like:
 > 🎯 Ultimately, every team member contributed with full dedication and effort, ensuring that *Dragon Adventure* could reach its final form as a polished, immersive experience. Our collective passion and resilience were the foundation of the project’s success.
 
 
-### Additional Marks
+### <a name="Additional_Marks">Additional Marks</a>
 
 You can delete this section in your own repo, it's just here for information. in addition to the marks above, we will be marking you on the following two points:
 
