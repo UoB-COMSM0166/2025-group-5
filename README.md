@@ -24,16 +24,16 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 - Group member 6, Yaxin Chen, mq24914@bristol.ac.uk, chyx-17
 
 ## Project Report
-[1. Introduction](#Introduction)
-[2. Game Content](#Game_Content)
-[3. Requirements](#Requirements)
-[4. Design](#Design)
-[5. Implementation](#Implementation)
-[6. Evaluation](#evaluation)
-[7. Process](#Process)
-[8. Conclusion](#Conclusion)
-[9. Contribution Statement](#Contribution_Statement)
-[10. Additional Marks](#Additional_Marks)
+- [1. Introduction](#Introduction)
+- [2. Game Content](#Game_Content)
+- [3. Requirements](#Requirements)
+- [4. Design](#Design)
+- [5. Implementation](#Implementation)
+- [6. Evaluation](#evaluation)
+- [7. Process](#Process)
+- [8. Conclusion](#Conclusion)
+- [9. Contribution Statement](#Contribution_Statement)
+- [10. Additional Marks](#Additional_Marks)
 
 ### <a name="Introduction">1. Introduction</a>
 
