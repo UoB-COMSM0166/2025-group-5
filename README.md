@@ -148,8 +148,6 @@ These findings led to two top-level design goals:
 
 > *As a player, I want story and gameplay to feel interconnected, so that my actions carry emotional weight in the world.*
 
----
-
 **<a name="ac-immersive-1"></a>AC1: World Introduction via Story Cutscene**  
 > *Given* the player starts a new game,  
 > *When* the session begins,  
@@ -159,8 +157,6 @@ These findings led to two top-level design goals:
 - [✓] Transitioned from plain text to illustrated VO cutscene  
 - [✓] Structured around three essential lore beats  
 - [✓] Synchronized narration and visuals post-feedback
-
----
 
 **<a name="ac-immersive-2"></a>AC2: Narrative-Driven Transitions & Mechanic Introduction**  
 > *Given* the player completes a level,  
@@ -180,8 +176,6 @@ These findings led to two top-level design goals:
 
 > *As a player, I want to grow through earned abilities so I can overcome challenges and feel my mastery deepen.*
 
----
-
 **<a name="ac-growth-1"></a>AC1: Progression-Based Problem Solving**  
 > *Given* the player has unlocked transformation abilities,  
 > *When* they encounter negative status effects (e.g., burn, slow),  
@@ -191,8 +185,6 @@ These findings led to two top-level design goals:
 - [✓] Transformations tied to debuff resolution  
 - [✓] Ability usage signaled via updated UI indicators  
 - [✗] No dynamic scaling of difficulty or debuff severity  
-
----
 
 **<a name="ac-growth-2"></a>AC2: Souls-like Difficulty via Layered Design**  
 > *Given* the player enters a level,  
@@ -550,14 +542,40 @@ This evaluation stage not only verified core design decisions, but also informed
 
 #### Code Testing
 
-**Unit Testing**  
-Throughout the development process, we conducted extensive unit testing on key game modules and features. Using the JUnit framework, we wrote over 200 test cases covering core mechanics, character systems, combat systems, item systems, and other aspects of the game. These tests ensured that each independent module worked correctly before integration.
+**Black Box Testing**
 
-**Integration Testing**  
-Following unit tests, we conducted integration testing to verify compatibility among different modules. During this phase, we resolved issues such as synchronization errors between movement and collision detection, and inconsistencies between item usage and combat states. These fixes ensured a stable, seamless experience.
+This black-box testing process comprehensively evaluates the functionality of the game from initialization to termination. The **game startup tests** confirmed that the game initializes correctly, the initial state is properly loaded, and level settings are correctly applied. In the **game control tests**, we verified that keyboard input is responsive, pause functionality works as intended, and the movement control system operates smoothly. The **interface tests** examined the canvas dimensions, the display of in-game status information, and the rendering of UI elements. The **game termination tests** validated that the player's death conditions are triggered accurately and the game transitions into a proper end state. **Boundary condition tests** were conducted to evaluate behavior under screen size constraints, rapid key inputs, and extreme value inputs. The **exception handling tests** focused on how the game reacts to resource loading failures, crash recovery mechanisms, and error state management. Finally, **accessibility tests** assessed keyboard support, input responsiveness, and the overall ease of interaction, ensuring that the game remains user-friendly for all players.
 
-**System Testing**  
-We also conducted system testing to assess performance and platform compatibility. Simulating various user scenarios and edge conditions, we confirmed stability and responsiveness. Although designed primarily for mainstream devices, the game was optimized to run smoothly on lower-end systems as well.
+**White Box Testing**
+
+This testing process included detailed white-box testing to ensure the reliability of the game’s internal logic. In the **Level class tests**, we verified the class initialization process, functionality of key methods, accuracy of property assignments, and the completeness of underlying data structures. The **game state transition tests** focused on the correctness of state switching logic, consistency across different game states, and the precise triggering of state changes. In **object interaction tests**, we examined the logic governing interactions between game entities, including collision detection systems, damage calculation mechanisms, and the update of object statuses. Additionally, **internal logic tests** were conducted to validate the correctness and stability of the game’s core algorithms, data handling processes, and business logic.
+
+The scope of testing covered multiple dimensions: **functional testing** (core gameplay functions, user interactions, and system features), **performance testing** (response times, resource usage, and execution efficiency), **compatibility testing** (browser support, device adaptation, and runtime environment compatibility), and **security testing** (data integrity, operational safety, and state consistency). In terms of testing focus, **black-box testing** emphasized feature completeness, user experience, exception handling, and boundary conditions, while **white-box testing** targeted code quality, logical correctness, object interactions, and state management.
+
+**Core goal of this test**
+
+The primary objective of this testing cycle was to validate the functional behavior of the game, ensure smooth user interaction, and maintain the overall system stability. By combining code-level inspection with runtime behavior analysis, the testing process also contributes to quality assurance. Furthermore, user experience considerations were central, aiming to ensure fluid controls, friendly interfaces, and responsive performance throughout gameplay.
+
+**Game Simulation Environment Initialization Code Description:**
+
+This code sets up a simulated browser environment in Node.js to support testing of HTML5 Canvas game logic. It uses jsdom to create document and window, and mocks functions like canvas, button, and video using jest.fn() to avoid relying on an actual browser. Core classes such as Character, Player, Enemy, and Projectile are defined, and global game states, variables, and level objects are initialized to allow for function calls and behavior verification during testing.
+
+**Equivalence_Partitoning_table**
+
+| Test Function | Input Condition / Action | Valid Equivalence Class | Invalid/Boundary Class | Expected Result |
+| :-- | :-- | :-- | :-- | :-- |
+| Game Startup | Call setup() after environment initialization | Initial game state is 'start' | Missing resource files, improper initialization | Game loads successfully with state 'start' |
+| Story Playback & Skipping | Call startStory1() / startStory2() | Switches to 'story1' / 'story2' correctly | Incorrect order, missing resources | Video plays and state changes properly |
+| Enter Level | Call startGame(1) | State changes to 'playing', level recorded | Invalid level number (e.g. -1, null) | Game starts and level number is set |
+| Keyboard Control | Dispatch 'keydown' (Arrow keys, 'p') | Player responds, 'p' toggles pause | Invalid keys, rapid repeated keys | State or player updates accordingly |
+| Player Death | Reduce player HP to 0 | Status becomes 'DEAD' | HP underflow or not updated | Player status updates to 'DEAD' |
+| Frame Rate Performance | Call level1.update() | Execution time ≤ frame budget | Execution time too high | Update completes within frame time |
+| Resource Load Error | loadJsonData() throws error | Error thrown and handled | Error unhandled, app crashes | Error caught and test passes |
+| Difficulty Progression | Call startGame(2) | Game difficulty increases | Attributes unchanged | Game difficulty increases as expected |
+| Button Interaction | Call button.mousePressed() | Interaction callback runs | No callback or button not initialized | Callback is invoked |
+| Rapid Key Input | Dispatch keydown 10 times | Responsive to all events | Laggy or missed inputs | Method is called multiple times |
+| Accessibility & Localization | Keyboard input & language setting | Recognises keys and language attribute exists | No response or 'lang' undefined | Keyboard works and language attribute exists |
+| Save Game State | Set and check gameState and present_level | State saved and restored correctly | State lost or overwritten | State remains correct |
 
 ### Process
 
