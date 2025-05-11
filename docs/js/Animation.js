@@ -1,11 +1,11 @@
 class SpriteAnimator {
   /**
    * @param {Object} frameSets  
-   *   键名为状态(state)：
+   *   Key name: state：
    *     'idleUp' | 'idleDown' | 'idleLeft' | 'idleRight' | 'moveUp'|'moveDown'|'moveLeft'|'moveRight'
    *            |'attackUp'|'attackDown'|'attackLeft'|'attackRight'
-   *   值为 { frames: p5.Image[], period: number(ms), loop: boolean }
-   * @param {string} initialState - 初始状态，默认为 'idle'
+   *   value { frames: p5.Image[], period: number(ms), loop: boolean }
+   * @param {string} initialState - Initial state, default is 'idle'
    */
   constructor(frameSets, initialState = 'idleUp') {
     this.frameSets = frameSets;
@@ -16,7 +16,7 @@ class SpriteAnimator {
   }
 
   /**
-   * 切换状态（如果状态不变，则重置动画到起始帧）
+   * Switch state (if the state doesn't change, reset the animation to the first frame)
    * @param {string} newState
    */
   setState(newState) {
@@ -32,12 +32,12 @@ class SpriteAnimator {
     }
   }
 
-  /** 更新当前帧索引（在 draw 之前调用） */
+  /** Update the current frame index (call before draw) */
   update() {
     let cfg = this.frameSets[this.currentState];
     if (!cfg || this.finished) return;
 
-    // 计算每帧的显示时间（interval）
+    // Calculate the display duration (interval) of each frame
     let interval = cfg.period / cfg.frames.length;
     let now = millis();
 
@@ -56,11 +56,11 @@ class SpriteAnimator {
   }
 
   /**
-   * 绘制当前帧
-   * @param {number} x  - 画布 x 坐标
-   * @param {number} y  - 画布 y 坐标
-   * @param {number} w  - 绘制宽度
-   * @param {number} h  - 绘制高度
+   * Draw the current frame
+   * @param {number} x  - Canvas x-coordinate
+   * @param {number} y  - Canvas y-coordinate
+   * @param {number} w  - Drawing width
+   * @param {number} h  - Drawing height
    */
   draw(x, y, w, h) {
     let cfg = this.frameSets[this.currentState];
@@ -68,12 +68,12 @@ class SpriteAnimator {
     image(cfg.frames[this.currentIndex], x, y, w, h);
   }
 
-  /** 是否已播完（仅对 loop=false 的状态有意义） */
+  /** Whether the animation has finished (only meaningful for states with loop = false) */
   isFinished() {
     return this.finished;
   }
 
-  /** 强制重置当前状态的动画序列到第一帧 */
+  /** Force reset the animation sequence of the current state to the first frame */
   reset() {
     this.currentIndex = 0;
     this.lastSwitch = millis();

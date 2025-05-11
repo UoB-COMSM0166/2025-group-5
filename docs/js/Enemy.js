@@ -1,4 +1,4 @@
-// 敌人类
+// enemy entity
 class Enemy extends Character 
 {
     constructor(enemyId, x, y, size, format, health, maxHealth, 
@@ -42,7 +42,7 @@ class Enemy extends Character
         this.isFindPlayer(level.player);
 
         if(this.attackCdTimer === 0)
-        { // 仅当攻击cd置零时可以发动攻击
+        { // # Attack can only be triggered when the attack cooldown is zero
             this.enemyMove(level);
             this.doAttack(level.player.x + level.player.size / 2, 
                         level.player.y + level.player.size / 2);
@@ -83,7 +83,7 @@ class Enemy extends Character
 
         if (!this.findPalyer) 
         {
-            // 按照巡逻路线移动
+            //# Move along the patrol route
             let dx = this.nextPatrolPoint.x - this.x;
             let dy = this.nextPatrolPoint.y - this.y;
             let dist = sqrt(dx * dx + dy * dy);
@@ -95,7 +95,7 @@ class Enemy extends Character
         } 
         else 
         {
-            // 追踪玩家
+            //# Chase the player
             let dx = level.player.x - this.x;
             let dy = level.player.y - this.y;
             let dist = sqrt(dx * dx + dy * dy);
@@ -106,11 +106,11 @@ class Enemy extends Character
             }
         }
 
-        // 边界约束
+        //Boundary constraints
         this.x = constrain(this.x, 0, width - this.size);
         this.y = constrain(this.y, 0, height - this.size);
 
-        // 障碍物碰撞检测
+        //Obstacle collision detection
         for (let obstacle of level.obstacles) 
         {
             if (!obstacle.isPassable &&
@@ -145,7 +145,7 @@ class Enemy extends Character
 
     invincibleTimerUpdate()
     {
-        // 无敌状态倒计时
+        //Invincibility countdown
         if(this.invincibleTimer !== 0)this.invincibleTimer --;
         if(this.invincibleTimer === 0)
         {

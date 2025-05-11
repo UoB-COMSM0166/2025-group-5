@@ -8,7 +8,7 @@ global.document = dom.window.document;
 global.window = dom.window;
 global.navigator = dom.window.navigator;
 
-// 游戏常量
+// Game constants
 global.canvasWidth = 1280;
 global.canvasHeight = 800;
 global.width = canvasWidth;
@@ -19,14 +19,14 @@ global.globalInvincibleTimer = 90;
 global.globalWaterStatusTimer = 180;
 global.globalFireStatusTimer = 120;
 
-// 游戏状态
+// Game states
 global.gameState = 'start';
 global.isGameOver = false;
 global.present_level = 0;
 global.pausedState = false;
 global.nextLevel = 0;
 
-// 定义所有类
+// Define all classes
 class Character {
     constructor(x, y, size, color, health, maxHealth, attack, status, speed, isInvincible, animations, isPlayer = false) {
         this.x = x;
@@ -60,7 +60,7 @@ class Character {
     }
 
     update() {
-        // 添加默认的 update 方法
+        // Add default update method
     }
 }
 
@@ -185,7 +185,7 @@ class SpriteAnimator {
     }
 
     update() {
-        // 模拟动画更新
+        // Simulate animation update
     }
 }
 
@@ -263,17 +263,17 @@ class Level {
     }
 
     async init() {
-        // 初始化关卡
+        // Initialize level
         return Promise.resolve();
     }
 
     start() {
-        // 开始关卡
+        // Start level
         this.player = new Character(100, 100, 50, 'red', 100, 100, 10, 'NORMAL', 5, true, {}, true);
     }
 
     update() {
-        // 更新关卡状态
+        // Update level state
         if (this.player) {
             this.player.update();
             this.player.display();
@@ -297,7 +297,7 @@ class Level {
     }
 }
 
-// 将类添加到全局对象
+// Add classes to global object
 global.Character = Character;
 global.Player = Player;
 global.Enemy = Enemy;
@@ -307,7 +307,7 @@ global.SkillBar = SkillBar;
 global.Curtain = Curtain;
 global.Level = Level;
 
-// 模拟画布和UI元素
+// Mock canvas and UI elements
 global.createCanvas = jest.fn().mockReturnValue({
     width: canvasWidth,
     height: canvasHeight,
@@ -341,7 +341,7 @@ global.createVideo = jest.fn().mockReturnValue({
     volume: jest.fn()
 });
 
-// 模拟视频对象
+// Mock video objects
 global.story1Video = {
     show: jest.fn(),
     hide: jest.fn(),
@@ -358,7 +358,7 @@ global.story2Video = {
     loop: jest.fn()
 };
 
-// 模拟图片资源
+// Mock image assets
 global.startImg = {};
 global.levelSelectImg = {};
 global.image_map = {
@@ -367,13 +367,13 @@ global.image_map = {
     background: { width: canvasWidth, height: canvasHeight }
 };
 
-// 模拟游戏对象
+// Mock game objects
 global.g_skillTextureList = [];
 global.g_skillStatusList = [];
 global.g_skillNumList = [];
 global.g_skillNumber = 8;
 
-// 游戏属性配置
+// Game attributes configuration
 global.attributes = {
     grassSlime: { health: 150 },
     ghostSlime: { health: 100 },
@@ -381,7 +381,7 @@ global.attributes = {
     fireSlime: { health: 130 }
 };
 
-// 模拟 level1 对象
+// Mock level1 object
 global.level1 = new Level(1, 'level1.json', {}, {}, true);
 level1.player = new Player(400, 300, 30, 'blue', 100, 100, 10, 'NORMAL', 5, 50, 100, 'single', 30, 'aoe', 20, 30, 100, 'red', 'special', false, {}, []);
 level1.start = jest.fn();
@@ -389,20 +389,20 @@ level1.update = jest.fn();
 level1.reset = jest.fn();
 level1.keyPressedInLevel = jest.fn();
 
-// 模拟游戏函数
+// Mock game functions
 global.setup = jest.fn().mockImplementation(async () => {
     createCanvas(canvasWidth, canvasHeight);
-    const startButton = createButton('开始游戏');
-    const skipButton = createButton('跳过');
+    const startButton = createButton('Start Game');
+    const skipButton = createButton('Skip');
     const story1Video = createVideo('assets/videos/story1.mp4');
     const story2Video = createVideo('assets/videos/story2.mp4');
     
-    // 加载资源
+    // Load resources
     image_map.start = { width: canvasWidth, height: canvasHeight };
     image_map.levelSelect = { width: canvasWidth, height: canvasHeight };
     image_map.background = { width: canvasWidth, height: canvasHeight };
     
-    // 初始化技能列表
+    // Initialize skill list
     for (let i = 0; i < g_skillNumber; i++) {
         g_skillTextureList.push({});
         g_skillStatusList.push(false);
@@ -414,7 +414,7 @@ global.setup = jest.fn().mockImplementation(async () => {
 
 global.draw = jest.fn();
 
-// 添加键盘事件处理
+// Add keyboard event handling
 document.addEventListener('keydown', (event) => {
     if (event.key === 'p') {
         pausedState = !pausedState;
@@ -424,7 +424,7 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// 模拟加载 JSON 数据
+// Mock loading JSON data
 global.loadJsonData = jest.fn().mockImplementation(() => Promise.resolve({
     player: {
         position: { x: 100, y: 100 }
@@ -434,7 +434,7 @@ global.loadJsonData = jest.fn().mockImplementation(() => Promise.resolve({
     obstacles: []
 }));
 
-// 其他全局函数
+// Other global functions
 global.image = jest.fn();
 global.background = jest.fn();
 global.text = jest.fn();
@@ -442,7 +442,7 @@ global.textSize = jest.fn();
 global.fill = jest.fn();
 global.keyIsDown = jest.fn().mockReturnValue(false);
 
-// 其他全局变量
+// Other global variables
 global.animations = {};
 global.level1ConfFile = {};
 global.level2ConfFile = {};
@@ -457,7 +457,7 @@ global.level2LightTexture = {};
 global.level3LightTexture = {};
 global.level4LightTexture = {};
 
-// 导出所有类
+// Export all classes
 module.exports = {
     Character,
     Player,
@@ -474,7 +474,7 @@ global.startGame = jest.fn().mockImplementation(level => {
     present_level = level;
     level1.start();
     if (level === 2) {
-        attributes.grassSlime.health = 150; // 第二关提高难度
+        attributes.grassSlime.health = 150; // Increase difficulty in level 2
     }
 });
 
@@ -512,23 +512,23 @@ global.draw = jest.fn().mockImplementation(() => {
     } else if (gameState === 'levelSelect') {
         image(levelSelectImg, 0, 0);
     } else if (gameState === 'playing') {
-        // 绘制游戏场景
+        // Draw game scene
     }
 });
 
 global.setup = async function() {
     createCanvas(canvasWidth, canvasHeight);
-    const startButton = createButton('开始游戏');
-    const skipButton = createButton('跳过');
+    const startButton = createButton('Start Game');
+    const skipButton = createButton('Skip');
     const story1Video = createVideo('assets/videos/story1.mp4');
     const story2Video = createVideo('assets/videos/story2.mp4');
     
-    // 加载资源
+    // Load resources
     image_map.start = { width: canvasWidth, height: canvasHeight };
     image_map.levelSelect = { width: canvasWidth, height: canvasHeight };
     image_map.background = { width: canvasWidth, height: canvasHeight };
     
-    // 初始化技能列表
+    // Initialize skill list
     for (let i = 0; i < g_skillNumber; i++) {
         g_skillTextureList.push({});
         g_skillStatusList.push(false);
@@ -538,6 +538,6 @@ global.setup = async function() {
     return Promise.resolve();
 };
 
-// 添加关卡实例
+// Add level instance
 global.level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture, true);
-level1.start = jest.fn(); 
+level1.start = jest.fn();

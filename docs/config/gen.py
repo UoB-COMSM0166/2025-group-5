@@ -5,35 +5,35 @@ import matplotlib.cm as cm
 import argparse
 
 def main(map_file, size_file):
-    # 读取 JSON 文件
+    # Read the JSON file
     with open(map_file, 'r') as f:
         map_data = json.load(f)
 
     with open(size_file, 'r') as f:
         size_data = json.load(f)
 
-    # 获取所有对象类型，并为每种对象类型分配颜色
+    # Get all object types and assign a color to each type
     object_types = list(size_data.keys())
     colormap = cm.get_cmap('tab10', len(object_types))
     colors = {obj_type: colormap(i) for i, obj_type in enumerate(object_types)}
 
-    # 创建绘图
+    # Create the plot
     fig, ax = plt.subplots()
     ax.set_xlim(0, size_data['map']['width'])
     ax.set_ylim(0, size_data['map']['height'])
     ax.set_aspect('equal')
 
-    # 用于图例的补丁列表
+    # List of patches for the legend
     legend_patches = []
 
-    # 绘制玩家
+    # Draw the player
     player_pos = map_data['player']['position']
     player_size = size_data['player']
     player_patch = patches.Rectangle((player_pos['x'], player_pos['y']), player_size['size'], player_size['size'], color=colors['player'])
     ax.add_patch(player_patch)
     legend_patches.append(patches.Patch(color=colors['player'], label='player'))
 
-    # 绘制敌人
+    # Draw the enemies
     for enemy in map_data['enemies']:
         enemy_pos = enemy['position']
         enemy_type = enemy['type']
@@ -43,7 +43,7 @@ def main(map_file, size_file):
         if enemy_type not in [patch.get_label() for patch in legend_patches]:
             legend_patches.append(patches.Patch(color=colors[enemy_type], label=enemy_type))
 
-    # 绘制障碍物
+   # Draw the obstacles
     for obstacle in map_data['obstacles']:
         obstacle_pos = obstacle['position']
         obstacle_type = obstacle['type']
@@ -53,10 +53,10 @@ def main(map_file, size_file):
         if obstacle_type not in [patch.get_label() for patch in legend_patches]:
             legend_patches.append(patches.Patch(color=colors[obstacle_type], label=obstacle_type))
 
-    # 添加图例
+    # Add the legend
     ax.legend(handles=legend_patches, loc='upper right', bbox_to_anchor=(1.2, 1))
 
-    # 显示图形
+    # Display the plot
     plt.gca().invert_yaxis()  # Invert y-axis to match typical screen coordinates
     plt.show()
 

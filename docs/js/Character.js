@@ -1,4 +1,4 @@
-// 角色基类
+// Character entity
 class Character {
     constructor(x, y, size, format, health, maxHealth, attack, status, speed, animationFlag, animationSet) 
     {
