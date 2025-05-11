@@ -318,7 +318,13 @@ This brought several advantages:
   <img src="./homework/week5/class_diagram.png" width="800"/>
 </p>
 <p align="center">
-  <img src="./homework/week5/class_diagram_full.png" width="800"/>
+  <img src="./report/class part1.pic.jpg" width="800"/>
+</p>
+<p align="center">
+  <img src="./report/class part2.pic.jpg" width="800"/>
+</p>
+<p align="center">
+  <img src="./report/class part3.pic.jpg" width="800"/>
 </p>
 
 We translated architecture into class structure using:
@@ -547,23 +553,53 @@ This evaluation stage not only verified core design decisions, but also informed
 
 **Black Box Testing**
 
-This black-box testing process comprehensively evaluates the functionality of the game from initialization to termination. The **game startup tests** confirmed that the game initializes correctly, the initial state is properly loaded, and level settings are correctly applied. In the **game control tests**, we verified that keyboard input is responsive, pause functionality works as intended, and the movement control system operates smoothly. The **interface tests** examined the canvas dimensions, the display of in-game status information, and the rendering of UI elements. The **game termination tests** validated that the player's death conditions are triggered accurately and the game transitions into a proper end state. **Boundary condition tests** were conducted to evaluate behavior under screen size constraints, rapid key inputs, and extreme value inputs. The **exception handling tests** focused on how the game reacts to resource loading failures, crash recovery mechanisms, and error state management. Finally, **accessibility tests** assessed keyboard support, input responsiveness, and the overall ease of interaction, ensuring that the game remains user-friendly for all players.
+##### **White-Box Testing**
 
-**White Box Testing**
+White-box testing focused on validating the internal logic and structure of the game at the source code level.
 
-This testing process included detailed white-box testing to ensure the reliability of the game’s internal logic. In the **Level class tests**, we verified the class initialization process, functionality of key methods, accuracy of property assignments, and the completeness of underlying data structures. The **game state transition tests** focused on the correctness of state switching logic, consistency across different game states, and the precise triggering of state changes. In **object interaction tests**, we examined the logic governing interactions between game entities, including collision detection systems, damage calculation mechanisms, and the update of object statuses. Additionally, **internal logic tests** were conducted to validate the correctness and stability of the game’s core algorithms, data handling processes, and business logic.
+- **Level Class Testing** evaluated initialization processes, method functionality, property assignment accuracy, and structural integrity.
+- **State Transition Testing** ensured correct logic for switching between game states, precise triggering conditions, and consistent behavior.
+- **Object Interaction Testing** assessed logic for player, enemy, and projectile interactions, including collision detection, damage calculation, and state updates.
+- **Core Logic and Algorithm Testing** verified the stability and correctness of key algorithms and data handling processes, ensuring well-defined business logic.
 
-The scope of testing covered multiple dimensions: **functional testing** (core gameplay functions, user interactions, and system features), **performance testing** (response times, resource usage, and execution efficiency), **compatibility testing** (browser support, device adaptation, and runtime environment compatibility), and **security testing** (data integrity, operational safety, and state consistency). In terms of testing focus, **black-box testing** emphasized feature completeness, user experience, exception handling, and boundary conditions, while **white-box testing** targeted code quality, logical correctness, object interactions, and state management.
+This stage emphasized code quality, logical precision, and structural robustness, laying a solid foundation for stable gameplay.
 
-**Core goal of this test**
+------
 
-The primary objective of this testing cycle was to validate the functional behavior of the game, ensure smooth user interaction, and maintain the overall system stability. By combining code-level inspection with runtime behavior analysis, the testing process also contributes to quality assurance. Furthermore, user experience considerations were central, aiming to ensure fluid controls, friendly interfaces, and responsive performance throughout gameplay.
+##### **Black-Box Testing**
 
-**Game Simulation Environment Initialization Code Description:**
+Black-box testing evaluated the game's external behavior from the user’s perspective, without relying on source code.
 
-This code sets up a simulated browser environment in Node.js to support testing of HTML5 Canvas game logic. It uses jsdom to create document and window, and mocks functions like canvas, button, and video using jest.fn() to avoid relying on an actual browser. Core classes such as Character, Player, Enemy, and Projectile are defined, and global game states, variables, and level objects are initialized to allow for function calls and behavior verification during testing.
+- **Startup and Loading Tests** confirmed proper initialization, resource loading, and level setup.
+- **Control and Input Tests** validated keyboard responsiveness, functional pause controls, and smooth character movement.
+- **UI and Display Tests** checked canvas dimensions, status indicators, and UI rendering accuracy.
+- **Termination Tests** verified that player death conditions triggered appropriate end-state transitions.
+- **Boundary Condition Tests** evaluated performance under rapid input, screen resizing, and extreme user actions.
+- **Exception Handling Tests** observed the system's ability to handle resource failures, crash recovery, and error states.
+- **Accessibility Tests** focused on keyboard navigation, input responsiveness, and ease of interaction to ensure inclusive gameplay.
 
-**Equivalence_Partitoning_table**
+These tests emphasized functional completeness, stability under edge cases, and a seamless user experience.
+
+------
+
+##### **Testing Scope and Objectives**
+
+The testing covered multiple dimensions:
+
+- **Functional Testing**: Validated gameplay mechanics, system operations, and user interactions.
+- **Performance Testing**: Measured responsiveness, resource efficiency, and execution speed.
+- **Compatibility Testing**: Ensured smooth operation across browsers, screen sizes, and devices.
+- **Security Testing**: Checked data integrity, safe handling of system states, and resilience against faults.
+
+The **core objective** was to verify reliable game behavior, smooth user interaction, and consistent system performance across different conditions. The combination of white-box logic validation and black-box runtime analysis supported comprehensive quality assurance.
+
+------
+
+##### **Simulation Environment Setup**
+
+A simulated browser environment was built using **Node.js** and **jsdom**, with `jest.fn()` used to mock elements like canvas, buttons, and video components. Core classes such as `Character`, `Player`, `Enemy`, and `Projectile` were defined. Global variables and level instances were initialized to allow function testing and behavior validation without relying on a browser.
+
+##### **Equivalence_Partitoning_table**
 
 | Test Function | Input Condition / Action | Valid Equivalence Class | Invalid/Boundary Class | Expected Result |
 | :-- | :-- | :-- | :-- | :-- |
@@ -746,12 +782,12 @@ Looking ahead, we hope to build on this foundation with features like:
 
 | Name            | Role                   | Primary Responsibilities                                                                                                                                     | Notes                                                                                                    |
 |-----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming, class implementation, UML/class                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
+| **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming, **class implementation**, UML/class                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
 | **Xinyi Zhou**    | Programmer              | UI programming, **inter-level transitions**, configuration parsing, loading systems, requirement,  **music configuration**                                                                            | Focused on level selection, player state saving/loading, and polished system behaviors outside gameplay. |
 | **Jingwei Lin**   | Technical Bridge & Writer | class design, **team structure evolution**, **requirement and report authorship** ,diagrams                                                 | Played a key role in shaping cross-team collaboration; drafted major report sections and visual models. |
-| **Xiao Wu**       | Narrative Designer      | **Black testing**, Story system, worldbuilding, comic-style cutscenes, requirement                                                                                                             | Designed all narrative components; ensured story progression aligns with gameplay tone.                  |
-| **Yaxin Chen**    | Game Designer           | White testing, Level layout logic, transformation mechanic, cursed vision system, requirement                                                                                             | Designed vision-restricting gameplay and transformation; structured configuration for monsters/maps.     |
-| **Yaoyao Shen**   | Visual Designer         | UI assets, level-clear transitions, polish for menus and HUD, requirement,diagrams                                                                                                    | Designed interface feedback, victory panels, and bridging visual elements.                              |
+| **Xiao Wu**       | Narrative Designer      | **Black Box testing**, Story system, worldbuilding, **comic-style cutscenes**, requirement                                                                                                             | Designed all narrative components; ensured story progression aligns with gameplay tone.                  |
+| **Yaxin Chen**    | Game Designer           | **White Box testing**, **Level layout logic**, transformation mechanic, cursed vision system, requirement                                                                                             | Designed vision-restricting gameplay and transformation; structured configuration for monsters/maps.     |
+| **Yaoyao Shen**   | Visual Designer         | **UI assets**, **level-clear transitions**, polish for menus and HUD, requirement,diagrams                                                                                                    | Designed interface feedback, victory panels, and bridging visual elements.                              |
 
 ---
 
