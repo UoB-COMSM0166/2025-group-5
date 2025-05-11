@@ -287,7 +287,7 @@ A key architectural milestone was our adoption of a configuration-driven design.
 
 ---
 
-##### Example: JSON-Defined Enemy Entry<a name="json">
+##### Example: JSON-Defined Enemy Entry<a name="json"></a>
 
 ```json
 "fireSlime": {
@@ -411,7 +411,7 @@ Later, the team split into visual and code roles while maintaining **tight integ
 
 #### Challenge 1: Player Transformation System  
 *Required to support [problem-solving through earned abilities](#ac-growth-1).*
-<a name="transformation">
+<a name="transformation"></a>
 <p align="center">
   <img src="./report/challenge1.pic.jpg" width="900"/><br>
   <em>Figure 1. Player Transformation System – Presentation</em>
@@ -551,8 +551,7 @@ This evaluation stage not only verified core design decisions, but also informed
 
 #### Code Testing
 
-**Black Box Testing**
-
+-----
 ##### **White-Box Testing**
 
 White-box testing focused on validating the internal logic and structure of the game at the source code level.
@@ -564,8 +563,8 @@ White-box testing focused on validating the internal logic and structure of the 
 
 This stage emphasized code quality, logical precision, and structural robustness, laying a solid foundation for stable gameplay.
 
-------
 
+-----
 ##### **Black-Box Testing**
 
 Black-box testing evaluated the game's external behavior from the user’s perspective, without relying on source code.
@@ -580,8 +579,7 @@ Black-box testing evaluated the game's external behavior from the user’s persp
 
 These tests emphasized functional completeness, stability under edge cases, and a seamless user experience.
 
-------
-
+-----
 ##### **Testing Scope and Objectives**
 
 The testing covered multiple dimensions:
@@ -593,12 +591,12 @@ The testing covered multiple dimensions:
 
 The **core objective** was to verify reliable game behavior, smooth user interaction, and consistent system performance across different conditions. The combination of white-box logic validation and black-box runtime analysis supported comprehensive quality assurance.
 
-------
-
+-----
 ##### **Simulation Environment Setup**
 
 A simulated browser environment was built using **Node.js** and **jsdom**, with `jest.fn()` used to mock elements like canvas, buttons, and video components. Core classes such as `Character`, `Player`, `Enemy`, and `Projectile` were defined. Global variables and level instances were initialized to allow function testing and behavior validation without relying on a browser.
 
+-----
 ##### **Equivalence_Partitoning_table**
 
 | Test Function | Input Condition / Action | Valid Equivalence Class | Invalid/Boundary Class | Expected Result |
@@ -662,7 +660,7 @@ After the prototype, our team naturally divided into two specialized yet interde
   Xiao Wu (narrative/story), Yaxin Chen (level design), Yaoyao Shen (UI and transitions)
 
 - **Software Engineering Team**  
-  Shaojie Yang and Xinyi Zhou (core system pairs), Jingwei Lin (integration and testing lead)
+  Shaojie Yang and Xinyi Zhou (core system pairs), Jingwei Lin (integration), Yaxin Chen(White Box test), Xiao Wu(Black Box test)
 
 ---
 
@@ -671,7 +669,7 @@ After the prototype, our team naturally divided into two specialized yet interde
 Each visual contributor focused on a subsystem:
 
 - Xiao Wu ensured narrative cohesion via cutscenes and worldbuilding cues  
-- Yaxin Chen prototyped level hazards and cursed mechanics  
+- Yaxin Chen prototyped level hazards, cursed mechanics. Define all the attributes of players and enemies.  
 - Yaoyao Shen built polished transitions and user interface components
 
 They applied principles of **requirement decomposition**—dividing the narrative, interaction, and presentation pipeline according to shared [Acceptance Criteria](#epics).
@@ -682,7 +680,9 @@ They applied principles of **requirement decomposition**—dividing the narrativ
 
 The engineering group maintained a rigorous pair programming schedule, daily standups, and tracked progress in Jira. Continuous integration ensured stability, while peer code reviews supported quality and shared ownership.
 
-Jingwei Lin emerged as a cross-domain facilitator—regularly informing the visual team of the engine’s evolving constraints. This limited misalignment and prevented infeasible designs from being proposed.
+Yang Shaojie and Lin Jingwei from the engineering team communicated with Chen Yaxin and Shen Yaoyao from the design team to complete the map application, monster design and numerical design to improve the playability of the game;
+
+At the same time, Wu Xiao from the design team collaborated with Zhou Xinyi from the engineering team to complete the development of UI design, scene transition, exit options and other functions, gradually improving the game aesthetics and design logic.
 
 ---
 
