@@ -24,18 +24,18 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 - Group member 6, Yaxin Chen, mq24914@bristol.ac.uk, chyx-17
 
 ## Project Report
-- [1. Introduction](#Introduction)
-- [2. Game Content](#Game_Content)
-- [3. Requirements](#Requirements)
-- [4. Design](#Design)
-- [5. Implementation](#Implementation)
+- [1. Introduction](#introduction)
+- [2. Game Content](#game_content)
+- [3. Requirements](#requirements)
+- [4. Design](#design_1)
+- [5. Implementation](#implementation)
 - [6. Evaluation](#evaluation)
-- [7. Process](#Process)
-- [8. Conclusion](#Conclusion)
-- [9. Contribution Statement](#Contribution_Statement)
-- [10. Additional Marks](#Additional_Marks)
+- [7. Process](#process)
+- [8. Conclusion](#conclusion)
+- [9. Contribution Statement](#contribution_statement)
+- [10. Additional Marks](#additional_marks)
 
-### 1. Introduction<a name="Introduction"></a>
+### 1. Introduction<a name="introduction"></a>
 
 <p align="center" style="display:flex; flex-direction:column; justify-content:center;">
   <img src="./report/start0.pic.jpg" width="250"/>
@@ -70,7 +70,7 @@ At the heart of the experience is a three-layered design philosophy:
 
 ---
 
-### 2. Game Content<a name="Game_Content"></a>
+### 2. Game Content<a name="game_content"></a>
 
 |               | <p align="center"><img src="./report/forest.pic.jpg" width="200"/><br/><strong>Forest</strong></p> | <p align="center"><img src="./report/grayyard.pic.jpg" width="200"/><br/><strong>Graveyard</strong></p> | <p align="center"><img src="./report/lake.pic.jpg" width="200"/><br/><strong>Lake</strong></p> | <p align="center"><img src="./report/mountain.pic.jpg" width="200"/><br/><strong>Volcano</strong></p> |
 |---------------|--------------------------------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
@@ -85,7 +85,7 @@ At the heart of the experience is a three-layered design philosophy:
 > This mechanic relies heavily on our **configuration-driven system**, enabling behavior variation without code changes.  
 > For implementation details, see [JSON Example](#json).
 
-### 3. Requirements<a name="Requirements"></a>
+### 3. Requirements<a name="requirements"></a>
 
 #### Overview: Our Requirements Engineering Logic
 
@@ -238,7 +238,7 @@ Resulting Value–Effort Matrix:
 
 > *Note: Our prioritization placed user experience and narrative coherence at the center—ensuring development effort mapped directly to perceived player value.*
 
-### 4. Design<a name="Design"></a>
+### 4. Design<a name="design_1"></a>
 
 Our system design followed a top-down, user-centered methodology. We began by modeling gameplay behavior from the player’s perspective and iteratively transformed these abstractions into concrete architecture, class structure, configuration logic, and real-time behavior.
 
@@ -385,7 +385,7 @@ Our sequence diagrams helped visualize runtime logic:
 
 > Ultimately, each stage—use case, architecture, class, config, and runtime—was carefully layered to reinforce the next.
 
-### 5. Implementation<a name="Implementation"></a>
+### 5. Implementation<a name="implementation"></a>
 
 To keep development outcome-aligned and manageable, we adopted a **top-down implementation strategy** mapped to our design goals:
 
@@ -614,7 +614,7 @@ A simulated browser environment was built using **Node.js** and **jsdom**, with 
 | Accessibility & Localization | Keyboard input & language setting | Recognises keys and language attribute exists | No response or 'lang' undefined | Keyboard works and language attribute exists |
 | Save Game State | Set and check gameState and present_level | State saved and restored correctly | State lost or overwritten | State remains correct |
 
-### 7. Process<a name="Process"></a>
+### 7. Process<a name="process"></a>
 
 #### Overview
 
@@ -725,7 +725,7 @@ We adopted a weekly sprint cycle with structured collaboration periods and indiv
 
 This rhythm enabled consistent progress while encouraging initiative, creativity, and adaptability across the engineering and visual pipelines.
 
-### 8. Conclusion<a name="Conclusion"></a>
+### 8. Conclusion<a name="conclusion"></a>
 
 Overall, *Dragon Adventure* successfully delivered on most of our intended design goals, especially in its attempt to **fuse narrative and challenge into a cohesive gameplay experience**. Through this project, we gained not just technical and design skills, but a deeper methodological understanding of **why games work the way they do**. That said, compared to polished commercial titles, *Dragon Adventure* stands more as a **proof of concept and a methodological exploration**—valuable in ideas, yet limited in finish and scope.
 
@@ -778,7 +778,7 @@ Looking ahead, we hope to build on this foundation with features like:
 > *Dragon Adventure* wasn’t just the game we built—it was the **process that made us a real development team**.
 
 
-### 9. Contribution Statement<a name="Contribution_Statement"></a>
+### 9. Contribution Statement<a name="contribution_statement"></a>
 
 | Name            | Role                   | Primary Responsibilities                                                                                                                                     | Notes                                                                                                    |
 |-----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
@@ -796,7 +796,7 @@ Looking ahead, we hope to build on this foundation with features like:
 > 🎯 Ultimately, every team member contributed with full dedication and effort, ensuring that *Dragon Adventure* could reach its final form as a polished, immersive experience. Our collective passion and resilience were the foundation of the project’s success.
 
 
-### 10. Additional Marks<a name="Additional_Marks"></a>
+### 10. Additional Marks<a name="additional_marks"></a>
 
 You can delete this section in your own repo, it's just here for information. in addition to the marks above, we will be marking you on the following two points:
 
