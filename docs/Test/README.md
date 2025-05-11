@@ -1,3 +1,67 @@
+------
+
+### **Game Testing Summary**
+
+This testing process combined **white-box** and **black-box** techniques to comprehensively evaluate the HTML5 Canvas-based game, ensuring functional completeness, system stability, and user-friendly interaction.
+
+------
+
+### **White-Box Testing**
+
+White-box testing focused on validating the internal logic and structure of the game at the source code level.
+
+- **Level Class Testing** evaluated initialization processes, method functionality, property assignment accuracy, and structural integrity.
+- **State Transition Testing** ensured correct logic for switching between game states, precise triggering conditions, and consistent behavior.
+- **Object Interaction Testing** assessed logic for player, enemy, and projectile interactions, including collision detection, damage calculation, and state updates.
+- **Core Logic and Algorithm Testing** verified the stability and correctness of key algorithms and data handling processes, ensuring well-defined business logic.
+
+This stage emphasized code quality, logical precision, and structural robustness, laying a solid foundation for stable gameplay.
+
+------
+
+### **Black-Box Testing**
+
+Black-box testing evaluated the game's external behavior from the user’s perspective, without relying on source code.
+
+- **Startup and Loading Tests** confirmed proper initialization, resource loading, and level setup.
+- **Control and Input Tests** validated keyboard responsiveness, functional pause controls, and smooth character movement.
+- **UI and Display Tests** checked canvas dimensions, status indicators, and UI rendering accuracy.
+- **Termination Tests** verified that player death conditions triggered appropriate end-state transitions.
+- **Boundary Condition Tests** evaluated performance under rapid input, screen resizing, and extreme user actions.
+- **Exception Handling Tests** observed the system's ability to handle resource failures, crash recovery, and error states.
+- **Accessibility Tests** focused on keyboard navigation, input responsiveness, and ease of interaction to ensure inclusive gameplay.
+
+These tests emphasized functional completeness, stability under edge cases, and a seamless user experience.
+
+------
+
+### **Testing Scope and Objectives**
+
+The testing covered multiple dimensions:
+
+- **Functional Testing**: Validated gameplay mechanics, system operations, and user interactions.
+- **Performance Testing**: Measured responsiveness, resource efficiency, and execution speed.
+- **Compatibility Testing**: Ensured smooth operation across browsers, screen sizes, and devices.
+- **Security Testing**: Checked data integrity, safe handling of system states, and resilience against faults.
+
+The **core objective** was to verify reliable game behavior, smooth user interaction, and consistent system performance across different conditions. The combination of white-box logic validation and black-box runtime analysis supported comprehensive quality assurance.
+
+------
+
+### **Simulation Environment Setup**
+
+A simulated browser environment was built using **Node.js** and **jsdom**, with `jest.fn()` used to mock elements like canvas, buttons, and video components. Core classes such as `Character`, `Player`, `Enemy`, and `Projectile` were defined. Global variables and level instances were initialized to allow function testing and behavior validation without relying on a browser.
+
+
+
+
+
+
+
+
+
+
+
 **黑盒测试**
 
 本次黑盒测试覆盖了多个方面的功能验证，确保游戏从启动到结束过程中的稳定性与交互逻辑。首先，我们进行了游戏启动测试，验证游戏初始化是否正常、初始状态是否正确加载，并对关卡设置进行检查。随后，通过游戏控制测试，确保键盘输入响应及时，暂停功能有效，以及玩家移动控制系统运行正常。在游戏界面测试中，我们检查了画布尺寸、状态信息显示及各类界面元素的呈现情况。游戏结束测试方面，验证玩家死亡条件是否正确触发，游戏是否能够正常进入结束状态。边界条件测试主要涵盖屏幕尺寸限制、快速按键输入以及输入极限情况下的表现。异常处理测试则关注资源加载错误、崩溃恢复机制和错误状态处理。最后，我们还进行了可访问性测试，评估键盘控制的支持程度、输入的响应能力以及整体操作的便捷性，确保游戏对所有用户友好。
