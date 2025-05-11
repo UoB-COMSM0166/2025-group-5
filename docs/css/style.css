@@ -5,12 +5,12 @@ body {
     align-items: center;
     min-height: 100vh;
     /* background-color: #1a1a1a; */
-    background-image: url("../resources/images/web_background/example.jpg"); /* 图片路径 */
-    background-repeat: no-repeat;  /* 禁止重复 */
-    background-position: center;   /* 居中显示 */
-    background-size: cover;        /* 覆盖整个区域 */
-    background-attachment: fixed;  /* 固定背景 */
-    background-color: #f0f0f0;     /* 备用背景色 */
+    background-image: url("../resources/images/web_background/example.jpg"); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #f0f0f0;
     overflow: hidden;
 }
 
@@ -28,9 +28,9 @@ canvas {
 }
 
 .image-container {
-    position: absolute; /* 或 fixed，看你是否希望随页面滚动 */
+    position: absolute;
     top: 20px;
-    left: 0; /* 靠左对齐 */
+    left: 0;
     height: 280px;
     overflow: hidden;
   }

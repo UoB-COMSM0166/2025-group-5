@@ -1,8 +1,8 @@
-/* ----------  原有常量与逻辑，无改动 ---------- */
-let gameState = 'start'; // 游戏状态 start/levelSelect/playing/over
+
+let gameState = 'start'; 
 let startButton;
 let gameTitle;
-let levelTitle; // 关卡选择标题
+let levelTitle; 
 let vol = 5;
 let bri = 8;
 let volUpButton;
@@ -16,7 +16,6 @@ let briDisplay;
 canvasWidth = 1280;
 canvasHeight = 800;
 
-// ** —— 新增：开始界面动态图与关卡过场图资源配置 —— **
 const startScreenFiles = [
   'resources/images/start/anim1.png',
   'resources/images/start/anim2.png',
@@ -27,10 +26,9 @@ const startScreenFiles = [
 ];
 let startScreenImages = [];
 let startAnimFrame = 0;
-const startAnimInterval = 10; // 帧切换间隔
+const startAnimInterval = 10; 
 let startAnimCounter = 0;
 
-// —— 新增：关卡过场图 —— 
 const interLevelFiles = [
   'resources/images/transition/inter1.png',
   'resources/images/transition/inter2.png',
@@ -40,9 +38,8 @@ const interLevelFiles = [
 let interLevelImages = [];
 let interLevelIndex = 0;
 let interTimer = 0;
-const interDuration = 180; // 3秒 @60fps
+const interDuration = 180;
 
-// 3) 进入第 2-4 关前过场（占位前两个元素空字符串）
 const interEnterFiles = [
   '', // index 0 unused
   '', // index 1 unused
@@ -53,9 +50,8 @@ const interEnterFiles = [
 let interEnterImages = [];
 let interEnterIndex = 0;
 let EnterTimer = 0;
-const enterDuration = 300; // 5秒 @60fps
+const enterDuration = 300; 
 
-// —— 新增：关卡选择界面资源 —— 
 const levelSelectBGFiles = [
   'resources/images/selectlevel/Select_BG1.png',
   'resources/images/selectlevel/Select_BG2.png',
@@ -64,20 +60,18 @@ const levelSelectBGFiles = [
 ];
 let levelSelectBGImgs = [];
 
-// 关卡解锁状态，索引 0–3 对应第 1–4 关，初始都未通关
 let levelCleared = [false,false,false,false];
 
-// 按钮区域配置：手动调好 x/y/w/h 后，把 alpha 设为 0 形成“隐形”按钮
 const levelBtnAreas = [
-  { x:40, y:485, w:290, h:235, alpha: 0   }, // 第1关：完全透明
-  { x:350, y:485, w:275, h:235, alpha: 80  }, // 第2关：弱可见
-  { x:650, y:485, w:280, h:235, alpha: 150 }, // 第3关：中等可见
-  { x:955, y:485, w:290, h:235, alpha: 255 }  // 第4关：完全不透明
+  { x:40, y:485, w:290, h:235, alpha: 0   },
+  { x:350, y:485, w:275, h:235, alpha: 0  },
+  { x:650, y:485, w:280, h:235, alpha: 0 },
+  { x:955, y:485, w:290, h:235, alpha: 0 }
 ];
 
-// 5) ESC 暂停菜单按钮尺寸与位置
+
 const pauseBtnSize    = { w: 150, h: 50 };
-const pauseBtnOffsetX = 200; // 相对画布中心左右偏移
+const pauseBtnOffsetX = 200;
 const pauseBtnPosY    = 270
 
 let player;
@@ -268,29 +262,28 @@ let g_skillBarWidth = 50;
 let g_skillBarBlankWidth = 5;
 let g_textSize = 25;
 
-/* ----------  新增：开场 / 剧情 / 选关 资源 ---------- */
-// 开始界面图片,
+
 let startImgFile = './resources/images/game_background/GameStart.jpg';
 let startImg = [];
 // let startAnimInterval = 100;
 
-// 选关界面底图
+
 let levelSelectImgFile = './resources/images/game_background/LevelSelect.jpg';
 let levelSelectImg;
 
-// ESC界面地图
+
 let escSelectImgFile = './resources/images/setting/Settings.png';
 let escSelectImg;
 
-// 剧情视频
-let story1VideoFile = './resources/videos/story1.mp4';   // 剧情介绍
-let story2VideoFile = './resources/videos/story2_loop.mp4'; // 循环等待
-let story1Video; // p5.MediaElement
+
+let story1VideoFile = './resources/videos/story1.mp4';
+let story2VideoFile = './resources/videos/story2_loop.mp4';
+let story1Video;
 let story2Video;
 
-/* ----------  统一预加载 ---------- */
+/* ----------  Unified preloading ---------- */
 function preload() {
-  /* 原有加载 */
+
     textBoardTexture = loadImage(textBoardFile);
     playerTexture = loadImage(playerFile);
     image_map["soldier_idle"] = loadImage(enemyFile);
@@ -332,12 +325,12 @@ function preload() {
     level4BGTexture = loadImage(level4BGFile);
     level4LightTexture = loadImage(level4LightFile);
 
-  /* 新增加载 */
+  
   // startImg = loadImage(startImgFile);
   levelSelectImg = loadImage(levelSelectImgFile);
   escSelectImg = loadImage(escSelectImgFile);
 
-  // --- 新增：开始界面 6 帧动画 ---
+  //Start screen 6-frame animation
   for (let f of startScreenFiles) {
     startScreenImages.push(loadImage(f));
   }
@@ -346,21 +339,20 @@ function preload() {
     levelSelectBGImgs.push(loadImage(f));
   }
 
-  // --- 新增：关卡胜利过场 ---
+  //Level victory transition
   for (let f of interLevelFiles) {
     interLevelImages.push(loadImage(f));
   }
-  // --- 新增：进入第 2-4 关前过场 ---
+  //Transition before entering levels 2 to 4
   for (let f of interEnterFiles) {
     interEnterImages.push(f ? loadImage(f) : null);
   }
-  // --- 新增：选关背景 & 按钮图 ---
+  //Level selection background & button images
   levelSelectBGImage = loadImage(levelSelectBGFile);
   for (let f of levelBtnFiles) {
     levelBtnImages.push(loadImage(f));
   }
 
-  // p5 视频使用 createVideo，必须立即隐藏，防止自动播放
   story1Video = createVideo([story1VideoFile]);
   story1Video.hide();
 
