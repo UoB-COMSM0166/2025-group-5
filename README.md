@@ -30,8 +30,6 @@ https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
 
 ### Introduction
 
----
-
 <p align="center" style="display:flex; flex-direction:column; justify-content:center;">
   <img src="./report/start0.pic.jpg" width="250"/>
 </p>
@@ -81,8 +79,6 @@ At the heart of the experience is a three-layered design philosophy:
 > For implementation details, see [JSON Example](#json).
 
 ### Requirements
-
----
 
 #### Overview: Our Requirements Engineering Logic
 
@@ -578,8 +574,6 @@ This code sets up a simulated browser environment in Node.js to support testing 
 | Save Game State | Set and check gameState and present_level | State saved and restored correctly | State lost or overwritten | State remains correct |
 
 ### Process
-
----
 
 #### Overview
 
