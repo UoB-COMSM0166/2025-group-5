@@ -44,7 +44,7 @@ class Curtain{
             vertex(this.w, this.h);
             vertex(0, this.h);
 
-            // 普通圆形视野
+            //Normal circular field of view
             if(this.shape === "round")
             {
                 beginContour();
@@ -56,7 +56,7 @@ class Curtain{
                 }
                 endContour();
             }
-            // 普通锥形视野
+            //Normal cone-shaped field of view
             if(this.shape === "sector")
             {
                 let sectorStartAngle;

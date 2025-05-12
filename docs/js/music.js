@@ -8,7 +8,7 @@ class Music {
         this.bgMusic.volume  = this.bgMusic.baseVol * this.master;
         this.bgMusic.isPlaying = false;
 
-    // —— 关卡专属 BGM —— 
+    //Level-specific BGM
         this.levels = {};
         for (let i = 1; i <= 4; i++) {
             const a = new Audio(`resources/music/level${i}.mp3`);
@@ -23,35 +23,12 @@ class Music {
         this.sfx = {
             shoot: makeSfx("shoot.mp3"),
             hit:   makeSfx("hit.mp3"),
-            start: makeSfx("Starting_Music.mp3"),
-            // level1: makeSfx("Forest.mp3"),
-            // level2: makeSfx("Graveyard.mp3"),
-            // level3: makeSfx("Lake.mp3"),
-            // level4: makeSfx("Lava.mp3")
+            start: makeSfx("Starting_Music.mp3")
         };
     }
 
-    // playBackground() {
-    //     this.bgMusic.play();
-    // }
 
-    // async playBackground() {
-    //     if (this.bgMusic.isPlaying) return;
-    //     try {
-    //         await this.bgMusic.play();
-    //         this.bgMusic.isPlaying = true;
-    //     } catch (err) {
-    //     console.warn('背景音乐播放失败：', err);
-    //     }
-    // }
-
-    // stopBackground() {
-    //     this.bgMusic.pause();
-    //     this.bgMusic.isPlaying = false;
-    //     this.bgMusic.currentTime = 0; // 重置音乐进度
-    // }
-
-  // 播放／停止初始背景
+  // Play/stop the initial background music
   playBackground() {
     if (this.bgMusic.isPlaying) return;
     this.bgMusic.currentTime = 0;
@@ -65,7 +42,7 @@ class Music {
     this.bgMusic.isPlaying = false;
   }
 
-  // 播放／停止指定关卡音乐（level: 1–4）
+  //Play/stop the music for the specified level (level: 1–4)
   playLevel(level) {
     const track = this.levels[level];
     if (!track || track.isPlaying) return;
@@ -92,7 +69,7 @@ class Music {
 
     playSFX(name) {
         if (this.sfx[name]) {
-            this.sfx[name].currentTime = 0; // 重新播放
+            this.sfx[name].currentTime = 0; //Replay
             this.sfx[name].play();
         }
     }
@@ -101,7 +78,7 @@ class Music {
         this.master = constrain(v, 0, 1);
         this.bgMusic.volume = this.bgMusic.baseVol * this.master;
 
-  // —— 新增：关卡专属 BGM 一并调整 —— 
+  //New: Adjust level-specific BGM accordingly
   for (const lvl in this.levels) {
     const track = this.levels[lvl];
     track.volume = track.baseVol * this.master;
@@ -113,7 +90,7 @@ class Music {
     }
 }
 
-// 全局音乐对象
+// Global music object
 const gameMusic = new Music();
 
 function makeSfx(file, base = 0.6) {

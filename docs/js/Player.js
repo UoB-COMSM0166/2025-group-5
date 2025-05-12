@@ -1,4 +1,4 @@
-// 玩家类
+// player entity
 class Player extends Character 
 {
     constructor(x, y, size,

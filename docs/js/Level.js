@@ -41,12 +41,12 @@ class Level
 
     start()
     {
-        // 清空原有对象
+        //Clear existing objects
         this.player = null;
         this.enemies = [];
         this.obstacles = [];
 
-        // 创建玩家对象
+        //Create the player object
         this.player = new Player(this.jsonData.player.position.x, 
             this.jsonData.player.position.y, attributes.player.size, 
             playerTexture, attributes.player.health, attributes.player.health,
@@ -59,17 +59,17 @@ class Level
             attributes.player.animationFlag, animations["player"],
             []
         );
-        // 创建敌人对象
+        //Create enemy objects
         this.createEnemies();
-        // 创建可交互对象
+        //Create interactive objects
         this.createEntities();
-        // 创建障碍物对象
+        //Create obstacle objects
         this.createObstacles();
     }
 
     update()
     {
-        this.drawBG(); // 绘制背景
+        this.drawBG(); //Draw the background
         if(!this.promptFlag && !this.startAnimation)
         {
             this.player.update();
@@ -80,11 +80,11 @@ class Level
             // this.drawObstacles();
             this.drawProjectiles();
             this.checkCollisions();
-            this.drawLight(); // 绘制前景
+            this.drawLight(); // Draw the foreground
 
             if(this.curtainFlag)
             {
-                this.drawCurtain(); // 绘制幕布
+                this.drawCurtain(); // Draw the curtain
             }
             
             this.skillBar.display();
@@ -133,11 +133,11 @@ class Level
         {
             entity.display();
         }
-        this.drawLight(); // 绘制前景
+        this.drawLight(); // Draw the foreground
 
         if(this.curtainFlag)
         {
-            this.drawCurtain(); // 绘制幕布
+            this.drawCurtain(); // Draw the curtain
         }
         
         this.skillBar.display();
@@ -171,7 +171,7 @@ class Level
 
     drawProjectiles()
     {
-        // 玩家子弹
+        //Player bullets
         this.player.projectiles.forEach(
             proj => {       
                 proj.update();       
@@ -182,7 +182,7 @@ class Level
         this.player.projectiles = 
             this.player.projectiles.filter(proj => proj.isVisible(this.obstacles));
 
-        // 敌人子弹
+        // Enemy bullets
         for (let i = this.enemies.length - 1; i >= 0; i --) 
         {
         
@@ -199,10 +199,10 @@ class Level
 
     checkCollisions()
     {
-        // 玩家遭受伤害判定
+        //Player damage detection
         if(this.player.getStatus() !== charStatus.INVINCIBLE)
         {
-            // 玩家与敌人碰撞检测
+            //Collision detection between player and enemies
             for (let i = this.enemies.length - 1; i >= 0; i --) 
             {
 
@@ -238,7 +238,7 @@ class Level
             }
         }
 
-        // 玩家与障碍物碰撞检测
+        //Collision detection between player and obstacles
         for (let obstacle of this.obstacles) 
         {
             if (!obstacle.isPassable &&
@@ -251,9 +251,9 @@ class Level
             }
         }
 
-        // // 敌人与障碍物碰撞检测,在enemy类中实现
+        // Collision detection between enemies and obstacles, implemented in the Enemy class
 
-        // 子弹与敌人碰撞检测
+        // Collision detection between bullets and enemies
         for (let i = this.enemies.length - 1; i >= 0; i --)
         {
             for (let j = this.player.projectiles.length - 1; j >= 0; j--) 
@@ -284,7 +284,7 @@ class Level
             }
         }
 
-        // 敌人子弹与玩家碰撞检测
+        // Collision detection between enemy bullets and the player
         for (let i = this.enemies.length - 1; i >= 0; i --)
         {
             for (let j = this.enemies[i].projectiles.length - 1; j >= 0; j--) 
@@ -304,7 +304,7 @@ class Level
             }
         }
 
-        // 游戏失败及变身结束判定
+        // Game over and transformation end detection
         if(this.player.getHealth() === 0)
         {
             if(!this.transformFlag)
@@ -402,7 +402,7 @@ class Level
     }
 
     createObstacles()
-    { // 根据level.json中的内容创建隐形墙
+    { // Create invisible walls based on the content in level.json
         for(let obstacle of this.jsonData.obstacles)
         {
             let temp = new Obstacle(obstacle.position.x, 
@@ -511,7 +511,7 @@ class Level
                 }
             }
             else if(key === 'e')
-            { // 如果玩家按e，检测周围是否存在可触发的entity
+            { // If the player presses 'E', check for triggerable entities nearby
                 for(let i = 0; i < this.entities.length; i ++)
                 {
                     if(this.entities[i].triggerableFlag)

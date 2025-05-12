@@ -1,4 +1,4 @@
-// 障碍物类
+// Obstacle entity
 class Obstacle extends Character {
     constructor(x, y, obstacleSize, isPassable) {
         let color = isPassable ? 'lightgreen' : 'gray';

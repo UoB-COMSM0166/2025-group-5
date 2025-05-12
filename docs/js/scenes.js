@@ -1,4 +1,4 @@
-// 创建敌人
+// Create enemies
 function createEnemies() 
 {
     for (let i = 0; i < enemyCount; i++) 
@@ -9,7 +9,7 @@ function createEnemies()
     }
 }
 
-// 创建障碍物
+// Create obstacles
 function createObstacles() 
 {
     for (let i = 0; i < obstacleCount; i++) 
@@ -29,7 +29,7 @@ function createObstacles()
     }
 }
 
-// 绘制敌人
+// Draw enemies
 function drawEnemies() 
 {
     for (let enemy of enemies) 
@@ -39,7 +39,7 @@ function drawEnemies()
     }
 }
 
-// 绘制障碍物
+// Draw obstacles
 function drawObstacles() 
 {
     for (let obstacle of obstacles) 
@@ -48,7 +48,7 @@ function drawObstacles()
     }
 }
 
-// 绘制子弹
+// Draw bullets
 function drawProjectiles() 
 {
     for (let i = player.projectiles.length - 1; i >= 0; i --) 
@@ -57,7 +57,7 @@ function drawProjectiles()
         proj.update();
         proj.display();
 
-        // 只检测不可穿越障碍物
+        // Only detect impassable obstacles
         for (let obstacle of obstacles) 
         {
             if (!obstacle.isPassable &&
@@ -75,7 +75,7 @@ function drawProjectiles()
     player.projectiles = player.projectiles.filter(proj => proj.isVisible());
 }
 
-// 检测玩家是否在草丛里
+// Check if the player is in the grass
 function isPlayerInGrass() 
 {
     for (let obstacle of obstacles) 
@@ -92,10 +92,10 @@ function isPlayerInGrass()
     return false;
 }
 
-// 碰撞检测
+//Collision detection
 function checkCollisions() 
 {
-    // 玩家与敌人碰撞检测
+    //Collision detection between the player and enemies
     for (let enemy of enemies) 
     {
         if (player.x < enemy.x + enemy.size &&
@@ -108,7 +108,7 @@ function checkCollisions()
         }
     }
 
-    // 玩家与障碍物碰撞检测
+    //Collision detection between the player and obstacles
     for (let obstacle of obstacles) 
     {
         if (!obstacle.isPassable &&
@@ -121,7 +121,7 @@ function checkCollisions()
         }
     }
 
-    // 子弹与敌人碰撞检测
+    // Collision detection between bullets and enemies
     for (let i = enemies.length - 1; i >= 0; i --)
     {
         for (let j = player.projectiles.length - 1; j >= 0; j--) 

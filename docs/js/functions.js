@@ -1,4 +1,4 @@
-// 读取json文件并返回
+//Read the JSON file and return it
 async function loadJsonData(jsonFile) 
 {
     try 

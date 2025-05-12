@@ -1,4 +1,4 @@
-// 子弹类（新增方向控制）
+// Bullet class (with added direction control)
 class Projectile {
     constructor(x, y, dx, dy, size, speed, maxDistance, format, skill) {
         this.x = x;
@@ -16,7 +16,7 @@ class Projectile {
             image: format instanceof p5.Image ? format : null
         };
 
-        // 起始位置，控制子弹范围
+        //Starting position to control bullet range
         this.startX = x;        
         this.startY = y;
     }
@@ -39,7 +39,7 @@ class Projectile {
     }
 
     isVisible(obstacles) {
-        for (let obstacle of obstacles) // 障碍物检测
+        for (let obstacle of obstacles) //Obstacle detection
         {
             if (!obstacle.isPassable &&
                 this.x < obstacle.x + obstacle.size &&

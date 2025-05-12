@@ -21,13 +21,13 @@ class SkillBar{
 
         for(let i = 0; i < this.skillNum; i ++)
         {
-            // 绘制矩形框
+            //Draw a rectangular frame
             noFill();
             stroke("white");
             strokeWeight(this.blankwidth);
             rect(this.x + i * this.width, this.y, this.width, this.height);
             
-            // 绘制填充物
+            //Draw a filled shape
             if(this.statusList[i] === false)
             {
                 image(this.lockedTexture, 
@@ -45,7 +45,7 @@ class SkillBar{
                     this.height - this.blankwidth * 2);
             }
 
-            // 绘制技能快捷键
+            // Draw skill hotkeys
             if(this.statusList[i] === true)
             {
                 fill("red");
@@ -57,7 +57,7 @@ class SkillBar{
                     this.x + this.blankwidth + i * this.width, 
                     this.y + this.blankwidth * 4);
 
-            // 绘制技能剩余次数
+            //Draw remaining skill usage count
                 fill("yellow");
                 noStroke();
                 textSize(this.textSize);

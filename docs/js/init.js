@@ -1,31 +1,28 @@
 // init.js
 
-// let level1, level2, level3, level4;
-// let attributes, animations;
-// // let interTimer   = 0;  // 胜利过场计时
-// let enterTimer   = 0;  // 进入关卡过场计时
 
-// import { musicManager } from './music.js';
 
-let nextLevel    = 1;  // 点击选关后要进入的关卡
+
+
+let nextLevel    = 1;  // The level to enter after clicking level selection
 let pausedState  = false;
 
 let skipButton;
 
 async function setup() {
-  // 创建并定位画布
+  //Create and position the canvas
   canvasElem = createCanvas(canvasWidth, canvasHeight);
   frameRate(60);
-  // 获取画布在页面上的位置
+  //Get the canvas position on the page
   canvasX = canvasElem.elt.offsetLeft;
   canvasY = canvasElem.elt.offsetTop;
 
 
-  // 预生成“Restart”按钮（Game Over 时用）
+  //Pre-generate the "Restart" button (used during Game Over)
   startButton = createButton('Restart');
   startButton.hide();
 
-  // 预生成 "vol+", "vol-", "volValue", "bri+", "bri-", "briValue"
+  //Pre-generate "vol+", "vol-", "volValue", "bri+", "bri-", "briValue"
 
   volUpButton = createButton('vol+');
   volUpButton.position(980, 475);
@@ -63,7 +60,7 @@ async function setup() {
   briDisplay.attribute('readonly', 'true');
   briDisplay.hide();
 
-  // —— 初始化视频与 Skip 按钮 —— 
+  //Initialize video and Skip button
   story1Video = createVideo(['resources/videos/story1.mp4']);
   story1Video.size(canvasWidth, canvasHeight);
   story1Video.position(0, 0);
@@ -80,7 +77,7 @@ async function setup() {
   // skipButton.position(canvasWidth - 100, 20);
   // skipButton.hide();
 
-  // 准备剧情视频，固定在画布范围
+  //Prepare the story video, fixed within the canvas area
   story1Video.size(canvasWidth, canvasHeight);
   story1Video.position(canvasX, canvasY);
   story1Video.attribute('playsinline', '');
@@ -91,7 +88,7 @@ async function setup() {
   story2Video.attribute('playsinline', '');
   story2Video.hide();
 
-  // 创建并初始化关卡对象（不生成 DOM）
+  //Create and initialize level objects (without generating DOM elements)
   level1 = new Level(1, level1ConfFile, level1BGTexture, level1LightTexture, false);
   await level1.init();
   level2 = new Level(2, level2ConfFile, level2BGTexture, level2LightTexture, true);
@@ -101,11 +98,11 @@ async function setup() {
   level4 = new Level(4, level4ConfFile, level4BGTexture, level4LightTexture, false);
   await level4.init();
 
-  // 加载属性配置
+  //Load attribute configuration
   attributes = await loadJsonData(attributeFile);
   animations = await loadJsonData(animationFile);
 
-  // 初始化技能栏资源
+  //Initialize skill bar resources
   g_skillTextureList.push(image_map['grassSlime_idle']);
   g_skillTextureList.push(image_map['ghostSlime_idle']);
   g_skillTextureList.push(image_map['waterSlime_idle']);
@@ -565,52 +562,12 @@ async function setup() {
 }
 
 
-
-
-
-
-// 关卡选择：首次创建按钮，后续 show() 保证可见
 function selectLevel() {
-  // 隐 Restart
   startButton.hide();
 
-  // 首次创建
-  // if (!level1Button) {
-  //   const btnW = 110, btnH = 40, gap = 20;
-  //   const x = canvasX + canvasWidth / 2 - btnW / 2;
-  //   const y1 = canvasY + canvasHeight / 2 - btnH / 2 - gap;
-  //   const y2 = y1 + btnH + gap;
-  //   const y3 = y2 + btnH + gap;
-  //   const y4 = y3 + btnH + gap;
-
-  //   level1Button = createButton('Level 1')
-  //     .size(btnW, btnH)
-  //     .position(x, y1)
-  //     .mousePressed(() => startGame(1));
-
-  //   level2Button = createButton('Level 2')
-  //     .size(btnW, btnH)
-  //     .position(x, y2)
-  //     .mousePressed(() => startGame(2));
-
-  //   level3Button = createButton('Level 3')
-  //     .size(btnW, btnH)
-  //     .position(x, y3)
-  //     .mousePressed(() => startGame(3));
-
-  //   level4Button = createButton('Level 4')
-  //     .size(btnW, btnH)
-  //     .position(x, y4)
-  //     .mousePressed(() => startGame(4));
-  // }
-  // 保证显示
-  // level1Button.show();
-  // level2Button.show();
-  // level3Button.show();
-  // level4Button.show();
 }
 
-// 开始游戏并隐藏按钮
+//Start the game and hide the button
 function startGame(level) {
   gameState = 'playing';
   isGameOver = false;
@@ -635,14 +592,14 @@ function startGame(level) {
   // level4Button.hide();
 }
 
-// Game Over 后回到选关
+//Return to level selection after Game Over
 function restartGame() {
   gameState = 'levelSelect';
   startButton.hide();
   selectLevel();
 }
 
-// 主循环，始终先填黑
+//Main loop, always fill black first
 function draw() {
   background(0);
   switch(gameState) {
@@ -657,7 +614,7 @@ function draw() {
     case 'over':        drawGameOver();    break;
   }
 
-  if (bri < 10) {                   // bri 10 = 最亮，不加遮罩
+  if (bri < 10) {                   // bri 10 = Brightest level, no overlay applied
     noStroke();
     const alpha = (10 - bri) * 25.5; 
     fill(0, alpha); 
@@ -665,17 +622,17 @@ function draw() {
   }
 }
 
-// —— 1. “start” 界面：按空格或鼠标开始，进入 story1 视频 —— 
+//"start" screen: press space or click to start, then enter the story1 video
 function drawStart(){
-  // —— 1. 计算动画帧索引 —— 
-  // framesPerImage：每张动画帧持续的 draw() 调用次数，你可以根据需要调节速度
+  //Calculate animation frame index
+  //framesPerImage: number of draw() calls each animation frame lasts; adjust to control speed
   const framesPerImage = 10;
   const idx = Math.floor(frameCount / framesPerImage) % startScreenImages.length;
 
-  // —— 2. 清屏并绘制动画 —— 
-  background(0);                     // 黑底背景
+  //Clear the screen and draw the animation
+  background(0);                     // Black background
   imageMode(CENTER);                 
-  // 将第 idx 帧动画居中绘制
+  // Draw the idx-th animation frame centered on the screen
   // image(startScreenImages[idx], width/2, height/2);
   image(startScreenImages[idx], width/2, height/2+40);
 
@@ -687,14 +644,14 @@ function drawStart(){
   }
 }
 
-// —— 2. “story1” 过场：播放一次，可 Skip —— 
+//"story1" transition: play once, can be skipped
 function startStory1() {
   gameMusic.stopBackground();
   gameState = 'story1';
   story1Video.position(canvasX, canvasY);
   story1Video.show().play();
 
-  // 在画布内右上角创建 Skip 按钮
+  //Create a Skip button at the top-right corner of the canvas
   const btnW = 60, btnH = 30, m = 10;
   skipButton = createButton('Skip');
   skipButton.size(btnW, btnH);
@@ -704,9 +661,9 @@ function startStory1() {
   story1Video.onended(startStory2);
 }
 
-// —— 2. “story1” 过场：播放一次，可 Skip —— 
+//"story1" transition: play once, skippable
 function drawStory1(){
-  // 视频已经在 DOM 上播放
+  //he video is already playing on the DOM
   skipButton.mousePressed(()=>{
     story1Video.stop();
     story1Video.hide();
@@ -715,7 +672,7 @@ function drawStory1(){
   });
 }
 
-// —— 3. “story2” 过场：循环播放，可 Skip 或空格跳过 —— 
+//"story2" transition: loop playback, can be skipped or skipped with spacebar
 function startStory2() {
   if (skipButton) {
     skipButton.remove();
@@ -726,7 +683,7 @@ function startStory2() {
   story2Video.position(canvasX, canvasY);
   story2Video.show().loop();
 
-  // 在画布内右上角创建 Skip 按钮
+  //Create a Skip button at the top-right corner of the canvas
   const btnW = 60, btnH = 30, m = 10;
   skipButton = createButton('Skip');
   skipButton.size(btnW, btnH);
@@ -743,20 +700,20 @@ function drawStory2(){
   background(0);
   skipButton.show();
   skipButton.mousePressed(()=>enterLevelSelect());
-  // 确保视频在 DOM 上可见并循环播放
-  // 把当前视频帧画到画布上
+  //Ensure the video is visible on the DOM and set to loop playback
+  //Draw the current video frame onto the canvas
   // imageMode(CORNER);
   // image(story2Video, canvasX, canvasY,
   //       canvasWidth, canvasHeight);
 
-  // Skip 按钮只需 show，一旦创建后每帧都让它保持可见
+  //The Skip button only needs to be shown once; keep it visible every frame after creation
   skipButton.show();
     if (keyIsDown(32)) {
     enterLevelSelect();
   }
 }
 
-// —— 4. 进入选关界面 —— 
+//Enter the level selection screen
 function enterLevelSelect() {
   story1Video.hide().stop();
   story2Video.hide().stop();
@@ -769,18 +726,18 @@ function enterLevelSelect() {
   selectLevel();
 }
 
-// —— 2. 绘制“关卡选择”界面 —— 
+//Draw the "Level Selection" screen
 function drawLevelSelect() {
   gameMusic.stopLevel(1);
   gameMusic.stopLevel(2);
   gameMusic.stopLevel(3);
   gameMusic.stopLevel(4);
   gameMusic.playBackground(); 
-  // 根据已通关数 +1 选背景图（初次进入即 1）
+  //Select background image based on cleared level count + 1 (starts at 1 for first entry)
   let unlockedCount = levelCleared.filter(b => b).length + 1;
   unlockedCount = constrain(unlockedCount, 1, 4);
 
-  // 绘制对应背景
+  //Draw the corresponding background
   imageMode(CENTER);
   image(
     levelSelectBGImgs[unlockedCount - 1],
@@ -788,16 +745,16 @@ function drawLevelSelect() {
     width, height
   );
 
-  // 绘制并检测每个解锁按钮
+  //Draw and check each unlocked button
   for (let i = 0; i < unlockedCount; i++) {
     let area = levelBtnAreas[i];
-    // 仅绘制透明边框，fill 全透明
+    //Draw only a transparent border, with fully transparent fill
     noFill();
     stroke(255, 0);
     strokeWeight(2);
     rect(area.x, area.y, area.w, area.h);
 
-    // 点击“隐形”按钮区域
+    //Click the "invisible" button area
     if (
       mouseIsPressed &&
       mouseX >= area.x && mouseX <= area.x + area.w &&
@@ -812,7 +769,7 @@ function drawLevelSelect() {
 }
 
 
-// —— 5. “interEnter”：进入 2–4 关前的 5 秒过场，可空格跳过 —— 
+//"interEnter": 5-second transition before entering levels 2–4, skippable with spacebar
 function drawInterEnter(){
   imageMode(CORNER);
   // EnterTimer =0;
@@ -827,7 +784,7 @@ function drawInterEnter(){
   }
 }
 
-// —— 6. “playing”：实际游戏，记得先重置 imageMode —— 
+//"playing": actual gameplay, remember to reset imageMode
 function drawPlaying(){
   imageMode(CORNER);
   if      (present_level===1){

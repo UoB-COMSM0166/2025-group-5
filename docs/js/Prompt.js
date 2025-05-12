@@ -1,4 +1,4 @@
-// 提示类，用于生成对话框
+// Prompt entity for generating dialog boxes
 class Prompt {
     constructor(x, y, width, height, text, format) 
     {
