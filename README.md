@@ -9,7 +9,13 @@ Our game lives in the [/docs](/docs) folder, and is published using Github pages
 
 Include a demo video of our game here [Video Demonstration](https://www.youtube.com/watch?v=tdPnVR722zU)
 [![Video Demonstration](https://img.youtube.com/vi/tdPnVR722zU/0.jpg)](https://www.youtube.com/watch?v=tdPnVR722zU)
+Include a demo video of our game here [Video Demonstration](https://www.youtube.com/watch?v=tdPnVR722zU)
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=tdPnVR722zU">
+    <img src="https://img.youtube.com/vi/tdPnVR722zU/0.jpg" alt="Video Demonstration">
+  </a>
+</p>
 
 ## Kanban Link
 https://wuxiaoalfie.atlassian.net/jira/software/projects/MFLP/boards/1
