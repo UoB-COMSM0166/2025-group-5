@@ -8,8 +8,6 @@ Link to our game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-5/)
 Our game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
 
 Include a demo video of our game here [Video Demonstration](https://www.youtube.com/watch?v=tdPnVR722zU)
-[![Video Demonstration](https://img.youtube.com/vi/tdPnVR722zU/0.jpg)](https://www.youtube.com/watch?v=tdPnVR722zU)
-Include a demo video of our game here [Video Demonstration](https://www.youtube.com/watch?v=tdPnVR722zU)
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=tdPnVR722zU">
