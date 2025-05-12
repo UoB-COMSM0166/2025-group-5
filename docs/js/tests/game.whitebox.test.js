@@ -1,13 +1,12 @@
-// 游戏白盒测试文件
 require('./jest.setup.js');
 
-// 模拟函数
+// Mock functions
 global.restartGame = jest.fn().mockImplementation(() => {
     gameState = 'start';
     present_level = 0;
 });
 
-describe('Level类测试', () => {
+describe('Level Class Test', () => {
     let level;
     
     beforeEach(() => {
@@ -19,7 +18,7 @@ describe('Level类测试', () => {
         };
     });
 
-    test('Level初始化测试', () => {
+    test('Level Initialization Test', () => {
         expect(level.id).toBe(1);
         expect(level.jsonFile).toBe('level1.json');
         expect(level.curtainFlag).toBe(true);
@@ -29,12 +28,12 @@ describe('Level类测试', () => {
         expect(level.obstacles).toEqual([]);
     });
 
-    test('Level.start()测试', () => {
+    test('Level.start() Test', () => {
         level.start();
         expect(level.player).not.toBeNull();
     });
 
-    test('Level.update()测试', () => {
+    test('Level.update() Test', () => {
         level.start();
         level.player.update = jest.fn();
         level.player.display = jest.fn();
@@ -43,7 +42,7 @@ describe('Level类测试', () => {
         expect(level.player.display).toHaveBeenCalled();
     });
 
-    test('Level.reset()测试', () => {
+    test('Level.reset() Test', () => {
         level.start();
         level.reset();
         expect(level.player).toBeNull();
@@ -53,14 +52,14 @@ describe('Level类测试', () => {
     });
 });
 
-describe('Character类测试', () => {
+describe('Character Class Test', () => {
     let character;
     
     beforeEach(() => {
         character = new Character(100, 100, 50, 'red', 100, 100, 10, 'NORMAL', 5, true, {}, true);
     });
 
-    test('Character初始化测试', () => {
+    test('Character Initialization Test', () => {
         expect(character.x).toBe(100);
         expect(character.y).toBe(100);
         expect(character.size).toBe(50);
@@ -73,72 +72,72 @@ describe('Character类测试', () => {
         expect(character.isPlayer).toBe(true);
     });
 
-    test('Character.changeHealth()测试', () => {
-        // 正常伤害
+    test('Character.changeHealth() Test', () => {
+        // Normal damage
         character.changeHealth(-20);
         expect(character.health).toBe(80);
 
-        // 治疗
+        // Healing
         character.changeHealth(10);
         expect(character.health).toBe(90);
 
-        // 超出最大生命值
+        // Exceeding max health
         character.changeHealth(20);
         expect(character.health).toBe(100);
 
-        // 死亡
+        // Death
         character.changeHealth(-100);
         expect(character.health).toBe(0);
         expect(character.status).toBe('DEAD');
     });
 
-    test('Character.changeStatus()测试', () => {
+    test('Character.changeStatus() Test', () => {
         character.changeStatus('INVINCIBLE');
         expect(character.status).toBe('INVINCIBLE');
         expect(character.invincibleTimer).toBe(60);
     });
 });
 
-describe('游戏状态转换测试', () => {
+describe('Game State Transition Test', () => {
     beforeEach(() => {
         gameState = 'start';
         present_level = 0;
         level1.start = jest.fn();
     });
 
-    test('游戏状态转换流程测试', () => {
-        // 开始游戏
+    test('Game State Transition Flow Test', () => {
+        // Start game
         startGame(1);
         expect(gameState).toBe('playing');
         expect(present_level).toBe(1);
         expect(level1.start).toHaveBeenCalled();
 
-        // 暂停游戏
+        // Pause game
         const pauseEvent = new KeyboardEvent('keydown', { key: 'p' });
         document.dispatchEvent(pauseEvent);
         expect(gameState).toBe('paused');
 
-        // 继续游戏
+        // Resume game
         document.dispatchEvent(pauseEvent);
         expect(gameState).toBe('playing');
     });
 });
 
-describe('游戏资源管理测试', () => {
-    test('资源加载测试', async () => {
+describe('Game Resource Management Test', () => {
+    test('Resource Loading Test', async () => {
         const data = await loadJsonData();
         expect(data).toBeDefined();
     });
 
-    test('资源错误处理测试', async () => {
+    test('Resource Error Handling Test', async () => {
         const error = new Error('Resource not found');
         global.loadJsonData = jest.fn().mockRejectedValue(error);
         await expect(loadJsonData()).rejects.toThrow('Resource not found');
     });
 });
 
-describe('游戏配置测试', () => {
-    test('游戏常量测试', () => {
+describe('Game Configuration Test', () => {
+    test('Game Constants Test', () => {
         expect(canvasWidth).toBe(1280);
         expect(canvasHeight).toBe(800);
         expect(frameRate).toBe(60);
@@ -148,11 +147,11 @@ describe('游戏配置测试', () => {
         expect(globalFireStatusTimer).toBe(120);
     });
 
-    test('游戏属性配置测试', () => {
+    test('Game Attributes Configuration Test', () => {
         expect(attributes).toBeDefined();
         expect(attributes.grassSlime).toBeDefined();
         expect(attributes.ghostSlime).toBeDefined();
         expect(attributes.waterSlime).toBeDefined();
         expect(attributes.fireSlime).toBeDefined();
     });
-}); 
+});
