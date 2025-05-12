@@ -9,6 +9,10 @@ Our game lives in the [/docs](/docs) folder, and is published using Github pages
 
 Include a demo video of our game here [Video Demonstration](https://www.youtube.com/watch?v=tdPnVR722zU)
 [![Video Demonstration](https://img.youtube.com/vi/tdPnVR722zU/0.jpg)](https://www.youtube.com/watch?v=tdPnVR722zU)
+[![Video Demonstration]((https://img.youtube.com/vi/tdPnVR722zU/0.jpg))](https://www.youtube.com/watch?v=tdPnVR722zU)
+
+👉 [点击这里观看视频演示](https://www.youtube.com/watch?v=tdPnVR722zU)
+
 
 
 ## Kanban Link
