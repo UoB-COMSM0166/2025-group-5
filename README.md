@@ -786,7 +786,7 @@ Looking ahead, we hope to build on this foundation with features like:
 
 ### 9. Contribution Statement<a name="contribution_statement"></a>
 
-| Name            | Role                   | Primary Responsibilities| Contribution |                                                                                                                                     | Notes                                                                                                    |
+| Name            | Role                   | Primary Responsibilities|                                                                                                       | Notes                                                                                                    |
 |-----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | **Shaojie Yang**  | Programmer              | Combat system, monster AI, **full in-level tech implementation**, pair programming, **class implementation**, UML/class                                                                            | Led patrol/routing logic; implemented all interactive monster behavior and obstacle interactions.        |
 | **Xinyi Zhou**    | Programmer              | UI programming, **inter-level transitions**, configuration parsing, loading systems, requirement,  **music configuration**                                                                            | Focused on level selection, player state saving/loading, and polished system behaviors outside gameplay. |
